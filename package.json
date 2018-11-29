@@ -1,0 +1,29 @@
+{
+	"name": "postsettings",
+	"name_title": "PostSettings",
+	"version": "0.0.1",
+	"description": "PostSettings",
+	"homepage": "#",
+	"main": "index.js",
+	"scripts": {
+		"dev": "parcel watch src/index.js -o postsettings.js -d build"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.1.6",
+		"@babel/plugin-proposal-class-properties": "^7.1.0",
+		"autoprefixer": "^9.3.1",
+		"cssnano": "^4.1.7",
+		"gulp": "^4.0.0",
+		"gulp-header": "^2.0.5",
+		"gulp-rename": "^1.4.0",
+		"gulp-replace": "^1.0.0",
+		"gulp-run-command": "0.0.9",
+		"gulp-zip": "^4.2.0",
+		"merge2": "^1.2.3",
+		"stylus": "^0.54.5"
+	},
+	"dependencies": {
+		"uuid": "^3.3.2",
+		"yup": "^0.26.6"
+	}
+}

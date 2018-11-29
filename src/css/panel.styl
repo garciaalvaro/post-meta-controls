@@ -1,0 +1,41 @@
+/*
+ * Test
+ */
+/*
+ * Settings
+ */
+
+.ps-tab
+
+	.components-panel__body:first-child
+		border-top none
+
+	.components-panel__row
+		margin 0
+		padding 0
+		display flex
+		flex-direction column
+
+	.ps-control
+	// > div
+		position relative
+		padding 2em 1.2em
+		width 100%
+
+		+ .ps-control
+			border-top 1px solid rgba(0,0,0,0.1)
+
+	.ps-panel
+		padding 0
+
+		button
+			color var(--text_color)
+		svg
+			color var(--fill_color)
+
+		> h2.components-panel__body-title
+			margin 0
+
+		h2:hover
+		button:focus
+			background transparent

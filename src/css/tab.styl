@@ -1,0 +1,32 @@
+/*
+ * Test
+ */
+/*
+ * Settings
+ */
+
+.ps-sidebar
+	.ps-tabs_navigation
+		display flex
+		height 50px
+		background-color var(--background_color)
+		border-bottom 1px solid var(--border_color)
+
+	button.ps-tab_button
+		padding 3px 15px
+		height 100%
+		box-shadow none
+		width 50%
+		color var(--text_color)
+		background transparent
+		transition background-color 0.15s cubic-bezier(0, 0, 0.2, 1)
+		display flex
+		align-items center
+		justify-content center
+
+		&.is_active
+			margin-bottom -1px
+			height calc(100% + 1px)
+			font-weight 600
+			padding-bottom 0
+			border-bottom 3px solid var(--color_primary)

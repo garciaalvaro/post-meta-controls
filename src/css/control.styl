@@ -1,0 +1,46 @@
+/*
+ * Test
+ */
+/*
+ * controls
+ */
+
+.ps-sidebar
+	.components-base-control__help
+		font-style normal
+		margin-top 15px
+		opacity .8
+	.components-base-control__label
+	.components-checkbox-control__label
+		font-weight 500
+
+.ps-control-radio
+	.components-base-control__label
+		margin-bottom 15px
+
+.ps-control-select
+	position relative
+	color var(--text_color_stronger)
+
+	.components-base-control__label
+		font-weight 600
+		margin-bottom 1.5em
+
+	.components-base-control__field
+		position relative
+
+	select
+		color var(--text_color_stronger)
+		border-color var(--text_color_stronger)
+		background-color var(--color_primary)
+		outline-color transparent
+		box-shadow none
+
+	&:before
+		content ""
+		position absolute
+		top -1px
+		bottom 0
+		left 0
+		right 0
+		background-color var(--color_primary)
