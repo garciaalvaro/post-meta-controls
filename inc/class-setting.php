@@ -10,19 +10,19 @@ abstract class Setting extends Base {
 	protected function get_props_default() {
 		$default_type = $this->get_props_default_type();
 		$default = array(
-			// 'class_type'      => 'setting',
-			'id'              => '',
-			'path'            => array(),
-			'index'           => '',
-			'meta_key'        => '',
-			'meta_key_prefix' => 'ps_',
-			'type'            => '',
-			'label'           => '',
-			'description'     => '',
-			'default'         => '',
-			'help'            => '',
-			'post_type'       => 'post',
-			'meta_type'       => 'string',
+			'id'                  => '',
+			'path'                => array(),
+			'index'               => '',
+			'type'                => '',
+			'label'               => '',
+			'description'         => '',
+			'default'             => '',
+			'help'                => '',
+			'post_type'           => 'post',
+			'meta_type'           => 'string',
+			'meta_key'            => '',
+			'meta_key_prefix'     => 'ps_',
+			'meta_key_prefix_from_sidebar' => '',
 			'types_can_have_meta' => array(
 				'checkbox',
 				'radio',
@@ -35,23 +35,22 @@ abstract class Setting extends Base {
 	protected function get_props_schema() {
 		$schema_type = $this->get_props_schema_type();
 		$schema = array(
-			// 'class_type'      => array( 'type' => 'id', ),
-			'id'              => array( 'type' => 'id', ),
-			'path'            => array( 'type' => 'array_string', ),
-			'index'           => array( 'type' => 'integer', ),
-			'meta_key'        => array( 'type' => 'id', ),
-			'meta_key_prefix' => array( 'type' => 'id', ),
-			'type'            => array( 'type' => 'id', ),
-			'label'           => array( 'type' => 'text', ),
-			'description'     => array( 'type' => 'text', ),
-			'default'         => array( 'type' => 'id', ),
-			'help'            => array( 'type' => 'text', ),
-			'post_type'       => array( 'type' => 'id', ),
-			'meta_type'       => array( 'type' => 'id', ),
+			'id'                  => array( 'type' => 'id', ),
+			'path'                => array( 'type' => 'array_string', ),
+			'index'               => array( 'type' => 'integer', ),
+			'type'                => array( 'type' => 'id', ),
+			'label'               => array( 'type' => 'text', ),
+			'description'         => array( 'type' => 'text', ),
+			'default'             => array( 'type' => 'id', ),
+			'help'                => array( 'type' => 'text', ),
+			'post_type'           => array( 'type' => 'id', ),
+			'meta_type'           => array( 'type' => 'id', ),
+			'meta_key'            => array( 'type' => 'id', ),
+			'meta_key_prefix'     => array( 'type' => 'id', ),
+			'meta_key_prefix_from_sidebar' => array( 'type' => 'id', ),
 			'types_can_have_meta' => array( 'type' => 'array_string', ),
 		);
 		$required_keys = array(
-			// 'class_type',
 			'id',
 			'path',
 			'index',
@@ -62,7 +61,6 @@ abstract class Setting extends Base {
 		);
 		$private_keys = array(
 			'types_can_have_meta',
-			// 'class_type',
 			'id',
 			'meta_type',
 		);
@@ -92,15 +90,15 @@ abstract class Setting extends Base {
 
 	private function assign_prop_meta_prefix() {
 
-		if (
-			empty( $this->props['meta_key'] ) ||
-			empty( $this->props['meta_key_prefix'] )
-		) {
+		if ( empty( $this->props['meta_key'] ) ) {
 			return;
 		}
 
-		$this->props['meta_key'] =
-			$this->props['meta_key_prefix'] . $this->props['meta_key'];
+		$prefix = 'ps_' !== $this->props['meta_key_prefix']
+			? $this->props['meta_key_prefix']
+			: $this->props['meta_key_prefix_from_sidebar'];
+
+		$this->props['meta_key'] = $prefix . $this->props['meta_key'];
 	}
 
 	public function register_meta() {
