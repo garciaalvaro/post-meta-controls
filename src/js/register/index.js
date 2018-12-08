@@ -1,5 +1,5 @@
-import "./_test";
 import addSidebar from "./addSidebar";
+// import "./_test";
 
 const { forEach } = lodash;
 const { applyFilters } = wp.hooks;

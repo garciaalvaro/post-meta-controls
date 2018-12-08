@@ -17,7 +17,7 @@ function add_inline_script() {
 	// $sidebars = implode( '', $sidebars );
 
 	$qqq =
-		'wp.hooks.addFilter("ps_add_sidebars","qwe",(sidebars)=>{return sidebars.concat(' .
+		'wp.hooks.addFilter("ps_add_sidebars","qwe",function(sidebars){return sidebars.concat(' .
 		\wp_json_encode( $sidebars ) .
 		')});';
 

@@ -13,105 +13,21 @@ $sidebar_a = array(
 					'initial_open'   => true,
 					'settings'       => array(
 						array(
-							'help'     => 'help asd',
-							'type'     => 'radio',
-							'default'  => 'ww',
-							'meta_key' => 'aaa',
-							'label'    => 'aaa',
-							'options'  => array(
-								'uu' => 'UU',
-								'vv' => 'VV',
-								'ww' => 'ww',
-							),
-						),
-						array(
-							'help'     => 'help asd',
-							'type'     => 'checkbox',
-							'default'  => true,
-							'meta_key' => 'bbb',
-							'label'    => 'bbb',
-						),
-					),
-				),
-				array(
-					'label'          => 'a',
-					'with_container' => false,
-					'settings'       => array(
-						array(
-							'help'      => 'help asd',
-							'type'      => 'radio',
-							'default'   => 'ww',
 
-							'data_type' => 'meta', // localstorage meta none
-							'meta_key'  => 'ccc',
+							'data_type'       => 'meta', // localstorage meta none option 
 
-							'label'     => 'ccc',
-							'options'   => array(
-								'uu' => 'UU',
-								'vv' => 'VV',
-								'ww' => 'ww',
-							),
-						),
-						array(
-							'help'     => 'help asd',
-							'type'     => 'checkbox',
-							'default'  => true,
-							'meta_key' => 'ddd',
-							'label'    => 'ddd',
-						),
-					),
-				),
-			),
-		),
-		array(
-			'label'  => '222',
-			'panels' => array(
-				array(
-					'label'          => 'a',
-					'with_container' => true,
-					'initial_open'   => true,
-					'settings'       => array(
-						array(
+							'meta_key'        => 'aaa',
+							'meta_key_prefix' => 'ppref_',
+
 							'help'     => 'help asd',
 							'type'     => 'radio',
 							'default'  => 'ww',
-							'meta_key' => 'eee',
-							'label'    => 'eee',
+							'label'    => 'vvvvvvvvvv',
 							'options'  => array(
 								'uu' => 'UU',
 								'vv' => 'VV',
 								'ww' => 'ww',
 							),
-						),
-						array(
-							'help'     => 'help asd',
-							'type'     => 'checkbox',
-							'default'  => true,
-							'meta_key' => 'fff',
-							'label'    => 'fff',
-						),
-					),
-					'label'          => 'a',
-					'with_container' => false,
-					'settings'       => array(
-						array(
-							'help'     => 'help asd',
-							'type'     => 'radio',
-							'default'  => 'ww',
-							'meta_key' => 'ggg',
-							'label'    => 'ggg',
-							'options'  => array(
-								'uu' => 'UU',
-								'vv' => 'VV',
-								'ww' => 'ww',
-							),
-						),
-						array(
-							'help'     => 'help asd',
-							'type'     => 'checkbox',
-							'default'  => true,
-							'meta_key' => 'hhh',
-							'label'    => 'hhh',
 						),
 					),
 				),

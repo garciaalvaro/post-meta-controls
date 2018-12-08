@@ -1,81 +1,130 @@
 <?php
 
 $sidebar_a = array(
-	'key'       => 'a',
-	'label'       => 'a',
-	// 'post_type' => 'ebisuportfolio',
-);
-$tab_a = array(
-	'sidebar_key' => 'a',
-	'key'         => 'a',
-	'label'       => 'a',
-);
-$tab_b = array(
-	'sidebar_key' => 'a',
-	'key'         => 'b',
-	'label'       => 'b',
-);
-$panel_a = array(
-	'tab_key' => 'a',
-	'key'     => 'a',
-	'label'   => 'a',
-	'initial_open'   => true,
-);
-$panel_b = array(
-	'tab_key' => 'b',
-	'key'     => 'b',
-	'label'   => 'b',
-	'with_container'   => false,
-);
-$checkbox_a = array(
-	'panel_key' => 'a',
-	'default'   => false,
-	'key'       => 'checkbox_a',
-	'label'     => 'label asd',
-	'help'     => 'help asd',
-);
-$radio_b = array(
-	'help'     => 'help asd',
-	'panel_key' => 'a',
-	'default'   => 'ww',
-	'key'       => 'radio_b',
-	'label'     => 'radio_b',
-	'options'   => array(
-		'uu' => 'UU',
-		'vv' => 'VV',
-		'ww' => 'ww',
+	'id'    => 'aaa',
+	'label' => 'a',
+	'tabs'  => array(
+		array(
+			'label'  => '111',
+			'panels' => array(
+				array(
+					'label'          => 'a',
+					'with_container' => true,
+					'initial_open'   => true,
+					'settings'       => array(
+						array(
+							'meta_key'        => 'aaa',
+							'meta_key_prefix' => 'ppref_',
+
+							'help'     => 'help asd',
+							'type'     => 'radio',
+							'default'  => 'ww',
+							'label'    => 'vvvvvvvvvv',
+							'options'  => array(
+								'uu' => 'UU',
+								'vv' => 'VV',
+								'ww' => 'ww',
+							),
+						),
+						array(
+							'help'     => 'help asd',
+							'type'     => 'checkbox',
+							'default'  => true,
+							'meta_key' => 'bbb',
+							'label'    => 'bbb',
+						),
+					),
+				),
+				array(
+					'label'          => 'a',
+					'with_container' => false,
+					'settings'       => array(
+						array(
+							'help'      => 'help asd',
+							'type'      => 'radio',
+							'default'   => 'ww',
+
+							'meta_key'  => 'ccc',
+
+							'label'     => 'ccc',
+							'options'   => array(
+								'uu' => 'UU',
+								'vv' => 'VV',
+								'ww' => 'ww',
+							),
+						),
+						array(
+							'help'     => 'help asd',
+							'type'     => 'checkbox',
+							'default'  => true,
+							'meta_key' => 'ddd',
+							'label'    => 'ddd',
+						),
+					),
+				),
+			),
+		),
+		array(
+			'label'  => '222',
+			'panels' => array(
+				array(
+					'label'          => 'a',
+					'with_container' => true,
+					'initial_open'   => true,
+					'settings'       => array(
+						array(
+							'help'     => 'help asd',
+							'type'     => 'radio',
+							'default'  => 'ww',
+							'meta_key' => 'eee',
+							'label'    => 'eee',
+							'options'  => array(
+								'uu' => 'UU',
+								'vv' => 'VV',
+								'ww' => 'ww',
+							),
+						),
+						array(
+							'help'     => 'help asd',
+							'type'     => 'checkbox',
+							'default'  => true,
+							'meta_key' => 'fff',
+							'label'    => 'fff',
+						),
+					),
+					'label'          => 'a',
+					'with_container' => false,
+					'settings'       => array(
+						array(
+							'help'     => 'help asd',
+							'type'     => 'radio',
+							'default'  => 'ww',
+							'meta_key' => 'ggg',
+							'label'    => 'ggg',
+							'options'  => array(
+								'uu' => 'UU',
+								'vv' => 'VV',
+								'ww' => 'ww',
+							),
+						),
+						array(
+							'help'     => 'help asd',
+							'type'     => 'checkbox',
+							'default'  => true,
+							'meta_key' => 'hhh',
+							'label'    => 'hhh',
+						),
+					),
+				),
+			),
+		),
 	),
 );
-$checkbox_c = array(
-	'panel_key' => 'b',
-	'default'   => false,
-	'key'       => 'checkbox_c',
-	'label'     => 'checkbox_c',
-	'help'     => 'checkbox_c',
-);
-$radio_d = array(
-	'help'     => 'radio_d',
-	'panel_key' => 'b',
-	'default'   => 'ww',
-	'key'       => 'radio_d',
-	'label'     => 'radio_d',
-	'options'   => array(
-		'uu' => 'UU',
-		'vv' => 'VV',
-		'ww' => 'ww',
-	),
-);
 
-ps_add_sidebar( $sidebar_a );
+// ps_add_sidebar( $sidebar_a );
 
-ps_add_tab( $tab_a );
-ps_add_tab( $tab_b );
+// $sidebar_a['id'] = 'bbb';
 
-ps_add_panel( $panel_a );
-ps_add_panel( $panel_b );
+// ps_add_sidebar( $sidebar_a );
 
-ps_add_setting_checkbox( $checkbox_a );
-ps_add_setting_radio( $radio_b );
-
-ps_add_setting_checkbox( $checkbox_c );
-ps_add_setting_radio( $radio_d );
+POSTSETTINGS\add_sidebar( $sidebar_a );
