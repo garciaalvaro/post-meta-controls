@@ -10,7 +10,7 @@ abstract class Setting extends Base {
 	protected function get_props_default() {
 		$default_type = $this->get_props_default_type();
 		$default = array(
-			'class_type'      => 'setting',
+			// 'class_type'      => 'setting',
 			'id'              => '',
 			'path'            => array(),
 			'index'           => '',
@@ -35,7 +35,7 @@ abstract class Setting extends Base {
 	protected function get_props_schema() {
 		$schema_type = $this->get_props_schema_type();
 		$schema = array(
-			'class_type'      => array( 'type' => 'id', ),
+			// 'class_type'      => array( 'type' => 'id', ),
 			'id'              => array( 'type' => 'id', ),
 			'path'            => array( 'type' => 'array_string', ),
 			'index'           => array( 'type' => 'integer', ),
@@ -51,7 +51,7 @@ abstract class Setting extends Base {
 			'types_can_have_meta' => array( 'type' => 'array_string', ),
 		);
 		$required_keys = array(
-			'class_type',
+			// 'class_type',
 			'id',
 			'path',
 			'index',
@@ -62,7 +62,7 @@ abstract class Setting extends Base {
 		);
 		$private_keys = array(
 			'types_can_have_meta',
-			'class_type',
+			// 'class_type',
 			'id',
 			'meta_type',
 		);

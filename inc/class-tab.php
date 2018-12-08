@@ -6,7 +6,7 @@ class Tab extends Base {
 
 	protected function get_props_default() {
 		return array(
-			'class_type' => 'tab',
+			// 'class_type' => 'tab',
 			'id'         => '',
 			'path'       => array(),
 			'index'      => '',
@@ -17,7 +17,7 @@ class Tab extends Base {
 
 	protected function get_props_schema() {
 		$schema = array(
-			'class_type' => array( 'type' => 'id', ),
+			// 'class_type' => array( 'type' => 'id', ),
 			'id'         => array( 'type' => 'id', ),
 			'path'       => array( 'type' => 'array_string', ),
 			'index'      => array( 'type' => 'integer', ),
@@ -25,7 +25,7 @@ class Tab extends Base {
 			'post_type'  => array( 'type' => 'id', ),
 		);
 		$required_keys = array(
-			'class_type',
+			// 'class_type',
 			'id',
 			'path',
 			'index',
@@ -33,7 +33,7 @@ class Tab extends Base {
 			'post_type',
 		);
 		$private_keys = array(
-			'class_type',
+			// 'class_type',
 		);
 		$non_empty_values = array(
 			'id',
