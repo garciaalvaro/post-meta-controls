@@ -23,7 +23,7 @@ const createInstance = (class_name, elements, path) => {
 		let is_valid = false;
 		let id = "";
 		let children_els = [];
-		let children_type = "";
+		let children_class_name = "";
 
 		element.path = path;
 		element.index = index;
@@ -31,16 +31,16 @@ const createInstance = (class_name, elements, path) => {
 		if ("sidebar" === class_name && !isEmpty(element.tabs)) {
 			class_instance = new Sidebar(element);
 			children_els = element.tabs;
-			children_type = "tabs";
-		} else if ("tabs" === class_name && !isEmpty(element.panels)) {
+			children_class_name = "tab";
+		} else if ("tab" === class_name && !isEmpty(element.panels)) {
 			class_instance = new Tab(element);
 			children_els = element.panels;
-			children_type = "panels";
-		} else if ("panels" === class_name && !isEmpty(element.settings)) {
+			children_class_name = "panel";
+		} else if ("panel" === class_name && !isEmpty(element.settings)) {
 			class_instance = new Panel(element);
 			children_els = element.settings;
-			children_type = "settings";
-		} else if ("settings" === class_name && !isEmpty(element.type)) {
+			children_class_name = "setting";
+		} else if ("setting" === class_name && !isEmpty(element.type)) {
 			if ("checkbox" === element.type) {
 				class_instance = new Checkbox(element);
 			} else if ("radio" === element.type) {
@@ -61,9 +61,9 @@ const createInstance = (class_name, elements, path) => {
 
 		const props_this = class_instance.getProps();
 
-		if ("settings" !== class_name) {
-			props_this[children_type] = createInstance(
-				children_type,
+		if ("setting" !== class_name) {
+			props_this[`${children_class_name}s`] = createInstance(
+				children_class_name,
 				children_els,
 				path.concat(id)
 			);

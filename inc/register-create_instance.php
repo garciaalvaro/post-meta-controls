@@ -3,7 +3,7 @@
 namespace POSTSETTINGS;
 
 function create_instance(
-	$class_type = '',
+	$class_name = '',
 	$elements = array(),
 	$path = array()
 ) {
@@ -19,34 +19,34 @@ function create_instance(
 			continue;
 		}
 
-		$class_instance = false;
-		$is_valid       = false;
-		$id             = '';
-		$children_els   = array();
-		$children_type  = '';
+		$class_instance      = false;
+		$is_valid            = false;
+		$id                  = '';
+		$children_els        = array();
+		$children_class_name = '';
 
 		$element['path']  = $path;
 		$element['index'] = $key;
 
-		if ( 'sidebar' === $class_type && ! empty( $element['tabs'] ) ) {
+		if ( 'sidebar' === $class_name && ! empty( $element['tabs'] ) ) {
 
-			$class_instance = new Sidebar( $element );
-			$children_els   = $element['tabs'];
-			$children_type  = 'tabs';
+			$class_instance      = new Sidebar( $element );
+			$children_els        = $element['tabs'];
+			$children_class_name = 'tab';
 
-		} elseif ( 'tabs' === $class_type && ! empty( $element['panels'] ) ) {
+		} elseif ( 'tab' === $class_name && ! empty( $element['panels'] ) ) {
 
-			$class_instance = new Tab( $element );
-			$children_els   = $element['panels'];
-			$children_type  = 'panels';
+			$class_instance      = new Tab( $element );
+			$children_els        = $element['panels'];
+			$children_class_name = 'panel';
 
-		} elseif ( 'panels' === $class_type && ! empty( $element['settings'] ) ) {
+		} elseif ( 'panel' === $class_name && ! empty( $element['settings'] ) ) {
 
-			$class_instance = new Panel( $element );
-			$children_els   = $element['settings'];
-			$children_type  = 'settings';
+			$class_instance      = new Panel( $element );
+			$children_els        = $element['settings'];
+			$children_class_name = 'setting';
 
-		} elseif ( 'settings' === $class_type && ! empty( $element['type'] ) ) {
+		} elseif ( 'setting' === $class_name && ! empty( $element['type'] ) ) {
 
 			if ( 'checkbox' === $element['type'] ) {
 				$class_instance = new Checkbox( $element );
@@ -68,12 +68,13 @@ function create_instance(
 
 		$props_this = $class_instance->get_props();
 
-		if ( 'settings' !== $class_type ) {
-			$props_this[ $children_type ] = create_instance(
-				$children_type,
-				$children_els,
-				array_merge( $path, array( $id ) )
-			);
+		if ( ! empty( $children_class_name ) ) {
+			$props_this[ $children_class_name . "s" ] =
+				create_instance(
+					$children_class_name,
+					$children_els,
+					array_merge( $path, array( $id ) )
+				);
 		}
 
 		$props = array_merge( $props, array( $props_this ) );
