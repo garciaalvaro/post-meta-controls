@@ -10,8 +10,7 @@ class Panel extends Base {
 			index: "",
 			label: "",
 			initial_open: false,
-			with_container: true,
-			post_type: "post"
+			with_container: true
 		};
 	}
 
@@ -37,20 +36,10 @@ class Panel extends Base {
 			},
 			with_container: {
 				type: "bool"
-			},
-			post_type: {
-				type: "id"
 			}
 		};
 
-		const required_keys = [
-			"class_name",
-			"id",
-			"path",
-			"index",
-			"label",
-			"post_type"
-		];
+		const required_keys = ["class_name", "id", "path", "index", "label"];
 		const private_keys = ["class_name", "id"];
 		const non_empty_values = ["id"];
 

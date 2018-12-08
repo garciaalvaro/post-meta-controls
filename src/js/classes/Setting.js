@@ -15,7 +15,6 @@ class Setting extends Base {
 			description: "",
 			default: "",
 			help: "",
-			post_type: "post",
 			meta_type: "string",
 			types_can_have_meta: ["checkbox", "radio"]
 		};
@@ -39,7 +38,6 @@ class Setting extends Base {
 			description: { type: "text" },
 			default: { type: "id" },
 			help: { type: "text" },
-			post_type: { type: "id" },
 			meta_type: { type: "id" },
 			types_can_have_meta: { type: "array_string" }
 		};
@@ -50,7 +48,6 @@ class Setting extends Base {
 			"path",
 			"index",
 			"type",
-			"post_type",
 			"types_can_have_meta"
 		];
 		const private_keys = [

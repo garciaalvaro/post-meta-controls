@@ -8,8 +8,7 @@ class Tab extends Base {
 			id: "",
 			path: [],
 			index: "",
-			label: "",
-			post_type: "post"
+			label: ""
 		};
 	}
 
@@ -19,18 +18,10 @@ class Tab extends Base {
 			id: { type: "id" },
 			path: { type: "array_string" },
 			index: { type: "integer" },
-			label: { type: "text" },
-			post_type: { type: "id" }
+			label: { type: "text" }
 		};
 
-		const required_keys = [
-			"class_name",
-			"id",
-			"path",
-			"index",
-			"label",
-			"post_type"
-		];
+		const required_keys = ["class_name", "id", "path", "index", "label"];
 		const private_keys = ["class_name"];
 		const non_empty_values = ["id"];
 
