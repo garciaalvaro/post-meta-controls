@@ -16,13 +16,14 @@ function add_sidebar( $sidebar_props_raw = array() ) {
 		array( $sidebar_props_raw ),
 		array()
 	);
-	$sidebar_props = $sidebar_props[0];
+	// $sidebar_props = $sidebar_props[0];
 
-	// var_dump( $sidebar_props );
+	// var_dump( $sidebar_props[0]['tabs'][0]['panels'][0]['settings'][0] );
 	/*highlight_string("<?php\n\$data =\n" . var_export($sidebar_props, true) . ";\n?>");*/
 
 	\add_filter( 'ps_add_sidebar', function( $sidebars ) use ( $sidebar_props ) {
-		$sidebars[] = $sidebar_props;
+		// $sidebars[] = $sidebar_props;
+		$sidebars = array_merge( $sidebars, $sidebar_props );
 
 		return $sidebars;
 	} );

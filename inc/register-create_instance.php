@@ -70,7 +70,7 @@ function create_instance(
 			return;
 		}
 
-		$props_this = $class_instance->get_props();
+		$props_this = $class_instance->get_props_for_js();
 
 		if ( ! empty( $children_class_name ) ) {
 			$props_this[ $children_class_name . "s" ] =

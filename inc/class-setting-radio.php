@@ -4,6 +4,12 @@ namespace POSTSETTINGS;
 
 class Radio extends Setting {
 
+	protected function get_js_props_type() {
+		return array(
+			'options',
+		);
+	}
+
 	protected function get_props_default_type() {
 		$default_type = array(
 			'type'    => 'radio',

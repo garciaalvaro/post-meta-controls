@@ -20,21 +20,21 @@ export default compose([
 			meta: getEditedPostAttribute("meta")
 		};
 	}),
-	withDispatch((dispatch, { id, meta_key, value, meta }) => {
+	withDispatch((dispatch, { id, meta_key_with_prefix, value, meta }) => {
 		const { updateSettingValue } = dispatch(store_slug);
 		const { editPost } = dispatch("core/editor");
 
 		return {
 			update: value_new => {
 				updateSettingValue(id, value_new);
-				editPost({ meta: { [meta_key]: value_new } });
+				editPost({ meta: { [meta_key_with_prefix]: value_new } });
 				// editPost({ meta: { ...meta, [id]: value_new } });
-				l({ meta: { ...meta, [meta_key]: value_new } });
+				l({ meta: { ...meta, [meta_key_with_prefix]: value_new } });
 			},
 			toggle: () => {
 				updateSettingValue(id, !value);
-				editPost({ meta: { [meta_key]: !value } });
-				// editPost({ meta: { ...meta, [meta_key]: !value } });
+				editPost({ meta: { [meta_key_with_prefix]: !value } });
+				// editPost({ meta: { ...meta, [meta_key_with_prefix]: !value } });
 			}
 		};
 	}),

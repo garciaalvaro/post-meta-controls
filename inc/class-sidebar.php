@@ -4,6 +4,16 @@ namespace POSTSETTINGS;
 
 class Sidebar extends Base {
 
+	protected function get_js_props() {
+		return array(
+			'id',
+			'label',
+			'description',
+			// 'post_type',
+			// 'meta_key_prefix',
+		);
+	}
+
 	protected function get_props_default() {
 		return array(
 			'id'              => \wp_generate_uuid4(),
@@ -41,11 +51,5 @@ class Sidebar extends Base {
 
 	public function get_meta_key_prefix() {
 		return $this->props['meta_key_prefix'];
-	}
-
-	protected function post_props_validation() {// TODO: check if this could be set to private
-
-		$this->add_js_filter();
-
 	}
 }

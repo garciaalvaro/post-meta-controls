@@ -4,6 +4,10 @@ namespace POSTSETTINGS;
 
 class Checkbox extends Setting {
 
+	protected function get_js_props_type() {
+		return array();
+	}
+
 	protected function get_props_default_type() {
 		$default_type = array(
 			'type'    => 'checkbox',

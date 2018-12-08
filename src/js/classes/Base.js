@@ -1,14 +1,14 @@
 import l, { store_slug, sanitize } from "../utils";
 
 const {
-	last,
 	isArray,
+	isUndefined,
+	isEmpty,
+	last,
 	keys,
 	assign,
 	pick,
-	forEach,
-	isUndefined,
-	isEmpty
+	forEach
 } = lodash;
 
 class Base {

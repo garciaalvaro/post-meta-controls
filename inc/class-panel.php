@@ -4,9 +4,20 @@ namespace POSTSETTINGS;
 
 class Panel extends Base {
 
+	protected function get_js_props() {
+		return array(
+			'id',
+			'path',
+			// 'index',
+			'label',
+			'initial_open',
+			'with_container',
+			// 'post_type',
+		);
+	}
+
 	protected function get_props_default() {
 		return array(
-			// 'class_type'     => 'panel',
 			'id'             => '',
 			'path'           => array(),
 			'index'          => '',
@@ -52,12 +63,6 @@ class Panel extends Base {
 	protected function pre_props_validation() {// TODO: check if this could be set to private
 
 		$this->assign_prop_id();
-
-	}
-
-	protected function post_props_validation() {// TODO: check if this could be set to private
-
-		$this->add_js_filter();
 
 	}
 }

@@ -5,8 +5,7 @@ class Checkbox extends Setting {
 	getPropsDefaultType() {
 		return {
 			type: "checkbox",
-			default: true,
-			meta_type: "boolean"
+			default: true
 		};
 	}
 

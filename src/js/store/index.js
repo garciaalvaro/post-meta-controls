@@ -19,7 +19,9 @@ const reducer = function() {
 				return {
 					...state,
 					settings: state.settings.map(setting => {
-						let meta_value = get(meta, [setting.meta_key]);
+						let meta_value = get(meta, [
+							setting.meta_key_with_prefix
+						]);
 						meta_value = isUndefined(meta_value)
 							? isUndefined(setting.default)
 								? ""

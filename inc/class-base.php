@@ -7,6 +7,7 @@ abstract class Base {
 	protected $props;
 	private $props_default;
 	private $props_schema;
+	private $props_for_js;
 
 	function __construct( $props = array() ) {
 
@@ -14,6 +15,7 @@ abstract class Base {
 		$this->props         = $props;
 		$this->props_default = $this->get_props_default();
 		$this->props_schema  = $this->get_props_schema();
+		$this->props_for_js  = $this->get_js_props();
 
 		// Run functions before validating props.
 		if ( method_exists( $this, 'pre_clean_props' ) ) {
@@ -39,6 +41,7 @@ abstract class Base {
 
 	abstract protected function get_props_default();
 	abstract protected function get_props_schema();
+	abstract protected function get_js_props();
 
 	private function unset_props_keys_private() {
 		foreach ( $this->props_schema as $key => $schema ) {
@@ -96,6 +99,7 @@ abstract class Base {
 				true === $schema['required'] &&
 				! isset( $this->props[ $key ] )
 			) {
+				print_r($key." 1;" );
 				$this->props['valid'] = false;
 				return;
 			}
@@ -106,6 +110,7 @@ abstract class Base {
 					$schema['can_be_empty']['condition_value'] &&
 				empty( $this->props[ $key ] )
 			) {
+				print_r($key." 2;" );
 				$this->props['valid'] = false;
 				return;
 			}
@@ -114,6 +119,7 @@ abstract class Base {
 				false === $schema['can_be_empty'] &&
 				empty( $this->props[ $key ] )
 			) {
+				print_r($key." 3;" );
 				$this->props['valid'] = false;
 				return;
 			}
@@ -139,45 +145,6 @@ abstract class Base {
 			end( $this->props['path'] ) . '_' . $this->props['index'];
 	}
 
-	protected function add_js_filter() {
-
-	// 	if ( false === $this->props['valid'] ) {
-	// 		return false;
-	// 	}
-
-	// 	$props           = $this->props;
-	// 	$props_post_type = $props['post_type'];
-
-	// 	unset( $props['post_type'] );
-	// 	unset( $props['valid'] );
-
-	// 	\add_filter(
-	// 		'ps_add_js_filters',
-	// 		function( $js_filters, $post_type ) use ( $props, $props_post_type ) {
-
-	// 			if ( $props_post_type !== $post_type ) {
-	// 				return $js_filters;
-	// 			}
-	// 			$js_filters[] =
-	// 				implode( '',
-	// 					array(
-	// 						'ps_af(',// wp.hooks.addFilter
-	// 						'"ps_add_' . $props['class_type'] . '",',
-	// 						'"' . $props['class_type'] . '",',
-	// 						'(els) => {',
-	// 						'return els.concat(' . \wp_json_encode( $props ) . ');',
-	// 						'}',
-	// 						');',
-	// 					)
-	// 				);
-
-	// 			return $js_filters;
-	// 		},
-	// 		10,
-	// 		2
-	// 	);
-	}
-
 	public function is_valid() {
 		return ! empty( $this->props['valid'] );
 	}
@@ -186,7 +153,16 @@ abstract class Base {
 		return isset( $this->props['id'] ) ? $this->props['id'] : false;
 	}
 
-	public function get_props() {
-		return $this->props;
+	public function get_props_for_js() {
+
+		$filtered_props = $this->props;
+
+		foreach ( $this->props as $key => $value ) {
+			if ( ! in_array( $key, $this->props_for_js ) ) {
+				unset( $filtered_props[ $key ] );
+			}
+		}
+
+		return $filtered_props;
 	}
 }

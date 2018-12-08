@@ -8,7 +8,6 @@ class Radio extends Setting {
 		return {
 			type: "radio",
 			default: "",
-			meta_type: "string",
 			options: []
 		};
 	}

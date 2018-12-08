@@ -46,4 +46,4 @@ require_once POSTSETTINGS_INC_DIR . 'action.php';
 // require_once POSTSETTINGS_INC_DIR . 'global_functions.php';
 require_once POSTSETTINGS_INC_DIR . '_test.php';
 
-// require_once POSTSETTINGS_INC_DIR . 'test.php';
+require_once POSTSETTINGS_INC_DIR . 'test.php';

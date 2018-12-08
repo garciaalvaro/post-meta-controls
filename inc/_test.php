@@ -15,7 +15,7 @@ $sidebar_a = array(
 					'settings'       => array(
 						array(
 
-							'data_type'       => 'localstorage', // localstorage meta none option
+							'data_type'       => 'meta', // localstorage meta none option
 							'meta_key'        => 'qwee',
 							// 'meta_key_prefix' => 'ps_',
 
