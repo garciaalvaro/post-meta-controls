@@ -5,11 +5,24 @@ namespace POSTSETTINGS;
 class Checkbox extends Setting {
 
 	protected function get_props_default_type() {
-		return array(
-			'type'      => 'checkbox',
-			'default'   => true,
-			'meta_type' => 'boolean',
+		$default_type = array(
+			'type'    => 'checkbox',
+			'default' => true,
 		);
+
+		if (
+			! empty( $this->props['data_type'] ) &&
+			'meta' === $this->props['data_type']
+		) {
+			$default_type = \wp_parse_args(
+				array(
+					'meta_type' => 'boolean',
+				),
+				$default_type
+			);
+		}
+
+		return $default_type;
 	}
 
 	protected function get_props_schema_type() {

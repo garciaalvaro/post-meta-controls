@@ -10,24 +10,36 @@ abstract class Setting extends Base {
 	protected function get_props_default() {
 		$default_type = $this->get_props_default_type();
 		$default = array(
-			'id'                  => '',
-			'path'                => array(),
-			'index'               => '',
-			'type'                => '',
-			'label'               => '',
-			'description'         => '',
-			'default'             => '',
-			'help'                => '',
-			'post_type'           => 'post',
-			'meta_type'           => 'string',
-			'meta_key'            => '',
-			'meta_key_prefix'     => 'ps_',
-			'meta_key_prefix_from_sidebar' => '',
-			'types_can_have_meta' => array(
-				'checkbox',
-				'radio',
-			),
+			'id'          => '',
+			'path'        => array(),
+			'index'       => '',
+			'type'        => '',
+			'label'       => '',
+			'description' => '',
+			'default'     => '',
+			'help'        => '',
+			'post_type'   => 'post',
+			'data_type'   => 'none',
 		);
+
+		if (
+			! empty( $this->props['data_type'] ) &&
+			'meta' === $this->props['data_type']
+		) {
+			$default = \wp_parse_args(
+				array(
+					'meta_type'           => 'string',
+					'types_can_have_meta' => array(
+						'checkbox',
+						'radio',
+					),
+					'meta_key'            => '',
+					'meta_key_prefix'     => 'ps_',
+					'meta_key_prefix_from_sidebar' => '',
+				),
+				$default
+			);
+		}
 
 		return \wp_parse_args( $default_type, $default );
 	}
@@ -35,20 +47,16 @@ abstract class Setting extends Base {
 	protected function get_props_schema() {
 		$schema_type = $this->get_props_schema_type();
 		$schema = array(
-			'id'                  => array( 'type' => 'id', ),
-			'path'                => array( 'type' => 'array_string', ),
-			'index'               => array( 'type' => 'integer', ),
-			'type'                => array( 'type' => 'id', ),
-			'label'               => array( 'type' => 'text', ),
-			'description'         => array( 'type' => 'text', ),
-			'default'             => array( 'type' => 'id', ),
-			'help'                => array( 'type' => 'text', ),
-			'post_type'           => array( 'type' => 'id', ),
-			'meta_type'           => array( 'type' => 'id', ),
-			'meta_key'            => array( 'type' => 'id', ),
-			'meta_key_prefix'     => array( 'type' => 'id', ),
-			'meta_key_prefix_from_sidebar' => array( 'type' => 'id', ),
-			'types_can_have_meta' => array( 'type' => 'array_string', ),
+			'id'          => array( 'type' => 'id', ),
+			'path'        => array( 'type' => 'array_string', ),
+			'index'       => array( 'type' => 'integer', ),
+			'type'        => array( 'type' => 'id', ),
+			'label'       => array( 'type' => 'text', ),
+			'description' => array( 'type' => 'text', ),
+			'default'     => array( 'type' => 'id', ),
+			'help'        => array( 'type' => 'text', ),
+			'post_type'   => array( 'type' => 'id', ),
+			'data_type'   => array( 'type' => 'id', ),
 		);
 		$required_keys = array(
 			'id',
@@ -56,18 +64,52 @@ abstract class Setting extends Base {
 			'index',
 			'type',
 			'post_type',
-			'types_can_have_meta',
 			// TODO default here? radio must have a default even if it is empty
 		);
 		$private_keys = array(
-			'types_can_have_meta',
 			'id',
-			'meta_type',
 		);
 		$non_empty_values = array(
 			'id',
-			'meta_key',
 		);
+
+		if (
+			! empty( $this->props['data_type'] ) &&
+			'meta' === $this->props['data_type']
+		) {
+			$schema = \wp_parse_args(
+				array(
+					'meta_type'           => array( 'type' => 'id', ),
+					'types_can_have_meta' => array( 'type' => 'array_string', ),
+					'meta_key'            => array( 'type' => 'id', ),
+					'meta_key_prefix'     => array( 'type' => 'id', ),
+					'meta_key_prefix_from_sidebar' => array( 'type' => 'id', ),
+				),
+				$schema
+			);
+			$required_keys = \wp_parse_args(
+				array(
+					'types_can_have_meta',
+				),
+				$required_keys
+			);
+			$private_keys = \wp_parse_args(
+				array(
+					'types_can_have_meta',
+					'meta_type',
+				),
+				$private_keys
+			);
+			$non_empty_values = \wp_parse_args(
+				array(
+					'meta_key' => array(
+						'condition_key'   => 'data_type',
+						'condition_value' => 'meta',
+					),
+				),
+				$non_empty_values
+			);
+		}
 
 		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
 
@@ -105,8 +147,9 @@ abstract class Setting extends Base {
 
 		if (
 			true !== $this->props['valid'] ||
-			empty( $this->props['type'] ) ||
-			empty( $this->props['types_can_have_meta'] ) ||
+			'meta' !== $this->props['data_type'] ||
+			// empty( $this->props['type'] ) ||
+			// empty( $this->props['types_can_have_meta'] ) ||
 			! in_array( $this->props['type'], $this->props['types_can_have_meta'] )
 		) {
 			return;

@@ -11,7 +11,7 @@ abstract class Base {
 	function __construct( $props = array() ) {
 
 		// Set values.
-		$this->props     = $props;
+		$this->props         = $props;
 		$this->props_default = $this->get_props_default();
 		$this->props_schema  = $this->get_props_schema();
 
@@ -95,6 +95,16 @@ abstract class Base {
 			if (
 				true === $schema['required'] &&
 				! isset( $this->props[ $key ] )
+			) {
+				$this->props['valid'] = false;
+				return;
+			}
+
+			if (
+				is_array( $schema['can_be_empty'] ) &&
+				$this->props[ $schema['can_be_empty']['condition_key'] ] ===
+					$schema['can_be_empty']['condition_value'] &&
+				empty( $this->props[ $key ] )
 			) {
 				$this->props['valid'] = false;
 				return;

@@ -11,9 +11,16 @@ function set_schema(
 ) {
 
 	foreach ( $schema as $key => $prop_array ) {
-		$prop_array['required']     = in_array( $key, $required_keys );
-		$prop_array['private']      = in_array( $key, $private_keys );
-		$prop_array['can_be_empty'] = ! in_array( $key, $non_empty_values );
+		$prop_array['required'] = in_array( $key, $required_keys );
+		$prop_array['private']  = in_array( $key, $private_keys );
+
+		if ( in_array( $key, $non_empty_values ) ) {
+			$prop_array['can_be_empty'] = false;
+		} elseif ( array_key_exists( $key, $non_empty_values ) ) {
+			$prop_array['can_be_empty'] = $non_empty_values[ $key ];
+		} else {
+			$prop_array['can_be_empty'] = true;
+		}
 
 		$schema[ $key ] = $prop_array;
 	}

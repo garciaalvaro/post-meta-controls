@@ -5,12 +5,25 @@ namespace POSTSETTINGS;
 class Radio extends Setting {
 
 	protected function get_props_default_type() {
-		return array(
-			'type'            => 'radio',
-			'default'         => '',
-			'meta_type'       => 'string',
-			'options'         => array(),
+		$default_type = array(
+			'type'    => 'radio',
+			'default' => '',
+			'options' => array(),
 		);
+
+		if (
+			! empty( $this->props['data_type'] ) &&
+			'meta' === $this->props['data_type']
+		) {
+			$default_type = \wp_parse_args(
+				array(
+					'meta_type' => 'string',
+				),
+				$default_type
+			);
+		}
+
+		return $default_type;
 	}
 
 	protected function get_props_schema_type() {

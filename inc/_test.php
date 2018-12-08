@@ -1,9 +1,10 @@
 <?php
 
 $sidebar_a = array(
-	'id'    => 'aaa',
-	'label' => 'a',
-	'tabs'  => array(
+	'id'              => 'aaa',
+	'label'           => 'a',
+	'meta_key_prefix' => 'sideb_',
+	'tabs'            => array(
 		array(
 			'label'  => '111',
 			'panels' => array(
@@ -14,10 +15,9 @@ $sidebar_a = array(
 					'settings'       => array(
 						array(
 
-							'data_type'       => 'meta', // localstorage meta none option 
-
-							'meta_key'        => 'aaa',
-							'meta_key_prefix' => 'ppref_',
+							'data_type'       => 'localstorage', // localstorage meta none option
+							'meta_key'        => 'qwee',
+							// 'meta_key_prefix' => 'ps_',
 
 							'help'     => 'help asd',
 							'type'     => 'radio',
