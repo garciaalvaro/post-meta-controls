@@ -4,7 +4,7 @@ import Base from "./Base";
 class Setting extends Base {
 	getPropsDefault() {
 		const defaults = {
-			class_type: "setting",
+			class_name: "setting",
 			id: "",
 			path: [],
 			index: "",
@@ -26,7 +26,7 @@ class Setting extends Base {
 
 	getPropsSchema() {
 		const schema = {
-			class_type: { type: "id" },
+			class_name: { type: "id" },
 			id: { type: "id" },
 			path: { type: "array_string" },
 			index: { type: "integer" },
@@ -45,7 +45,7 @@ class Setting extends Base {
 		};
 
 		const required_keys = [
-			"class_type",
+			"class_name",
 			"id",
 			"path",
 			"index",
@@ -55,7 +55,7 @@ class Setting extends Base {
 		];
 		const private_keys = [
 			"types_can_have_meta",
-			"class_type",
+			"class_name",
 			"id",
 			"meta_type"
 		];

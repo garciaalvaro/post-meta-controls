@@ -4,7 +4,7 @@ import Base from "./Base";
 class Panel extends Base {
 	getPropsDefault() {
 		return {
-			class_type: "panel",
+			class_name: "panel",
 			id: "",
 			path: [],
 			index: "",
@@ -17,7 +17,7 @@ class Panel extends Base {
 
 	getPropsSchema() {
 		const schema = {
-			class_type: {
+			class_name: {
 				type: "id"
 			},
 			id: {
@@ -44,14 +44,14 @@ class Panel extends Base {
 		};
 
 		const required_keys = [
-			"class_type",
+			"class_name",
 			"id",
 			"path",
 			"index",
 			"label",
 			"post_type"
 		];
-		const private_keys = ["class_type", "id"];
+		const private_keys = ["class_name", "id"];
 		const non_empty_values = ["id"];
 
 		setSchema(schema, required_keys, private_keys, non_empty_values);

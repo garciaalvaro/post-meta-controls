@@ -7,7 +7,7 @@ import Radio from "../classes/Setting-Radio";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
-const createInstance = (class_type, elements, path) => {
+const createInstance = (class_name, elements, path) => {
 	if (!isArray(elements)) {
 		return false;
 	}
@@ -28,19 +28,19 @@ const createInstance = (class_type, elements, path) => {
 		element.path = path;
 		element.index = index;
 
-		if ("sidebar" === class_type && !isEmpty(element.tabs)) {
+		if ("sidebar" === class_name && !isEmpty(element.tabs)) {
 			class_instance = new Sidebar(element);
 			children_els = element.tabs;
 			children_type = "tabs";
-		} else if ("tabs" === class_type && !isEmpty(element.panels)) {
+		} else if ("tabs" === class_name && !isEmpty(element.panels)) {
 			class_instance = new Tab(element);
 			children_els = element.panels;
 			children_type = "panels";
-		} else if ("panels" === class_type && !isEmpty(element.settings)) {
+		} else if ("panels" === class_name && !isEmpty(element.settings)) {
 			class_instance = new Panel(element);
 			children_els = element.settings;
 			children_type = "settings";
-		} else if ("settings" === class_type && !isEmpty(element.type)) {
+		} else if ("settings" === class_name && !isEmpty(element.type)) {
 			if ("checkbox" === element.type) {
 				class_instance = new Checkbox(element);
 			} else if ("radio" === element.type) {
@@ -61,7 +61,7 @@ const createInstance = (class_type, elements, path) => {
 
 		const props_this = class_instance.getProps();
 
-		if ("settings" !== class_type) {
+		if ("settings" !== class_name) {
 			props_this[children_type] = createInstance(
 				children_type,
 				children_els,

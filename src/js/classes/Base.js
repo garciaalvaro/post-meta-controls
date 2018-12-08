@@ -142,16 +142,16 @@ class Base {
 			return;
 		}
 
-		const { class_type } = this.props;
+		const { class_name } = this.props;
 		const { valid, index, ...filtered_props } = this.props;
 
-		if (class_type === "sidebar") {
+		if (class_name === "sidebar") {
 			dispatch(store_slug).addSidebar(filtered_props);
-		} else if (class_type === "tab") {
+		} else if (class_name === "tab") {
 			dispatch(store_slug).addTab(filtered_props);
-		} else if (class_type === "panel") {
+		} else if (class_name === "panel") {
 			dispatch(store_slug).addPanel(filtered_props);
-		} else if (class_type === "setting") {
+		} else if (class_name === "setting") {
 			dispatch(store_slug).addSetting(filtered_props);
 		}
 	}

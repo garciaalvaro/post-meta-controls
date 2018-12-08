@@ -4,7 +4,7 @@ import Base from "./Base";
 class Tab extends Base {
 	getPropsDefault() {
 		return {
-			class_type: "tab",
+			class_name: "tab",
 			id: "",
 			path: [],
 			index: "",
@@ -15,7 +15,7 @@ class Tab extends Base {
 
 	getPropsSchema() {
 		const schema = {
-			class_type: { type: "id" },
+			class_name: { type: "id" },
 			id: { type: "id" },
 			path: { type: "array_string" },
 			index: { type: "integer" },
@@ -24,14 +24,14 @@ class Tab extends Base {
 		};
 
 		const required_keys = [
-			"class_type",
+			"class_name",
 			"id",
 			"path",
 			"index",
 			"label",
 			"post_type"
 		];
-		const private_keys = ["class_type"];
+		const private_keys = ["class_name"];
 		const non_empty_values = ["id"];
 
 		setSchema(schema, required_keys, private_keys, non_empty_values);

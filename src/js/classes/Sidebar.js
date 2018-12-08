@@ -5,7 +5,7 @@ import Base from "./Base";
 class Sidebar extends Base {
 	getPropsDefault() {
 		return {
-			class_type: "sidebar",
+			class_name: "sidebar",
 			id: uuid(),
 			label: "",
 			description: "",
@@ -18,7 +18,7 @@ class Sidebar extends Base {
 
 	getPropsSchema() {
 		const schema = {
-			class_type: { type: "id" },
+			class_name: { type: "id" },
 			id: { type: "id" },
 			label: { type: "text" },
 			description: { type: "text" },
@@ -29,13 +29,13 @@ class Sidebar extends Base {
 		};
 
 		const required_keys = [
-			"class_type",
+			"class_name",
 			"id",
 			"label",
 			"post_type",
 			"active_tab"
 		];
-		const private_keys = ["class_type", "active_tab", "settings_id"];
+		const private_keys = ["class_name", "active_tab", "settings_id"];
 		const non_empty_values = ["id"];
 
 		setSchema(schema, required_keys, private_keys, non_empty_values);
