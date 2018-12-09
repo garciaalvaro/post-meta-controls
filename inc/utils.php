@@ -79,7 +79,6 @@ function sanitize_array_array_string( $value ) {
 
 function sanitize_options( $value, $options, $default, $multiple = false ) {
 
-	// Ensure input is a slug.
 	$value = true === $multiple
 		? json_decode( $value, true )
 		: \sanitize_key( $value );
@@ -99,10 +98,10 @@ function sanitize_options( $value, $options, $default, $multiple = false ) {
 		}
 
 		return empty( $value )
-			? $default
+			? sanitize_id( $default )
 			: wp_json_encode( array_values( $value ) );
 	}
 
 	// If the input is a valid key, return it; otherwise, return the default.
-	return in_array( $value, $options ) ? $value : $default;
+	return in_array( $value, $options ) ? $value : sanitize_id( $default );
 }
