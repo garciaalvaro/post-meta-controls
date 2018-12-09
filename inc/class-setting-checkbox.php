@@ -16,18 +16,6 @@ class Checkbox extends Setting {
 			'default_value' => true,
 		);
 
-		if (
-			! empty( $this->props['data_type'] ) &&
-			'meta' === $this->props['data_type']
-		) {
-			$default_type = \wp_parse_args(
-				array(
-					'meta_type' => 'boolean',
-				),
-				$default_type
-			);
-		}
-
 		return $default_type;
 	}
 

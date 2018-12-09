@@ -6,7 +6,7 @@ function create_instance(
 	$class_name = '',
 	$elements = array(),
 	$path = array(),
-	$meta_key_prefix_from_sidebar = ''
+	$data_key_prefix_from_sidebar = ''
 ) {
 
 	if ( ! is_array( $elements ) ) {
@@ -34,7 +34,7 @@ function create_instance(
 			$class_instance      = new Sidebar( $element );
 			$children_els        = $element['tabs'];
 			$children_class_name = 'tab';
-			$meta_key_prefix_from_sidebar = $class_instance->get_meta_key_prefix();
+			$data_key_prefix_from_sidebar = $class_instance->get_data_key_prefix();
 
 		} elseif ( 'tab' === $class_name && ! empty( $element['panels'] ) ) {
 
@@ -50,7 +50,7 @@ function create_instance(
 
 		} elseif ( 'setting' === $class_name && ! empty( $element['type'] ) ) {
 
-			$element['meta_key_prefix_from_sidebar'] = $meta_key_prefix_from_sidebar;
+			$element['data_key_prefix_from_sidebar'] = $data_key_prefix_from_sidebar;
 
 			if ( 'checkbox' === $element['type'] ) {
 				$class_instance = new Checkbox( $element );
@@ -78,7 +78,7 @@ function create_instance(
 					$children_class_name,
 					$children_els,
 					array_merge( $path, array( $id ) ),
-					$meta_key_prefix_from_sidebar
+					$data_key_prefix_from_sidebar
 				);
 		}
 

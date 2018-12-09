@@ -18,18 +18,6 @@ class Radio extends Setting {
 			'options'       => array(),
 		);
 
-		if (
-			! empty( $this->props['data_type'] ) &&
-			'meta' === $this->props['data_type']
-		) {
-			$default_type = \wp_parse_args(
-				array(
-					'meta_type' => 'string',
-				),
-				$default_type
-			);
-		}
-
 		return $default_type;
 	}
 

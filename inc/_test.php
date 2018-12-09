@@ -16,12 +16,12 @@ $sidebar_a = array(
 						array(
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'meta_key'        => 'qwee',
+							'data_key'        => 'zczqweqqw',
 							// 'meta_key_prefix' => 'ps_',
 
 							'help'     => 'help asd',
-							'type'     => 'radio',
-							'default'  => 'ww',
+							'type'     => 'checkbox',
+							'default_value'  => true,
 							'label'    => 'vvvvvvvvvv',
 							'options'  => array(
 								'uu' => 'UU',

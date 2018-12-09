@@ -7,12 +7,12 @@ import Radio from "../classes/Setting-Radio";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
-const createInstance = (class_name, elements, path) => {
+const createInstance = (class_name, elements, path, instances) => {
 	if (!isArray(elements)) {
-		return false;
+		return instances;
 	}
 
-	let props = [];
+	let instances_array = [];
 
 	forEach(elements, (element, index) => {
 		if (!isObject(element)) {
@@ -59,19 +59,21 @@ const createInstance = (class_name, elements, path) => {
 			return;
 		}
 
-		const props_this = class_instance.getProps();
+		instances_array.push(class_instance.getProps());
 
 		if ("setting" !== class_name) {
-			props_this[`${children_class_name}s`] = createInstance(
+			instances = createInstance(
 				children_class_name,
 				children_els,
-				path.concat(id)
+				path.concat(id),
+				instances
 			);
 		}
-		props = props.concat(props_this);
 	});
 
-	return props;
+	instances[`${class_name}s`] = instances_array;
+
+	return instances;
 };
 
 export default createInstance;

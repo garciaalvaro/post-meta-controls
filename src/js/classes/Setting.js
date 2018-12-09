@@ -16,9 +16,10 @@ class Setting extends Base {
 			description: "",
 			help: ""
 		};
-		if (get(this.props, "data_type") === "meta") {
+		const data_type = get(this.props, "data_type");
+		if (data_type === "meta" || data_type === "localstorage") {
 			merge(defaults, {
-				meta_key_with_prefix: ""
+				data_key_with_prefix: ""
 			});
 		}
 
@@ -43,12 +44,13 @@ class Setting extends Base {
 		let private_keys = ["class_name", "id"];
 		let non_empty_values = ["id"];
 
-		if (get(this.props, "data_type") === "meta") {
+		const data_type = get(this.props, "data_type");
+		if (data_type === "meta" || data_type === "localstorage") {
 			merge(schema, {
-				meta_key_with_prefix: { type: "text" }
+				data_key_with_prefix: { type: "id" }
 			});
-			required_keys.push("meta_key_with_prefix");
-			non_empty_values.push("meta_key_with_prefix");
+			required_keys.push("data_key_with_prefix");
+			non_empty_values.push("data_key_with_prefix");
 		}
 
 		setSchema(schema, required_keys, private_keys, non_empty_values);

@@ -40,7 +40,7 @@ class Base {
 		// Validate props.
 		this.validateProps();
 
-		this.dispatchToStore();
+		// this.dispatchToStore();
 	}
 
 	unsetPropsKeysPrivate() {
@@ -135,26 +135,26 @@ class Base {
 		this.props.id = `${last(this.props.path)}_${this.props.index}`;
 	}
 
-	dispatchToStore() {
-		const { dispatch } = wp.data;
+	// dispatchToStore() {
+	// 	const { dispatch } = wp.data;
 
-		if (this.props.valid !== true || isUndefined(dispatch(store_slug))) {
-			return;
-		}
+	// 	if (this.props.valid !== true || isUndefined(dispatch(store_slug))) {
+	// 		return;
+	// 	}
 
-		const { class_name } = this.props;
-		const { valid, index, ...filtered_props } = this.props;
+	// 	const { class_name } = this.props;
+	// 	const { valid, index, ...filtered_props } = this.props;
 
-		if (class_name === "sidebar") {
-			dispatch(store_slug).addSidebar(filtered_props);
-		} else if (class_name === "tab") {
-			dispatch(store_slug).addTab(filtered_props);
-		} else if (class_name === "panel") {
-			dispatch(store_slug).addPanel(filtered_props);
-		} else if (class_name === "setting") {
-			dispatch(store_slug).addSetting(filtered_props);
-		}
-	}
+	// 	if (class_name === "sidebar") {
+	// 		dispatch(store_slug).addSidebar(filtered_props);
+	// 	} else if (class_name === "tab") {
+	// 		dispatch(store_slug).addTab(filtered_props);
+	// 	} else if (class_name === "panel") {
+	// 		dispatch(store_slug).addPanel(filtered_props);
+	// 	} else if (class_name === "setting") {
+	// 		dispatch(store_slug).addSetting(filtered_props);
+	// 	}
+	// }
 
 	isValid() {
 		return this.props.valid === true;

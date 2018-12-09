@@ -2,6 +2,13 @@
 
 namespace POSTSETTINGS;
 
+function get_meta_type( $setting_type = '' ) {
+	if ( 'checkbox' === $setting_type ) {
+		return 'boolean';
+	}
+
+	return 'string';
+}
 
 function set_schema(
 	$schema = array(),

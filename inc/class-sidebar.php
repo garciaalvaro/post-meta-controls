@@ -9,8 +9,6 @@ class Sidebar extends Base {
 			'id',
 			'label',
 			'description',
-			// 'post_type',
-			// 'meta_key_prefix',
 		);
 	}
 
@@ -21,7 +19,7 @@ class Sidebar extends Base {
 			'description'     => '',
 			// 'icon_url'    => '',// TODO
 			'post_type'       => 'post',
-			'meta_key_prefix' => 'ps_',
+			'data_key_prefix' => 'ps_',
 		);
 	}
 
@@ -32,7 +30,7 @@ class Sidebar extends Base {
 			'description'     => array( 'type' => 'text', ),
 			// 'icon_url'    => array( 'type' => 'id', ),// TODO
 			'post_type'       => array( 'type' => 'id', ),
-			'meta_key_prefix' => array( 'type' => 'id', ),
+			'data_key_prefix' => array( 'type' => 'id', ),
 		);
 		$required_keys = array(
 			'id',
@@ -49,7 +47,7 @@ class Sidebar extends Base {
 		return $schema;
 	}
 
-	public function get_meta_key_prefix() {
-		return $this->props['meta_key_prefix'];
+	public function get_data_key_prefix() {
+		return $this->props['data_key_prefix'];
 	}
 }

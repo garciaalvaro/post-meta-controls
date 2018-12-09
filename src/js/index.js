@@ -1,2 +1,2 @@
-import "./store";
+// import "./store";
 import "./register";
