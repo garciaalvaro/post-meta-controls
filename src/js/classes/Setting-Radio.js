@@ -7,14 +7,14 @@ class Radio extends Setting {
 	getPropsDefaultType() {
 		return {
 			type: "radio",
-			default: "",
+			default_value: "",
 			options: []
 		};
 	}
 
 	getPropsSchemaType() {
 		const schema = {
-			default: { type: "id" },
+			default_value: { type: "id" },
 			options: { type: "array_object_string" }
 		};
 

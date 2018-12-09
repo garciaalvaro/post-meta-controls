@@ -18,7 +18,6 @@ abstract class Setting extends Base {
 			'type',
 			'label',
 			'description',
-			'default',
 			'help',
 			// 'post_type',
 		);
@@ -48,7 +47,6 @@ abstract class Setting extends Base {
 			'type'        => '',
 			'label'       => '',
 			'description' => '',
-			'default'     => '',
 			'help'        => '',
 			'post_type'   => 'post',
 		);
@@ -86,7 +84,6 @@ abstract class Setting extends Base {
 			'type'        => array( 'type' => 'id', ),
 			'label'       => array( 'type' => 'text', ),
 			'description' => array( 'type' => 'text', ),
-			'default'     => array( 'type' => 'id', ),
 			'help'        => array( 'type' => 'text', ),
 			'post_type'   => array( 'type' => 'id', ),
 		);
@@ -210,10 +207,10 @@ abstract class Setting extends Base {
 
 						if ( 'radio' === $props['type'] ) {
 
-							$options = $this->props['options'];
-							$default = $this->props['default'];
+							$options       = $this->props['options'];
+							$default_value = $this->props['default_value'];
 
-							return sanitize_options( $value, $options, $default );
+							return sanitize_options( $value, $options, $default_value );
 
 						} elseif ( 'checkbox' === $props['type'] ) {
 

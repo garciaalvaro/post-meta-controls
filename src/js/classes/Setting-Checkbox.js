@@ -5,13 +5,13 @@ class Checkbox extends Setting {
 	getPropsDefaultType() {
 		return {
 			type: "checkbox",
-			default: true
+			default_value: true
 		};
 	}
 
 	getPropsSchemaType() {
 		const schema = {
-			default: { type: "bool" }
+			default_value: { type: "bool" }
 		};
 
 		const required_keys = ["label"];

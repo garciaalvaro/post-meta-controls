@@ -14,20 +14,19 @@ const reducer = function() {
 		switch (action.type) {
 			case "UPDATE_SETTING_VALUES": {
 				const { meta } = action;
-				l("meta", meta);
 
 				return {
 					...state,
 					settings: state.settings.map(setting => {
-						let meta_value = get(meta, [
-							setting.meta_key_with_prefix
-						]);
-						meta_value = isUndefined(meta_value)
-							? isUndefined(setting.default)
-								? ""
-								: setting.default
+						const { meta_key_with_prefix, default_value } = setting;
+
+						let meta_value = get(meta, [meta_key_with_prefix]);
+						meta_value = isUndefined(
+							get(meta, [meta_key_with_prefix])
+						)
+							? default_value
 							: meta_value;
-						// l("p", meta_value);
+
 						return {
 							...setting,
 							value: meta_value
@@ -210,7 +209,7 @@ const controls = {
 };
 
 const resolvers = {
-	*getSidebar(state) {
+	*getTabs(state) {
 		const meta = yield actions.getMeta();
 		return actions.updateSettingValues(meta);
 	}

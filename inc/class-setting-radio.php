@@ -12,9 +12,9 @@ class Radio extends Setting {
 
 	protected function get_props_default_type() {
 		$default_type = array(
-			'type'    => 'radio',
-			'default' => '',
-			'options' => array(),
+			'type'          => 'radio',
+			'default_value' => '',
+			'options'       => array(),
 		);
 
 		if (
@@ -34,8 +34,8 @@ class Radio extends Setting {
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default' => array( 'type' => 'id', ),
-			'options' => array( 'type' => 'array_array_string', ),
+			'default_value' => array( 'type' => 'id', ),
+			'options'       => array( 'type' => 'array_array_string', ),
 		);
 		$required_keys = array(
 			'label',

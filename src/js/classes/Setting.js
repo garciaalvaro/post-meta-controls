@@ -14,7 +14,6 @@ class Setting extends Base {
 			type: "",
 			label: "",
 			description: "",
-			default: "",
 			help: ""
 		};
 		if (get(this.props, "data_type") === "meta") {
@@ -38,7 +37,6 @@ class Setting extends Base {
 			type: { type: "id" },
 			label: { type: "text" },
 			description: { type: "text" },
-			default: { type: "id" },
 			help: { type: "text" }
 		};
 		let required_keys = ["class_name", "id", "path", "index", "type"];

@@ -10,8 +10,8 @@ class Checkbox extends Setting {
 
 	protected function get_props_default_type() {
 		$default_type = array(
-			'type'    => 'checkbox',
-			'default' => true,
+			'type'          => 'checkbox',
+			'default_value' => true,
 		);
 
 		if (
@@ -31,7 +31,7 @@ class Checkbox extends Setting {
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default' => array( 'type' => 'bool', ),
+			'default_value' => array( 'type' => 'bool', ),
 		);
 		$required_keys = array(
 			'label',
