@@ -5,7 +5,9 @@ namespace POSTSETTINGS;
 class Checkbox extends Setting {
 
 	protected function get_js_props_type() {
-		return array();
+		return array(
+			'default_value',
+		);
 	}
 
 	protected function get_props_default_type() {

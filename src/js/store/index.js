@@ -1,7 +1,7 @@
 import l, { store_slug } from "../utils";
 import initial_state from "./initial_state";
 
-const { last, filter, get, isUndefined, find } = lodash;
+const { last, filter, get, find } = lodash;
 const { registerStore } = wp.data;
 
 const reducer = function() {
@@ -18,14 +18,17 @@ const reducer = function() {
 				return {
 					...state,
 					settings: state.settings.map(setting => {
-						const { meta_key_with_prefix, default_value } = setting;
-
+						const {
+							meta_key_with_prefix,
+							default_value,
+							type
+						} = setting;
 						let meta_value = get(meta, [meta_key_with_prefix]);
-						meta_value = isUndefined(
-							get(meta, [meta_key_with_prefix])
-						)
-							? default_value
-							: meta_value;
+
+						if (type === "checkbox" || type === "radio") {
+							meta_value =
+								meta_value === "" ? default_value : meta_value;
+						}
 
 						return {
 							...setting,
