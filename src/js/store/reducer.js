@@ -35,7 +35,11 @@ const reducer = (state = initial_state, action) => {
 						]);
 					}
 
-					if (type === "checkbox" || type === "radio") {
+					if (
+						type === "checkbox" ||
+						type === "radio" ||
+						type === "select"
+					) {
 						value =
 							isUndefined(value) || value === ""
 								? default_value

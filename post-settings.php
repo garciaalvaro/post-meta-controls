@@ -37,9 +37,10 @@ require_once POSTSETTINGS_INC_DIR . 'class-panel.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-checkbox.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-radio.php';
+require_once POSTSETTINGS_INC_DIR . 'class-setting-select.php';
 // require_once POSTSETTINGS_INC_DIR . 'class-setting-custom_component.php';
 
-require_once POSTSETTINGS_INC_DIR . 'register-create_instance.php';
+require_once POSTSETTINGS_INC_DIR . 'register-generate_instances.php';
 require_once POSTSETTINGS_INC_DIR . 'register-add_sidebar.php';
 
 require_once POSTSETTINGS_INC_DIR . 'action.php';

@@ -2,6 +2,7 @@ import l, { store_slug } from "../../utils";
 import Div from "../Utils";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
+import Select from "./Select";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -17,6 +18,9 @@ class Control extends Component {
 
 			case "radio":
 				return <Radio {...this.props} />;
+
+			case "select":
+				return <Select {...this.props} />;
 
 			default:
 				return null;

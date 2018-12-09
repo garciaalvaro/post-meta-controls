@@ -4,20 +4,35 @@ import withStoreConnection from "./_withStoreConnection";
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
-const { RadioControl } = wp.components;
+const { SelectControl } = wp.components;
 
 class Radio extends Component {
 	render() {
-		const { options, label, help, value, updateString } = this.props;
+		const {
+			options,
+			label,
+			help,
+			value,
+			updateString,
+			updateArrayString,
+			multiple
+		} = this.props;
 
 		return (
-			<RadioControl
-				className="ps-control-radio"
+			<SelectControl
+				className="ps-control-select"
 				label={label}
 				help={help}
-				selected={value}
+				value={value}
 				options={options}
-				onChange={updateString}
+				multiple={multiple}
+				onChange={value => {
+					if (multiple) {
+						updateArrayString(value);
+					} else {
+						updateString(value);
+					}
+				}}
 			/>
 		);
 	}

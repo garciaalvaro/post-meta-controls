@@ -4,10 +4,11 @@ import Tab from "../classes/Tab";
 import Panel from "../classes/Panel";
 import Checkbox from "../classes/Setting-Checkbox";
 import Radio from "../classes/Setting-Radio";
+import Select from "../classes/Setting-Select";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
-const createInstance = (class_name, elements, path, instances) => {
+const generateInstances = (class_name, elements, path, instances) => {
 	if (!isArray(elements)) {
 		return instances;
 	}
@@ -45,6 +46,8 @@ const createInstance = (class_name, elements, path, instances) => {
 				class_instance = new Checkbox(element);
 			} else if ("radio" === element.type) {
 				class_instance = new Radio(element);
+			} else if ("select" === element.type) {
+				class_instance = new Select(element);
 			} else if ("custom_component" === element.type) {
 				// class_instance = new CustomComponent( element );
 			}
@@ -62,7 +65,7 @@ const createInstance = (class_name, elements, path, instances) => {
 		instances_array.push(class_instance.getProps());
 
 		if ("setting" !== class_name) {
-			instances = createInstance(
+			instances = generateInstances(
 				children_class_name,
 				children_els,
 				path.concat(id),
@@ -76,4 +79,4 @@ const createInstance = (class_name, elements, path, instances) => {
 	return instances;
 };
 
-export default createInstance;
+export default generateInstances;

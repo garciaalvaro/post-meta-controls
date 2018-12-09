@@ -2,8 +2,9 @@
 
 namespace POSTSETTINGS;
 
-function get_meta_type( $setting_type = '' ) {
-	if ( 'checkbox' === $setting_type ) {
+function get_meta_type( $props = array() ) {
+
+	if ( 'checkbox' === $props['type'] ) {
 		return 'boolean';
 	}
 
@@ -76,15 +77,31 @@ function sanitize_array_array_string( $value ) {
 	return $value;
 }
 
-function sanitize_options( $value, $options, $default ) {
+function sanitize_options( $value, $options, $default, $multiple = false ) {
 
 	// Ensure input is a slug.
-	$value = \sanitize_key( $value );
+	$value = true === $multiple
+		? json_decode( $value, true )
+		: \sanitize_key( $value );
+	$options = sanitize_array( $options );
 
 	// Get list of choices from the control associated with the setting.
 	$options = array_map( function( $option ) {
 		return $option['value'];
 	}, $options );
+
+	if ( true === $multiple && is_array( $value ) ) {
+
+		foreach ( $value as $value_key => $value_value ) {
+			if ( ! in_array( $value_value, $options ) ) {
+				unset( $value[ $value_key ] );
+			}
+		}
+
+		return empty( $value )
+			? $default
+			: wp_json_encode( array_values( $value ) );
+	}
 
 	// If the input is a valid key, return it; otherwise, return the default.
 	return in_array( $value, $options ) ? $value : $default;

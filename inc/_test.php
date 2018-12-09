@@ -14,16 +14,17 @@ $sidebar_a = array(
 					'initial_open'   => true,
 					'settings'       => array(
 						array(
+							'type'            => 'select',
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'zczqweqqw',
-							// 'meta_key_prefix' => 'ps_',
+							'data_key'        => 'qwed',
+							'data_key_prefix' => 'ps_',
 
-							'help'     => 'help asd',
-							'type'     => 'checkbox',
-							'default_value'  => true,
-							'label'    => 'vvvvvvvvvv',
-							'options'  => array(
+							'help'            => 'help asd',
+							// 'multiple'        => true,
+							'default_value'   => true,
+							'label'           => 'vvvvvvvvvv',
+							'options'         => array(
 								'uu' => 'UU',
 								'vv' => 'VV',
 								'ww' => 'ww',

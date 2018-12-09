@@ -2,7 +2,7 @@
 
 namespace POSTSETTINGS;
 
-function create_instance(
+function generate_instances(
 	$class_name = '',
 	$elements = array(),
 	$path = array(),
@@ -56,6 +56,8 @@ function create_instance(
 				$class_instance = new Checkbox( $element );
 			} elseif ( 'radio' === $element['type'] ) {
 				$class_instance = new Radio( $element );
+			} elseif ( 'select' === $element['type'] ) {
+				$class_instance = new Select( $element );
 			} elseif ( 'custom_component' === $element['type'] ) {
 				// new CustomComponent( $element );
 			}
@@ -74,7 +76,7 @@ function create_instance(
 
 		if ( ! empty( $children_class_name ) ) {
 			$props_this[ $children_class_name . "s" ] =
-				create_instance(
+				generate_instances(
 					$children_class_name,
 					$children_els,
 					array_merge( $path, array( $id ) ),

@@ -66,6 +66,7 @@ abstract class Setting extends Base {
 					'types_can_have_meta'          => array(
 						'checkbox',
 						'radio',
+						'select',
 					),
 					'data_key'                     => '',
 					'data_key_prefix'              => 'ps_',
@@ -196,7 +197,7 @@ abstract class Setting extends Base {
 		}
 
 		$props              = $this->props;
-		$props['meta_type'] = get_meta_type( $props['type'] );
+		$props['meta_type'] = get_meta_type( $props );
 
 		\add_action( 'init', function() use ( $props ) {
 			\register_post_meta(
@@ -208,12 +209,17 @@ abstract class Setting extends Base {
 					'type'              => $props['meta_type'],
 					'sanitize_callback' => function( $value ) use ( $props ) {
 
-						if ( 'radio' === $props['type'] ) {
+						if ( 'radio' === $props['type'] || 'select' === $props['type'] ) {
 
 							$options       = $this->props['options'];
 							$default_value = $this->props['default_value'];
 
-							return sanitize_options( $value, $options, $default_value );
+							return sanitize_options(
+								$value,
+								$options,
+								$default_value,
+								'select' === $props['type'] && true === $props['multiple']
+							);
 
 						} elseif ( 'checkbox' === $props['type'] ) {
 

@@ -11,7 +11,7 @@ function add_sidebar( $sidebar_props_raw = array() ) {
 		return;
 	}
 
-	$sidebar_props = create_instance(
+	$sidebar_props = generate_instances(
 		'sidebar',
 		array( $sidebar_props_raw ),
 		array()
