@@ -20,7 +20,8 @@ $sidebar_a = array(
 							'data_key'        => 'ttt',
 							// 'data_key_prefix' => 'ps_',
 
-							'min'            => 100,
+							'step'           => 1,
+							'min'            => 1100,
 							'max'            => 200,
 
 							'help'            => 'help asd',

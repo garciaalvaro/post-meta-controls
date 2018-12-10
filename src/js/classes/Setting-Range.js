@@ -22,9 +22,41 @@ class Range extends Setting {
 
 		const required_keys = ["label", "min", "max"];
 		const private_keys = [];
-		const non_empty_values = ["label", "step", "min", "max"];
+		const conditions = {
+			label: "not_empty",
+			step: [
+				{
+					argument_1: "step",
+					operator: "greater_than",
+					argument_2: 0,
+					argument_2_is_prop: false
+				}
+			],
+			min: [
+				{
+					argument_1: "max",
+					operator: "greater_than",
+					argument_2: "min",
+					argument_2_is_prop: true
+				}
+			],
+			max: [
+				{
+					argument_1: "max",
+					operator: "greater_than",
+					argument_2: "min",
+					argument_2_is_prop: true
+				},
+				{
+					argument_1: "max",
+					operator: "greater_than",
+					argument_2: 0,
+					argument_2_is_prop: false
+				}
+			]
+		};
 
-		setSchema(schema, required_keys, private_keys, non_empty_values);
+		setSchema(schema, required_keys, private_keys, conditions);
 
 		return schema;
 	}

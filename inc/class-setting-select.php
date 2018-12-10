@@ -46,9 +46,9 @@ class Select extends Setting {
 			'options',
 		);
 		$private_keys = array();
-		$non_empty_values = array(
-			'label',
-			'options',
+		$conditions = array(
+			'label'   => 'not_empty',
+			'options' => 'not_empty',
 		);
 
 		if (
@@ -63,7 +63,7 @@ class Select extends Setting {
 			);
 		}
 
-		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
+		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return $schema;
 	}

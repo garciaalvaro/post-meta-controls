@@ -38,14 +38,41 @@ class Range extends Setting {
 			'max',
 		);
 		$private_keys = array();
-		$non_empty_values = array(
-			'label',
-			'step',
-			'min',
-			'max',
+		$conditions = array(
+			'label' => 'not_empty',
+			'step'  => array(
+				array(
+					'argument_1'         => 'step',
+					'operator'           => 'greater_than',
+					'argument_2'         => 0,
+					'argument_2_is_prop' => false,
+				),
+			),
+			'min'   => array(
+				array(
+					'argument_1'         => 'max',
+					'operator'           => 'greater_than',
+					'argument_2'         => 'min',
+					'argument_2_is_prop' => true,
+				),
+			),
+			'max'   => array(
+				array(
+					'argument_1'         => 'max',
+					'operator'           => 'greater_than',
+					'argument_2'         => 'min',
+					'argument_2_is_prop' => true,
+				),
+				array(
+					'argument_1'         => 'max',
+					'operator'           => 'greater_than',
+					'argument_2'         => 0,
+					'argument_2_is_prop' => false,
+				),
+			),
 		);
 
-		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
+		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return $schema;
 	}

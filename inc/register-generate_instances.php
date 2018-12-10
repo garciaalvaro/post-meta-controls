@@ -71,7 +71,7 @@ function generate_instances(
 		}
 
 		if ( true !== $is_valid || empty( $id ) ) {
-			return;
+			continue;
 		}
 
 		$props_this = $class_instance->get_props_for_js();

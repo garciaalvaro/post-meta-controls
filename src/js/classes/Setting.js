@@ -42,7 +42,7 @@ class Setting extends Base {
 		};
 		let required_keys = ["class_name", "id", "path", "index", "type"];
 		let private_keys = ["class_name", "id"];
-		let non_empty_values = ["id"];
+		let conditions = { id: "not_empty" };
 
 		const data_type = get(this.props, "data_type");
 		if (data_type === "meta" || data_type === "localstorage") {
@@ -50,10 +50,10 @@ class Setting extends Base {
 				data_key_with_prefix: { type: "id" }
 			});
 			required_keys.push("data_key_with_prefix");
-			non_empty_values.push("data_key_with_prefix");
+			conditions.data_key_with_prefix = "not_empty";
 		}
 
-		setSchema(schema, required_keys, private_keys, non_empty_values);
+		setSchema(schema, required_keys, private_keys, conditions);
 
 		const schema_type = this.getPropsSchemaType();
 

@@ -38,11 +38,11 @@ class Sidebar extends Base {
 			'post_type',
 		);
 		$private_keys = array();
-		$non_empty_values = array(
-			'id',
+		$conditions = array(
+			'id' => 'not_empty',
 		);
 
-		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
+		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return $schema;
 	}

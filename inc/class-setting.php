@@ -105,8 +105,8 @@ abstract class Setting extends Base {
 		$private_keys = array(
 			'id',
 		);
-		$non_empty_values = array(
-			'id',
+		$conditions = array(
+			'id' => 'not_empty',
 		);
 
 		if (
@@ -141,20 +141,16 @@ abstract class Setting extends Base {
 				),
 				$private_keys
 			);
-			$non_empty_values = \wp_parse_args(
+			$conditions = \wp_parse_args(
 				array(
-					'data_key_with_prefix',
-					'data_key',
-					// 'data_key' => array(
-					// 	'condition_key'   => 'data_type',
-					// 	'condition_value' => 'meta',
-					// ),
+					'data_key_with_prefix' => 'not_empty',
+					'data_key'             => 'not_empty',
 				),
-				$non_empty_values
+				$conditions
 			);
 		}
 
-		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
+		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return \wp_parse_args( $schema_type, $schema );
 	}

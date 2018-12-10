@@ -27,11 +27,11 @@ class Checkbox extends Setting {
 			'label',
 		);
 		$private_keys = array();
-		$non_empty_values = array(
-			'label',
+		$conditions = array(
+			'label' => 'not_empty',
 		);
 
-		$schema = set_schema( $schema, $required_keys, $private_keys, $non_empty_values );
+		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return $schema;
 	}

@@ -31,7 +31,7 @@ class Select extends Setting {
 
 		const required_keys = ["label", "options"];
 		const private_keys = [];
-		const non_empty_values = ["label", "options"];
+		const conditions = { label: "not_empty", options: "not_empty" };
 
 		const multiple = get(this.props, "multiple");
 		if (multiple) {
@@ -40,7 +40,7 @@ class Select extends Setting {
 			});
 		}
 
-		setSchema(schema, required_keys, private_keys, non_empty_values);
+		setSchema(schema, required_keys, private_keys, conditions);
 
 		return schema;
 	}

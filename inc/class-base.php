@@ -31,6 +31,7 @@ abstract class Base {
 		if ( method_exists( $this, 'pre_props_validation' ) ) {
 			$this->pre_props_validation();
 		}
+
 		$this->validate_props();
 
 		// Run functions after validating props.
@@ -95,31 +96,28 @@ abstract class Base {
 
 	private function validate_props() {
 		foreach ( $this->props_schema as $key => $schema ) {
+
+			$required = $schema['required'];
+
+			// If is required.
 			if (
-				true === $schema['required'] &&
-				! isset( $this->props[ $key ] )
+				false === validate_required( $required, $this->props )
 			) {
-				print_r($key." 1;" );
 				$this->props['valid'] = false;
 				return;
 			}
 
-			if (
-				is_array( $schema['can_be_empty'] ) &&
-				$this->props[ $schema['can_be_empty']['condition_key'] ] ===
-					$schema['can_be_empty']['condition_value'] &&
-				empty( $this->props[ $key ] )
-			) {
-				print_r($key." 2;" );
-				$this->props['valid'] = false;
-				return;
+			if ( ! isset( $schema['conditions'] ) ) {
+				continue;
 			}
 
+			$conditions = $schema['conditions'];
+
+			// If has conditions assigned.
 			if (
-				false === $schema['can_be_empty'] &&
-				empty( $this->props[ $key ] )
+				false ===
+					validate_conditions( $conditions, $key, $this->props )
 			) {
-				print_r($key." 3;" );
 				$this->props['valid'] = false;
 				return;
 			}

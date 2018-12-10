@@ -23,9 +23,9 @@ class Tab extends Base {
 
 		const required_keys = ["class_name", "id", "path", "index", "label"];
 		const private_keys = ["class_name"];
-		const non_empty_values = ["id"];
+		const conditions = { id: "not_empty" };
 
-		setSchema(schema, required_keys, private_keys, non_empty_values);
+		setSchema(schema, required_keys, private_keys, conditions);
 
 		return schema;
 	}

@@ -1,4 +1,4 @@
-import l, { store_slug, sanitize } from "../utils";
+import l, { sanitize, validate } from "../utils";
 
 const {
 	isArray,
@@ -98,21 +98,21 @@ class Base {
 	}
 
 	validateProps() {
-		forEach(this.props_schema, (value, key) => {
-			if (
-				this.props_schema[key].required === true &&
-				isUndefined(value)
-			) {
+		forEach(this.props_schema, (schema, key) => {
+			// If is required.
+			if (!validate.required(schema.required, this.props)) {
 				this.props.valid = false;
 				return;
 			}
 
-			if (
-				this.props_schema[key].can_be_empty === false &&
-				isEmpty(value)
-			) {
-				this.props.valid = false;
+			if (isUndefined(schema.conditions)) {
 				return;
+			}
+
+			// If has conditions assigned.
+			if (!validate.conditions(schema.conditions, key, this.props)) {
+				this.props.valid = false;
+				return; // TODO: continue loop and add not valid props and conditions
 			}
 		});
 
