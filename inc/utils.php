@@ -44,6 +44,12 @@ function get_meta_type( $props = array() ) {
 
 	if ( 'checkbox' === $props['type'] ) {
 		return 'boolean';
+	} elseif (
+		'range' === $props['type'] &&
+		isset( $props['float_number'] ) &&
+		false === $props['float_number']
+	) {
+		return 'integer';
 	}
 
 	return 'string';
@@ -76,6 +82,10 @@ function sanitize_id( $value ) {
 
 function sanitize_text( $value ) {
 	return \sanitize_text_field( $value );
+}
+
+function sanitize_float( $value ) {
+	return abs( floatval( $value ) );
 }
 
 function sanitize_integer( $value ) {
@@ -140,11 +150,20 @@ function sanitize_options( $value, $options, $default, $multiple = false ) {
 	return in_array( $value, $options ) ? $value : sanitize_id( $default );
 }
 
-function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
+function sanitize_range( $value = 1, $props = array() ) {
 
-	$value = sanitize_integer( $value );
-	$min   = sanitize_integer( $min );
-	$max   = sanitize_integer( $max );
+	$min = $props['min'];
+	$max = $props['max'];
+
+	if ( true === $props['float_number'] ) {
+		$value = sanitize_float( $value );
+		$min   = sanitize_float( $min );
+		$max   = sanitize_float( $max );
+	} else {
+		$value = sanitize_integer( $value );
+		$min   = sanitize_integer( $min );
+		$max   = sanitize_integer( $max );
+	}
 
 	$value = max( $value, $min );
 	$value = min( $value, $max );

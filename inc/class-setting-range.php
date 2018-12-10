@@ -10,6 +10,7 @@ class Range extends Setting {
 			'step',
 			'min',
 			'max',
+			'float_number',
 		);
 	}
 
@@ -20,6 +21,7 @@ class Range extends Setting {
 			'step'          => 1,
 			'min'           => 0,
 			'max'           => 1,
+			'float_number'  => false,
 		);
 
 		return $default_type;
@@ -31,7 +33,23 @@ class Range extends Setting {
 			'step'          => array( 'type' => 'integer', ),
 			'min'           => array( 'type' => 'integer', ),
 			'max'           => array( 'type' => 'integer', ),
+			'float_number'  => array( 'type' => 'bool', ),
 		);
+
+		if (
+			! empty( $this->props['float_number'] ) &&
+			true === $this->props['float_number']
+		) {
+			$schema = \wp_parse_args(
+				array(
+					'step' => array( 'type' => 'float', ),
+					'min'  => array( 'type' => 'float', ),
+					'max'  => array( 'type' => 'float', ),
+				),
+				$schema
+			);
+		}
+
 		$required_keys = array(
 			'label',
 			'min',

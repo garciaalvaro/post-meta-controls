@@ -78,6 +78,10 @@ class Base {
 					this.props[key] = sanitize.integer(value);
 					break;
 
+				case "float":
+					this.props[key] = sanitize.float(value);
+					break;
+
 				case "bool":
 					this.props[key] = sanitize.bool(value);
 					break;

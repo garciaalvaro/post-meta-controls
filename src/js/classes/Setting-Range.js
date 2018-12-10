@@ -1,6 +1,8 @@
 import l, { setSchema } from "../utils";
 import Setting from "./Setting";
 
+const { get, merge } = lodash;
+
 class Range extends Setting {
 	getPropsDefaultType() {
 		return {
@@ -8,7 +10,8 @@ class Range extends Setting {
 			default_value: true,
 			step: 1,
 			min: 0,
-			max: 0
+			max: 0,
+			float_number: false
 		};
 	}
 
@@ -17,8 +20,18 @@ class Range extends Setting {
 			default_value: { type: "integer" },
 			step: { type: "integer" },
 			min: { type: "integer" },
-			max: { type: "integer" }
+			max: { type: "integer" },
+			float_number: { type: "bool" }
 		};
+
+		const float_number = get(this.props, "float_number");
+		if (float_number === true) {
+			merge(schema, {
+				step: { type: "float" },
+				min: { type: "float" },
+				max: { type: "float" }
+			});
+		}
 
 		const required_keys = ["label", "min", "max"];
 		const private_keys = [];

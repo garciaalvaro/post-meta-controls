@@ -8,6 +8,7 @@ const {
 	forEach,
 	escape,
 	toSafeInteger,
+	toNumber,
 	deburr
 } = lodash;
 
@@ -31,6 +32,13 @@ const sanitizeText = value => {
 
 const sanitizeBool = value => {
 	return isBoolean(value) && value === true ? true : false;
+};
+
+const sanitizeFloat = value => {
+	value = toNumber(value);
+	value = Math.abs(value);
+
+	return value;
 };
 
 const sanitizeInteger = value => {
@@ -90,6 +98,7 @@ export default {
 	id: sanitizeId,
 	text: sanitizeText,
 	bool: sanitizeBool,
+	float: sanitizeFloat,
 	integer: sanitizeInteger,
 	array: sanitizeArray,
 	object: sanitizeObject,

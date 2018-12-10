@@ -71,6 +71,10 @@ abstract class Base {
 					$this->props[ $key ] = sanitize_text( $value );
 					break;
 
+				case 'float':
+					$this->props[ $key ] = sanitize_float( $value );
+					break;
+
 				case 'integer':
 					$this->props[ $key ] = sanitize_integer( $value );
 					break;

@@ -224,7 +224,7 @@ abstract class Setting extends Base {
 
 						} elseif ( 'range' === $props['type'] ) {
 
-							return sanitize_range( $value, $props['min'], $props['max'] );
+							return sanitize_range( $value, $props );
 
 						}
 

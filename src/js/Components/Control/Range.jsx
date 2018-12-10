@@ -15,7 +15,9 @@ class Range extends Component {
 			label,
 			help,
 			value,
-			updateInteger
+			float_number,
+			updateInteger,
+			updateFloat
 		} = this.props;
 
 		return (
@@ -27,7 +29,13 @@ class Range extends Component {
 				min={min}
 				max={max}
 				step={step}
-				onChange={updateInteger}
+				onChange={value => {
+					if (float_number) {
+						updateFloat(value);
+					} else {
+						updateInteger(value);
+					}
+				}}
 			/>
 		);
 	}
