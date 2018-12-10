@@ -6,7 +6,7 @@ const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
 const { SelectControl } = wp.components;
 
-class Radio extends Component {
+class Select extends Component {
 	render() {
 		const {
 			options,
@@ -38,4 +38,4 @@ class Radio extends Component {
 	}
 }
 
-export default withStoreConnection(Radio);
+export default withStoreConnection(Select);

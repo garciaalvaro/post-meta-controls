@@ -5,6 +5,7 @@ import Panel from "../classes/Panel";
 import Checkbox from "../classes/Setting-Checkbox";
 import Radio from "../classes/Setting-Radio";
 import Select from "../classes/Setting-Select";
+import Range from "../classes/Setting-Range";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
@@ -48,6 +49,8 @@ const generateInstances = (class_name, elements, path, instances) => {
 				class_instance = new Radio(element);
 			} else if ("select" === element.type) {
 				class_instance = new Select(element);
+			} else if ("range" === element.type) {
+				class_instance = new Range(element);
 			} else if ("custom_component" === element.type) {
 				// class_instance = new CustomComponent( element );
 			}

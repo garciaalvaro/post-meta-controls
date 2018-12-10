@@ -67,6 +67,7 @@ abstract class Setting extends Base {
 						'checkbox',
 						'radio',
 						'select',
+						'range',
 					),
 					'data_key'                     => '',
 					'data_key_prefix'              => 'ps_',
@@ -224,6 +225,10 @@ abstract class Setting extends Base {
 						} elseif ( 'checkbox' === $props['type'] ) {
 
 							return sanitize_bool( $value );
+
+						} elseif ( 'range' === $props['type'] ) {
+
+							return sanitize_range( $value, $props['min'], $props['max'] );
 
 						}
 

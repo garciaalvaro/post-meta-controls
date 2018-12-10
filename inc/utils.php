@@ -105,3 +105,15 @@ function sanitize_options( $value, $options, $default, $multiple = false ) {
 	// If the input is a valid key, return it; otherwise, return the default.
 	return in_array( $value, $options ) ? $value : sanitize_id( $default );
 }
+
+function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
+
+	$value = sanitize_integer( $value );
+	$min   = sanitize_integer( $min );
+	$max   = sanitize_integer( $max );
+
+	$value = max( $value, $min );
+	$value = min( $value, $max );
+
+	return $value;
+}

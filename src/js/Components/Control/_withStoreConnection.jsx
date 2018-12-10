@@ -26,6 +26,17 @@ export default compose([
 		const { editPost } = dispatch("core/editor");
 
 		return {
+			updateInteger: value_new => {
+				value_new = sanitize.integer(value_new);
+
+				updateSettingValue(id, data_key_with_prefix, value_new);
+
+				if (!isEmpty(data_key_with_prefix)) {
+					editPost({
+						meta: { [data_key_with_prefix]: value_new }
+					});
+				}
+			},
 			updateArrayString: value_new => {
 				value_new = sanitize.arrayString(value_new);
 

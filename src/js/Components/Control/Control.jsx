@@ -3,6 +3,7 @@ import Div from "../Utils";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
+import Range from "./Range";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -21,6 +22,9 @@ class Control extends Component {
 
 			case "select":
 				return <Select {...this.props} />;
+
+			case "range":
+				return <Range {...this.props} />;
 
 			default:
 				return null;

@@ -14,15 +14,18 @@ $sidebar_a = array(
 					'initial_open'   => true,
 					'settings'       => array(
 						array(
-							'type'            => 'select',
+							'type'            => 'range',
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'qwed',
-							'data_key_prefix' => 'ps_',
+							'data_key'        => 'ttt',
+							// 'data_key_prefix' => 'ps_',
+
+							'min'            => 100,
+							'max'            => 200,
 
 							'help'            => 'help asd',
 							// 'multiple'        => true,
-							'default_value'   => true,
+							'default_value'   => 'ww',
 							'label'           => 'vvvvvvvvvv',
 							'options'         => array(
 								'uu' => 'UU',

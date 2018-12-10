@@ -58,6 +58,8 @@ function generate_instances(
 				$class_instance = new Radio( $element );
 			} elseif ( 'select' === $element['type'] ) {
 				$class_instance = new Select( $element );
+			} elseif ( 'range' === $element['type'] ) {
+				$class_instance = new Range( $element );
 			} elseif ( 'custom_component' === $element['type'] ) {
 				// new CustomComponent( $element );
 			}
