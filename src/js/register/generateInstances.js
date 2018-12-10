@@ -61,7 +61,7 @@ const generateInstances = (class_name, elements, path, instances) => {
 			id = class_instance.getId();
 		}
 
-		if (true !== is_valid || isEmpty(id)) {
+		if (true !== is_valid && "setting" !== class_name) {
 			return;
 		}
 

@@ -98,10 +98,19 @@ class Base {
 	}
 
 	validateProps() {
+		this.props.invalid_warnings = [];
+
 		forEach(this.props_schema, (schema, key) => {
+			const validate_required = validate.required(
+				schema.required,
+				this.props
+			);
+
 			// If is required.
-			if (!validate.required(schema.required, this.props)) {
+			if (validate_required.valid === false) {
+				this.props.invalid_warnings.push(...validate_required.warning);
 				this.props.valid = false;
+
 				return;
 			}
 
@@ -109,9 +118,19 @@ class Base {
 				return;
 			}
 
+			const validate_conditions = validate.conditions(
+				schema.conditions,
+				key,
+				this.props
+			);
+
 			// If has conditions assigned.
-			if (!validate.conditions(schema.conditions, key, this.props)) {
+			if (validate_conditions.valid === false) {
+				this.props.invalid_warnings.push(
+					...validate_conditions.warnings
+				);
 				this.props.valid = false;
+
 				return; // TODO: continue loop and add not valid props and conditions
 			}
 		});

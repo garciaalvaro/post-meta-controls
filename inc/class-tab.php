@@ -41,7 +41,8 @@ class Tab extends Base {
 		);
 		$private_keys = array();
 		$conditions = array(
-			'id' => 'not_empty',
+			'id'    => 'not_empty',
+			'label' => 'not_empty',
 		);
 
 		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );

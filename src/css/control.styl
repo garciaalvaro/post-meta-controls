@@ -1,9 +1,17 @@
 /*
  * Test
  */
-/*
- * controls
- */
+
+
+.ps-control
+	position relative
+	padding 2em 1.2em
+	width 100%
+
+	+ .ps-control
+		border-top 1px solid rgba(0,0,0,0.1)
+	+ .invalid
+		border-top 4px solid transparent
 
 .ps-sidebar
 	.components-base-control__help

@@ -65,12 +65,12 @@ function generate_instances(
 			}
 		}
 
-		if ( $class_instance !== false ) {
+		if ( false !== $class_instance ) {
 			$is_valid = $class_instance->is_valid();
 			$id       = $class_instance->get_id();
 		}
 
-		if ( true !== $is_valid || empty( $id ) ) {
+		if ( true !== $is_valid && 'setting' !== $class_name ) {
 			continue;
 		}
 

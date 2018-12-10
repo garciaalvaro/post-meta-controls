@@ -41,12 +41,12 @@ class Range extends Setting {
 				}
 			],
 			max: [
-				{
-					argument_1: "max",
-					operator: "greater_than",
-					argument_2: "min",
-					argument_2_is_prop: true
-				},
+				// {
+				// 	argument_1: "max",
+				// 	operator: "greater_than",
+				// 	argument_2: "min",
+				// 	argument_2_is_prop: true
+				// },
 				{
 					argument_1: "max",
 					operator: "greater_than",

@@ -4,12 +4,17 @@ const { isUndefined } = lodash;
 const { dispatch } = wp.data;
 
 const initialDispatch = element => {
-	l(element);
-	if (element.valid !== true || isUndefined(dispatch(store_slug))) {
+	if (
+		isUndefined(
+			dispatch(store_slug) ||
+				(element.valid !== true && element.class_name !== "setting")
+		)
+	) {
 		return;
 	}
+
 	const { class_name } = element;
-	const { valid, index, ...filtered_props } = element;
+	const { index, ...filtered_props } = element;
 
 	if (class_name === "sidebar") {
 		dispatch(store_slug).addSidebar(filtered_props);
