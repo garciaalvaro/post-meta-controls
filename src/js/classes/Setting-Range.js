@@ -6,6 +6,7 @@ class Range extends Setting {
 		return {
 			type: "range",
 			default_value: true,
+			step: 1,
 			min: 0,
 			max: 0
 		};
@@ -14,13 +15,14 @@ class Range extends Setting {
 	getPropsSchemaType() {
 		const schema = {
 			default_value: { type: "integer" },
+			step: { type: "integer" },
 			min: { type: "integer" },
 			max: { type: "integer" }
 		};
 
 		const required_keys = ["label", "min", "max"];
 		const private_keys = [];
-		const non_empty_values = ["label", "min", "max"];
+		const non_empty_values = ["label", "step", "min", "max"];
 
 		setSchema(schema, required_keys, private_keys, non_empty_values);
 

@@ -8,7 +8,15 @@ const { RangeControl } = wp.components;
 
 class Range extends Component {
 	render() {
-		const { min, max, label, help, value, updateInteger } = this.props;
+		const {
+			min,
+			max,
+			step,
+			label,
+			help,
+			value,
+			updateInteger
+		} = this.props;
 
 		return (
 			<RangeControl
@@ -18,6 +26,7 @@ class Range extends Component {
 				value={value}
 				min={min}
 				max={max}
+				step={step}
 				onChange={updateInteger}
 			/>
 		);

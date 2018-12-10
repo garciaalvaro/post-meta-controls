@@ -7,6 +7,7 @@ class Range extends Setting {
 	protected function get_js_props_type() {
 		return array(
 			'default_value',
+			'step',
 			'min',
 			'max',
 		);
@@ -16,6 +17,7 @@ class Range extends Setting {
 		$default_type = array(
 			'type'          => 'range',
 			'default_value' => 0,
+			'step'          => 1,
 			'min'           => 0,
 			'max'           => 1,
 		);
@@ -26,6 +28,7 @@ class Range extends Setting {
 	protected function get_props_schema_type() {
 		$schema = array(
 			'default_value' => array( 'type' => 'integer', ),
+			'step'          => array( 'type' => 'integer', ),
 			'min'           => array( 'type' => 'integer', ),
 			'max'           => array( 'type' => 'integer', ),
 		);
@@ -37,6 +40,7 @@ class Range extends Setting {
 		$private_keys = array();
 		$non_empty_values = array(
 			'label',
+			'step',
 			'min',
 			'max',
 		);
