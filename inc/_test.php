@@ -17,17 +17,39 @@ $sidebar_a = array(
 							'type'            => 'range',
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'ttt',
+							'data_key'        => 'zz',
 							// 'data_key_prefix' => 'ps_',
 
-							'step'           => 1,
+							'float_number'   => true,
+							'step'           => 1.11,
+							'min'            => 100,
+							'max'            => 200,
+
+							'help'            => 'help asd',
+							// 'multiple'        => true,
+							'default_value'   => 'ww',
+							'label'           => 'Setting numero #1',
+							'qoptions'         => array(
+								'uu' => 'UU',
+								'vv' => 'VV',
+								'ww' => 'ww',
+							),
+						),
+						array(
+							'type'            => 'radio',
+
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'qwq',
+							// 'data_key_prefix' => 'ps_',
+
+							'step'           => 0,
 							'min'            => 1100,
 							'max'            => 200,
 
 							'help'            => 'help asd',
 							// 'multiple'        => true,
 							'default_value'   => 'ww',
-							'label'           => 'vvvvvvvvvv',
+							'label'           => 'Setting numero #1',
 							'options'         => array(
 								'uu' => 'UU',
 								'vv' => 'VV',

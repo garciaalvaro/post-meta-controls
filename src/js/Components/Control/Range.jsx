@@ -1,5 +1,8 @@
 import l, { store_slug } from "../../utils";
+import classnames from "classnames";
 import withStoreConnection from "./_withStoreConnection";
+
+const { toString } = lodash;
 
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
@@ -19,10 +22,15 @@ class Range extends Component {
 			updateInteger,
 			updateFloat
 		} = this.props;
+		const decimal_length = toString(max + step).length;
+		const classes = classnames(
+			{ [`float_${decimal_length}`]: float_number },
+			"ps-control-range"
+		);
 
 		return (
 			<RangeControl
-				className="ps-control-range"
+				className={classes}
 				label={label}
 				help={help}
 				value={value}
