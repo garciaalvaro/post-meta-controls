@@ -39,8 +39,14 @@ require_once POSTSETTINGS_INC_DIR . 'class-setting-checkbox.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-radio.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-select.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-range.php';
+require_once POSTSETTINGS_INC_DIR . 'class-setting-text.php';
 // require_once POSTSETTINGS_INC_DIR . 'class-setting-custom_component.php';
 
+// require_once POSTSETTINGS_INC_DIR . 'register-get_children_elements.php';
+// require_once POSTSETTINGS_INC_DIR . 'register-get_class_instances.php';
+require_once POSTSETTINGS_INC_DIR . 'register-register_setting_meta.php';
+require_once POSTSETTINGS_INC_DIR . 'register-add_metadata_exists_prop.php';
+require_once POSTSETTINGS_INC_DIR . 'register-get_props.php';
 require_once POSTSETTINGS_INC_DIR . 'register-generate_instances.php';
 require_once POSTSETTINGS_INC_DIR . 'register-add_sidebar.php';
 

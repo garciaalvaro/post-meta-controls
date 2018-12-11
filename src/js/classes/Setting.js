@@ -1,4 +1,5 @@
 import l, { setSchema } from "../utils";
+import uuid from "uuid/v4";
 import Base from "./Base";
 
 const { get, merge } = lodash;
@@ -7,14 +8,15 @@ class Setting extends Base {
 	getPropsDefault() {
 		let defaults = {
 			class_name: "setting",
-			id: "",
+			id: uuid(),
 			data_type: "none",
 			path: [],
 			index: "",
 			type: "",
 			label: "",
 			description: "",
-			help: ""
+			help: "",
+			metadata_exists: false
 		};
 		const data_type = get(this.props, "data_type");
 		if (data_type === "meta" || data_type === "localstorage") {
@@ -38,10 +40,11 @@ class Setting extends Base {
 			type: { type: "id" },
 			label: { type: "text" },
 			description: { type: "text" },
-			help: { type: "text" }
+			help: { type: "text" },
+			metadata_exists: { type: "bool" }
 		};
 		let required_keys = ["class_name", "id", "path", "index", "type"];
-		let private_keys = ["class_name", "id"];
+		let private_keys = ["class_name"];
 		let conditions = { id: "not_empty" };
 
 		const data_type = get(this.props, "data_type");

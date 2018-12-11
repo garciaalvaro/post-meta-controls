@@ -3,91 +3,127 @@
 namespace POSTSETTINGS;
 
 function generate_instances(
-	$class_name = '',
-	$elements = array(),
+	$class_name = array(),
+	$props_raw = array(),
 	$path = array(),
-	$data_key_prefix_from_sidebar = ''
+	$data_key_prefix_from_sidebar = '',
+	$class_instances = array()
 ) {
 
-	if ( ! is_array( $elements ) ) {
+	if ( ! is_array( $props_raw ) ) {
 		return array();
 	}
 
 	$props = array();
 
-	foreach ( $elements as $key => $element ) {
-		if ( ! is_array( $element ) ) {
+	foreach ( $props_raw as $key => $prop_raw ) {
+
+		if ( ! is_array( $prop_raw ) ) {
 			continue;
 		}
 
-		$class_instance      = false;
-		$is_valid            = false;
-		$id                  = '';
-		$children_els        = array();
-		$children_class_name = '';
+		$class_instance     = false;
+		$children_props_raw =
+			empty( $class_name['children'] ) || empty( $prop_raw[ $class_name['children'] ] )
+				? array()
+				: $prop_raw[ $class_name['children'] ];
 
-		$element['path']  = $path;
-		$element['index'] = $key;
+		$prop_raw['path']  = $path;
+		$prop_raw['index'] = $key;
 
-		if ( 'sidebar' === $class_name && ! empty( $element['tabs'] ) ) {
+		if ( 'sidebars' === $class_name['current'] ) {
 
-			$class_instance      = new Sidebar( $element );
-			$children_els        = $element['tabs'];
-			$children_class_name = 'tab';
+			$class_instance      = new Sidebar( $prop_raw );
+			$class_name_children = array(
+				'parent'   => 'sidebars',
+				'current'  => 'tabs',
+				'children' => 'panels',
+			);
 			$data_key_prefix_from_sidebar = $class_instance->get_data_key_prefix();
 
-		} elseif ( 'tab' === $class_name && ! empty( $element['panels'] ) ) {
+		} elseif ( 'tabs' === $class_name['current'] ) {
 
-			$class_instance      = new Tab( $element );
-			$children_els        = $element['panels'];
-			$children_class_name = 'panel';
+			$class_instance      = new Tab( $prop_raw );
+			$class_name_children = array(
+				'parent'   => 'tabs',
+				'current'  => 'panels',
+				'children' => 'settings',
+			);
 
-		} elseif ( 'panel' === $class_name && ! empty( $element['settings'] ) ) {
+		} elseif ( 'panels' === $class_name['current'] ) {
 
-			$class_instance      = new Panel( $element );
-			$children_els        = $element['settings'];
-			$children_class_name = 'setting';
+			$class_instance      = new Panel( $prop_raw );
+			$class_name_children = array(
+				'parent'   => 'panels',
+				'current'  => 'settings',
+				'children' => '',
+			);
 
-		} elseif ( 'setting' === $class_name && ! empty( $element['type'] ) ) {
+		} elseif ( 'settings' === $class_name['current'] && ! empty( $prop_raw['type'] ) ) {
 
-			$element['data_key_prefix_from_sidebar'] = $data_key_prefix_from_sidebar;
+			$class_name_children = array(
+				'parent'   => 'settings',
+				'current'  => '',
+				'children' => '',
+			);
 
-			if ( 'checkbox' === $element['type'] ) {
-				$class_instance = new Checkbox( $element );
-			} elseif ( 'radio' === $element['type'] ) {
-				$class_instance = new Radio( $element );
-			} elseif ( 'select' === $element['type'] ) {
-				$class_instance = new Select( $element );
-			} elseif ( 'range' === $element['type'] ) {
-				$class_instance = new Range( $element );
-			} elseif ( 'custom_component' === $element['type'] ) {
-				// new CustomComponent( $element );
+			$prop_raw['data_key_prefix_from_sidebar'] =
+				$data_key_prefix_from_sidebar;
+
+			switch ( $prop_raw['type'] ) {
+				case 'checkbox':
+					$class_instance = new Checkbox( $prop_raw );
+					break;
+
+				case 'radio':
+					$class_instance = new Radio( $prop_raw );
+					break;
+
+				case 'select':
+					$class_instance = new Select( $prop_raw );
+					break;
+
+				case 'range':
+					$class_instance = new Range( $prop_raw );
+					break;
+
+				case 'text':
+					$class_instance = new Text( $prop_raw );
+					break;
+
+				default:
+					break;
 			}
 		}
 
-		if ( false !== $class_instance ) {
-			$is_valid = $class_instance->is_valid();
-			$id       = $class_instance->get_id();
+		if (
+			false !== $class_instance &&
+			( true === $class_instance->is_valid() ||
+			  'settings' === $class_name['current'] )
+		) {
+
+			$class_instances[ $class_name['current'] ] =
+				empty( $class_instances[ $class_name['current'] ] )
+					? array()
+					: $class_instances[ $class_name['current'] ];
+
+			$class_instances[ $class_name['current'] ][] = $class_instance;
+
 		}
 
-		if ( true !== $is_valid && 'setting' !== $class_name ) {
-			continue;
+		if ( ! empty( $children_props_raw ) ) {
+
+			$path = \wp_parse_args( array( $class_instance->get_id() ), $path );
+
+			$class_instances = generate_instances(
+				$class_name_children,
+				$children_props_raw,
+				$path,
+				$data_key_prefix_from_sidebar,
+				$class_instances
+			);
 		}
-
-		$props_this = $class_instance->get_props_for_js();
-
-		if ( ! empty( $children_class_name ) ) {
-			$props_this[ $children_class_name . "s" ] =
-				generate_instances(
-					$children_class_name,
-					$children_els,
-					array_merge( $path, array( $id ) ),
-					$data_key_prefix_from_sidebar
-				);
-		}
-
-		$props = array_merge( $props, array( $props_this ) );
 	}
 
-	return $props;
+	return $class_instances;
 }

@@ -17,8 +17,7 @@ const sanitizeId = value => {
 		return "";
 	}
 	value = deburr(value);
-	/* https://stackoverflow.com/a/20865026 | CC BY-SA 3.0  */
-	value = value.replace(/\W+/g, "");
+	value = value.replace(/[^\w-]/g, "");
 
 	return value;
 };

@@ -64,7 +64,18 @@ export default compose([
 						});
 					}
 				},
-				updateString: value_new => {
+				updateId: value_new => {
+					value_new = sanitize.id(value_new);
+
+					updateSettingValue(id, data_key_with_prefix, value_new);
+
+					if (!isEmpty(data_key_with_prefix)) {
+						editPost({
+							meta: { [data_key_with_prefix]: value_new }
+						});
+					}
+				},
+				updateText: value_new => {
 					value_new = sanitize.text(value_new);
 
 					updateSettingValue(id, data_key_with_prefix, value_new);

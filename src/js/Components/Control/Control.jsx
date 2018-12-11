@@ -5,6 +5,7 @@ import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
 import Range from "./Range";
+import Text from "./Text";
 import Invalid from "./Invalid";
 
 const { withState, compose } = wp.compose;
@@ -30,6 +31,9 @@ class Control extends Component {
 
 			case "range":
 				return <Range {...this.props} />;
+
+			case "text":
+				return <Text {...this.props} />;
 
 			default:
 				return null;

@@ -18,7 +18,7 @@ class Panel extends Base {
 
 	protected function get_props_default() {
 		return array(
-			'id'             => '',
+			'id'             => \wp_generate_uuid4(),
 			'path'           => array(),
 			'index'          => '',
 			'label'          => '',
@@ -49,7 +49,7 @@ class Panel extends Base {
 		);
 		$private_keys = array(
 			// 'class_type',
-			'id',
+			// 'id',
 		);
 		$conditions = array(
 			'id' => 'not_empty',
@@ -60,9 +60,9 @@ class Panel extends Base {
 		return $schema;
 	}
 
-	protected function pre_props_validation() {// TODO: check if this could be set to private
+	// protected function pre_props_validation() {// TODO: check if this could be set to private
 
-		$this->assign_prop_id();
+	// 	$this->assign_prop_id();
 
-	}
+	// }
 }

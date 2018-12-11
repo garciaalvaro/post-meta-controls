@@ -16,7 +16,7 @@ class Tab extends Base {
 
 	protected function get_props_default() {
 		return array(
-			'id'        => '',
+			'id'        => \wp_generate_uuid4(),
 			'path'      => array(),
 			'index'     => '',
 			'label'     => '',
@@ -39,7 +39,9 @@ class Tab extends Base {
 			'label',
 			'post_type',
 		);
-		$private_keys = array();
+		$private_keys = array(
+			// 'id',
+		);
 		$conditions = array(
 			'id'    => 'not_empty',
 			'label' => 'not_empty',
@@ -50,10 +52,10 @@ class Tab extends Base {
 		return $schema;
 	}
 
-	// TODO: check if this could be set to private.
-	protected function pre_props_validation() {
+	// // TODO: check if this could be set to private.
+	// protected function pre_props_validation() {
 
-		$this->assign_prop_id();
+	// 	$this->assign_prop_id();
 
-	}
+	// }
 }

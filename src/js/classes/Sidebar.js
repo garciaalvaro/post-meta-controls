@@ -1,6 +1,10 @@
-import l, { setSchema } from "../utils";
+import l, { plugin_namespace_dash, icons, setSchema } from "../utils";
+import SidebarContainer from "../Components/Sidebar/SidebarContainer";
+import Div from "../Components/Utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
+
+const { registerPlugin } = wp.plugins;
 
 class Sidebar extends Base {
 	getPropsDefault() {
@@ -33,6 +37,20 @@ class Sidebar extends Base {
 		setSchema(schema, required_keys, private_keys, conditions);
 
 		return schema;
+	}
+
+	registerPlugin() {
+		if (!this.props.valid) {
+			return;
+		}
+
+		const { id, label } = this.props;
+		const plugin_id = `${plugin_namespace_dash}-${id}`;
+
+		registerPlugin(plugin_id, {
+			icon: <Div id="ps-pinned-logo">{icons.logo}</Div>,
+			render: () => <SidebarContainer id={id} label={label} />
+		});
 	}
 }
 

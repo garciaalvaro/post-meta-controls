@@ -15,6 +15,7 @@ const reducer = (state = initial_state, action) => {
 	switch (action.type) {
 		case "SET_INITIAL_VALUES": {
 			const { meta } = action;
+			l("meta", meta);
 
 			return {
 				...state_old,
@@ -23,6 +24,7 @@ const reducer = (state = initial_state, action) => {
 						data_key_with_prefix,
 						default_value,
 						type,
+						metadata_exists,
 						data_type
 					} = setting;
 					let value = "";
@@ -35,16 +37,19 @@ const reducer = (state = initial_state, action) => {
 						]);
 					}
 
-					if (
-						type === "checkbox" ||
-						type === "radio" ||
-						type === "select"
-					) {
-						value =
-							isUndefined(value) || value === ""
-								? default_value
-								: value;
-					}
+					// if (
+					// 	type === "checkbox" ||
+					// 	type === "radio" ||
+					// 	type === "select" ||
+					// 	type === "range"
+					// ) {
+					value =
+						isUndefined(value) || !metadata_exists
+							? default_value
+							: value;
+					// } else {
+					// 	value = isUndefined(value) ? default_value : value;
+					// }
 
 					return {
 						...setting,

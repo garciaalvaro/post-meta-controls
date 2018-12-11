@@ -4,16 +4,23 @@ namespace POSTSETTINGS;
 
 function add_inline_script() {
 
-	$sidebars = apply_filters( 'ps_add_sidebar', array() );
+	$ps = array(
+		'sidebars' => array(),
+		'tabs'     => array(),
+		'panels'   => array(),
+		'settings' => array(),
+	);
 
-	if ( empty( $sidebars ) ) {
+	$ps = apply_filters( 'ps_add_sidebars', $ps );
+
+	if ( empty( $ps['sidebars'] ) ) {
 		return false;
 	}
 
 	$js_hook =
-		'wp.hooks.addFilter("ps_add_sidebars","qwe",function(sidebars){return sidebars.concat(' .
-		\wp_json_encode( $sidebars ) .
-		')});';
+		'wp.hooks.addFilter("ps_add_sidebars","qwe",function(ps){' .
+			'return ps.concat(' . \wp_json_encode( $ps ) . ');' .
+		'});';
 
 	\wp_add_inline_script( 'postsettings_js', $js_hook, 'before' );
 }

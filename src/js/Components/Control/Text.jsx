@@ -4,23 +4,22 @@ import withStoreConnection from "./_withStoreConnection";
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
-const { RadioControl } = wp.components;
+const { TextControl } = wp.components;
 
-class Radio extends Component {
+class Text extends Component {
 	render() {
-		const { options, label, help, value, updateId } = this.props;
+		const { label, help, value, updateText } = this.props;
 
 		return (
-			<RadioControl
-				className="ps-control-radio"
+			<TextControl
+				className="ps-control-checkbox"
 				label={label}
 				help={help}
-				selected={value}
-				options={options}
-				onChange={updateId}
+				value={value}
+				onChange={updateText}
 			/>
 		);
 	}
 }
 
-export default withStoreConnection(Radio);
+export default withStoreConnection(Text);

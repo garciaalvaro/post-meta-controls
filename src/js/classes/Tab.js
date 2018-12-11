@@ -1,11 +1,12 @@
 import l, { setSchema } from "../utils";
+import uuid from "uuid/v4";
 import Base from "./Base";
 
 class Tab extends Base {
 	getPropsDefault() {
 		return {
 			class_name: "tab",
-			id: "",
+			id: uuid(),
 			path: [],
 			index: "",
 			label: ""

@@ -1,11 +1,12 @@
 import l, { setSchema } from "../utils";
+import uuid from "uuid/v4";
 import Base from "./Base";
 
 class Panel extends Base {
 	getPropsDefault() {
 		return {
 			class_name: "panel",
-			id: "",
+			id: uuid(),
 			path: [],
 			index: "",
 			label: "",
@@ -40,7 +41,7 @@ class Panel extends Base {
 		};
 
 		const required_keys = ["class_name", "id", "path", "index", "label"];
-		const private_keys = ["class_name", "id"];
+		const private_keys = ["class_name"];
 		const conditions = { id: "not_empty" };
 
 		setSchema(schema, required_keys, private_keys, conditions);

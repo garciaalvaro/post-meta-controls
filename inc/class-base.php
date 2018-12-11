@@ -132,20 +132,26 @@ abstract class Base {
 		}
 	}
 
-	protected function assign_prop_id() {
+	// protected function assign_prop_id() {
 
-		if (
-			! empty( $this->props['id'] ) ||
-			! is_array( $this->props['path'] ) ||
-			empty( $this->props['path'] ) ||
-			! isset( $this->props['index'] )
-		) {
-			return;
-		}
+	// 	if (
+	// 		! empty( $this->props['id'] ) ||
+	// 		! is_array( $this->props['path'] ) ||
+	// 		empty( $this->props['path'] ) ||
+	// 		! isset( $this->props['index'] )
+	// 	) {
+	// 		return;
+	// 	}
 
-		$this->props['id'] =
-			end( $this->props['path'] ) . '_' . $this->props['index'];
-	}
+	// 	$path = '';
+
+	// 	foreach ( $this->props['path'] as $value ) {
+	// 		$path .= $value . '_';
+	// 	}
+
+	// 	$this->props['id'] = $this->props['index'];
+
+	// }
 
 	public function is_valid() {
 		return ! empty( $this->props['valid'] );

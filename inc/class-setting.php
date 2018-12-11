@@ -12,13 +12,14 @@ abstract class Setting extends Base {
 		$props_for_js_type = $this->get_js_props_type();
 		$props_for_js      = array(
 			'id',
-			'data_type',
 			'path',
+			'data_type',
 			// 'index',
 			'type',
 			'label',
 			'description',
 			'help',
+			'metadata_exists',
 			// 'post_type',
 		);
 
@@ -43,9 +44,9 @@ abstract class Setting extends Base {
 	protected function get_props_default() {
 		$default_type = $this->get_props_default_type();
 		$default      = array(
-			'id'          => '',
-			'data_type'   => 'none',
+			'id'          => \wp_generate_uuid4(),
 			'path'        => array(),
+			'data_type'   => 'none',
 			'index'       => '',
 			'type'        => '',
 			'label'       => '',
@@ -68,6 +69,7 @@ abstract class Setting extends Base {
 						'radio',
 						'select',
 						'range',
+						'text',
 					),
 					'data_key'                     => '',
 					'data_key_prefix'              => 'ps_',
@@ -85,8 +87,8 @@ abstract class Setting extends Base {
 		$schema_type = $this->get_props_schema_type();
 		$schema      = array(
 			'id'          => array( 'type' => 'id', ),
-			'data_type'   => array( 'type' => 'id', ),
 			'path'        => array( 'type' => 'array_string', ),
+			'data_type'   => array( 'type' => 'id', ),
 			'index'       => array( 'type' => 'integer', ),
 			'type'        => array( 'type' => 'id', ),
 			'label'       => array( 'type' => 'text', ),
@@ -103,7 +105,7 @@ abstract class Setting extends Base {
 			// TODO default here? radio must have a default even if it is empty
 		);
 		$private_keys = array(
-			'id',
+			// 'id',
 		);
 		$conditions = array(
 			'id' => 'not_empty',
@@ -157,7 +159,7 @@ abstract class Setting extends Base {
 
 	protected function pre_props_validation() {// TODO: check if this could be set to private
 
-		$this->assign_prop_id();
+		// $this->assign_prop_id();
 		$this->assign_prop_data_key_prefix();
 
 	}
@@ -181,6 +183,24 @@ abstract class Setting extends Base {
 		$this->props['data_key_with_prefix'] = $prefix . $this->props['data_key'];
 	}
 
+	public function add_metadata_exists_prop() {
+
+		if (
+			true !== $this->props['valid'] ||
+			'meta' !== $this->props['data_type'] ||
+			! in_array( $this->props['type'], $this->props['types_can_have_meta'] )
+		) {
+			return;
+		}
+
+		$this->props['metadata_exists'] =
+			\metadata_exists(
+				'post',
+				\get_the_ID(),
+				$this->props['data_key_with_prefix']
+			);
+	}
+
 	public function register_meta() {
 
 		if (
@@ -196,7 +216,7 @@ abstract class Setting extends Base {
 		$props              = $this->props;
 		$props['meta_type'] = get_meta_type( $props );
 
-		\add_action( 'init', function() use ( $props ) {
+		// \add_action( 'init', function() use ( $props ) {
 			\register_post_meta(
 				$props['post_type'],
 				$props['data_key_with_prefix'],
@@ -218,6 +238,10 @@ abstract class Setting extends Base {
 								'select' === $props['type'] && true === $props['multiple']
 							);
 
+						} elseif ( 'text' === $props['type'] ) {
+
+							return sanitize_text( $value );
+
 						} elseif ( 'checkbox' === $props['type'] ) {
 
 							return sanitize_bool( $value );
@@ -232,6 +256,6 @@ abstract class Setting extends Base {
 					},
 				)
 			);
-		} );
+		// } );
 	}
 }

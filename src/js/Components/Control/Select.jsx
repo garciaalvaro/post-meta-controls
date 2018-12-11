@@ -13,7 +13,7 @@ class Select extends Component {
 			label,
 			help,
 			value,
-			updateString,
+			updateId,
 			updateArrayString,
 			multiple
 		} = this.props;
@@ -30,7 +30,7 @@ class Select extends Component {
 					if (multiple) {
 						updateArrayString(value);
 					} else {
-						updateString(value);
+						updateId(value);
 					}
 				}}
 			/>

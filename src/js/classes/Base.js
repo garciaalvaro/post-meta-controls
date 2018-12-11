@@ -1,4 +1,4 @@
-import l, { sanitize, validate } from "../utils";
+import l, { sanitize, validate, store_slug } from "../utils";
 
 const {
 	isArray,
@@ -10,6 +10,7 @@ const {
 	pick,
 	forEach
 } = lodash;
+const { dispatch } = wp.data;
 
 class Base {
 	props;
@@ -41,6 +42,29 @@ class Base {
 		this.validateProps();
 
 		// this.dispatchToStore();
+	}
+
+	dispatch() {
+		const { class_name, valid } = this.props;
+
+		if (
+			isUndefined(dispatch(store_slug)) ||
+			(valid !== true && class_name !== "setting")
+		) {
+			return;
+		}
+
+		const { index, ...filtered_props } = this.props;
+
+		if (class_name === "sidebar") {
+			dispatch(store_slug).addSidebar(filtered_props);
+		} else if (class_name === "tab") {
+			dispatch(store_slug).addTab(filtered_props);
+		} else if (class_name === "panel") {
+			dispatch(store_slug).addPanel(filtered_props);
+		} else if (class_name === "setting") {
+			dispatch(store_slug).addSetting(filtered_props);
+		}
 	}
 
 	unsetPropsKeysPrivate() {
@@ -155,7 +179,7 @@ class Base {
 		}
 
 		// this.props.id = this.props.index;
-		this.props.id = `${last(this.props.path)}_${this.props.index}`;
+		this.props.id = `${this.props.path.join("_")}_${this.props.index}`;
 	}
 
 	// dispatchToStore() {
