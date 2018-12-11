@@ -168,5 +168,9 @@ function sanitize_range( $value = 1, $props = array() ) {
 	$value = max( $value, $min );
 	$value = min( $value, $max );
 
+	if ( true === $props['float_number'] ) {
+		return (string) $value;
+	}
+
 	return $value;
 }
