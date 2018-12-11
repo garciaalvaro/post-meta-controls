@@ -11,20 +11,24 @@ function add_sidebar( $sidebar_props_raw = array() ) {
 		return;
 	}
 
-	$sidebar_props = generate_instances(
-		'sidebar',
-		array( $sidebar_props_raw ),
-		array()
+	\add_filter(
+		'ps_add_sidebar',
+		function( $sidebars ) use ( $sidebar_props_raw ) {
+
+			$sidebar_this = generate_instances(
+				'sidebar',
+				array( $sidebar_props_raw ),
+				array()
+			);
+
+			if (
+				! empty( $sidebar_this[0]['post_type'] ) &&
+				\get_post_type() === $sidebar_this[0]['post_type']
+			) {
+				return array_merge( $sidebars, $sidebar_this );
+			}
+
+			return $sidebars;
+		}
 	);
-	// $sidebar_props = $sidebar_props[0];
-
-	// var_dump( $sidebar_props[0]['tabs'][0]['panels'][0]['settings'][0] );
-	/*highlight_string("<?php\n\$data =\n" . var_export($sidebar_props, true) . ";\n?>");*/
-
-	\add_filter( 'ps_add_sidebar', function( $sidebars ) use ( $sidebar_props ) {
-		// $sidebars[] = $sidebar_props;
-		$sidebars = array_merge( $sidebars, $sidebar_props );
-
-		return $sidebars;
-	} );
 }

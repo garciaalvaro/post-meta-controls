@@ -9,6 +9,7 @@ class Sidebar extends Base {
 			'id',
 			'label',
 			'description',
+			'post_type',
 		);
 	}
 
