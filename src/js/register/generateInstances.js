@@ -8,6 +8,7 @@ import Select from "../classes/Setting-Select";
 import Range from "../classes/Setting-Range";
 import Text from "../classes/Setting-Text";
 import Textarea from "../classes/Setting-Textarea";
+import Color from "../classes/Setting-Color";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
@@ -57,6 +58,8 @@ const generateInstances = (class_name, elements, path, instances) => {
 				class_instance = new Text(element);
 			} else if ("textarea" === element.type) {
 				class_instance = new Textarea(element);
+			} else if ("color" === element.type) {
+				class_instance = new Color(element);
 			}
 		}
 

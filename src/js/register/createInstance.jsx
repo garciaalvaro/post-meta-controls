@@ -8,6 +8,7 @@ import Select from "../classes/Setting-Select";
 import Range from "../classes/Setting-Range";
 import Text from "../classes/Setting-Text";
 import Textarea from "../classes/Setting-Textarea";
+import Color from "../classes/Setting-Color";
 
 const { isUndefined } = lodash;
 
@@ -46,6 +47,8 @@ const createInstance = (props_raw, class_name) => {
 				class_instance = new Text(props_raw);
 			} else if ("textarea" === type) {
 				class_instance = new Textarea(props_raw);
+			} else if ("color" === type) {
+				class_instance = new Color(props_raw);
 			}
 			break;
 

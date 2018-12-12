@@ -95,6 +95,10 @@ function generate_instances(
 					$class_instance = new Textarea( $prop_raw );
 					break;
 
+				case 'color':
+					$class_instance = new Color( $prop_raw );
+					break;
+
 				default:
 					break;
 			}

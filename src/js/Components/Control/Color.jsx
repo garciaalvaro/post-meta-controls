@@ -1,43 +1,32 @@
 import l, { store_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
-import ColorPalette from "./ColorPaletteClone";
+import ColorPaletteClone from "./ColorPaletteClone";
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
+const { ColorPalette } = wp.components;
 
 class Color extends Component {
 	render() {
-		const {
-			options,
-			label,
-			help,
-			value,
-			updateString,
-			updateArrayString,
-			multiple,
-			setState,
-			color
-		} = this.props;
-		const colors = [
-			{ name: "red", color: "#f00" },
-			{ name: "white", color: "#fff" },
-			{ name: "blue", color: "#00f" }
-		];
+		const { updateText, value, palette, alpha } = this.props;
+
+		if (alpha) {
+			return (
+				<ColorPaletteClone
+					colors={palette}
+					value={value}
+					updateText={updateText}
+				/>
+			);
+		}
 
 		return (
 			<ColorPalette
-				colors={colors}
-				value={color}
-				onChange={color => setState({ color })}
+				colors={palette}
+				value={value}
+				onChange={updateText}
 			/>
 		);
 	}
 }
 
-export default compose([
-	withState({
-		color: "#f00"
-	}),
-	withStoreConnection
-])(Color);
+export default withStoreConnection(Color);

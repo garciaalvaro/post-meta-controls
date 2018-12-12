@@ -1,13 +1,14 @@
 import l, { store_slug } from "../../utils";
 import classnames from "classnames";
 import Div from "../Utils";
+import Invalid from "./Invalid";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
 import Range from "./Range";
 import Text from "./Text";
 import Textarea from "./Textarea";
-import Invalid from "./Invalid";
+import Color from "./Color";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -38,6 +39,9 @@ class Control extends Component {
 
 			case "textarea":
 				return <Textarea {...this.props} />;
+
+			case "color":
+				return <Color {...this.props} />;
 
 			default:
 				return null;

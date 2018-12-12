@@ -16,12 +16,13 @@ $sidebar_a = array(
 					'initial_open'   => true,
 					'settings'       => array(
 						array(
-							'type'            => 'textarea',
+							'type'            => 'color',
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'zaxc',
+							'data_key'        => 'zaaxc',
 							// 'data_key_prefix' => 'ps_',
 
+							'alpha'   => true,
 							'float_number'   => true,
 							'step'           => 1.11,
 							'min'            => 100,
@@ -31,10 +32,9 @@ $sidebar_a = array(
 							// 'multiple'        => true,
 							'default_value'   => 'deeef txt',
 							'label'           => 'Setting numero #1',
-							'qoptions'         => array(
-								'uu' => 'UU',
-								'vv' => 'VV',
-								'ww' => 'ww',
+							'palette'         => array(
+								'rojo'     => '#f00',
+								'amarillo' => '#fc0',
 							),
 						),
 						array(

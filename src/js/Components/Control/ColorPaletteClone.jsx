@@ -1,101 +1,97 @@
+import l from "../../utils";
 import classnames from "classnames";
-// import { React } from "react";
-import { ChromePicker } from "react-color";
+import Div from "../Utils";
+import ColorPickerWithAlpha from "./ColorPickerWithAlpha";
 
 const { map } = lodash;
+const { Component } = wp.element;
 const { __, sprintf } = wp.i18n;
 const { Button, Dropdown, Tooltip } = wp.components;
+const custom_colorpicker_label = __("Custom color picker");
 
-const ColorPalette = ({
-	colors,
-	disableCustomColors = false,
-	value,
-	onChange,
-	className
-}) => {
-	const applyOrUnset = color => {
-		return () => onChange(value === color ? undefined : color);
-	};
-	const customColorPickerLabel = __("Custom color picker");
-	const classes = classnames("components-color-palette", className);
-	return (
-		<div className={classes}>
-			{map(colors, ({ color, name }) => {
-				const style = { color: color };
-				const itemClasses = classnames(
-					"components-color-palette__item",
-					{ "is-active": value === color }
-				);
+class ColorPalette extends Component {
+	render() {
+		const { colors, value, updateText } = this.props;
 
-				return (
-					<div
-						key={color}
-						className="components-color-palette__item-wrapper"
-					>
-						<Tooltip
-							text={
-								name ||
-								// translators: %s: color hex code e.g: "#f00".
-								sprintf(__("Color code: %s"), color)
-							}
+		return (
+			<Div className={"components-color-palette"}>
+				{map(colors, ({ color, name }) => {
+					const item_classes = classnames(
+						"components-color-palette__item",
+						{ "is-active": value === color }
+					);
+
+					return (
+						<Div
+							key={color}
+							className="components-color-palette__item-wrapper"
 						>
-							<button
-								type="button"
-								className={itemClasses}
-								style={style}
-								onClick={applyOrUnset(color)}
-								aria-label={
-									name
-										? // translators: %s: The name of the color e.g: "vivid red".
-										  sprintf(__("Color: %s"), name)
-										: // translators: %s: color hex code e.g: "#f00".
-										  sprintf(__("Color code: %s"), color)
+							<Tooltip
+								text={
+									name ||
+									// translators: %s: color hex code e.g: "#f00".
+									sprintf(__("Color code: %s"), color)
 								}
-								aria-pressed={value === color}
-							/>
-						</Tooltip>
-					</div>
-				);
-			})}
-
-			{!disableCustomColors && (
+							>
+								<Button
+									type="button"
+									className={item_classes}
+									style={{ color: color }}
+									onClick={color => {
+										color = value === color ? "" : color;
+										updateText(color);
+									}}
+									aria-label={
+										name
+											? // translators: %s: The name of the color e.g: "vivid red".
+											  sprintf(__("Color: %s"), name)
+											: // translators: %s: color hex code e.g: "#f00".
+											  sprintf(
+													__("Color code: %s"),
+													color
+											  )
+									}
+									aria-pressed={value === color}
+								/>
+							</Tooltip>
+						</Div>
+					);
+				})}
 				<Dropdown
 					className="components-color-palette__item-wrapper components-color-palette__custom-color"
 					contentClassName="components-color-palette__picker"
 					renderToggle={({ isOpen, onToggle }) => (
-						<Tooltip text={customColorPickerLabel}>
-							<button
+						<Tooltip text={custom_colorpicker_label}>
+							<Button
 								type="button"
 								aria-expanded={isOpen}
 								className="components-color-palette__item"
 								onClick={onToggle}
-								aria-label={customColorPickerLabel}
+								aria-label={custom_colorpicker_label}
 							>
 								<span className="components-color-palette__custom-color-gradient" />
-							</button>
+							</Button>
 						</Tooltip>
 					)}
 					renderContent={() => (
-						<ChromePicker
-							color={value}
-							onChangeComplete={color => onChange(color.hex)}
-							disableAlpha
+						<ColorPickerWithAlpha
+							value={value}
+							updateText={updateText}
 						/>
 					)}
 				/>
-			)}
-
-			<Button
-				className="components-color-palette__clear"
-				type="button"
-				onClick={() => onChange(undefined)}
-				isSmall
-				isDefault
-			>
-				{__("Clear")}
-			</Button>
-		</div>
-	);
-};
+				<Button
+					className="components-color-palette__clear"
+					type="button"
+					onClick={() => updateText("")}
+					isSmall
+					isDefault
+				>
+					{__("Clear")}
+				</Button>
+			</Div>
+		);
+	}
+}
 
 export default ColorPalette;
