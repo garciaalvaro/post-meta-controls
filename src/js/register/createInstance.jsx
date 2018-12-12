@@ -7,6 +7,7 @@ import Radio from "../classes/Setting-Radio";
 import Select from "../classes/Setting-Select";
 import Range from "../classes/Setting-Range";
 import Text from "../classes/Setting-Text";
+import Textarea from "../classes/Setting-Textarea";
 
 const { isUndefined } = lodash;
 
@@ -43,6 +44,8 @@ const createInstance = (props_raw, class_name) => {
 				class_instance = new Range(props_raw);
 			} else if ("text" === type) {
 				class_instance = new Text(props_raw);
+			} else if ("textarea" === type) {
+				class_instance = new Textarea(props_raw);
 			}
 			break;
 

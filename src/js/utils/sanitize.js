@@ -29,6 +29,14 @@ const sanitizeText = value => {
 	return escape(value);
 };
 
+const sanitizeTextarea = value => {
+	// if (!isString(value)) {
+	// 	return "";
+	// }
+	// return escape(value);
+	return value;
+};
+
 const sanitizeBool = value => {
 	return isBoolean(value) && value === true ? true : false;
 };
@@ -96,6 +104,7 @@ const sanitizeArrayObjectString = value => {
 export default {
 	id: sanitizeId,
 	text: sanitizeText,
+	textarea: sanitizeTextarea,
 	bool: sanitizeBool,
 	float: sanitizeFloat,
 	integer: sanitizeInteger,

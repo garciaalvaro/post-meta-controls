@@ -70,6 +70,7 @@ abstract class Setting extends Base {
 						'select',
 						'range',
 						'text',
+						'textarea',
 					),
 					'data_key'                     => '',
 					'data_key_prefix'              => 'ps_',
@@ -241,6 +242,10 @@ abstract class Setting extends Base {
 						} elseif ( 'text' === $props['type'] ) {
 
 							return sanitize_text( $value );
+
+						} elseif ( 'textarea' === $props['type'] ) {
+
+							return sanitize_textarea( $value );
 
 						} elseif ( 'checkbox' === $props['type'] ) {
 

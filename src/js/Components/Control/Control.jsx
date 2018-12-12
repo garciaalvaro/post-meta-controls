@@ -6,6 +6,7 @@ import Radio from "./Radio";
 import Select from "./Select";
 import Range from "./Range";
 import Text from "./Text";
+import Textarea from "./Textarea";
 import Invalid from "./Invalid";
 
 const { withState, compose } = wp.compose;
@@ -34,6 +35,9 @@ class Control extends Component {
 
 			case "text":
 				return <Text {...this.props} />;
+
+			case "textarea":
+				return <Textarea {...this.props} />;
 
 			default:
 				return null;

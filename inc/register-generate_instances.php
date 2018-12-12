@@ -91,6 +91,10 @@ function generate_instances(
 					$class_instance = new Text( $prop_raw );
 					break;
 
+				case 'textarea':
+					$class_instance = new Textarea( $prop_raw );
+					break;
+
 				default:
 					break;
 			}

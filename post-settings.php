@@ -28,6 +28,7 @@ if ( ! defined( 'POSTSETTINGS_INC_DIR' ) ) {
 
 
 require_once POSTSETTINGS_INC_DIR . 'utils.php';
+require_once POSTSETTINGS_INC_DIR . 'utils-sanitize.php';
 require_once POSTSETTINGS_INC_DIR . 'enqueue.php';
 
 require_once POSTSETTINGS_INC_DIR . 'class-base.php';
@@ -40,6 +41,7 @@ require_once POSTSETTINGS_INC_DIR . 'class-setting-radio.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-select.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-range.php';
 require_once POSTSETTINGS_INC_DIR . 'class-setting-text.php';
+require_once POSTSETTINGS_INC_DIR . 'class-setting-textarea.php';
 // require_once POSTSETTINGS_INC_DIR . 'class-setting-custom_component.php';
 
 // require_once POSTSETTINGS_INC_DIR . 'register-get_children_elements.php';

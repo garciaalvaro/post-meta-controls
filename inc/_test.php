@@ -16,10 +16,10 @@ $sidebar_a = array(
 					'initial_open'   => true,
 					'settings'       => array(
 						array(
-							'type'            => 'text',
+							'type'            => 'textarea',
 
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'zxc',
+							'data_key'        => 'zaxc',
 							// 'data_key_prefix' => 'ps_',
 
 							'float_number'   => true,

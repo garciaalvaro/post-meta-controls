@@ -7,6 +7,7 @@ import Radio from "../classes/Setting-Radio";
 import Select from "../classes/Setting-Select";
 import Range from "../classes/Setting-Range";
 import Text from "../classes/Setting-Text";
+import Textarea from "../classes/Setting-Textarea";
 
 const { isArray, isObject, forEach, isEmpty } = lodash;
 
@@ -54,8 +55,8 @@ const generateInstances = (class_name, elements, path, instances) => {
 				class_instance = new Range(element);
 			} else if ("text" === element.type) {
 				class_instance = new Text(element);
-			} else if ("custom_component" === element.type) {
-				// class_instance = new CustomComponent( element );
+			} else if ("textarea" === element.type) {
+				class_instance = new Textarea(element);
 			}
 		}
 

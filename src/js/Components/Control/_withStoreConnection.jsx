@@ -76,7 +76,7 @@ export default compose([
 					}
 				},
 				updateText: value_new => {
-					value_new = sanitize.text(value_new);
+					value_new = sanitize.textarea(value_new);
 
 					updateSettingValue(id, data_key_with_prefix, value_new);
 
