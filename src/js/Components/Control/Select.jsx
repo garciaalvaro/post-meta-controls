@@ -13,8 +13,7 @@ class Select extends Component {
 			label,
 			help,
 			value,
-			updateId,
-			updateArrayString,
+			updateValue,
 			multiple
 		} = this.props;
 
@@ -26,13 +25,7 @@ class Select extends Component {
 				value={value}
 				options={options}
 				multiple={multiple}
-				onChange={value => {
-					if (multiple) {
-						updateArrayString(value);
-					} else {
-						updateId(value);
-					}
-				}}
+				onChange={updateValue}
 			/>
 		);
 	}

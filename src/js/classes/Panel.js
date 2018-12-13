@@ -33,10 +33,10 @@ class Panel extends Base {
 				type: "text"
 			},
 			initial_open: {
-				type: "bool"
+				type: "boolean"
 			},
 			with_container: {
-				type: "bool"
+				type: "boolean"
 			}
 		};
 

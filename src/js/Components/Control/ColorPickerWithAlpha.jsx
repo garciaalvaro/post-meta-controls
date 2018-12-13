@@ -7,7 +7,6 @@ const { isNil } = lodash;
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component, createRef } = wp.element;
-const { CheckboxControl } = wp.components;
 
 const colorpicker_options = {
 	showHSL: false,
@@ -34,7 +33,7 @@ class ColorPickerWithAlpha extends Component {
 			return;
 		}
 
-		const { updateText, value } = this.props;
+		const { updateValue, value } = this.props;
 
 		this.colorpicker_instance = AColorPicker.from(
 			this.colorpicker_div.current,
@@ -42,7 +41,7 @@ class ColorPickerWithAlpha extends Component {
 				...colorpicker_options,
 				color: value
 			}
-		).on("change", (picker, color) => updateText(color));
+		).on("change", (picker, color) => updateValue(color));
 	};
 
 	render() {

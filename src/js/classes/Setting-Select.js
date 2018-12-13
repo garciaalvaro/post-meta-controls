@@ -25,7 +25,7 @@ class Select extends Setting {
 	getPropsSchemaType() {
 		const schema = {
 			default_value: { type: "id" },
-			multiple: { type: "bool" },
+			multiple: { type: "boolean" },
 			options: { type: "array_object_string" }
 		};
 
@@ -36,7 +36,7 @@ class Select extends Setting {
 		const multiple = get(this.props, "multiple");
 		if (multiple) {
 			merge(schema, {
-				default_value: { type: "array" }
+				default_value: { type: "array_string" }
 			});
 		}
 

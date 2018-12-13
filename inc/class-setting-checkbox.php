@@ -21,7 +21,7 @@ class Checkbox extends Setting {
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default_value' => array( 'type' => 'bool', ),
+			'default_value' => array( 'type' => 'boolean', ),
 		);
 		$required_keys = array(
 			'label',

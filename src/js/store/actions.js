@@ -7,30 +7,43 @@ const actions = {
 			meta
 		};
 	},
-	updateSettingValue(id, data_key_with_prefix, value) {
+	fetchMeta() {
+		return {
+			type: "FETCH_META"
+		};
+	},
+	updateImageData(setting_id, value, image_data) {
+		return {
+			type: "UPDATE_IMAGE_DATA",
+			setting_id,
+			value,
+			image_data
+		};
+	},
+	fetchImageData(image_id) {
+		return {
+			type: "FETCH_IMAGE_DATA",
+			image_id
+		};
+	},
+	updateSettingValue(id, value) {
 		return {
 			type: "UPDATE_SETTING_VALUE",
 			id,
-			data_key_with_prefix,
 			value
 		};
 	},
-	updateActiveTab(sidebar_id, id) {
+	updateActiveTab(sidebar_id, tab_id) {
 		return {
 			type: "UPDATE_ACTIVE_TAB",
 			sidebar_id,
-			id
+			tab_id
 		};
 	},
-	toggleInitialOpen(id) {
+	togglePanelInitialOpen(id) {
 		return {
-			type: "TOGGLE_INITIAL_OPEN",
+			type: "TOGGLE_PANEL_INITIAL_OPEN",
 			id
-		};
-	},
-	getMeta() {
-		return {
-			type: "GET_META"
 		};
 	},
 	addSidebar(sidebar) {
@@ -60,8 +73,13 @@ const actions = {
 };
 
 const controls = {
-	GET_META(action) {
+	FETCH_META(action) {
 		return wp.data.select("core/editor").getCurrentPostAttribute("meta");
+	},
+	FETCH_IMAGE_DATA(action) {
+		const path = `wp/v2/media/${action.image_id}`;
+
+		return wp.apiFetch({ path });
 	}
 };
 

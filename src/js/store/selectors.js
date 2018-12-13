@@ -23,13 +23,33 @@ const selectors = {
 	},
 	getTabs(state, parent_id) {
 		return state.tabs.filter(tab => last(tab.path) === parent_id);
+	},
+	getImageData(state, setting_id, image_id) {
+		const setting = find(state.settings, { id: setting_id });
+
+		if (setting.multiple) {
+			return find(setting.image_data, { id: image_id });
+		}
+
+		return setting.image_data;
 	}
 };
 
 const resolvers = {
-	*getTabs(state) {
-		const meta = yield actions.getMeta();
+	*getTabs() {
+		const meta = yield actions.fetchMeta();
+
 		return actions.setInitialValues(meta);
+	},
+	*getImageData(setting_id, image_id) {
+		const image_data_raw = yield actions.fetchImageData(image_id);
+		l("*getImageData", image_id, image_data_raw);
+		const image_data = {
+			url: get(image_data_raw, ["media_details.sizes.large.source_url"]),
+			alt: get(image_data_raw, "alt_text")
+		};
+
+		return actions.updateImageData(setting_id, image_data);
 	}
 };
 

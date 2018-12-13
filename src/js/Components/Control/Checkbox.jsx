@@ -8,7 +8,7 @@ const { CheckboxControl } = wp.components;
 
 class Checkbox extends Component {
 	render() {
-		const { label, help, value, toggleBool } = this.props;
+		const { label, help, value, toggleValue } = this.props;
 
 		return (
 			<CheckboxControl
@@ -16,7 +16,7 @@ class Checkbox extends Component {
 				label={label}
 				help={help}
 				checked={value}
-				onChange={toggleBool}
+				onChange={toggleValue}
 			/>
 		);
 	}

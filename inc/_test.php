@@ -15,49 +15,98 @@ $sidebar_a = array(
 					'with_container' => true,
 					'initial_open'   => true,
 					'settings'       => array(
+						// array(
+						// 	'type'            => 'image',
+						// 	'data_type'       => 'meta', // localstorage meta none option
+						// 	'data_key'        => 'image',
+
+						// 	// 'default_value'   => 'bbb',
+						// 	'label'           => 'image',
+						// ),
 						array(
-							'type'            => 'color',
-
+							'type'            => 'select',
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'zaaxc',
-							// 'data_key_prefix' => 'ps_',
+							'data_key'        => 'select',
 
-							'alpha'   => true,
-							'float_number'   => true,
-							'step'           => 1.11,
-							'min'            => 100,
-							'max'            => 200,
-
-							'help'            => 'help asd',
-							// 'multiple'        => true,
-							'default_value'   => 'deeef txt',
-							'label'           => 'Setting numero #1',
-							'palette'         => array(
-								'rojo'     => '#f00',
-								'amarillo' => '#fc0',
+							'default_value'   => 'bbb',
+							'label'           => 'select',
+							'options'         => array(
+								'aaa' => 'aaa',
+								'bbb' => 'bbb',
 							),
 						),
 						array(
-							'id'            => 'my-setting',
-							'type'            => 'radio',
-
+							'type'            => 'select',
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'cxz',
-							// 'data_key_prefix' => 'ps_',
+							'data_key'        => 'select_multiple',
 
-							'step'           => 0,
-							'min'            => 1100,
-							'max'            => 200,
-
-							'help'            => 'help asd',
-							// 'multiple'        => true,
-							'default_value'   => 'ww',
-							'label'           => 'Setting numero #1',
+							'multiple'        => true,
+							'default_value'   => ['bbb'],
+							'label'           => 'select_multiple',
 							'options'         => array(
-								'uu' => 'UU',
-								'vv' => 'VV',
-								'ww' => 'ww',
+								'aaa' => 'aaa',
+								'bbb' => 'bbb',
 							),
+						),
+						array(
+							'type'            => 'radio',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'radio',
+
+							'default_value'   => 'bbb',
+							'label'           => 'radio',
+							'options'         => array(
+								'aaa' => 'aaa',
+								'bbb' => 'bbb',
+							),
+						),
+						array(
+							'type'            => 'checkbox',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'checkbox',
+
+							'default_value'  => true,
+							'label'          => 'checkbox',
+							'help'           => 'checkbox',
+						),
+						array(
+							'type'            => 'text',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'text',
+
+							'default_value'   => 'text',
+							'label'           => 'text',
+						),
+						array(
+							'type'            => 'textarea',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'textarea',
+
+							'default_value'   => 'textarea',
+							'label'           => 'textarea',
+						),
+						array(
+							'type'            => 'range',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'range',
+
+							'step'           => 2,
+							'min'            => 100,
+							'max'            => 200,
+							'default_value'   => 144,
+							'label'           => 'range',
+						),
+						array(
+							'type'            => 'range',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'range_float',
+
+							'float_number'   => true,
+							'step'           => 0.1,
+							'min'            => 100.2,
+							'max'            => 200.2,
+							'default_value'   => 140.2,
+							'label'           => 'range_float',
 						),
 					),
 				),

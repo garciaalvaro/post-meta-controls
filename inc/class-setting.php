@@ -72,6 +72,7 @@ abstract class Setting extends Base {
 						'text',
 						'textarea',
 						'color',
+						'image',
 					),
 					'data_key'                     => '',
 					'data_key_prefix'              => 'ps_',
@@ -208,64 +209,28 @@ abstract class Setting extends Base {
 		if (
 			true !== $this->props['valid'] ||
 			'meta' !== $this->props['data_type'] ||
-			// empty( $this->props['type'] ) ||
-			// empty( $this->props['types_can_have_meta'] ) ||
 			! in_array( $this->props['type'], $this->props['types_can_have_meta'] )
 		) {
 			return;
 		}
 
-		$props              = $this->props;
-		$props['meta_type'] = get_meta_type( $props );
+		$props = $this->props;
+		$type  = 'range' === $props['type'] && true === $props['float_number']
+			? 'range_float'
+			: $props['type'];
+		$meta_type     = get_meta_arg_type( $type );
+		$meta_sanitize = get_meta_arg_sanitize( $type, $props );
+		$meta_single   = get_meta_arg_single( $type, $props );
 
-		// \add_action( 'init', function() use ( $props ) {
-			\register_post_meta(
-				$props['post_type'],
-				$props['data_key_with_prefix'],
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => $props['meta_type'],
-					'sanitize_callback' => function( $value ) use ( $props ) {
-
-						if ( 'radio' === $props['type'] || 'select' === $props['type'] ) {
-
-							$options       = $this->props['options'];
-							$default_value = $this->props['default_value'];
-
-							return sanitize_options(
-								$value,
-								$options,
-								$default_value,
-								'select' === $props['type'] && true === $props['multiple']
-							);
-
-						} elseif ( 'text' === $props['type'] ) {
-
-							return sanitize_text( $value );
-
-						} elseif ( 'textarea' === $props['type'] ) {
-
-							return sanitize_textarea( $value );
-
-						} elseif ( 'checkbox' === $props['type'] ) {
-
-							return sanitize_bool( $value );
-
-						} elseif ( 'color' === $props['type'] ) {
-
-							return sanitize_text( $value );
-
-						} elseif ( 'range' === $props['type'] ) {
-
-							return sanitize_range( $value, $props );
-
-						}
-
-						return '';// TODO: return?
-					},
-				)
-			);
-		// } );
+		\register_post_meta(
+			$props['post_type'],
+			$props['data_key_with_prefix'],
+			array(
+				'show_in_rest'      => true,
+				'single'            => $meta_single,
+				'type'              => $meta_type,
+				'sanitize_callback' => $meta_sanitize,
+			)
+		);
 	}
 }

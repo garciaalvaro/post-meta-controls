@@ -8,7 +8,7 @@ const { RadioControl } = wp.components;
 
 class Radio extends Component {
 	render() {
-		const { options, label, help, value, updateId } = this.props;
+		const { options, label, help, value, updateValue } = this.props;
 
 		return (
 			<RadioControl
@@ -17,7 +17,7 @@ class Radio extends Component {
 				help={help}
 				selected={value}
 				options={options}
-				onChange={updateId}
+				onChange={updateValue}
 			/>
 		);
 	}

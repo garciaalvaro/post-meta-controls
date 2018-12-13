@@ -7,14 +7,14 @@ const { ColorPalette } = wp.components;
 
 class Color extends Component {
 	render() {
-		const { updateText, value, palette, alpha } = this.props;
+		const { updateValue, value, palette, alpha } = this.props;
 
 		if (alpha) {
 			return (
 				<ColorPaletteClone
 					colors={palette}
 					value={value}
-					updateText={updateText}
+					updateValue={updateValue}
 				/>
 			);
 		}
@@ -23,7 +23,7 @@ class Color extends Component {
 			<ColorPalette
 				colors={palette}
 				value={value}
-				onChange={updateText}
+				onChange={updateValue}
 			/>
 		);
 	}

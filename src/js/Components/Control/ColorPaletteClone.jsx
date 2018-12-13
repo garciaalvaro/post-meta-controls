@@ -11,7 +11,7 @@ const custom_colorpicker_label = __("Custom color picker");
 
 class ColorPalette extends Component {
 	render() {
-		const { colors, value, updateText } = this.props;
+		const { colors, value, updateValue } = this.props;
 
 		return (
 			<Div className={"components-color-palette"}>
@@ -39,7 +39,7 @@ class ColorPalette extends Component {
 									style={{ color: color }}
 									onClick={color => {
 										color = value === color ? "" : color;
-										updateText(color);
+										updateValue(color);
 									}}
 									aria-label={
 										name
@@ -76,14 +76,14 @@ class ColorPalette extends Component {
 					renderContent={() => (
 						<ColorPickerWithAlpha
 							value={value}
-							updateText={updateText}
+							updateValue={updateValue}
 						/>
 					)}
 				/>
 				<Button
 					className="components-color-palette__clear"
 					type="button"
-					onClick={() => updateText("")}
+					onClick={() => updateValue("")}
 					isSmall
 					isDefault
 				>

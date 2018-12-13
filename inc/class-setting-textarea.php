@@ -12,7 +12,7 @@ class Textarea extends Setting {
 
 	protected function get_props_default_type() {
 		$default_type = array(
-			'type'          => 'checkbox',
+			'type'          => 'textarea',
 			'default_value' => '',
 		);
 

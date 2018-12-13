@@ -106,8 +106,12 @@ class Base {
 					this.props[key] = sanitize.float(value);
 					break;
 
-				case "bool":
-					this.props[key] = sanitize.bool(value);
+				case "boolean":
+					this.props[key] = sanitize.boolean(value);
+					break;
+
+				case "array_integer":
+					this.props[key] = sanitize.arrayInteger(value);
 					break;
 
 				case "array_string":

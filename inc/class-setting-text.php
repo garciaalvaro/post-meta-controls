@@ -12,7 +12,7 @@ class Text extends Setting {
 
 	protected function get_props_default_type() {
 		$default_type = array(
-			'type'          => 'checkbox',
+			'type'          => 'text',
 			'default_value' => '',
 		);
 

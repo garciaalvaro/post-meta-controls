@@ -16,7 +16,7 @@ class Color extends Setting {
 	getPropsSchemaType() {
 		const schema = {
 			default_value: { type: "id" },
-			alpha: { type: "bool" },
+			alpha: { type: "boolean" },
 			palette: { type: "array_object_string" }
 		};
 

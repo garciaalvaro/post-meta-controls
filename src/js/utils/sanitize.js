@@ -37,13 +37,14 @@ const sanitizeTextarea = value => {
 	return value;
 };
 
-const sanitizeBool = value => {
+const sanitizeBoolean = value => {
 	return isBoolean(value) && value === true ? true : false;
 };
 
 const sanitizeFloat = value => {
 	value = toNumber(value);
 	value = Math.abs(value);
+	value = Math.round(100 * value) / 100;
 
 	return value;
 };
@@ -67,6 +68,16 @@ const sanitizeObject = value => {
 	if (!isObject(value)) {
 		return {};
 	}
+
+	return value;
+};
+
+const sanitizeArrayInteger = value => {
+	value = sanitizeArray(value);
+
+	forEach(value, (array_value, array_index) => {
+		value[array_index] = sanitizeInteger(array_value);
+	});
 
 	return value;
 };
@@ -105,11 +116,12 @@ export default {
 	id: sanitizeId,
 	text: sanitizeText,
 	textarea: sanitizeTextarea,
-	bool: sanitizeBool,
+	boolean: sanitizeBoolean,
 	float: sanitizeFloat,
 	integer: sanitizeInteger,
 	array: sanitizeArray,
 	object: sanitizeObject,
+	arrayInteger: sanitizeArrayInteger,
 	arrayString: sanitizeArrayString,
 	objectString: sanitizeObjectString,
 	arrayObjectString: sanitizeArrayObjectString

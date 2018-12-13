@@ -19,12 +19,12 @@ class Range extends Component {
 			help,
 			value,
 			float_number,
-			updateInteger,
-			updateFloat
+			updateValue
 		} = this.props;
-		const decimal_length = toString(max + step).length;
+		const digits_length =
+			toString(Math.round(max)).length + (float_number ? 2 : 0);
 		const classes = classnames(
-			{ [`float_${decimal_length}`]: float_number },
+			{ [`float_${digits_length}`]: float_number },
 			"ps-control-range"
 		);
 
@@ -37,13 +37,7 @@ class Range extends Component {
 				min={min}
 				max={max}
 				step={step}
-				onChange={value => {
-					if (float_number) {
-						updateFloat(value);
-					} else {
-						updateInteger(value);
-					}
-				}}
+				onChange={updateValue}
 			/>
 		);
 	}

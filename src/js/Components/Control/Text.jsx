@@ -8,15 +8,15 @@ const { TextControl } = wp.components;
 
 class Text extends Component {
 	render() {
-		const { label, help, value, updateText } = this.props;
+		const { label, help, value, updateValue } = this.props;
 
 		return (
 			<TextControl
-				className="ps-control-checkbox"
+				className="ps-control-text"
 				label={label}
 				help={help}
 				value={value}
-				onChange={updateText}
+				onChange={updateValue}
 			/>
 		);
 	}

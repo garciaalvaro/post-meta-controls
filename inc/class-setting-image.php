@@ -2,11 +2,10 @@
 
 namespace POSTSETTINGS;
 
-class Select extends Setting {
+class Image extends Setting {
 
 	protected function get_js_props_type() {
 		return array(
-			'options',
 			'default_value',
 			'multiple',
 		);
@@ -14,10 +13,9 @@ class Select extends Setting {
 
 	protected function get_props_default_type() {
 		$default_type = array(
-			'type'          => 'select',
-			'default_value' => '',
+			'type'          => 'image',
+			'default_value' => 0,
 			'multiple'      => false,
-			'options'       => array(),
 		);
 
 		if (
@@ -37,18 +35,15 @@ class Select extends Setting {
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default_value' => array( 'type' => 'id', ),
+			'default_value' => array( 'type' => 'integer', ),
 			'multiple'      => array( 'type' => 'boolean', ),
-			'options'       => array( 'type' => 'array_array_string', ),
 		);
 		$required_keys = array(
 			'label',
-			'options',
 		);
 		$private_keys = array();
 		$conditions = array(
 			'label'   => 'not_empty',
-			'options' => 'not_empty',
 		);
 
 		if (
@@ -57,7 +52,7 @@ class Select extends Setting {
 		) {
 			$schema = \wp_parse_args(
 				array(
-					'default_value' => array( 'type' => 'array_string', ),
+					'default_value' => array( 'type' => 'array_integer', ),
 				),
 				$schema
 			);
@@ -66,31 +61,5 @@ class Select extends Setting {
 		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
 		return $schema;
-	}
-
-	protected function pre_clean_props() {
-		$this->prepare_options();
-	}
-
-	private function prepare_options() {
-
-		if ( empty( $this->props['options'] ) ) {
-			return;
-		}
-
-		$options_clean = array();
-
-		foreach ( $this->props['options'] as $key => $value ) {
-			if ( ! is_string( $key ) || ! is_string( $value ) ) {
-				continue;
-			}
-
-			$options_clean[] = array(
-				'value' => $key,
-				'label' => $value,
-			);
-		}
-
-		$this->props['options'] = $options_clean;
 	}
 }

@@ -33,7 +33,7 @@ class Range extends Setting {
 			'step'          => array( 'type' => 'integer', ),
 			'min'           => array( 'type' => 'integer', ),
 			'max'           => array( 'type' => 'integer', ),
-			'float_number'  => array( 'type' => 'bool', ),
+			'float_number'  => array( 'type' => 'boolean', ),
 		);
 
 		if (

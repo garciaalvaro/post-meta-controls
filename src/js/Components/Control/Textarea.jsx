@@ -8,15 +8,15 @@ const { TextareaControl } = wp.components;
 
 class Textarea extends Component {
 	render() {
-		const { label, help, value, updateText } = this.props;
+		const { label, help, value, updateValue } = this.props;
 
 		return (
 			<TextareaControl
-				className="ps-control-checkbox"
+				className="ps-control-textarea"
 				label={label}
 				help={help}
 				value={value}
-				onChange={updateText}
+				onChange={updateValue}
 			/>
 		);
 	}

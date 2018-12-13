@@ -1,156 +1,166 @@
 import l from "../utils";
 import initial_state from "./initial_state";
+import produce from "immer";
 
-const { get, isUndefined, find } = lodash;
+const { get, isUndefined, find, forEach } = lodash;
 
 const reducer = (state = initial_state, action) => {
-	let state_old = state;
+	let next_state;
 
 	// 'Persistence' takes the saved properties as the whole initial_state,
 	// so we need to include the initial_state properties in the first reducer call.
 	if (isUndefined(state.sidebars)) {
-		state_old = { ...initial_state, ...state };
+		next_state = { ...initial_state, ...state };
+	} else {
+		next_state = state;
 	}
 
 	switch (action.type) {
 		case "SET_INITIAL_VALUES": {
-			const { meta } = action;
-			l("meta", meta);
-
-			return {
-				...state_old,
-				settings: state_old.settings.map(setting => {
+			const next_settings = produce(next_state.settings, draft => {
+				draft.map(setting => {
 					const {
 						data_key_with_prefix,
 						default_value,
-						type,
 						metadata_exists,
 						data_type
 					} = setting;
-					let value = "";
 
-					if (data_type === "meta") {
-						value = get(meta, [data_key_with_prefix]);
+					let value = default_value;
+
+					if (data_type === "meta" && metadata_exists) {
+						value = get(action.meta, [data_key_with_prefix]);
 					} else if (data_type === "localstorage") {
-						value = get(state_old.settings_persisted, [
-							data_key_with_prefix
-						]);
+						const localstorage_value = get(
+							state_next.settings_persisted,
+							[data_key_with_prefix]
+						);
+
+						value = isUndefined(localstorage_value)
+							? default_value
+							: localstorage_value;
 					}
 
-					// if (
-					// 	type === "checkbox" ||
-					// 	type === "radio" ||
-					// 	type === "select" ||
-					// 	type === "range"
-					// ) {
-					value =
-						isUndefined(value) || !metadata_exists
-							? default_value
-							: value;
-					// } else {
-					// 	value = isUndefined(value) ? default_value : value;
-					// }
+					setting.value = value;
+				});
+			});
 
-					return {
-						...setting,
-						value: value
-					};
-				})
+			return {
+				...next_state,
+				settings: next_settings
 			};
 		}
 		case "UPDATE_SETTING_VALUE": {
-			const { id, value } = action;
-			const setting = find(state.settings, { id: id });
-			let settings_persisted = state_old.settings_persisted;
-			if (
-				get(setting, "data_type") === "localstorage" &&
-				!isUndefined(get(setting, "data_key_with_prefix"))
-			) {
-				settings_persisted = {
-					...state_old.settings_persisted,
-					[setting.data_key_with_prefix]: value
-				};
-			}
+			next_state = produce(next_state, draft_state => {
+				const setting = find(draft_state.settings, { id: action.id });
+				setting.value = action.value;
+
+				const data_type = get(setting, "data_type");
+				const data_key_with_prefix = get(
+					setting,
+					"data_key_with_prefix"
+				);
+				if (
+					data_type === "localstorage" &&
+					!isUndefined(data_key_with_prefix)
+				) {
+					draft_state.settings_persisted[data_key_with_prefix] =
+						action.value;
+				}
+			});
 
 			return {
-				...state_old,
-				settings: state_old.settings.map(setting => {
-					if (setting.id !== id) {
-						return setting;
-					}
+				...next_state
+			};
+		}
+		case "UPDATE_IMAGE_DATA": {
+			const next_settings = produce(
+				next_state.settings,
+				draft_settings => {
+					const setting = find(draft_settings, {
+						id: action.setting_id
+					});
 
-					return { ...setting, value: value };
-				}),
-				settings_persisted: settings_persisted
+					setting.value = action.value;
+					setting.image_data = action.image_data;
+				}
+			);
+
+			return {
+				...next_state,
+				settings: next_settings
 			};
 		}
 		case "UPDATE_ACTIVE_TAB": {
-			const { sidebar_id, id } = action;
+			const next_sidebars = produce(
+				next_state.sidebars,
+				draft_sidebars => {
+					const sidebar = find(draft_sidebars, {
+						id: action.sidebar_id
+					});
+
+					sidebar.active_tab = action.tab_id;
+				}
+			);
 
 			return {
-				...state_old,
-				sidebars: state_old.sidebars.map(sidebar => {
-					if (sidebar.id !== sidebar_id) {
-						return sidebar;
-					}
-
-					return { ...sidebar, active_tab: id };
-				})
+				...next_state,
+				sidebars: next_sidebars
 			};
 		}
-		case "TOGGLE_INITIAL_OPEN": {
-			const { id } = action;
+		case "TOGGLE_PANEL_INITIAL_OPEN": {
+			const next_panels = produce(next_state.panels, draft_panels => {
+				const panel = find(draft_panels, { id: action.id });
+
+				panel.initial_open = !panel.initial_open;
+			});
 
 			return {
-				...state_old,
-				panels: state_old.panels.map(panel => {
-					if (panel.id !== id) {
-						return panel;
-					}
-
-					return { ...panel, initial_open: !panel.initial_open };
-				})
+				...next_state,
+				panels: next_panels
 			};
 		}
 		case "ADD_SIDEBAR": {
 			return {
-				...state_old,
-				sidebars: [...state_old.sidebars, action.sidebar]
+				...next_state,
+				sidebars: [...next_state.sidebars, action.sidebar]
 			};
 		}
 		case "ADD_TAB": {
 			return {
-				...state_old,
-				tabs: [...state_old.tabs, action.tab]
+				...next_state,
+				tabs: [...next_state.tabs, action.tab]
 			};
 		}
 		case "ADD_PANEL": {
 			return {
-				...state_old,
-				panels: [...state_old.panels, action.panel]
+				...next_state,
+				panels: [...next_state.panels, action.panel]
 			};
 		}
 		case "ADD_SETTING": {
 			const sidebar_id = action.setting.path[0];
+			const next_sidebars = produce(
+				next_state.sidebars,
+				draft_sidebars => {
+					const sidebar = find(draft_sidebars, { id: sidebar_id });
+
+					sidebar.settings_id = [
+						...sidebar.settings_id,
+						action.setting.id
+					];
+				}
+			);
 
 			return {
-				...state_old,
-				settings: [...state_old.settings, action.setting],
-				sidebars: state_old.sidebars.map(sidebar => {
-					if (sidebar.id !== sidebar_id) {
-						return sidebar;
-					}
-
-					return {
-						...sidebar,
-						settings_id: [...sidebar.settings_id, action.setting.id]
-					};
-				})
+				...next_state,
+				settings: [...next_state.settings, action.setting],
+				sidebars: next_sidebars
 			};
 		}
 	}
 
-	return state;
+	return next_state;
 };
 
 export default reducer;

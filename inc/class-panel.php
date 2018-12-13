@@ -35,8 +35,8 @@ class Panel extends Base {
 			'path'           => array( 'type' => 'array_string', ),
 			'index'          => array( 'type' => 'integer', ),
 			'label'          => array( 'type' => 'text', ),
-			'initial_open'   => array( 'type' => 'bool', ),
-			'with_container' => array( 'type' => 'bool', ),
+			'initial_open'   => array( 'type' => 'boolean', ),
+			'with_container' => array( 'type' => 'boolean', ),
 			'post_type'      => array( 'type' => 'id', ),
 		);
 		$required_keys = array(

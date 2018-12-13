@@ -7,7 +7,6 @@
 // const { withState, compose } = wp.compose;
 // const { withSelect, withDispatch } = wp.data;
 // const { Component, createRef } = wp.element;
-// const { CheckboxControl } = wp.components;
 
 // const colorpicker_options = {
 // 	showHSL: false,

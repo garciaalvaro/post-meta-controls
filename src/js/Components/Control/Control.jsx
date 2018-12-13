@@ -9,6 +9,7 @@ import Range from "./Range";
 import Text from "./Text";
 import Textarea from "./Textarea";
 import Color from "./Color";
+import ImageContainer from "./ImageContainer";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -42,6 +43,9 @@ class Control extends Component {
 
 			case "color":
 				return <Color {...this.props} />;
+
+			case "image":
+				return <ImageContainer {...this.props} />;
 
 			default:
 				return null;

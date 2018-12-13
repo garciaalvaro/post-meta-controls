@@ -40,19 +40,83 @@ function validate_required( $required, $prop ) {
 	return ! $required || $exists;
 }
 
-function get_meta_type( $props = array() ) {
+function get_meta_arg_type( $type = '' ) {
 
-	if ( 'checkbox' === $props['type'] ) {
-		return 'boolean';
-	} elseif (
-		'range' === $props['type'] &&
-		isset( $props['float_number'] ) &&
-		false === $props['float_number']
-	) {
-		return 'integer';
+	switch ( $type ) {
+		case 'checkbox':
+			return 'boolean';
+			break;
+
+		case 'image':
+		case 'range':
+			return 'integer';
+			break;
+
+		default:
+			return 'string';
+			break;
 	}
+}
 
-	return 'string';
+function get_meta_arg_single( $type = '', $props = array() ) {
+
+	$multiple =
+		( 'select' === $type || 'image' === $type ) &&
+		true === $props['multiple'];
+
+	return false === $multiple;
+}
+
+function get_meta_arg_sanitize( $type = '', $props = array() ) {
+
+	switch ( $type ) {
+		case 'checkbox':
+			return __NAMESPACE__ . '\sanitize_boolean';
+			break;
+
+		case 'text':
+		case 'color':
+			return '\sanitize_text_field';
+			break;
+
+		case 'textarea':
+			return '\sanitize_textarea_field';
+			break;
+
+		case 'image':
+			return '\absint';
+			break;
+
+		case 'range':
+			$min = $props['min'];
+			$max = $props['max'];
+			return function ( $value ) use( $min, $max ) {
+				return sanitize_range( $value, $min, $max );
+			};
+			break;
+
+		case 'range_float':
+			$min = $props['min'];
+			$max = $props['max'];
+			return function ( $value ) use( $min, $max ) {
+				return sanitize_range_float( $value, $min, $max );
+			};
+			break;
+
+		case 'radio':
+		case 'select':
+			$options  = $props['options'];
+			$default  = $props['default_value'];
+			$multiple = 'select' === $type && true === $props['multiple'];
+			return function ( $value ) use( $options, $default ) {
+				return sanitize_options( $value, $options, $default, $multiple );
+			};
+			break;
+
+		default:
+			return '\sanitize_text_field';
+			break;
+	}
 }
 
 function set_schema(

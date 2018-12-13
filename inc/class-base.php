@@ -79,8 +79,12 @@ abstract class Base {
 					$this->props[ $key ] = sanitize_integer( $value );
 					break;
 
-				case 'bool':
-					$this->props[ $key ] = sanitize_bool( $value );
+				case 'boolean':
+					$this->props[ $key ] = sanitize_boolean( $value );
+					break;
+
+				case 'array_integer':
+					$this->props[ $key ] = sanitize_array_integer( $value );
 					break;
 
 				case 'array_string':

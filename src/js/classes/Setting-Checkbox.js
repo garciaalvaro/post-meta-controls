@@ -11,7 +11,7 @@ class Checkbox extends Setting {
 
 	getPropsSchemaType() {
 		const schema = {
-			default_value: { type: "bool" }
+			default_value: { type: "boolean" }
 		};
 
 		const required_keys = ["label"];

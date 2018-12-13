@@ -27,7 +27,7 @@ class Panel extends Component {
 			label,
 			initial_open,
 			with_container,
-			toggleInitialOpen
+			togglePanelInitialOpen
 		} = this.props;
 
 		const component_with_container = (
@@ -36,7 +36,7 @@ class Panel extends Component {
 				icon="welcome-widgets-menus"
 				initialOpen={initial_open}
 				className="ps-panel"
-				onToggle={toggleInitialOpen}
+				onToggle={togglePanelInitialOpen}
 			>
 				{this.getPanelsComponent()}
 			</PanelBody>
@@ -62,10 +62,10 @@ export default compose([
 		};
 	}),
 	withDispatch((dispatch, { id }) => {
-		const { toggleInitialOpen } = dispatch(store_slug);
+		const { togglePanelInitialOpen } = dispatch(store_slug);
 
 		return {
-			toggleInitialOpen: () => toggleInitialOpen(id)
+			togglePanelInitialOpen: () => togglePanelInitialOpen(id)
 		};
 	})
 ])(Panel);

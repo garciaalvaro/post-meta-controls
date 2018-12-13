@@ -21,7 +21,7 @@ class Range extends Setting {
 			step: { type: "integer" },
 			min: { type: "integer" },
 			max: { type: "integer" },
-			float_number: { type: "bool" }
+			float_number: { type: "boolean" }
 		};
 
 		const float_number = get(this.props, "float_number");

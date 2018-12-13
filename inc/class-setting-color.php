@@ -26,7 +26,7 @@ class Color extends Setting {
 	protected function get_props_schema_type() {
 		$schema = array(
 			'default_value' => array( 'type' => 'id', ),
-			'alpha'         => array( 'type' => 'bool', ),
+			'alpha'         => array( 'type' => 'boolean', ),
 			'palette'       => array( 'type' => 'array_array_string', ),
 		);
 		$required_keys = array(

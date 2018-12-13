@@ -26,7 +26,7 @@ class Sidebar extends Base {
 			label: { type: "text" },
 			description: { type: "text" },
 			// icon_url: { type: "id" }, // TODO
-			active_tab: { type: "bool" },
+			active_tab: { type: "boolean" },
 			settings_id: { type: "array_string" }
 		};
 

@@ -15,20 +15,31 @@ function sanitize_textarea( $value ) {
 }
 
 function sanitize_float( $value ) {
-	return abs( floatval( $value ) );
+	return round( abs( floatval( $value ) ), 2 );
 }
 
 function sanitize_integer( $value ) {
 	return \absint( $value );
 }
 
-function sanitize_bool( $value ) {
+function sanitize_boolean( $value ) {
 	// https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
+	// return isset( $value ) && true == $value ? "ttt" : "fff";
 	return isset( $value ) && true == $value ? true : false;
 }
 
 function sanitize_array( $value ) {
 	return is_array( $value ) ? $value : array();
+}
+
+function sanitize_array_integer( $value ) {
+	$value = sanitize_array( $value );
+
+	foreach ( $value as $array_key => $array_value ) {
+		$value[ $array_key ] = sanitize_integer( $array_value );
+	}
+
+	return $value;
 }
 
 function sanitize_array_string( $value ) {
@@ -51,56 +62,45 @@ function sanitize_array_array_string( $value ) {
 	return $value;
 }
 
-function sanitize_options( $value, $options, $default, $multiple = false ) {
+function sanitize_options(
+	$value = '',
+	$options = array(),
+	$default = '',
+	$multiple = false
+) {
 
-	$value = true === $multiple
-		? json_decode( $value, true )
-		: \sanitize_key( $value );
+	$value   = \sanitize_key( $value );
 	$options = sanitize_array( $options );
+	$default = true === $multiple ? '' : sanitize_id( $default );
 
-	// Get list of choices from the control associated with the setting.
 	$options = array_map( function( $option ) {
 		return $option['value'];
 	}, $options );
 
-	if ( true === $multiple && is_array( $value ) ) {
-
-		foreach ( $value as $value_key => $value_value ) {
-			if ( ! in_array( $value_value, $options ) ) {
-				unset( $value[ $value_key ] );
-			}
-		}
-
-		return empty( $value )
-			? sanitize_id( $default )
-			: wp_json_encode( array_values( $value ) );
-	}
-
 	// If the input is a valid key, return it; otherwise, return the default.
-	return in_array( $value, $options ) ? $value : sanitize_id( $default );
+	return in_array( $value, $options ) ? $value : $default;
 }
 
-function sanitize_range( $value = 1, $props = array() ) {
+function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
 
-	$min = $props['min'];
-	$max = $props['max'];
-
-	if ( true === $props['float_number'] ) {
-		$value = sanitize_float( $value );
-		$min   = sanitize_float( $min );
-		$max   = sanitize_float( $max );
-	} else {
-		$value = sanitize_integer( $value );
-		$min   = sanitize_integer( $min );
-		$max   = sanitize_integer( $max );
-	}
+	$value = \absint( $value );
+	$min   = \absint( $min );
+	$max   = \absint( $max );
 
 	$value = max( $value, $min );
 	$value = min( $value, $max );
 
-	if ( true === $props['float_number'] ) {
-		return (string) $value;
-	}
-
 	return $value;
+}
+
+function sanitize_range_float( $value = 1, $min = 0, $max = 1 ) {
+
+	$value = sanitize_float( $value );
+	$min   = sanitize_float( $min );
+	$max   = sanitize_float( $max );
+
+	$value = max( $value, $min );
+	$value = min( $value, $max );
+
+	return (string) $value;
 }

@@ -41,7 +41,7 @@ class Setting extends Base {
 			label: { type: "text" },
 			description: { type: "text" },
 			help: { type: "text" },
-			metadata_exists: { type: "bool" }
+			metadata_exists: { type: "boolean" }
 		};
 		let required_keys = ["class_name", "id", "path", "index", "type"];
 		let private_keys = ["class_name"];
