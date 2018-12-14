@@ -44,12 +44,12 @@ class Sidebar extends Base {
 			return;
 		}
 
-		const { id, label } = this.props;
+		const { id } = this.props;
 		const plugin_id = `${plugin_namespace_dash}-${id}`;
 
 		registerPlugin(plugin_id, {
 			icon: <Div id="ps-pinned-logo">{icons.logo}</Div>,
-			render: () => <SidebarContainer id={id} label={label} />
+			render: () => <SidebarContainer sidebar_id={id} />
 		});
 	}
 }

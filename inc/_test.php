@@ -15,14 +15,15 @@ $sidebar_a = array(
 					'with_container' => true,
 					'initial_open'   => true,
 					'settings'       => array(
-						// array(
-						// 	'type'            => 'image',
-						// 	'data_type'       => 'meta', // localstorage meta none option
-						// 	'data_key'        => 'image',
+						array(
+							'type'            => 'image',
+							'data_type'       => 'meta', // localstorage meta none option
+							'data_key'        => 'image3',
 
-						// 	// 'default_value'   => 'bbb',
-						// 	'label'           => 'image',
-						// ),
+							'multiple'        => true,
+							'default_value'   => array(168,159),
+							'label'           => 'image',
+						),
 						array(
 							'type'            => 'select',
 							'data_type'       => 'meta', // localstorage meta none option

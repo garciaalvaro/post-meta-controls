@@ -1,9 +1,8 @@
-import l, { store_slug } from "../../utils";
+import l, { store_slug, getImageDataObject } from "../../utils";
 import Div from "../Utils";
 import Image from "./Image";
-import withStoreConnection from "./_withStoreConnection";
 
-const { isEmpty, isArray, isNil, map, reduce, forEach } = lodash;
+const { isEmpty, castArray, map, reduce, forEach } = lodash;
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { MediaUpload } = wp.editor;
@@ -11,9 +10,9 @@ const { Component } = wp.element;
 
 class ImageContainer extends Component {
 	renderHandler = ({ open }) => {
-		const { id: setting_id, value } = this.props;
+		const { id: setting_id, value: images_id, multiple } = this.props;
 
-		if (value === 0 || (isArray(value) && isEmpty(value))) {
+		if (isEmpty(images_id)) {
 			return (
 				<Div
 					onClick={open}
@@ -24,62 +23,24 @@ class ImageContainer extends Component {
 					}}
 				/>
 			);
-		} else if (isArray(value)) {
-			return map(value, image_id => (
+		} else {
+			return map(images_id, image_id => (
 				<Image
 					key={image_id}
 					open={open}
 					setting_id={setting_id}
 					image_id={image_id}
+					multiple={multiple}
 				/>
 			));
-		} else {
-			return (
-				<Image open={open} setting_id={setting_id} image_id={value} />
-			);
 		}
 	};
 
-	getImageDataObject = image_data => {
-		const { sizes, id, alt } = image_data;
-		const image_size =
-			sizes.medium_large ||
-			sizes.medium ||
-			sizes.large ||
-			sizes.thumbnail;
+	onSelectHandler = image_data_raw => {
+		image_data_raw = castArray(image_data_raw);
+		const data = getImageDataObject(image_data_raw, false);
 
-		if (isNil(image_size)) {
-			return null;
-		}
-
-		return {
-			id,
-			url: image_size.url,
-			alt: alt
-		};
-	};
-
-	onSelectHandler = images => {
-		const { getImageDataObject } = this;
-		const { updateImageData } = this.props;
-		let image_data = null;
-
-		if (!isArray(images)) {
-			image_data = getImageDataObject(images);
-		} else {
-			image_data = reduce(
-				images,
-				(result, image) => {
-					result.push(getImageDataObject(image));
-					return result;
-				},
-				[]
-			);
-		}
-		l(image_data, isEmpty(image_data));
-		if (!isEmpty(image_data)) {
-			updateImageData(image_data);
-		}
+		this.props.updateValue(data);
 	};
 
 	render() {
@@ -106,8 +67,7 @@ export default compose([
 			id: setting_id,
 			valid,
 			data_type,
-			data_key_with_prefix,
-			multiple
+			data_key_with_prefix
 		} = props;
 		const { updateImageData } = dispatch(store_slug);
 		const { editPost } = dispatch("core/editor");
@@ -115,28 +75,8 @@ export default compose([
 			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
 
 		return {
-			updateImageData: data => {
-				let value;
-				let image_data;
-
-				if (multiple) {
-					value = [];
-					image_data = [];
-
-					forEach(data, image => {
-						const { id: image_id, url, alt } = image;
-						value = [...value, image_id];
-						image_data = [
-							...image_data,
-							{ id: image_id, url, alt }
-						];
-					});
-				} else {
-					const { id: image_id, url, alt } = data;
-
-					value = image_id;
-					image_data = { url, alt };
-				}
+			updateValue: data => {
+				const { value, image_data } = data;
 
 				updateImageData(setting_id, value, image_data);
 

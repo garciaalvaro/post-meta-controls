@@ -3,6 +3,7 @@ import icons from "./icons";
 import sanitize from "./sanitize";
 import validate from "./validate";
 import setSchema from "./setSchema";
+import getImageDataObject from "./getImageDataObject";
 import {
 	plugin_name,
 	plugin_namespace,
@@ -17,6 +18,7 @@ export {
 	sanitize,
 	validate,
 	setSchema,
+	getImageDataObject,
 	plugin_name,
 	plugin_namespace,
 	plugin_namespace_dash,

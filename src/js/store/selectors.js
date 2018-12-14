@@ -1,7 +1,7 @@
-import l from "../utils";
+import l, { getImageDataObject } from "../utils";
 import { actions } from "./actions";
 
-const { last, filter, get, find } = lodash;
+const { last, filter, get, find, castArray } = lodash;
 
 const selectors = {
 	getSidebar(state, id) {
@@ -36,20 +36,18 @@ const selectors = {
 };
 
 const resolvers = {
-	*getTabs() {
+	*getSidebar() {
 		const meta = yield actions.fetchMeta();
 
 		return actions.setInitialValues(meta);
 	},
 	*getImageData(setting_id, image_id) {
-		const image_data_raw = yield actions.fetchImageData(image_id);
-		l("*getImageData", image_id, image_data_raw);
-		const image_data = {
-			url: get(image_data_raw, ["media_details.sizes.large.source_url"]),
-			alt: get(image_data_raw, "alt_text")
-		};
+		let image_data_raw = yield actions.fetchImageData(image_id);
+		image_data_raw = castArray(image_data_raw);
+		let { image_data } = getImageDataObject(image_data_raw, true);
+		image_data = get(image_data, "0");
 
-		return actions.updateImageData(setting_id, image_data);
+		return actions.addInitialImageData(setting_id, image_data);
 	}
 };
 

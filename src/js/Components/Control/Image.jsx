@@ -7,9 +7,7 @@ const { withSelect, withDispatch } = wp.data;
 
 class Image extends Component {
 	render() {
-		l(this.props);
-		const { open, image_data } = this.props;
-		const { url, alt } = image_data;
+		const { open, url, alt } = this.props;
 
 		return (
 			<Div id="icp-image-container">
@@ -22,9 +20,10 @@ class Image extends Component {
 export default compose([
 	withSelect((select, { setting_id, image_id }) => {
 		const { getImageData } = select(store_slug);
+		const image_data = getImageData(setting_id, image_id);
 
 		return {
-			image_data: getImageData(setting_id, image_id)
+			...image_data
 		};
 	})
 ])(Image);

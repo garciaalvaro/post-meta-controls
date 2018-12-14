@@ -24,13 +24,11 @@ class Sidebar extends Component {
 	}
 }
 
-export default Sidebar;
-// export default compose([
-// 	withSelect((select, { id }) => {
-// 		const { getSidebar } = select(store_slug);
+export default withSelect((select, { sidebar_id }) => {
+	const { getSidebar } = select(store_slug);
+	const sidebar = getSidebar(sidebar_id);
 
-// 		return {
-// 			sidebar: getSidebar(id)
-// 		};
-// 	})
-// ])(Sidebar);
+	return {
+		...sidebar
+	};
+})(Sidebar);

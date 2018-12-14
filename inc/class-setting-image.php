@@ -14,28 +14,16 @@ class Image extends Setting {
 	protected function get_props_default_type() {
 		$default_type = array(
 			'type'          => 'image',
-			'default_value' => 0,
+			'default_value' => array(),
 			'multiple'      => false,
 		);
-
-		if (
-			! empty( $this->props['multiple'] ) &&
-			true === $this->props['multiple']
-		) {
-			$default_type = \wp_parse_args(
-				array(
-					'default_value' => array(),
-				),
-				$default_type
-			);
-		}
 
 		return $default_type;
 	}
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default_value' => array( 'type' => 'integer', ),
+			'default_value' => array( 'type' => 'array_integer', ),
 			'multiple'      => array( 'type' => 'boolean', ),
 		);
 		$required_keys = array(
@@ -45,18 +33,6 @@ class Image extends Setting {
 		$conditions = array(
 			'label'   => 'not_empty',
 		);
-
-		if (
-			! empty( $this->props['multiple'] ) &&
-			true === $this->props['multiple']
-		) {
-			$schema = \wp_parse_args(
-				array(
-					'default_value' => array( 'type' => 'array_integer', ),
-				),
-				$schema
-			);
-		}
 
 		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 

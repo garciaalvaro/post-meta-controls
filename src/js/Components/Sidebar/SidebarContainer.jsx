@@ -6,13 +6,13 @@ const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 
 class SidebarContainer extends Component {
 	render() {
-		const { id, label } = this.props;
-		const plugin_id = `${plugin_namespace_dash}-${id}`;
+		const { sidebar_id, label } = this.props;
+		const plugin_id = `${plugin_namespace_dash}-${sidebar_id}`;
 
 		return (
 			<Fragment>
 				<PluginSidebar name={plugin_id} title={label}>
-					<Sidebar id={id} />
+					<Sidebar sidebar_id={sidebar_id} />
 				</PluginSidebar>
 				<PluginSidebarMoreMenuItem target={plugin_id}>
 					{label}

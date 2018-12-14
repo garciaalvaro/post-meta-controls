@@ -12,6 +12,13 @@ const actions = {
 			type: "FETCH_META"
 		};
 	},
+	addInitialImageData(setting_id, image_data) {
+		return {
+			type: "ADD_INITIAL_IMAGE_DATA",
+			setting_id,
+			image_data
+		};
+	},
 	updateImageData(setting_id, value, image_data) {
 		return {
 			type: "UPDATE_IMAGE_DATA",

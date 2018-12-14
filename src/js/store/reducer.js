@@ -17,6 +17,7 @@ const reducer = (state = initial_state, action) => {
 
 	switch (action.type) {
 		case "SET_INITIAL_VALUES": {
+			l("meta", action.meta);
 			const next_settings = produce(next_state.settings, draft => {
 				draft.map(setting => {
 					const {
@@ -71,6 +72,23 @@ const reducer = (state = initial_state, action) => {
 
 			return {
 				...next_state
+			};
+		}
+		case "ADD_INITIAL_IMAGE_DATA": {
+			const next_settings = produce(
+				next_state.settings,
+				draft_settings => {
+					const setting = find(draft_settings, {
+						id: action.setting_id
+					});
+
+					setting.image_data.push(action.image_data);
+				}
+			);
+
+			return {
+				...next_state,
+				settings: next_settings
 			};
 		}
 		case "UPDATE_IMAGE_DATA": {
