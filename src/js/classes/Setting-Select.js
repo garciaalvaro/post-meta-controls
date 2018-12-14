@@ -7,24 +7,17 @@ class Select extends Setting {
 	getPropsDefaultType() {
 		let defaults = {
 			type: "select",
-			default_value: "",
+			default_value: [],
 			multiple: false,
 			options: []
 		};
-
-		const multiple = get(this.props, "multiple");
-		if (multiple) {
-			merge(defaults, {
-				default_value: []
-			});
-		}
 
 		return defaults;
 	}
 
 	getPropsSchemaType() {
 		const schema = {
-			default_value: { type: "id" },
+			default_value: { type: "array_string" },
 			multiple: { type: "boolean" },
 			options: { type: "array_object_string" }
 		};
@@ -32,13 +25,6 @@ class Select extends Setting {
 		const required_keys = ["label", "options"];
 		const private_keys = [];
 		const conditions = { label: "not_empty", options: "not_empty" };
-
-		const multiple = get(this.props, "multiple");
-		if (multiple) {
-			merge(schema, {
-				default_value: { type: "array_string" }
-			});
-		}
 
 		setSchema(schema, required_keys, private_keys, conditions);
 

@@ -15,29 +15,17 @@ class Select extends Setting {
 	protected function get_props_default_type() {
 		$default_type = array(
 			'type'          => 'select',
-			'default_value' => '',
+			'default_value' => array(),
 			'multiple'      => false,
 			'options'       => array(),
 		);
-
-		if (
-			! empty( $this->props['multiple'] ) &&
-			true === $this->props['multiple']
-		) {
-			$default_type = \wp_parse_args(
-				array(
-					'default_value' => array(),
-				),
-				$default_type
-			);
-		}
 
 		return $default_type;
 	}
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default_value' => array( 'type' => 'id', ),
+			'default_value' => array( 'type' => 'array_string', ),
 			'multiple'      => array( 'type' => 'boolean', ),
 			'options'       => array( 'type' => 'array_array_string', ),
 		);
@@ -50,18 +38,6 @@ class Select extends Setting {
 			'label'   => 'not_empty',
 			'options' => 'not_empty',
 		);
-
-		if (
-			! empty( $this->props['multiple'] ) &&
-			true === $this->props['multiple']
-		) {
-			$schema = \wp_parse_args(
-				array(
-					'default_value' => array( 'type' => 'array_string', ),
-				),
-				$schema
-			);
-		}
 
 		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 
