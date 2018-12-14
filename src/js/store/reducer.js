@@ -2,7 +2,7 @@ import l from "../utils";
 import initial_state from "./initial_state";
 import produce from "immer";
 
-const { get, isUndefined, find, forEach } = lodash;
+const { get, isUndefined, find, castArray } = lodash;
 
 const reducer = (state = initial_state, action) => {
 	let next_state;
@@ -40,6 +40,9 @@ const reducer = (state = initial_state, action) => {
 						value = isUndefined(localstorage_value)
 							? default_value
 							: localstorage_value;
+					}
+					if (get(setting, "multiple") === false) {
+						value = castArray(value);
 					}
 
 					setting.value = value;

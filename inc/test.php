@@ -10,8 +10,7 @@ function ttest() {
 	global $post;
 	$meta = \get_post_meta( $post->ID );
 
-	var_dump(\get_post_meta( $post->ID, 'ps_select', false ) );
-	var_dump(\get_post_meta( $post->ID, 'ps_select_multiple', false ) );
+	var_dump(\get_post_meta( $post->ID, 'ps_image5', false ) );
 
 	// if ( isset( $meta[ 'ps_image2' ] ) ) { print_r( '<br/>ps_image2: ' ); var_dump( $meta[ 'ps_image2' ] ); }
 	// if ( isset( $meta[ 'ps_select' ] ) ) { print_r( '<br/>ps_select: ' ); var_dump( $meta[ 'ps_select' ] ); }

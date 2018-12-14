@@ -1,7 +1,7 @@
 import l, { store_slug } from "../../utils";
 import { setTimeout } from "timers";
 
-const { isEmpty, toString } = lodash;
+const { isEmpty, toString, get } = lodash;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
@@ -26,17 +26,20 @@ export default compose([
 		} = props;
 		const { updateSettingValue } = dispatch(store_slug);
 		const { editPost } = dispatch("core/editor");
-		const should_save_meta =
+		const save_meta =
 			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
 		const updateValue = value => {
 			updateSettingValue(id, value);
 
-			if (should_save_meta) {
+			if (save_meta) {
 				if (type === "range" && props.float_number) {
 					value = toString(value);
+				} else if (get(props, "multiple") === false) {
+					value = value[0];
+				} else if (type === "checkbox") {
+					value = value === false ? 0 : true;
 				}
 
-				l(data_key_with_prefix, value);
 				editPost({
 					meta: { [data_key_with_prefix]: value }
 				});
@@ -46,15 +49,8 @@ export default compose([
 		return {
 			updateValue,
 			toggleValue: () => {
-				let value = value_old === false;
-				updateSettingValue(id, value);
-
-				if (should_save_meta) {
-					value = value === false ? 0 : true;
-					editPost({
-						meta: { [data_key_with_prefix]: value }
-					});
-				}
+				const value = value_old === false;
+				updateValue(value);
 			}
 		};
 	}),

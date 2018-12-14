@@ -27,11 +27,7 @@ const selectors = {
 	getImageData(state, setting_id, image_id) {
 		const setting = find(state.settings, { id: setting_id });
 
-		if (setting.multiple) {
-			return find(setting.image_data, { id: image_id });
-		}
-
-		return setting.image_data;
+		return find(setting.image_data, { id: image_id });
 	}
 };
 

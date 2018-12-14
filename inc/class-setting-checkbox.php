@@ -13,7 +13,7 @@ class Checkbox extends Setting {
 	protected function get_props_default_type() {
 		$default_type = array(
 			'type'          => 'checkbox',
-			'default_value' => true,
+			'default_value' => false,
 		);
 
 		return $default_type;

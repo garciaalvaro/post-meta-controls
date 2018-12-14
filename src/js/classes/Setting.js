@@ -65,24 +65,7 @@ class Setting extends Base {
 
 	prePropsValidation() {
 		this.assignPropId();
-		// this.assignPropMetaPrefix();
 	}
-
-	postPropsValidation() {
-		// this.register_meta();
-	}
-
-	// assignPropMetaPrefix() {
-	// 	if (
-	// 		isEmpty(this.props_raw["meta_key"]) ||
-	// 		isEmpty(this.props_raw["meta_key_prefix"])
-	// 	) {
-	// 		return false;
-	// 	}
-
-	// 	this.props_raw["meta_key"] =
-	// 		this.props_raw["meta_key_prefix"] + this.props_raw["meta_key"];
-	// }
 }
 
 export default Setting;

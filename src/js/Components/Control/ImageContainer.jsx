@@ -2,7 +2,7 @@ import l, { store_slug, getImageDataObject } from "../../utils";
 import Div from "../Utils";
 import Image from "./Image";
 
-const { isEmpty, castArray, map, reduce, forEach } = lodash;
+const { isEmpty, castArray, map, get } = lodash;
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { MediaUpload } = wp.editor;
@@ -71,16 +71,18 @@ export default compose([
 		} = props;
 		const { updateImageData } = dispatch(store_slug);
 		const { editPost } = dispatch("core/editor");
-		const should_save_meta =
+		const save_meta =
 			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
 
 		return {
 			updateValue: data => {
-				const { value, image_data } = data;
+				let { value, image_data } = data;
 
 				updateImageData(setting_id, value, image_data);
 
-				if (should_save_meta) {
+				value = get(props, "multiple") === false ? value[0] : value;
+
+				if (save_meta) {
 					editPost({
 						meta: { [data_key_with_prefix]: value }
 					});

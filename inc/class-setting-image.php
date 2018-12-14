@@ -23,7 +23,7 @@ class Image extends Setting {
 
 	protected function get_props_schema_type() {
 		$schema = array(
-			'default_value' => array( 'type' => 'array_integer', ),
+			'default_value' => array( 'type' => 'integer', ),
 			'multiple'      => array( 'type' => 'boolean', ),
 		);
 		$required_keys = array(
@@ -33,6 +33,18 @@ class Image extends Setting {
 		$conditions = array(
 			'label'   => 'not_empty',
 		);
+
+		if (
+			! empty( $this->props['multiple'] ) &&
+			true === $this->props['multiple']
+		) {
+			$default_type = \wp_parse_args(
+				array(
+					'default_value' => array( 'type' => 'array_integer', ),
+				),
+				$default_type
+			);
+		}
 
 		$schema = set_schema( $schema, $required_keys, $private_keys, $conditions );
 

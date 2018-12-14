@@ -18,10 +18,11 @@ $sidebar_a = array(
 						array(
 							'type'            => 'image',
 							'data_type'       => 'meta', // localstorage meta none option
-							'data_key'        => 'image3',
+							'data_key'        => 'image5',
 
-							'multiple'        => true,
-							'default_value'   => array(168,159),
+							// 'multiple'        => true,
+							'default_value'   => 168,
+							// 'default_value'   => array(168,159),
 							'label'           => 'image',
 						),
 						array(
