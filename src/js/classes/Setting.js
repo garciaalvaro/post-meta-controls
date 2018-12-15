@@ -1,70 +1,102 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
 
-const { get, merge } = lodash;
-
 class Setting extends Base {
-	getPropsDefault() {
-		let defaults = {
+	getPrivates() {
+		return ["class_name"];
+	}
+
+	getDefaults() {
+		return {
 			class_name: "setting",
 			id: uuid(),
-			data_type: "none",
 			path: [],
-			index: "",
-			type: "",
 			label: "",
+			type: "",
 			description: "",
 			help: "",
-			metadata_exists: false
+			data_type: "none",
+			metadata_exists: false,
+			data_key_with_prefix: ""
 		};
-		const data_type = get(this.props, "data_type");
-		if (data_type === "meta" || data_type === "localstorage") {
-			merge(defaults, {
-				data_key_with_prefix: ""
-			});
-		}
-
-		const defaults_type = this.getPropsDefaultType();
-
-		return { ...defaults, ...defaults_type };
 	}
 
-	getPropsSchema() {
-		let schema = {
-			class_name: { type: "id" },
-			id: { type: "id" },
-			data_type: { type: "id" },
-			path: { type: "array_string" },
-			index: { type: "integer" },
-			type: { type: "id" },
-			label: { type: "text" },
-			description: { type: "text" },
-			help: { type: "text" },
-			metadata_exists: { type: "boolean" }
+	getSchema() {
+		const data_type_not_none = this.is_data_type_not_none();
+
+		return {
+			class_name: {
+				type: "id",
+				conditions: "not_empty"
+			},
+			id: {
+				type: "id",
+				conditions: "not_empty"
+			},
+			path: {
+				type: "array_id",
+				conditions: "not_empty"
+			},
+			label: {
+				type: "text"
+			},
+			type: {
+				type: "id",
+				conditions: "not_empty"
+			},
+			description: {
+				type: "text"
+			},
+			help: {
+				type: "text"
+			},
+			data_type: {
+				type: "id"
+			},
+			metadata_exists: {
+				type: "boolean"
+			},
+			data_key_with_prefix: {
+				type: "id",
+				conditions: data_type_not_none ? "not_empty" : false
+			}
 		};
-		let required_keys = ["class_name", "id", "path", "index", "type"];
-		let private_keys = ["class_name"];
-		let conditions = { id: "not_empty" };
-
-		const data_type = get(this.props, "data_type");
-		if (data_type === "meta" || data_type === "localstorage") {
-			merge(schema, {
-				data_key_with_prefix: { type: "id" }
-			});
-			required_keys.push("data_key_with_prefix");
-			conditions.data_key_with_prefix = "not_empty";
-		}
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		const schema_type = this.getPropsSchemaType();
-
-		return { ...schema, ...schema_type };
 	}
 
-	prePropsValidation() {
-		this.assignPropId();
+	is_data_type_not_none() {
+		const types_can_have_meta = [
+			"checkbox",
+			"radio",
+			"select",
+			"range",
+			"text",
+			"textarea",
+			"color",
+			"image"
+		];
+		if (
+			this.props.data_type === "meta" &&
+			types_can_have_meta.includes(this.props.type)
+		) {
+			return true;
+		}
+
+		const types_can_have_localstorage = [
+			"checkbox",
+			"radio",
+			"select",
+			"range",
+			"color"
+		];
+		if (
+			this.props.data_type === "localstorage" &&
+			types_can_have_localstorage.includes(this.props.type)
+		) {
+			return true;
+		}
+
+		return false;
 	}
 }
 

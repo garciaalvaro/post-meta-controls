@@ -23,7 +23,7 @@ class TabsContainer extends Component {
 				{tabs.map((tab, index) => {
 					if (
 						tab.id === active_tab ||
-						(active_tab === false && index === 0)
+						(active_tab === "" && index === 0)
 					) {
 						return <Tab key={tab.id} {...tab} />;
 					}

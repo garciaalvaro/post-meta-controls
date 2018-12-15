@@ -1,33 +1,10 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
 const { forEach, isEmpty, isString, isObject } = lodash;
 
 class Radio extends Setting {
-	getPropsDefaultType() {
-		return {
-			type: "radio",
-			default_value: "",
-			options: []
-		};
-	}
-
-	getPropsSchemaType() {
-		const schema = {
-			default_value: { type: "id" },
-			options: { type: "array_object_string" }
-		};
-
-		const required_keys = ["label", "options"];
-		const private_keys = [];
-		const conditions = { label: "not_empty", options: "not_empty" };
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
-	}
-
-	preCleanProps() {
+	beforeSetSchema() {
 		this.prepareOptions();
 	}
 
@@ -62,6 +39,34 @@ class Radio extends Setting {
 		});
 
 		this.props.options = options_clean;
+	}
+
+	setDefaults() {
+		const this_defaults = {
+			type: "radio",
+			default_value: "",
+			options: []
+		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
+	}
+
+	setSchema() {
+		const this_schema = {
+			default_value: {
+				type: "id"
+			},
+			options: {
+				type: "array_object_text",
+				conditions: "not_empty"
+			}
+		};
+
+		const parent_schema = this.getSchema();
+
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

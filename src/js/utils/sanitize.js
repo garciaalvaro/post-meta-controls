@@ -72,6 +72,16 @@ const sanitizeObject = value => {
 	return value;
 };
 
+const sanitizeArrayId = value => {
+	value = sanitizeArray(value);
+
+	forEach(value, (array_value, array_index) => {
+		value[array_index] = sanitizeId(array_value);
+	});
+
+	return value;
+};
+
 const sanitizeArrayInteger = value => {
 	value = sanitizeArray(value);
 
@@ -82,7 +92,7 @@ const sanitizeArrayInteger = value => {
 	return value;
 };
 
-const sanitizeArrayString = value => {
+const sanitizeArrayText = value => {
 	value = sanitizeArray(value);
 
 	forEach(value, (array_value, array_index) => {
@@ -92,7 +102,15 @@ const sanitizeArrayString = value => {
 	return value;
 };
 
-const sanitizeObjectString = value => {
+const sanitizeArrayEmpty = () => {
+	return [];
+};
+
+const sanitizeObjectEmpty = () => {
+	return {};
+};
+
+const sanitizeObjectText = value => {
 	value = sanitizeObject(value);
 
 	forEach(value, (array_value, array_index) => {
@@ -102,11 +120,11 @@ const sanitizeObjectString = value => {
 	return value;
 };
 
-const sanitizeArrayObjectString = value => {
+const sanitizeArrayObjectText = value => {
 	value = sanitizeArray(value);
 
 	forEach(value, (array_value, array_index) => {
-		value[array_index] = sanitizeObjectString(array_value);
+		value[array_index] = sanitizeObjectText(array_value);
 	});
 
 	return value;
@@ -121,8 +139,11 @@ export default {
 	integer: sanitizeInteger,
 	array: sanitizeArray,
 	object: sanitizeObject,
+	arrayId: sanitizeArrayId,
 	arrayInteger: sanitizeArrayInteger,
-	arrayString: sanitizeArrayString,
-	objectString: sanitizeObjectString,
-	arrayObjectString: sanitizeArrayObjectString
+	arrayText: sanitizeArrayText,
+	arrayEmpty: sanitizeArrayEmpty,
+	objectEmpty: sanitizeObjectEmpty,
+	objectText: sanitizeObjectText,
+	arrayObjectText: sanitizeArrayObjectText
 };

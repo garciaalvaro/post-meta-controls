@@ -21,7 +21,7 @@ const validateConditions = (conditions, prop_key, props) => {
 			/* translators: %s: Setting property name. */
 			const warning = {
 				property_name: prop_key,
-				message: __("This property can not be empty.")
+				message: __("This property can't be empty.")
 			};
 			return { valid: false, warnings: [warning] };
 		}

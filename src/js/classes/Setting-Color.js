@@ -1,35 +1,10 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
 const { forEach, isEmpty, isString, isObject } = lodash;
 
 class Color extends Setting {
-	getPropsDefaultType() {
-		return {
-			type: "color",
-			default_value: "",
-			alpha: false,
-			palette: []
-		};
-	}
-
-	getPropsSchemaType() {
-		const schema = {
-			default_value: { type: "id" },
-			alpha: { type: "boolean" },
-			palette: { type: "array_object_string" }
-		};
-
-		const required_keys = ["label", "palette"];
-		const private_keys = [];
-		const conditions = { label: "not_empty", palette: "not_empty" };
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
-	}
-
-	preCleanProps() {
+	beforeSetSchema() {
 		this.preparePalette();
 	}
 
@@ -64,6 +39,31 @@ class Color extends Setting {
 		});
 
 		this.props.palette = palette_clean;
+	}
+
+	setDefaults() {
+		const this_defaults = {
+			type: "color",
+			default_value: "",
+			alpha: false,
+			palette: []
+		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
+	}
+
+	setSchema() {
+		const this_schema = {
+			default_value: { type: "id" },
+			alpha: { type: "boolean" },
+			palette: { type: "array_object_text" }
+		};
+
+		const parent_schema = this.getSchema();
+
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

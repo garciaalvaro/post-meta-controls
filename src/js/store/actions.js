@@ -19,11 +19,10 @@ const actions = {
 			image_data
 		};
 	},
-	updateImageData(setting_id, value, image_data) {
+	updateImageData(setting_id, image_data) {
 		return {
 			type: "UPDATE_IMAGE_DATA",
 			setting_id,
-			value,
 			image_data
 		};
 	},

@@ -1,7 +1,7 @@
 import l, { store_slug } from "../../utils";
 import classnames from "classnames";
 import Div from "../Utils";
-import Invalid from "./Invalid";
+// import Invalid from "../Sidebar/Invalid";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
@@ -18,9 +18,9 @@ const { Component } = wp.element;
 class Control extends Component {
 	getControl() {
 		const { type, valid } = this.props;
-		if (!valid) {
-			return <Invalid {...this.props} />;
-		}
+		// if (!valid) {
+		// 	return <Invalid {...this.props} />;
+		// }
 
 		switch (type) {
 			case "checkbox":

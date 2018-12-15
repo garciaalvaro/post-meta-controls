@@ -2,7 +2,6 @@ import l from "./log";
 import icons from "./icons";
 import sanitize from "./sanitize";
 import validate from "./validate";
-import setSchema from "./setSchema";
 import getImageDataObject from "./getImageDataObject";
 import {
 	plugin_name,
@@ -17,7 +16,6 @@ export {
 	icons,
 	sanitize,
 	validate,
-	setSchema,
 	getImageDataObject,
 	plugin_name,
 	plugin_namespace,

@@ -1,36 +1,40 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
 
 class Panel extends Base {
-	getPropsDefault() {
-		return {
+	setPrivates() {
+		this.props_privates = ["class_name"];
+	}
+
+	setDefaults() {
+		this.props_defaults = {
 			class_name: "panel",
 			id: uuid(),
 			path: [],
-			index: "",
 			label: "",
 			initial_open: false,
 			with_container: true
 		};
 	}
 
-	getPropsSchema() {
-		const schema = {
+	setSchema() {
+		this.props_schema = {
 			class_name: {
-				type: "id"
+				type: "id",
+				conditions: "not_empty"
 			},
 			id: {
-				type: "id"
+				type: "id",
+				conditions: "not_empty"
 			},
 			path: {
-				type: "array_string"
-			},
-			index: {
-				type: "integer"
+				type: "array_id",
+				conditions: "not_empty"
 			},
 			label: {
-				type: "text"
+				type: "text",
+				conditions: "not_empty"
 			},
 			initial_open: {
 				type: "boolean"
@@ -39,18 +43,6 @@ class Panel extends Base {
 				type: "boolean"
 			}
 		};
-
-		const required_keys = ["class_name", "id", "path", "index", "label"];
-		const private_keys = ["class_name"];
-		const conditions = { id: "not_empty" };
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
-	}
-
-	prePropsValidation() {
-		this.assignPropId();
 	}
 }
 

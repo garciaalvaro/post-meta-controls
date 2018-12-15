@@ -1,0 +1,201 @@
+<?php
+
+namespace POSTSETTINGS;
+
+abstract class Setting extends Base {
+
+	abstract protected function set_defaults();
+	abstract protected function set_schema();
+	// abstract protected function set_privates();
+
+	protected function get_privates() {
+		return array(
+			'data_key_with_prefix',
+			'metadata_exists',
+		);
+	}
+
+	protected function get_defaults() {
+		return array(
+			'id'                           => \wp_generate_uuid4(),
+			'path'                         => array(),
+			'label'                        => '',
+			'post_type'                    => 'post',
+			'type'                         => '',
+			'description'                  => '',
+			'help'                         => '',
+			'data_type'                    => 'none',
+			'metadata_exists'              => false,
+			'data_key'                     => '',
+			'data_key_prefix'              => 'ps_',
+			'data_key_with_prefix'         => '',
+			'data_key_prefix_from_sidebar' => '',
+		);
+	}
+
+	private function is_data_type_not_none() {
+		$types_can_have_meta = array(
+			'checkbox',
+			'radio',
+			'select',
+			'range',
+			'text',
+			'textarea',
+			'color',
+			'image',
+		);
+		if (
+			'meta' === $this->props['data_type'] &&
+			in_array( $this->props['type'], $types_can_have_meta )
+		) {
+			return true;
+		}
+
+		$types_can_have_localstorage = array(
+			'checkbox',
+			'radio',
+			'select',
+			'range',
+			'color',
+		);
+		if (
+			'localstorage' === $this->props['data_type'] &&
+			in_array( $this->props['type'], $types_can_have_localstorage )
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected function get_schema() {
+		$data_type_not_none = $this->is_data_type_not_none();
+
+		return array(
+			'id' => array(
+				'type'       => 'id',
+				'for_js'     => true,
+				'conditions' => 'not_empty',
+			),
+			'path' => array(
+				'type'       => 'array_id',
+				'for_js'     => true,
+				'conditions' => 'not_empty',
+			),
+			'label' => array(
+				'type'   => 'text',
+				'for_js' => true,
+			),
+			'post_type' => array(
+				'type'       => 'id',
+				'for_js'     => false,
+				'conditions' => 'not_empty',
+			),
+			'type' => array(
+				'type'       => 'id',
+				'for_js'     => true,
+				'conditions' => 'not_empty',
+			),
+			'description' => array(
+				'type'   => 'text',
+				'for_js' => true,
+			),
+			'help' => array(
+				'type'   => 'text',
+				'for_js' => true,
+			),
+			'data_type' => array(
+				'type'   => 'id',
+				'for_js' => true,
+			),
+			'metadata_exists' => array(
+				'type'   => 'boolean',
+				'for_js' => true,
+			),
+			'data_key' => array(
+				'type'       => 'id',
+				'for_js'     => true,
+				'conditions' => $data_type_not_none ? 'not_empty' : false,
+			),
+			'data_key_prefix' => array(
+				'type'   => 'id',
+				'for_js' => true,
+			),
+			'data_key_prefix_from_sidebar' => array(
+				'type'       => 'id',
+				'for_js'     => true,
+				'conditions' => $data_type_not_none ? 'not_empty' : false,
+			),
+			'data_key_with_prefix' => array(
+				'type'       => 'id',
+				'for_js'     => true,
+				'conditions' => $data_type_not_none ? 'not_empty' : false,
+			),
+		);
+	}
+
+	protected function before_set_schema() {// TODO: check if this could be set to private
+		$this->set_data_key_with_prefix();
+	}
+
+	protected function set_data_key_with_prefix() {
+
+		if ( empty( $this->props['data_key'] ) ) {
+			return;
+		}
+
+		$prefix = 'ps_' !== $this->props['data_key_prefix']
+			? $this->props['data_key_prefix']
+			: $this->props['data_key_prefix_from_sidebar'];
+
+		$this->props['data_key_with_prefix'] = $prefix . $this->props['data_key'];
+	}
+
+	public function set_metadata_exists() {
+		$data_type_not_none = $this->is_data_type_not_none();
+		if (
+			true !== $this->props['valid'] ||
+			'meta' !== $this->props['data_type'] ||
+			false === $this->is_data_type_not_none()
+		) {
+			return;
+		}
+
+		$this->props['metadata_exists'] =
+			\metadata_exists(
+				'post',
+				\get_the_ID(),
+				$this->props['data_key_with_prefix']
+			);
+	}
+
+	public function register_meta() {
+
+		if (
+			true !== $this->props['valid'] ||
+			'meta' !== $this->props['data_type'] ||
+			false === $this->is_data_type_not_none()
+		) {
+			return;
+		}
+
+		$props = $this->props;
+		$type  = 'range' === $props['type'] && true === $props['float_number']
+			? 'range_float'
+			: $props['type'];
+		$meta_type     = get_meta_arg_type( $type );
+		$meta_sanitize = get_meta_arg_sanitize( $type, $props );
+		$meta_single   = get_meta_arg_single( $type, $props );
+
+		\register_post_meta(
+			$props['post_type'],
+			$props['data_key_with_prefix'],
+			array(
+				'show_in_rest'      => true,
+				'single'            => $meta_single,
+				'type'              => $meta_type,
+				'sanitize_callback' => $meta_sanitize,
+			)
+		);
+	}
+}

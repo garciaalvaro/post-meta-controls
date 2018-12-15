@@ -26,36 +26,34 @@ if ( ! defined( 'POSTSETTINGS_INC_DIR' ) ) {
 	define( 'POSTSETTINGS_INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
 }
 
+require_once POSTSETTINGS_INC_DIR . '_test-back.php';
+require_once POSTSETTINGS_INC_DIR . '_test-front.php';
 
-require_once POSTSETTINGS_INC_DIR . 'utils.php';
-require_once POSTSETTINGS_INC_DIR . 'utils-sanitize.php';
-require_once POSTSETTINGS_INC_DIR . 'enqueue.php';
+// Utils.
+require_once POSTSETTINGS_INC_DIR . 'utils/utils-meta.php';
+require_once POSTSETTINGS_INC_DIR . 'utils/utils-methods.php';
+require_once POSTSETTINGS_INC_DIR . 'utils/utils-sanitize.php';
 
-require_once POSTSETTINGS_INC_DIR . 'class-base.php';
-require_once POSTSETTINGS_INC_DIR . 'class-sidebar.php';
-require_once POSTSETTINGS_INC_DIR . 'class-tab.php';
-require_once POSTSETTINGS_INC_DIR . 'class-panel.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-checkbox.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-radio.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-select.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-range.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-text.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-textarea.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-color.php';
-require_once POSTSETTINGS_INC_DIR . 'class-setting-image.php';
-// require_once POSTSETTINGS_INC_DIR . 'class-setting-custom_component.php';
+// Classes.
+require_once POSTSETTINGS_INC_DIR . 'classes/class-base.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-sidebar.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-tab.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-panel.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-checkbox.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-radio.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-select.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-range.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-text.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-textarea.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-color.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-image.php';
 
-// require_once POSTSETTINGS_INC_DIR . 'register-get_children_elements.php';
-// require_once POSTSETTINGS_INC_DIR . 'register-get_class_instances.php';
-require_once POSTSETTINGS_INC_DIR . 'register-register_setting_meta.php';
-require_once POSTSETTINGS_INC_DIR . 'register-add_metadata_exists_prop.php';
-require_once POSTSETTINGS_INC_DIR . 'register-get_props.php';
-require_once POSTSETTINGS_INC_DIR . 'register-generate_instances.php';
-require_once POSTSETTINGS_INC_DIR . 'register-add_sidebar.php';
+// Core.
+require_once POSTSETTINGS_INC_DIR . 'core/core-create_sidebar.php';
+require_once POSTSETTINGS_INC_DIR . 'core/core-create_instances.php';
 
-require_once POSTSETTINGS_INC_DIR . 'action.php';
-// require_once POSTSETTINGS_INC_DIR . 'global_functions.php';
-require_once POSTSETTINGS_INC_DIR . '_test.php';
-
-require_once POSTSETTINGS_INC_DIR . 'test.php';
+// Register.
+require_once POSTSETTINGS_INC_DIR . 'register/register-global.php';
+require_once POSTSETTINGS_INC_DIR . 'register/register-inline.php';
+require_once POSTSETTINGS_INC_DIR . 'register/register-enqueue.php';

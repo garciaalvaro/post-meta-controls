@@ -1,77 +1,68 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
-const { get, merge } = lodash;
+const { __, sprintf } = wp.i18n;
 
 class Range extends Setting {
-	getPropsDefaultType() {
-		return {
+	setDefaults() {
+		const this_defaults = {
 			type: "range",
-			default_value: true,
+			default_value: 0,
 			step: 1,
 			min: 0,
-			max: 0,
+			max: 1,
 			float_number: false
 		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
 	}
 
-	getPropsSchemaType() {
-		const schema = {
+	setSchema() {
+		const this_schema = {
 			default_value: { type: "integer" },
-			step: { type: "integer" },
+			step: {
+				type: "integer",
+				conditions: [
+					{
+						value: this.props.step > 0,
+						message: __("This value has to be greater than 0.")
+					},
+					{
+						value:
+							this.props.max - this.props.min > this.props.step,
+						/* translators: %s: max property, %s: min property. */
+						message: sprintf(
+							__(
+								"This value has to be greater than '%s' minus '%s' values."
+							),
+							"max",
+							"min"
+						)
+					}
+				]
+			},
 			min: { type: "integer" },
-			max: { type: "integer" },
+			max: {
+				type: "integer",
+				conditions: [
+					{
+						value: this.props.max > this.props.min,
+						/* translators: %s: min property. */
+						message: sprintf(
+							__("This value has to be greater than '%s'."),
+							"min"
+						)
+					}
+				]
+			},
 			float_number: { type: "boolean" }
 		};
 
-		const float_number = get(this.props, "float_number");
-		if (float_number === true) {
-			merge(schema, {
-				step: { type: "float" },
-				min: { type: "float" },
-				max: { type: "float" }
-			});
-		}
+		const parent_schema = this.getSchema();
 
-		const required_keys = ["label", "min", "max"];
-		const private_keys = [];
-		const conditions = {
-			label: "not_empty",
-			step: [
-				{
-					argument_1: "step",
-					operator: "greater_than",
-					argument_2: 0,
-					argument_2_is_prop: false
-				}
-			],
-			min: [
-				{
-					argument_1: "max",
-					operator: "greater_than",
-					argument_2: "min",
-					argument_2_is_prop: true
-				}
-			],
-			max: [
-				// {
-				// 	argument_1: "max",
-				// 	operator: "greater_than",
-				// 	argument_2: "min",
-				// 	argument_2_is_prop: true
-				// },
-				{
-					argument_1: "max",
-					operator: "greater_than",
-					argument_2: 0,
-					argument_2_is_prop: false
-				}
-			]
-		};
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

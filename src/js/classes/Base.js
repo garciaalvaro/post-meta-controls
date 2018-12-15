@@ -1,55 +1,55 @@
-import l, { sanitize, validate, store_slug } from "../utils";
+import l, { sanitize, store_slug } from "../utils";
 
 const {
-	isArray,
 	isUndefined,
+	isArray,
+	isObject,
 	isEmpty,
-	last,
+	isString,
 	keys,
 	assign,
 	pick,
 	forEach
 } = lodash;
+const { __ } = wp.i18n;
 const { dispatch } = wp.data;
 
 class Base {
 	props;
-	props_default;
+	props_privates;
+	props_defaults;
 	props_schema;
 
 	constructor(props) {
-		// Set values.
 		this.props = props;
-		this.props_default = this.getPropsDefault();
-		this.props_schema = this.getPropsSchema();
+
+		// Remove keys that are meant to be assigned by the class.
+		this.setPrivates();
+		this.unsetPrivateKeys();
+
+		// Defaults.
+		this.setDefaults();
+		this.mergeDefaults();
 
 		// Run functions before validating props.
-		if (!isUndefined(this.preCleanProps)) {
-			this.preCleanProps();
+		if (!isUndefined(this.beforeSetSchema)) {
+			this.beforeSetSchema();
 		}
 
-		// Clean props.
-		this.unsetPropsKeysPrivate();
-		this.assignPropsDefaults();
-		this.castProps();
-
-		// Run functions before validating props.
-		if (!isUndefined(this.prePropsValidation)) {
-			this.prePropsValidation();
-		}
-
-		// Validate props.
+		// Schema.
+		this.setSchema();
+		this.castSchema();
 		this.validateProps();
-
-		// this.dispatchToStore();
 	}
+
+	setPrivates() {}
 
 	dispatch() {
 		const { class_name, valid } = this.props;
 
 		if (
-			isUndefined(dispatch(store_slug)) ||
-			(valid !== true && class_name !== "setting")
+			isUndefined(dispatch(store_slug)) // ||
+			// (valid !== true && class_name !== "setting")
 		) {
 			return;
 		}
@@ -67,29 +67,38 @@ class Base {
 		}
 	}
 
-	unsetPropsKeysPrivate() {
-		forEach(this.props_schema, (schema, key) => {
-			if (schema.private === true && !isUndefined(this.props[key])) {
-				const { [key]: omit_prop, ...rest } = this.props;
+	unsetPrivateKeys() {
+		if (isEmpty(this.props_privates)) {
+			return;
+		}
+
+		forEach(this.props_privates, prop => {
+			if (!isUndefined(this.props[prop])) {
+				const { [prop]: omit_prop, ...rest } = this.props;
 
 				this.props = rest;
 			}
 		});
 	}
 
-	assignPropsDefaults() {
+	mergeDefaults() {
 		// Assign default elements if not present in array and
 		// remove keys which are not present in defaults.
 		// this.props_raw = \shortcode_atts( this.props_default, this.props_raw );
 		this.props = assign(
-			this.props_default,
-			pick(this.props, keys(this.props_default))
+			this.props_defaults,
+			pick(this.props, keys(this.props_defaults))
 		);
 	}
 
-	castProps() {
+	castSchema() {
 		forEach(this.props, (value, key) => {
 			switch (this.props_schema[key].type) {
+				case "html_svg":
+					this.props[key] = value;
+					// this.props[key] = sanitize.id(value);
+					break;
+
 				case "id":
 					this.props[key] = sanitize.id(value);
 					break;
@@ -114,12 +123,24 @@ class Base {
 					this.props[key] = sanitize.arrayInteger(value);
 					break;
 
-				case "array_string":
-					this.props[key] = sanitize.arrayString(value);
+				case "array_id":
+					this.props[key] = sanitize.arrayId(value);
 					break;
 
-				case "array_object_string":
-					this.props[key] = sanitize.arrayObjectString(value);
+				case "array_empty":
+					this.props[key] = sanitize.arrayEmpty(value);
+					break;
+
+				case "object_empty":
+					this.props[key] = sanitize.objectEmpty(value);
+					break;
+
+				case "array_text":
+					this.props[key] = sanitize.arrayText(value);
+					break;
+
+				case "array_object_text":
+					this.props[key] = sanitize.arrayObjectText(value);
 					break;
 
 				default:
@@ -130,82 +151,49 @@ class Base {
 	}
 
 	validateProps() {
-		this.props.invalid_warnings = [];
+		const { props, props_schema } = this;
+		const invalid_warnings = [];
 
-		forEach(this.props_schema, (schema, key) => {
-			const validate_required = validate.required(
-				schema.required,
-				this.props
-			);
-
-			// If is required.
-			if (validate_required.valid === false) {
-				this.props.invalid_warnings.push(...validate_required.warning);
-				this.props.valid = false;
-
+		forEach(props_schema, (schema, prop_key) => {
+			if (isUndefined(schema.conditions) || schema.conditions === false) {
 				return;
 			}
 
-			if (isUndefined(schema.conditions)) {
-				return;
-			}
-
-			const validate_conditions = validate.conditions(
-				schema.conditions,
-				key,
-				this.props
+			const { conditions } = schema;
+			const prop = props[prop_key];
+			const type =
+				props.class_name === "setting" && props.type !== ""
+					? `${props.type} `
+					: "";
+			const warning_title = __(
+				`${prop_key} (${type}${props.class_name})`
 			);
 
-			// If has conditions assigned.
-			if (validate_conditions.valid === false) {
-				this.props.invalid_warnings.push(
-					...validate_conditions.warnings
-				);
-				this.props.valid = false;
-
-				return; // TODO: continue loop and add not valid props and conditions
+			if (conditions === "not_empty") {
+				if (
+					(isEmpty(prop) && (isArray(prop) || isObject(prop))) ||
+					(isString(prop) && prop === "")
+				) {
+					invalid_warnings.push({
+						title: warning_title,
+						message: __("This property can't be empty.")
+					});
+				}
+			} else if (isArray(conditions)) {
+				forEach(conditions, (value, message) => {
+					if (false === value) {
+						invalid_warnings.push({
+							title: warning_title,
+							message: message
+						});
+					}
+				});
 			}
 		});
 
-		if (this.props.valid !== false) {
-			this.props.valid = true;
-		}
+		this.props.invalid_warnings = invalid_warnings;
+		this.props.valid = isEmpty(invalid_warnings);
 	}
-
-	assignPropId() {
-		if (
-			!isEmpty(this.props.id) ||
-			!isArray(this.props.path) ||
-			isEmpty(this.props.path) ||
-			isUndefined(this.props.index)
-		) {
-			return;
-		}
-
-		// this.props.id = this.props.index;
-		this.props.id = `${this.props.path.join("_")}_${this.props.index}`;
-	}
-
-	// dispatchToStore() {
-	// 	const { dispatch } = wp.data;
-
-	// 	if (this.props.valid !== true || isUndefined(dispatch(store_slug))) {
-	// 		return;
-	// 	}
-
-	// 	const { class_name } = this.props;
-	// 	const { valid, index, ...filtered_props } = this.props;
-
-	// 	if (class_name === "sidebar") {
-	// 		dispatch(store_slug).addSidebar(filtered_props);
-	// 	} else if (class_name === "tab") {
-	// 		dispatch(store_slug).addTab(filtered_props);
-	// 	} else if (class_name === "panel") {
-	// 		dispatch(store_slug).addPanel(filtered_props);
-	// 	} else if (class_name === "setting") {
-	// 		dispatch(store_slug).addSetting(filtered_props);
-	// 	}
-	// }
 
 	isValid() {
 		return this.props.valid === true;

@@ -1,26 +1,32 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
 class Checkbox extends Setting {
-	getPropsDefaultType() {
-		return {
+	setDefaults() {
+		const this_defaults = {
 			type: "checkbox",
 			default_value: true
 		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
 	}
 
-	getPropsSchemaType() {
-		const schema = {
-			default_value: { type: "boolean" }
+	setSchema() {
+		const this_schema = {
+			default_value: {
+				type: "boolean"
+			},
+			label: {
+				type: "text",
+				conditions: "not_empty"
+			}
 		};
 
-		const required_keys = ["label"];
-		const private_keys = [];
-		const conditions = { label: "not_empty" };
+		const parent_schema = this.getSchema();
 
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

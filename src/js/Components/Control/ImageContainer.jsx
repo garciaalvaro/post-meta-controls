@@ -69,7 +69,7 @@ export default compose([
 			data_type,
 			data_key_with_prefix
 		} = props;
-		const { updateImageData } = dispatch(store_slug);
+		const { updateImageData, updateSettingValue } = dispatch(store_slug);
 		const { editPost } = dispatch("core/editor");
 		const save_meta =
 			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
@@ -78,7 +78,8 @@ export default compose([
 			updateValue: data => {
 				let { value, image_data } = data;
 
-				updateImageData(setting_id, value, image_data);
+				updateImageData(setting_id, image_data);
+				updateSettingValue(setting_id, value);
 
 				value = get(props, "multiple") === false ? value[0] : value;
 

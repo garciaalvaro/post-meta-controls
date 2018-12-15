@@ -1,37 +1,10 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
 const { forEach, isEmpty, isString, isObject, get, merge } = lodash;
 
 class Select extends Setting {
-	getPropsDefaultType() {
-		let defaults = {
-			type: "select",
-			default_value: [],
-			multiple: false,
-			options: []
-		};
-
-		return defaults;
-	}
-
-	getPropsSchemaType() {
-		const schema = {
-			default_value: { type: "array_string" },
-			multiple: { type: "boolean" },
-			options: { type: "array_object_string" }
-		};
-
-		const required_keys = ["label", "options"];
-		const private_keys = [];
-		const conditions = { label: "not_empty", options: "not_empty" };
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
-	}
-
-	preCleanProps() {
+	beforeSetSchema() {
 		this.prepareOptions();
 	}
 
@@ -66,6 +39,38 @@ class Select extends Setting {
 		});
 
 		this.props.options = options_clean;
+	}
+
+	setDefaults() {
+		const this_defaults = {
+			type: "select",
+			default_value: "",
+			multiple: false,
+			options: []
+		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
+	}
+
+	setSchema() {
+		const this_schema = {
+			default_value: {
+				type: this.props.multiple === true ? "array_id" : "id"
+			},
+			multiple: {
+				type: "boolean"
+			},
+			options: {
+				type: "array_object_text",
+				conditions: "not_empty"
+			}
+		};
+
+		const parent_schema = this.getSchema();
+
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

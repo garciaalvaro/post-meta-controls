@@ -1,9 +1,25 @@
 import l, { getImageDataObject } from "../utils";
 import { actions } from "./actions";
 
-const { last, filter, get, find, castArray } = lodash;
+const { last, filter, get, find, castArray, flatten } = lodash;
 
 const selectors = {
+	getWarnings(state, sidebar_id) {
+		const sidebar = find(state.sidebars, { id: sidebar_id });
+		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);
+		const panels = state.panels.filter(
+			({ path }) => path[0] === sidebar_id
+		);
+		const settings = state.settings.filter(
+			({ path }) => path[0] === sidebar_id
+		);
+		let items;
+		items = flatten([sidebar, tabs, panels, settings]);
+		items = items.map(item => item.invalid_warnings);
+		items = flatten(items);
+
+		return items;
+	},
 	getSidebar(state, id) {
 		return find(state.sidebars, { id: id });
 	},

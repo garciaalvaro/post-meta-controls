@@ -5,29 +5,21 @@
  * controls
  */
 
-.ps-control-invalid
-    color rgba(0,0,0,0.85)
+.ps-invalid
+	color rgba(0,0,0,0.85)
+	background-color #f9e2e2
+	border-left 4px solid #d94f4f
+	position relative
+	padding 2em 1.2em
+	width 100%
 
-    .components-base-control__label
-        position relative
+	.components-base-control__label
+		position relative
 
-    &:before
-        content ""
-        position absolute
-        top 0
-        left 0
-        right 0
-        bottom 0
-        background-color #f9e2e2
-        border-left 4px solid #d94f4f
+	+ .ps-invalid
+		margin-top 5px
 
-.ps-control-invalid-message
-    display block
-
-    + .ps-control-invalid-message
-        margin-top 15px
-
-.ps-control-invalid-title
-    font-size 13px
-    font-weight 500
-    display block
+.ps-invalid-title
+	font-size 13px
+	font-weight 500
+	display block

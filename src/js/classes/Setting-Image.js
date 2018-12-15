@@ -1,41 +1,36 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
-const { get, merge } = lodash;
-
 class Image extends Setting {
-	getPropsDefaultType() {
-		let defaults = {
+	setDefaults() {
+		const this_defaults = {
 			type: "select",
+			default_value: 0,
 			multiple: false,
-			default_value: [],
 			image_data: []
 		};
 
-		return defaults;
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
 	}
 
-	getPropsSchemaType() {
-		const schema = {
-			multiple: { type: "boolean" },
-			default_value: { type: "integer" },
-			image_data: { type: "array_object_string" }
+	setSchema() {
+		const this_schema = {
+			default_value: {
+				type: this.props.multiple === true ? "array_integer" : "integer"
+			},
+			multiple: {
+				type: "boolean"
+			},
+			image_data: {
+				type: "array_empty"
+			}
 		};
 
-		const multiple = get(this.props, "multiple");
-		if (multiple) {
-			merge(defaults, {
-				default_value: { type: "array_integer" }
-			});
-		}
+		const parent_schema = this.getSchema();
 
-		const required_keys = ["label"];
-		const private_keys = ["image_data"];
-		const conditions = { label: "not_empty" };
-
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

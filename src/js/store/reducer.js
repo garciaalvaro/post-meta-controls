@@ -2,7 +2,7 @@ import l from "../utils";
 import initial_state from "./initial_state";
 import produce from "immer";
 
-const { get, isUndefined, find, castArray } = lodash;
+const { isUndefined, isEmpty, isArray, get, find, castArray } = lodash;
 
 const reducer = (state = initial_state, action) => {
 	let next_state;
@@ -33,7 +33,7 @@ const reducer = (state = initial_state, action) => {
 						value = get(action.meta, [data_key_with_prefix]);
 					} else if (data_type === "localstorage") {
 						const localstorage_value = get(
-							state_next.settings_persisted,
+							next_state.settings_persisted,
 							[data_key_with_prefix]
 						);
 
@@ -41,7 +41,12 @@ const reducer = (state = initial_state, action) => {
 							? default_value
 							: localstorage_value;
 					}
+
 					if (get(setting, "multiple") === false) {
+						value =
+							isArray(value) && !isEmpty(value)
+								? value[0]
+								: value;
 						value = castArray(value);
 					}
 
@@ -102,7 +107,6 @@ const reducer = (state = initial_state, action) => {
 						id: action.setting_id
 					});
 
-					setting.value = action.value;
 					setting.image_data = action.image_data;
 				}
 			);
@@ -166,10 +170,12 @@ const reducer = (state = initial_state, action) => {
 				draft_sidebars => {
 					const sidebar = find(draft_sidebars, { id: sidebar_id });
 
-					sidebar.settings_id = [
-						...sidebar.settings_id,
-						action.setting.id
-					];
+					if (!isUndefined(sidebar)) {
+						sidebar.settings_id = [
+							...sidebar.settings_id,
+							action.setting.id
+						];
+					}
 				}
 			);
 

@@ -1,26 +1,28 @@
-import l, { setSchema } from "../utils";
+import l from "../utils";
 import Setting from "./Setting";
 
 class Textarea extends Setting {
-	getPropsDefaultType() {
-		return {
+	setDefaults() {
+		const this_defaults = {
 			type: "textarea",
 			default_value: ""
 		};
+
+		const parent_defaults = this.getDefaults();
+
+		this.props_defaults = { ...parent_defaults, ...this_defaults };
 	}
 
-	getPropsSchemaType() {
-		const schema = {
-			default_value: { type: "text" }
+	setSchema() {
+		const this_schema = {
+			default_value: {
+				type: "text"
+			}
 		};
 
-		const required_keys = ["label"];
-		const private_keys = [];
-		const conditions = { label: "not_empty" };
+		const parent_schema = this.getSchema();
 
-		setSchema(schema, required_keys, private_keys, conditions);
-
-		return schema;
+		this.props_schema = { ...parent_schema, ...this_schema };
 	}
 }
 

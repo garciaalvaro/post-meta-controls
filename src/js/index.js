@@ -1,2 +1,1 @@
-// import "./store";
-import "./register";
+import "./core";
