@@ -4,12 +4,13 @@ import Base from "./Base";
 
 class Panel extends Base {
 	setPrivates() {
-		this.props_privates = ["class_name"];
+		this.props_privates = ["class_name", "warnings"];
 	}
 
 	setDefaults() {
 		this.props_defaults = {
 			class_name: "panel",
+			warnings: [],
 			id: uuid(),
 			path: [],
 			label: "",
@@ -23,6 +24,9 @@ class Panel extends Base {
 			class_name: {
 				type: "id",
 				conditions: "not_empty"
+			},
+			warnings: {
+				type: "array_empty"
 			},
 			id: {
 				type: "id",

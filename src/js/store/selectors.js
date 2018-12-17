@@ -13,12 +13,12 @@ const selectors = {
 		const settings = state.settings.filter(
 			({ path }) => path[0] === sidebar_id
 		);
-		let items;
-		items = flatten([sidebar, tabs, panels, settings]);
-		items = items.map(item => item.warnings);
-		items = flatten(items);
+		let warnings;
+		warnings = flatten([sidebar, tabs, panels, settings]);
+		warnings = warnings.map(item => item.warnings);
+		warnings = flatten(warnings);
 
-		return items;
+		return warnings;
 	},
 	getSidebar(state, id) {
 		return find(state.sidebars, { id: id });

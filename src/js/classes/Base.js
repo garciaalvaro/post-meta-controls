@@ -22,6 +22,7 @@ class Base {
 
 	constructor(props) {
 		this.props = props;
+		this.addWarning = this.addWarning.bind(this);
 
 		// Remove keys that are meant to be assigned by the class.
 		this.setPrivates();
@@ -167,7 +168,7 @@ class Base {
 	}
 
 	validateProps() {
-		const { props, props_schema } = this;
+		const { props, props_schema, addWarning } = this;
 		const warnings = [];
 
 		forEach(props_schema, (schema, prop_key) => {
@@ -177,31 +178,21 @@ class Base {
 
 			const { conditions } = schema;
 			const prop = props[prop_key];
-			const type =
-				props.class_name === "setting" && props.type !== ""
-					? `${props.type} `
-					: "";
-			const warning_title = __(
-				`${prop_key} (${type}${props.class_name})`
-			);
 
 			if (conditions === "not_empty") {
 				if (
 					(isEmpty(prop) && (isArray(prop) || isObject(prop))) ||
 					(isString(prop) && prop === "")
 				) {
-					warnings.push({
-						title: warning_title,
-						message: __("This property can't be empty.")
-					});
+					const message = __("This property can't be empty.");
+					l("z");
+					addWarning(prop_key, message);
 				}
 			} else if (isArray(conditions)) {
 				forEach(conditions, (value, message) => {
 					if (false === value) {
-						warnings.push({
-							title: warning_title,
-							message: message
-						});
+						l("b");
+						addWarning(prop_key, message);
 					}
 				});
 			}
@@ -209,6 +200,21 @@ class Base {
 
 		this.props.warnings = warnings;
 		this.props.valid = isEmpty(warnings);
+	}
+
+	addWarning(prop_key, message) {
+		l(prop_key, this);
+		const { class_name, warnings } = this.props;
+		const type =
+			class_name === "setting" && this.props.type !== ""
+				? `${this.props.type} `
+				: "";
+		const title = __(`${prop_key} (${type + class_name})`);
+
+		warnings.push({
+			title,
+			message
+		});
 	}
 
 	isValid() {

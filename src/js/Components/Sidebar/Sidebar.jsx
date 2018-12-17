@@ -11,14 +11,14 @@ const { Component } = wp.element;
 
 class Sidebar extends Component {
 	render() {
-		const { id, warnings } = this.props;
+		const { id, all_warnings } = this.props;
 		const classNames = [
 			`ps-sidebar`,
 			`color_scheme-type-light`,
 			`color_scheme-name-banana`
 		].join(" ");
 
-		if (isEmpty(warnings)) {
+		if (isEmpty(all_warnings)) {
 			return (
 				<Div id={`ps-sidebar-${id}`} className={classNames}>
 					<TabsContainer sidebar_id={id} />
@@ -28,7 +28,7 @@ class Sidebar extends Component {
 			return (
 				<Div>
 					<Div>{__("The sidebar has some invalid properties:")}</Div>
-					{warnings.map(({ message, title }, index) => (
+					{all_warnings.map(({ message, title }, index) => (
 						<Invalid key={index} message={message} title={title} />
 					))}
 				</Div>
@@ -40,9 +40,10 @@ class Sidebar extends Component {
 export default withSelect((select, { sidebar_id }) => {
 	const { getSidebar, getWarnings } = select(store_slug);
 	const sidebar = getSidebar(sidebar_id);
+	const all_warnings = getWarnings(sidebar_id);
 
 	return {
-		warnings: getWarnings(sidebar_id),
+		all_warnings,
 		...sidebar
 	};
 })(Sidebar);

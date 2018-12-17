@@ -3,13 +3,53 @@ import uuid from "uuid/v4";
 import Base from "./Base";
 
 class Setting extends Base {
+	isDataTypeNotNone() {
+		const types_can_have_meta = [
+			"checkbox",
+			"radio",
+			"select",
+			"range",
+			"text",
+			"textarea",
+			"color",
+			"image"
+		];
+		if (
+			this.props.data_type === "meta" &&
+			types_can_have_meta.includes(this.props.type)
+		) {
+			return true;
+		}
+
+		const types_can_have_localstorage = [
+			"checkbox",
+			"radio",
+			"select",
+			"range",
+			"color"
+		];
+		if (
+			this.props.data_type === "localstorage" &&
+			types_can_have_localstorage.includes(this.props.type)
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	getDataKey() {
+		return this.props.data_key_with_prefix;
+	}
+
 	getPrivates() {
-		return ["class_name"];
+		return ["class_name", "warnings"];
 	}
 
 	getDefaults() {
 		return {
 			class_name: "setting",
+			warnings: [],
 			id: uuid(),
 			path: [],
 			label: "",
@@ -23,12 +63,15 @@ class Setting extends Base {
 	}
 
 	getSchema() {
-		const data_type_not_none = this.is_data_type_not_none();
+		const data_type_not_none = this.isDataTypeNotNone();
 
 		return {
 			class_name: {
 				type: "id",
 				conditions: "not_empty"
+			},
+			warnings: {
+				type: "array_empty"
 			},
 			id: {
 				type: "id",
@@ -62,41 +105,6 @@ class Setting extends Base {
 				conditions: data_type_not_none ? "not_empty" : false
 			}
 		};
-	}
-
-	is_data_type_not_none() {
-		const types_can_have_meta = [
-			"checkbox",
-			"radio",
-			"select",
-			"range",
-			"text",
-			"textarea",
-			"color",
-			"image"
-		];
-		if (
-			this.props.data_type === "meta" &&
-			types_can_have_meta.includes(this.props.type)
-		) {
-			return true;
-		}
-
-		const types_can_have_localstorage = [
-			"checkbox",
-			"radio",
-			"select",
-			"range",
-			"color"
-		];
-		if (
-			this.props.data_type === "localstorage" &&
-			types_can_have_localstorage.includes(this.props.type)
-		) {
-			return true;
-		}
-
-		return false;
 	}
 }
 
