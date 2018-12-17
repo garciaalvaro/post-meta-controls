@@ -11,7 +11,6 @@ class Panel extends Base {
 			'label'          => '',
 			'initial_open'   => false,
 			'with_container' => true,
-			'post_type'      => 'post',
 		);
 	}
 
@@ -30,11 +29,6 @@ class Panel extends Base {
 			'label' => array(
 				'type'       => 'text',
 				'for_js'     => true,
-				'conditions' => 'not_empty',
-			),
-			'post_type' => array(
-				'type'       => 'id',
-				'for_js'     => false,
 				'conditions' => 'not_empty',
 			),
 			'initial_open' => array(

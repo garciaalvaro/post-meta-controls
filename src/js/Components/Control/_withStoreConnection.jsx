@@ -1,5 +1,6 @@
 import l, { store_slug } from "../../utils";
 import { setTimeout } from "timers";
+import { isArray } from "util";
 
 const { isEmpty, toString, get } = lodash;
 const { compose } = wp.compose;
@@ -32,9 +33,10 @@ export default compose([
 			updateSettingValue(id, value);
 
 			if (save_meta) {
+				const multiple = get(props, "multiple");
 				if (type === "range" && props.float_number) {
 					value = toString(value);
-				} else if (get(props, "multiple") === false) {
+				} else if (multiple === false && isArray(multiple)) {
 					value = value[0];
 				} else if (type === "checkbox") {
 					value = value === false ? 0 : true;

@@ -38,9 +38,13 @@ function create_sidebar( $raw_props = array() ) {
 				'settings' => get_props( $class_instances['settings'] ),
 			);
 
+			$post_type       = \get_post_type();
+			$props_post_type = $props_this['sidebars'][0]['post_type'];
+
 			if (
-				! empty( $props_this['sidebars'][0]['post_type'] ) &&
-				\get_post_type() === $props_this['sidebars'][0]['post_type']
+				empty( $props_post_type ) ||
+				( is_array( $props_post_type ) && in_array( $post_type, $props_post_type ) ) ||
+				$post_type === $props_post_type
 			) {
 				$props = array(
 					'sidebars' => \wp_parse_args( $props['sidebars'], $props_this['sidebars'] ),

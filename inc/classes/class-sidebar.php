@@ -37,9 +37,8 @@ class Sidebar extends Base {
 				'conditions' => 'not_empty',
 			),
 			'post_type' => array(
-				'type'       => 'id',
-				'for_js'     => true,
-				'conditions' => 'not_empty',
+				'type'   => 'id_OR_array_id',
+				'for_js' => true,
 			),
 			'description' => array(
 				'type'   => 'text',

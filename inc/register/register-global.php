@@ -10,5 +10,7 @@ if ( ! function_exists( 'ps_create_sidebar' ) ) {
 		POSTSETTINGS\create_sidebar( $raw_props );
 	}
 
-	do_action( 'ps_init' );
+	add_action( 'init', function() {
+		do_action( 'ps_init' );
+	});
 }

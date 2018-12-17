@@ -5,14 +5,14 @@ namespace POSTSETTINGS;
 
 function setting_register_meta( $setting_instances = array() ) {
 
-	\add_action( 'init', function() use ( $setting_instances ) {
+	// \add_action( 'init', function() use ( $setting_instances ) {
 
 		foreach ( $setting_instances as $setting_instance ) {
 
 			$setting_instance->register_meta();
 
 		}
-	});
+	// });
 }
 
 function get_props( $class_instances = array() ) {
