@@ -21,9 +21,11 @@ class Range extends Setting {
 
 	setSchema() {
 		const this_schema = {
-			default_value: { type: "integer" },
+			default_value: {
+				type: this.props.float_number ? "float" : "integer"
+			},
 			step: {
-				type: "integer",
+				type: this.props.float_number ? "float" : "integer",
 				conditions: [
 					{
 						value: this.props.step > 0,
@@ -43,9 +45,11 @@ class Range extends Setting {
 					}
 				]
 			},
-			min: { type: "integer" },
+			min: {
+				type: this.props.float_number ? "float" : "integer"
+			},
 			max: {
-				type: "integer",
+				type: this.props.float_number ? "float" : "integer",
 				conditions: [
 					{
 						value: this.props.max > this.props.min,

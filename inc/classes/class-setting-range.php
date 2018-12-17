@@ -23,7 +23,7 @@ class Range extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'integer',
+				'type'   => true === $this->props['float_number'] ? 'float' : 'integer',
 				'for_js' => true,
 			),
 			'step' => array(

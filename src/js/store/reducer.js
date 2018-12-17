@@ -42,12 +42,15 @@ const reducer = (state = initial_state, action) => {
 							: localstorage_value;
 					}
 
-					if (get(setting, "multiple") === false) {
+					const multiple = get(setting, "multiple");
+
+					if (multiple === true) {
+						value = castArray(value);
+					} else if (multiple === false) {
 						value =
 							isArray(value) && !isEmpty(value)
-								? value[0]
-								: value;
-						value = castArray(value);
+								? [value[0]]
+								: castArray(value);
 					}
 
 					setting.value = value;

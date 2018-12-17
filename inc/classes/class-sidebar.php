@@ -4,6 +4,10 @@ namespace POSTSETTINGS;
 
 class Sidebar extends Base {
 
+	public function get_post_type() {
+		return $this->props['post_type'];
+	}
+
 	public function get_data_key_prefix() {
 		return $this->props['data_key_prefix'];
 	}

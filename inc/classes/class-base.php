@@ -100,6 +100,22 @@ abstract class Base {
 					$this->props[ $key ] = sanitize_array_array_text( $value );
 					break;
 
+				case 'id_OR_array_id':
+					if ( is_array( $this->props[ $key ] ) ) {
+						$this->props[ $key ] = sanitize_array_id( $value );
+					} else {
+						$this->props[ $key ] = sanitize_id( $value );
+					}
+					break;
+
+				case 'integer_OR_array_integer':
+					if ( is_array( $this->props[ $key ] ) ) {
+						$this->props[ $key ] = sanitize_array_integer( $value );
+					} else {
+						$this->props[ $key ] = sanitize_integer( $value );
+					}
+					break;
+
 				default:
 					$this->props[ $key ] = '';
 					break;

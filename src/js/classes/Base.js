@@ -143,6 +143,22 @@ class Base {
 					this.props[key] = sanitize.arrayObjectText(value);
 					break;
 
+				case "id_OR_array_id":
+					if (isArray(this.props[key])) {
+						this.props[key] = sanitize.arrayId(value);
+					} else {
+						this.props[key] = sanitize.id(value);
+					}
+					break;
+
+				case "integer_OR_array_integer":
+					if (isArray(this.props[key])) {
+						this.props[key] = sanitize.arrayInteger(value);
+					} else {
+						this.props[key] = sanitize.integer(value);
+					}
+					break;
+
 				default:
 					this.props[key] = "";
 					break;

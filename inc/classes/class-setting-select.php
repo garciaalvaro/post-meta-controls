@@ -48,7 +48,7 @@ class Select extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => true === $this->props['multiple'] ? 'array_id' : 'id',
+				'type'   => 'id_OR_array_id',
 				'for_js' => true,
 			),
 			'options' => array(

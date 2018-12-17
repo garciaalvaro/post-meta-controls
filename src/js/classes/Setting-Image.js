@@ -18,7 +18,7 @@ class Image extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: this.props.multiple === true ? "array_integer" : "integer"
+				type: "integer_OR_array_integer"
 			},
 			multiple: {
 				type: "boolean"

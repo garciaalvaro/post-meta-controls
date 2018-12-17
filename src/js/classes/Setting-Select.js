@@ -57,7 +57,7 @@ class Select extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: this.props.multiple === true ? "array_id" : "id"
+				type: "id_OR_array_id"
 			},
 			multiple: {
 				type: "boolean"

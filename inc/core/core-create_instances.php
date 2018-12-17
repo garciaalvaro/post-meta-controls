@@ -7,6 +7,7 @@ function create_instances(
 	$props_raw = array(),
 	$path = array(),
 	$data_key_prefix_from_sidebar = '',
+	$post_type = '',
 	$class_instances = array()
 ) {
 
@@ -40,6 +41,7 @@ function create_instances(
 				'children' => 'panels',
 			);
 			$data_key_prefix_from_sidebar = $class_instance->get_data_key_prefix();
+			$post_type                    = $class_instance->get_post_type();
 
 		} elseif ( 'tabs' === $class_name['current'] ) {
 
@@ -69,6 +71,8 @@ function create_instances(
 
 			$prop_raw['data_key_prefix_from_sidebar'] =
 				$data_key_prefix_from_sidebar;
+
+			$prop_raw['post_type'] = $post_type;
 
 			switch ( $prop_raw['type'] ) {
 				case 'checkbox':
@@ -132,6 +136,7 @@ function create_instances(
 				$children_props_raw,
 				$path,
 				$data_key_prefix_from_sidebar,
+				$post_type,
 				$class_instances
 			);
 		}

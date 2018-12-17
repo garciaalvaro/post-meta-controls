@@ -20,7 +20,7 @@ class Image extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => true === $this->props['multiple'] ? 'array_integer' : 'integer',
+				'type'   => 'integer_OR_array_integer',
 				'for_js' => true,
 			),
 			'multiple' => array(
