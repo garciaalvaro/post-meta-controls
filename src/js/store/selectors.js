@@ -15,7 +15,7 @@ const selectors = {
 		);
 		let items;
 		items = flatten([sidebar, tabs, panels, settings]);
-		items = items.map(item => item.invalid_warnings);
+		items = items.map(item => item.warnings);
 		items = flatten(items);
 
 		return items;

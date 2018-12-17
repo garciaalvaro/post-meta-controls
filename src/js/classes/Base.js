@@ -168,7 +168,7 @@ class Base {
 
 	validateProps() {
 		const { props, props_schema } = this;
-		const invalid_warnings = [];
+		const warnings = [];
 
 		forEach(props_schema, (schema, prop_key) => {
 			if (isUndefined(schema.conditions) || schema.conditions === false) {
@@ -190,7 +190,7 @@ class Base {
 					(isEmpty(prop) && (isArray(prop) || isObject(prop))) ||
 					(isString(prop) && prop === "")
 				) {
-					invalid_warnings.push({
+					warnings.push({
 						title: warning_title,
 						message: __("This property can't be empty.")
 					});
@@ -198,7 +198,7 @@ class Base {
 			} else if (isArray(conditions)) {
 				forEach(conditions, (value, message) => {
 					if (false === value) {
-						invalid_warnings.push({
+						warnings.push({
 							title: warning_title,
 							message: message
 						});
@@ -207,8 +207,8 @@ class Base {
 			}
 		});
 
-		this.props.invalid_warnings = invalid_warnings;
-		this.props.valid = isEmpty(invalid_warnings);
+		this.props.warnings = warnings;
+		this.props.valid = isEmpty(warnings);
 	}
 
 	isValid() {

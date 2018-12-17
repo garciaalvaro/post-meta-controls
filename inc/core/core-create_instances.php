@@ -129,12 +129,12 @@ function create_instances(
 
 		if ( ! empty( $children_props_raw ) ) {
 
-			$path = \wp_parse_args( array( $class_instance->get_id() ), $path );
+			$children_path = \wp_parse_args( array( $class_instance->get_id() ), $path );
 
 			$class_instances = create_instances(
 				$class_name_children,
 				$children_props_raw,
-				$path,
+				$children_path,
 				$data_key_prefix_from_sidebar,
 				$post_type,
 				$class_instances
