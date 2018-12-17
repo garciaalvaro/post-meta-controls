@@ -11,7 +11,7 @@ class TabButton extends Component {
 	render() {
 		const { label, id, is_active, updateActiveTab } = this.props;
 		const classNames = [
-			`ps-tab_button`,
+			`ps-tab_header-button`,
 			is_active ? "is_active" : "no-is_active"
 		].join(" ");
 

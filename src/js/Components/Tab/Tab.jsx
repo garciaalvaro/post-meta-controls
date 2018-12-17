@@ -11,7 +11,7 @@ class Tab extends Component {
 		const { panels, id } = this.props;
 
 		return (
-			<Div id={`ps-tab-${id}`} className="ps-tab">
+			<Div id={`ps-tab-content-${id}`} className="ps-tab-content">
 				{panels.map((panel, index) => (
 					<Panel key={panel.id} {...panel} />
 				))}

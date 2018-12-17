@@ -16,7 +16,10 @@ function ttest() {
 
 	// var_dump(\get_post_meta( $post->ID, 'ps_image5', false ) );
 
-	print_r(isset( $qqq['qwe']['we'] )?'true':'false');
+	// var_dump(true == 0 ? true : false);
+	var_dump(ps_get_checkbox('ps_checkbox1'));
+	var_dump(ps_get_meta('ps_checkbox1'));
+	// print_r(isset( $qqq['qwe']['we'] )?'true':'false');
 
 	// print_r(\absint(true));
 	// print_r(\absint(false));
