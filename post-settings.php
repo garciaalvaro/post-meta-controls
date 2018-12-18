@@ -48,6 +48,7 @@ require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-text.php';
 require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-textarea.php';
 require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-color.php';
 require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-image.php';
+require_once POSTSETTINGS_INC_DIR . 'classes/class-setting-customHTML.php';
 
 // Core.
 require_once POSTSETTINGS_INC_DIR . 'core/core-create_sidebar.php';

@@ -1,5 +1,5 @@
 import l, { store_slug } from "../../utils";
-import Div from "../Utils";
+import Div, { Span } from "../Utils";
 import Invalid from "./Invalid";
 import TabsContainer from "../Tab/TabsContainer";
 
@@ -27,7 +27,11 @@ class Sidebar extends Component {
 		} else {
 			return (
 				<Div>
-					<Div>{__("The sidebar has some invalid properties:")}</Div>
+					<Div id="ps-invalid-header">
+						<Span>
+							{__("The sidebar has some invalid properties:")}
+						</Span>
+					</Div>
 					{all_warnings.map(({ message, title }, index) => (
 						<Invalid key={index} message={message} title={title} />
 					))}

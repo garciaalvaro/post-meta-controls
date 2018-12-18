@@ -2,6 +2,12 @@
 
 namespace POSTSETTINGS;
 
+// function sanitize_html( $value ) {
+// 	$value = \wp_kses_post( $value );
+
+// 	return $value;
+// }
+
 function sanitize_html_svg( $value ) {
 	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(
@@ -31,6 +37,10 @@ function sanitize_html_svg( $value ) {
 	$value = preg_replace( '/ stroke-width=("|\')/', ' strokeWidth$1', $value );
 
 	return $value;
+}
+
+function sanitize_string( $value ) {
+	return (string) $value;
 }
 
 function sanitize_id( $value ) {

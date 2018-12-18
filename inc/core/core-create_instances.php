@@ -107,6 +107,10 @@ function create_instances(
 					$class_instance = new Image( $prop_raw );
 					break;
 
+				case 'custom_html':
+					$class_instance = new CustomHTML( $prop_raw );
+					break;
+
 				default:
 					break;
 			}

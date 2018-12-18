@@ -54,7 +54,7 @@ class Sidebar extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_empty"
+				type: "array_object_text"
 			},
 			id: {
 				type: "id",
@@ -71,11 +71,10 @@ class Sidebar extends Base {
 				type: "id"
 			},
 			icon_svg: {
-				type: "string"
+				type: "html"
 			},
 			active_tab: {
 				type: "id"
-				// conditions: "not_empty"
 			},
 			settings_id: {
 				type: "array_id"

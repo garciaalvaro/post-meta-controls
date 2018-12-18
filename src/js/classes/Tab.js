@@ -24,7 +24,7 @@ class Tab extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_empty"
+				type: "array_object_text"
 			},
 			id: {
 				type: "id",

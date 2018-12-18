@@ -3,7 +3,11 @@ import uuid from "uuid/v4";
 import Base from "./Base";
 
 class Setting extends Base {
-	isDataTypeNotNone() {
+	beforeSetSchema() {
+		this.prepareDataType();
+	}
+
+	prepareDataType() {
 		const types_can_have_meta = [
 			"checkbox",
 			"radio",
@@ -18,7 +22,7 @@ class Setting extends Base {
 			this.props.data_type === "meta" &&
 			types_can_have_meta.includes(this.props.type)
 		) {
-			return true;
+			return;
 		}
 
 		const types_can_have_localstorage = [
@@ -32,10 +36,11 @@ class Setting extends Base {
 			this.props.data_type === "localstorage" &&
 			types_can_have_localstorage.includes(this.props.type)
 		) {
-			return true;
+			return;
 		}
 
-		return false;
+		this.props.data_type = "none";
+		this.props.data_key_with_prefix = "";
 	}
 
 	getDataKey() {
@@ -63,15 +68,13 @@ class Setting extends Base {
 	}
 
 	getSchema() {
-		const data_type_not_none = this.isDataTypeNotNone();
-
 		return {
 			class_name: {
 				type: "id",
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_empty"
+				type: "array_object_text"
 			},
 			id: {
 				type: "id",
@@ -102,7 +105,8 @@ class Setting extends Base {
 			},
 			data_key_with_prefix: {
 				type: "id",
-				conditions: data_type_not_none ? "not_empty" : false
+				conditions:
+					this.props.data_type !== "none" ? "not_empty" : false
 			}
 		};
 	}

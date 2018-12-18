@@ -16,6 +16,15 @@ function ttest() {
 
 	// var_dump(\get_post_meta( $post->ID, 'ps_image5', false ) );
 
+	$html =
+		'<span width="24" height="24" viewBox="0 0 24 24">
+			<script>alert("svg alert")</script>
+			<div>hila asd asd a</div>
+		</span>';
+
+	// wp_kses( $html );
+	print_r( \wp_kses( $html,'post' ) );
+
 	// var_dump(true == 0 ? true : false);
 	var_dump(ps_get_checkbox('ps_checkbox1'));
 	var_dump(ps_get_meta('ps_checkbox1'));

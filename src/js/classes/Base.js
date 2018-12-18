@@ -96,8 +96,8 @@ class Base {
 	castSchema() {
 		forEach(this.props, (value, key) => {
 			switch (this.props_schema[key].type) {
-				case "string":
-					this.props[key] = sanitize.string(value);
+				case "html":
+					this.props[key] = sanitize.html(value);
 					break;
 
 				case "id":
@@ -169,7 +169,6 @@ class Base {
 
 	validateProps() {
 		const { props, props_schema, addWarning } = this;
-		const warnings = [];
 
 		forEach(props_schema, (schema, prop_key) => {
 			if (isUndefined(schema.conditions) || schema.conditions === false) {
@@ -185,25 +184,21 @@ class Base {
 					(isString(prop) && prop === "")
 				) {
 					const message = __("This property can't be empty.");
-					l("z");
 					addWarning(prop_key, message);
 				}
 			} else if (isArray(conditions)) {
 				forEach(conditions, (value, message) => {
 					if (false === value) {
-						l("b");
 						addWarning(prop_key, message);
 					}
 				});
 			}
 		});
 
-		this.props.warnings = warnings;
-		this.props.valid = isEmpty(warnings);
+		this.props.valid = isEmpty(this.props.warnings);
 	}
 
 	addWarning(prop_key, message) {
-		l(prop_key, this);
 		const { class_name, warnings } = this.props;
 		const type =
 			class_name === "setting" && this.props.type !== ""
@@ -211,7 +206,7 @@ class Base {
 				: "";
 		const title = __(`${prop_key} (${type + class_name})`);
 
-		warnings.push({
+		this.props.warnings = warnings.concat({
 			title,
 			message
 		});

@@ -10,6 +10,7 @@ import Text from "./Text";
 import Textarea from "./Textarea";
 import Color from "./Color";
 import ImageContainer from "./ImageContainer";
+import CustomHTML from "./CustomHTML";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -46,6 +47,9 @@ class Control extends Component {
 
 			case "image":
 				return <ImageContainer {...this.props} />;
+
+			case "custom_html":
+				return <CustomHTML {...this.props} />;
 
 			default:
 				return null;

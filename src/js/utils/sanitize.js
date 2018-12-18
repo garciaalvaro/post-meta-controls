@@ -7,14 +7,17 @@ const {
 	isBoolean,
 	isObject,
 	forEach,
-	toString,
+	escape,
 	toSafeInteger,
 	toNumber,
 	deburr
 } = lodash;
 
-const sanitizeString = value => {
-	value = toString(value);
+const sanitizeHtml = value => {
+	if (!isString(value)) {
+		return "";
+	}
+	value = DOMPurify.sanitize(value);
 
 	return value;
 };
@@ -33,7 +36,8 @@ const sanitizeText = value => {
 	if (!isString(value)) {
 		return "";
 	}
-	value = DOMPurify.sanitize(value);
+	value = escape(value);
+	// value = DOMPurify.sanitize(value);
 
 	return value;
 };
@@ -133,7 +137,7 @@ const sanitizeArrayObjectText = value => {
 
 export default {
 	id: sanitizeId,
-	string: sanitizeString,
+	html: sanitizeHtml,
 	text: sanitizeText,
 	boolean: sanitizeBoolean,
 	float: sanitizeFloat,

@@ -8,6 +8,7 @@ abstract class Setting extends Base {
 	abstract protected function set_schema();
 
 	protected function before_set_schema() {// TODO: check if this could be set to private
+		$this->prepare_data_type();
 		$this->set_data_key_with_prefix();
 	}
 
@@ -25,11 +26,10 @@ abstract class Setting extends Base {
 	}
 
 	public function set_metadata_exists() {
-		$data_type_not_none = $this->is_data_type_not_none();
+
 		if (
 			true !== $this->props['valid'] ||
-			'meta' !== $this->props['data_type'] ||
-			false === $this->is_data_type_not_none()
+			'meta' !== $this->props['data_type']
 		) {
 			return;
 		}
@@ -46,8 +46,7 @@ abstract class Setting extends Base {
 
 		if (
 			true !== $this->props['valid'] ||
-			'meta' !== $this->props['data_type'] ||
-			false === $this->is_data_type_not_none()
+			'meta' !== $this->props['data_type']
 		) {
 			return;
 		}
@@ -79,6 +78,42 @@ abstract class Setting extends Base {
 		}
 	}
 
+	private function prepare_data_type() {
+		$types_can_have_meta = array(
+			'checkbox',
+			'radio',
+			'select',
+			'range',
+			'text',
+			'textarea',
+			'color',
+			'image',
+		);
+		if (
+			'meta' === $this->props['data_type'] &&
+			in_array( $this->props['type'], $types_can_have_meta )
+		) {
+			return;
+		}
+
+		$types_can_have_localstorage = array(
+			'checkbox',
+			'radio',
+			'select',
+			'range',
+			'color',
+		);
+		if (
+			'localstorage' === $this->props['data_type'] &&
+			in_array( $this->props['type'], $types_can_have_localstorage )
+		) {
+			return;
+		}
+
+		$this->props['data_type'] = 'none';
+		$this->props['data_key']  = '';
+	}
+
 	protected function set_privates() {
 		$this->props_privates = array(
 			'data_key_with_prefix',
@@ -104,44 +139,7 @@ abstract class Setting extends Base {
 		);
 	}
 
-	private function is_data_type_not_none() {
-		$types_can_have_meta = array(
-			'checkbox',
-			'radio',
-			'select',
-			'range',
-			'text',
-			'textarea',
-			'color',
-			'image',
-		);
-		if (
-			'meta' === $this->props['data_type'] &&
-			in_array( $this->props['type'], $types_can_have_meta )
-		) {
-			return true;
-		}
-
-		$types_can_have_localstorage = array(
-			'checkbox',
-			'radio',
-			'select',
-			'range',
-			'color',
-		);
-		if (
-			'localstorage' === $this->props['data_type'] &&
-			in_array( $this->props['type'], $types_can_have_localstorage )
-		) {
-			return true;
-		}
-
-		return false;
-	}
-
 	protected function get_schema() {
-		$data_type_not_none = $this->is_data_type_not_none();
-
 		return array(
 			'id' => array(
 				'type'       => 'id',
@@ -185,7 +183,7 @@ abstract class Setting extends Base {
 			'data_key' => array(
 				'type'       => 'id',
 				'for_js'     => true,
-				'conditions' => $data_type_not_none ? 'not_empty' : false,
+				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
 			),
 			'data_key_prefix' => array(
 				'type'   => 'id',
@@ -194,12 +192,12 @@ abstract class Setting extends Base {
 			'data_key_prefix_from_sidebar' => array(
 				'type'       => 'id',
 				'for_js'     => true,
-				'conditions' => $data_type_not_none ? 'not_empty' : false,
+				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
 			),
 			'data_key_with_prefix' => array(
 				'type'       => 'id',
 				'for_js'     => true,
-				'conditions' => $data_type_not_none ? 'not_empty' : false,
+				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
 			),
 		);
 	}

@@ -26,7 +26,7 @@ class Panel extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_empty"
+				type: "array_object_text"
 			},
 			id: {
 				type: "id",
@@ -38,7 +38,8 @@ class Panel extends Base {
 			},
 			label: {
 				type: "text",
-				conditions: "not_empty"
+				conditions:
+					this.props.with_container === true ? "not_empty" : false
 			},
 			initial_open: {
 				type: "boolean"

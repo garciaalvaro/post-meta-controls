@@ -27,6 +27,10 @@ const createSidebars = raw_props => {
 	const createInstanceHelper = (element, name) => {
 		const instance = createInstance(element, name);
 
+		if (instance === false) {
+			return;
+		}
+
 		const id = instance.getId();
 		if (ids.includes(id)) {
 			const message = sprintf(already_exists_message, id);

@@ -29,7 +29,7 @@ class Panel extends Base {
 			'label' => array(
 				'type'       => 'text',
 				'for_js'     => true,
-				'conditions' => 'not_empty',
+				'conditions' => true === $this->props['with_container'] ? 'not_empty' : false,
 			),
 			'initial_open' => array(
 				'type'   => 'boolean',
