@@ -19,8 +19,8 @@ class Sidebar extends Base {
 			'post_type'       => 'post',
 			'description'     => '',
 			'data_key_prefix' => 'ps_',
-			'icon'            => 'carrot',
-			'use_svg_icon'    => false,
+			'icon_dashicon'   => 'carrot',
+			'icon_svg'        => false,
 		);
 	}
 
@@ -48,13 +48,12 @@ class Sidebar extends Base {
 				'type'   => 'id',
 				'for_js' => false,
 			),
-			'icon' => array(
-				'type'       => true === $this->props['use_svg_icon'] ? 'html_svg' : 'id',
-				'for_js'     => true,
-				'conditions' => 'not_empty',
+			'icon_dashicon' => array(
+				'type'   => 'id',
+				'for_js' => true,
 			),
-			'use_svg_icon' => array(
-				'type'   => 'boolean',
+			'icon_svg' => array(
+				'type'   => 'html_svg',
 				'for_js' => true,
 			),
 		);

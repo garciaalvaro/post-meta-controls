@@ -52,11 +52,11 @@ if ( ! function_exists( 'ps_get_checkbox' ) ) {
 		return $meta;
 	}
 }
-//single
-if ( ! function_exists( 'ps_get_image' ) ) {
-	function ps_get_image( $key = '', $size = 'large', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, false );
+if ( ! function_exists( 'ps_get_image' ) ) {
+	function ps_get_image( $key = '', $size = 'large', $single = true, $post_id = '' ) {
+
+		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
 			? POSTSETTINGS\sanitize_array_integer( $meta )
 			: POSTSETTINGS\sanitize_integer( $meta );
@@ -76,9 +76,9 @@ if ( ! function_exists( 'ps_get_image' ) ) {
 }
 
 if ( ! function_exists( 'ps_get_image_data' ) ) {
-	function ps_get_image_data( $key = '', $size = 'large', $post_id = '' ) {
+	function ps_get_image_data( $key = '', $size = 'large', $single = true, $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, false );
+		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
 			? POSTSETTINGS\sanitize_array_integer( $meta )
 			: POSTSETTINGS\sanitize_integer( $meta );
@@ -98,9 +98,9 @@ if ( ! function_exists( 'ps_get_image_data' ) ) {
 }
 
 if ( ! function_exists( 'ps_get_select' ) ) {
-	function ps_get_select( $key = '', $post_id = '' ) {
+	function ps_get_select( $key = '', $post_id = '', $single = true ) {
 
-		$meta = ps_get_meta( $key, $post_id, false );
+		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
 			? POSTSETTINGS\sanitize_array_id( $meta )
 			: POSTSETTINGS\sanitize_id( $meta );

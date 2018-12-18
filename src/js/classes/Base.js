@@ -46,16 +46,17 @@ class Base {
 	setPrivates() {}
 
 	dispatch() {
-		const { class_name, valid } = this.props;
-
-		if (
-			isUndefined(dispatch(store_slug)) // ||
-			// (valid !== true && class_name !== "setting")
-		) {
+		if (isUndefined(dispatch(store_slug))) {
 			return;
 		}
 
-		const { index, ...filtered_props } = this.props;
+		const {
+			valid,
+			icon_dashicon,
+			icon_svg,
+			class_name,
+			...filtered_props
+		} = this.props;
 
 		if (class_name === "sidebar") {
 			dispatch(store_slug).addSidebar(filtered_props);
@@ -95,9 +96,8 @@ class Base {
 	castSchema() {
 		forEach(this.props, (value, key) => {
 			switch (this.props_schema[key].type) {
-				case "html_svg":
-					this.props[key] = value;
-					// this.props[key] = sanitize.id(value);
+				case "string":
+					this.props[key] = sanitize.string(value);
 					break;
 
 				case "id":

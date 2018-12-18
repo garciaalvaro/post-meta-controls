@@ -1,26 +1,30 @@
-import l, { plugin_slug, icons, setSchema } from "../utils";
-import SidebarContainer from "../Components/Sidebar/SidebarContainer";
-import Div from "../Components/Utils";
+import l, { plugin_slug } from "../utils";
+import DOMPurify from "dompurify";
 import uuid from "uuid/v4";
+import SidebarContainer from "../Components/Sidebar/SidebarContainer";
 import Base from "./Base";
 
 const { registerPlugin } = wp.plugins;
+const { RawHTML } = wp.element;
 
 class Sidebar extends Base {
 	registerPlugin() {
-		// if (!this.props.valid) {
-		// 	return;
-		// }
-
-		const { id, icon } = this.props;
-		let plugin_id = `${plugin_slug}-${id}`;
+		const { id, icon_dashicon, icon_svg } = this.props;
+		let plugin_id;
+		plugin_id = `${plugin_slug}-${id}`;
 		plugin_id = plugin_id.replace(/_/g, "-");
 		plugin_id = plugin_id.replace(/[^a-zA-Z0-9-]/g, "");
+		const icon =
+			icon_svg !== "" ? (
+				<RawHTML className="ps-icon">
+					{DOMPurify.sanitize(icon_svg)}
+				</RawHTML>
+			) : (
+				DOMPurify.sanitize(icon_dashicon)
+			);
 
 		registerPlugin(plugin_id, {
-			icon: icon,
-			// icon: <div dangerouslySetInnerHTML={{ __html: icon }} />,
-			// icon: <Div id="ps-pinned-logo">{icons.logo}</Div>,
+			icon: icon ? icon : "carrot",
 			render: () => <SidebarContainer sidebar_id={id} />
 		});
 	}
@@ -38,8 +42,8 @@ class Sidebar extends Base {
 			description: "",
 			active_tab: false,
 			settings_id: [],
-			icon: "carrot",
-			use_svg_icon: ""
+			icon_dashicon: "carrot",
+			icon_svg: ""
 		};
 	}
 
@@ -63,12 +67,11 @@ class Sidebar extends Base {
 			description: {
 				type: "text"
 			},
-			icon: {
-				type: true === this.use_svg_icon ? "html_svg" : "id",
-				conditions: "not_empty"
+			icon_dashicon: {
+				type: "id"
 			},
-			use_svg_icon: {
-				type: "boolean"
+			icon_svg: {
+				type: "string"
 			},
 			active_tab: {
 				type: "id"

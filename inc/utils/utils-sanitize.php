@@ -5,20 +5,26 @@ namespace POSTSETTINGS;
 function sanitize_html_svg( $value ) {
 	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(
-		'svg'   => array(
-			'class' => true,
-			'aria-hidden' => true,
+		'svg' => array(
+			'class'           => true,
+			'aria-hidden'     => true,
 			'aria-labelledby' => true,
-			'role' => true,
-			// 'xmlns' => true,
-			'width' => true,
-			'height' => true,
-			'stroke-width' => true,
-			'viewbox' => true, // <= Must be lower case!
+			'role'            => true,
+			'width'           => true,
+			'height'          => true,
+			'stroke-width'    => true,
+			'viewbox'         => true,
 		),
-		'g'     => array( 'fill' => true ),
-		'title' => array( 'title' => true ),
-		'path'  => array( 'd' => true, 'fill' => true,  ),
+		'rect' => array(
+			'class'        => true,
+			'stroke-width' => true,
+			'fill'         => true,
+			'x'            => true,
+			'y'            => true,
+		),
+		'g'     => array( 'class' => true, 'stroke-width' => true, 'fill' => true ),
+		'path'  => array( 'class' => true, 'stroke-width' => true, 'fill' => true, 'd' => true, ),
+		'title' => array( 'class' => true, 'title' => true ),
 	);
 	$value = \wp_kses( $value, $allowed_svg );
 	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );

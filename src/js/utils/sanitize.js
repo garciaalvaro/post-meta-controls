@@ -1,4 +1,5 @@
 import l from "./log";
+import DOMPurify from "dompurify";
 
 const {
 	isString,
@@ -6,11 +7,17 @@ const {
 	isBoolean,
 	isObject,
 	forEach,
-	escape,
+	toString,
 	toSafeInteger,
 	toNumber,
 	deburr
 } = lodash;
+
+const sanitizeString = value => {
+	value = toString(value);
+
+	return value;
+};
 
 const sanitizeId = value => {
 	if (!isString(value)) {
@@ -26,14 +33,8 @@ const sanitizeText = value => {
 	if (!isString(value)) {
 		return "";
 	}
-	return escape(value);
-};
+	value = DOMPurify.sanitize(value);
 
-const sanitizeTextarea = value => {
-	// if (!isString(value)) {
-	// 	return "";
-	// }
-	// return escape(value);
 	return value;
 };
 
@@ -132,8 +133,8 @@ const sanitizeArrayObjectText = value => {
 
 export default {
 	id: sanitizeId,
+	string: sanitizeString,
 	text: sanitizeText,
-	textarea: sanitizeTextarea,
 	boolean: sanitizeBoolean,
 	float: sanitizeFloat,
 	integer: sanitizeInteger,
