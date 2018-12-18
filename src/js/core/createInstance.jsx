@@ -11,7 +11,8 @@ import {
 	Textarea,
 	Color,
 	Image,
-	CustomHTML
+	CustomHTML,
+	CustomText
 } from "../classes";
 
 const { isUndefined } = lodash;
@@ -63,6 +64,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "custom_html":
 				instance = new CustomHTML(props_raw);
+				break;
+
+			case "custom_text":
+				instance = new CustomText(props_raw);
 				break;
 
 			default:

@@ -2,7 +2,6 @@
 
 namespace POSTSETTINGS;
 
-
 function add_inline_script() {
 
 	$items = array(
@@ -12,7 +11,7 @@ function add_inline_script() {
 		'settings' => array(),
 	);
 
-	$items = apply_filters( 'ps_create_sidebar', $items );
+	$items = \apply_filters( 'ps_create_sidebar', $items );
 
 	if (
 		empty( $items['sidebars'] ) ||

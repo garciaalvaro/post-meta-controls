@@ -1,7 +1,5 @@
-import l, { store_slug } from "../../utils";
-import classnames from "classnames";
+import l from "../../utils";
 import Div from "../Utils";
-// import Invalid from "../Sidebar/Invalid";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
@@ -11,6 +9,7 @@ import Textarea from "./Textarea";
 import Color from "./Color";
 import ImageContainer from "./ImageContainer";
 import CustomHTML from "./CustomHTML";
+import CustomText from "./CustomText";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -18,10 +17,7 @@ const { Component } = wp.element;
 
 class Control extends Component {
 	getControl() {
-		const { type, valid } = this.props;
-		// if (!valid) {
-		// 	return <Invalid {...this.props} />;
-		// }
+		const { type } = this.props;
 
 		switch (type) {
 			case "checkbox":
@@ -51,6 +47,9 @@ class Control extends Component {
 			case "custom_html":
 				return <CustomHTML {...this.props} />;
 
+			case "custom_text":
+				return <CustomText {...this.props} />;
+
 			default:
 				return null;
 		}
@@ -58,10 +57,9 @@ class Control extends Component {
 
 	render() {
 		const { id, valid } = this.props;
-		const classes = classnames({ invalid: !valid }, "ps-control");
 
 		return (
-			<Div id={`ps-control-${id}`} className={classes}>
+			<Div id={`ps-control-${id}`} className="ps-control">
 				{this.getControl()}
 			</Div>
 		);

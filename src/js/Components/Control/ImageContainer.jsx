@@ -13,6 +13,7 @@ class ImageContainer extends Component {
 		const { id: setting_id, value: images_id, multiple } = this.props;
 
 		if (isEmpty(images_id)) {
+			//TODO: is images_id always an array?
 			return (
 				<Div
 					onClick={open}

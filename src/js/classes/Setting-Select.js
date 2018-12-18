@@ -5,6 +5,7 @@ const { forEach, isEmpty, isString, isObject, get, merge } = lodash;
 
 class Select extends Setting {
 	beforeSetSchema() {
+		super.beforeSetSchema();
 		this.prepareOptions();
 	}
 

@@ -2,6 +2,7 @@ import Panel from "./Panel";
 import Checkbox from "./Setting-Checkbox";
 import Color from "./Setting-Color";
 import CustomHTML from "./Setting-CustomHTML";
+import CustomText from "./Setting-CustomText";
 import Image from "./Setting-Image";
 import Radio from "./Setting-Radio";
 import Range from "./Setting-Range";
@@ -16,6 +17,7 @@ export {
 	Checkbox,
 	Color,
 	CustomHTML,
+	CustomText,
 	Image,
 	Radio,
 	Range,

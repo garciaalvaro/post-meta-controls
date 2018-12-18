@@ -3,19 +3,16 @@
 namespace POSTSETTINGS;
 
 
-function setting_register_meta( $setting_instances = array() ) {
+function call_register_meta( $setting_instances = array() ) {
 
-	// \add_action( 'init', function() use ( $setting_instances ) {
+	foreach ( $setting_instances as $setting_instance ) {
 
-		foreach ( $setting_instances as $setting_instance ) {
+		$setting_instance->register_meta();
 
-			$setting_instance->register_meta();
-
-		}
-	// });
+	}
 }
 
-function get_props( $class_instances = array() ) {
+function call_get_props( $class_instances = array() ) {
 
 	$props = array();
 
@@ -28,7 +25,7 @@ function get_props( $class_instances = array() ) {
 	return $props;
 }
 
-function setting_set_metadata_exists( $setting_instances = array() ) {
+function call_set_metadata_exists( $setting_instances = array() ) {
 
 	foreach ( $setting_instances as $setting_instance ) {
 

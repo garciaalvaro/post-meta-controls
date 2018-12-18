@@ -1,5 +1,13 @@
 <?php
 
+use POSTSETTINGS\create_sidebar;
+use POSTSETTINGS\sanitize_id;
+use POSTSETTINGS\sanitize_array_integer;
+use POSTSETTINGS\sanitize_integer;
+use POSTSETTINGS\sanitize_array_id;
+use POSTSETTINGS\sanitize_float;
+use POSTSETTINGS\sanitize_text;
+
 if ( ! function_exists( 'ps_create_sidebar' ) ) {
 	function ps_create_sidebar( $raw_props = array() ) {
 
@@ -7,7 +15,7 @@ if ( ! function_exists( 'ps_create_sidebar' ) ) {
 			return false;
 		}
 
-		POSTSETTINGS\create_sidebar( $raw_props );
+		create_sidebar( $raw_props );
 	}
 
 	add_action( 'init', function() {
@@ -39,7 +47,7 @@ if ( ! function_exists( 'ps_get_radio' ) ) {
 
 		$meta = ps_get_meta( $key, $post_id, true );
 
-		return POSTSETTINGS\sanitize_id( $meta );
+		return sanitize_id( $meta );
 	}
 }
 
@@ -58,8 +66,8 @@ if ( ! function_exists( 'ps_get_image' ) ) {
 
 		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
-			? POSTSETTINGS\sanitize_array_integer( $meta )
-			: POSTSETTINGS\sanitize_integer( $meta );
+			? sanitize_array_integer( $meta )
+			: sanitize_integer( $meta );
 
 		if ( is_array( $meta ) ) {
 			$image = array();
@@ -80,8 +88,8 @@ if ( ! function_exists( 'ps_get_image_data' ) ) {
 
 		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
-			? POSTSETTINGS\sanitize_array_integer( $meta )
-			: POSTSETTINGS\sanitize_integer( $meta );
+			? sanitize_array_integer( $meta )
+			: sanitize_integer( $meta );
 
 		if ( is_array( $meta ) ) {
 			$image = array();
@@ -102,8 +110,8 @@ if ( ! function_exists( 'ps_get_select' ) ) {
 
 		$meta = ps_get_meta( $key, $post_id, $single );
 		$meta = is_array( $meta )
-			? POSTSETTINGS\sanitize_array_id( $meta )
-			: POSTSETTINGS\sanitize_id( $meta );
+			? sanitize_array_id( $meta )
+			: sanitize_id( $meta );
 
 		return $meta;
 	}
@@ -113,7 +121,7 @@ if ( ! function_exists( 'ps_get_color' ) ) {
 	function ps_get_color( $key = '', $post_id = '' ) {
 
 		$meta = ps_get_meta( $key, $post_id, true );
-		$meta = POSTSETTINGS\sanitize_text( $meta );
+		$meta = sanitize_text( $meta );
 
 		// TODO: get correct string, alpha option
 
@@ -126,8 +134,8 @@ if ( ! function_exists( 'ps_get_range' ) ) {
 
 		$meta = ps_get_meta( $key, $post_id, true );
 		$meta = (string) (float) $meta === $meta
-			? POSTSETTINGS\sanitize_float( $meta )
-			: POSTSETTINGS\sanitize_integer( $meta );
+			? sanitize_float( $meta )
+			: sanitize_integer( $meta );
 
 		return $meta;
 	}

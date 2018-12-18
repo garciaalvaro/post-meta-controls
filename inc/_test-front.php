@@ -49,4 +49,4 @@ function ttest() {
 
 }
 
-\add_action( 'wp_head', __NAMESPACE__ . '\ttest' );
+// \add_action( 'wp_head', __NAMESPACE__ . '\ttest' );

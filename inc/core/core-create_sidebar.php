@@ -23,19 +23,19 @@ function create_sidebar( $raw_props = array() ) {
 		return;
 	}
 
-	setting_register_meta( $class_instances['settings'] );
+	call_register_meta( $class_instances['settings'] );
 
 	\add_filter(
 		'ps_create_sidebar',
 		function( $props ) use ( $class_instances ) {
 
-			setting_set_metadata_exists( $class_instances['settings'] );
+			call_set_metadata_exists( $class_instances['settings'] );
 
 			$props_this = array(
-				'sidebars' => get_props( $class_instances['sidebars'] ),
-				'tabs'     => get_props( $class_instances['tabs'] ),
-				'panels'   => get_props( $class_instances['panels'] ),
-				'settings' => get_props( $class_instances['settings'] ),
+				'sidebars' => call_get_props( $class_instances['sidebars'] ),
+				'tabs'     => call_get_props( $class_instances['tabs'] ),
+				'panels'   => call_get_props( $class_instances['panels'] ),
+				'settings' => call_get_props( $class_instances['settings'] ),
 			);
 
 			$post_type       = \get_post_type();

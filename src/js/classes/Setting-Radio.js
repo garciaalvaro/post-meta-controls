@@ -5,6 +5,7 @@ const { forEach, isEmpty, isString, isObject } = lodash;
 
 class Radio extends Setting {
 	beforeSetSchema() {
+		super.beforeSetSchema();
 		this.prepareOptions();
 	}
 

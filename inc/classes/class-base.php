@@ -60,10 +60,6 @@ abstract class Base {
 		foreach ( $this->props as $key => $value ) {
 
 			switch ( $this->props_schema[ $key ]['type'] ) {
-				// case 'html':
-				// 	// $this->props[ $key ] = sanitize_html( $value );
-				// 	break;
-
 				case 'string':
 					$this->props[ $key ] = sanitize_string( $value );
 					break;

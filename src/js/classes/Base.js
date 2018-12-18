@@ -32,7 +32,7 @@ class Base {
 		this.setDefaults();
 		this.mergeDefaults();
 
-		// Run functions before validating props.
+		// Run functions before casting the schema.
 		if (!isUndefined(this.beforeSetSchema)) {
 			this.beforeSetSchema();
 		}
@@ -40,6 +40,12 @@ class Base {
 		// Schema.
 		this.setSchema();
 		this.castSchema();
+
+		// Run functions after casting the schema.
+		if (!isUndefined(this.afterCastSchema)) {
+			this.afterCastSchema();
+		}
+
 		this.validateProps();
 	}
 
@@ -86,7 +92,6 @@ class Base {
 	mergeDefaults() {
 		// Assign default elements if not present in array and
 		// remove keys which are not present in defaults.
-		// this.props_raw = \shortcode_atts( this.props_default, this.props_raw );
 		this.props = assign(
 			this.props_defaults,
 			pick(this.props, keys(this.props_defaults))
@@ -136,12 +141,20 @@ class Base {
 					this.props[key] = sanitize.objectEmpty(value);
 					break;
 
+				case "object_text":
+					this.props[key] = sanitize.objectText(value);
+					break;
+
 				case "array_text":
 					this.props[key] = sanitize.arrayText(value);
 					break;
 
 				case "array_object_text":
 					this.props[key] = sanitize.arrayObjectText(value);
+					break;
+
+				case "array_object_string":
+					this.props[key] = sanitize.arrayObjectString(value);
 					break;
 
 				case "id_OR_array_id":

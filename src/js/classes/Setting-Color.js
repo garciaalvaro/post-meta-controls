@@ -5,6 +5,7 @@ const { forEach, isEmpty, isString, isObject } = lodash;
 
 class Color extends Setting {
 	beforeSetSchema() {
+		super.beforeSetSchema();
 		this.preparePalette();
 	}
 

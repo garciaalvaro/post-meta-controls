@@ -32,6 +32,14 @@ const sanitizeId = value => {
 	return value;
 };
 
+const sanitizeString = value => {
+	if (!isString(value)) {
+		return "";
+	}
+
+	return value;
+};
+
 const sanitizeText = value => {
 	if (!isString(value)) {
 		return "";
@@ -115,6 +123,16 @@ const sanitizeObjectEmpty = () => {
 	return {};
 };
 
+const sanitizeObjectString = value => {
+	value = sanitizeObject(value);
+
+	forEach(value, (array_value, array_index) => {
+		value[array_index] = sanitizeString(array_value);
+	});
+
+	return value;
+};
+
 const sanitizeObjectText = value => {
 	value = sanitizeObject(value);
 
@@ -135,6 +153,16 @@ const sanitizeArrayObjectText = value => {
 	return value;
 };
 
+const sanitizeArrayObjectString = value => {
+	value = sanitizeArray(value);
+
+	forEach(value, (array_value, array_index) => {
+		value[array_index] = sanitizeObjectString(array_value);
+	});
+
+	return value;
+};
+
 export default {
 	id: sanitizeId,
 	html: sanitizeHtml,
@@ -147,8 +175,9 @@ export default {
 	arrayId: sanitizeArrayId,
 	arrayInteger: sanitizeArrayInteger,
 	arrayText: sanitizeArrayText,
+	objectText: sanitizeObjectText,
 	arrayEmpty: sanitizeArrayEmpty,
 	objectEmpty: sanitizeObjectEmpty,
-	objectText: sanitizeObjectText,
-	arrayObjectText: sanitizeArrayObjectText
+	arrayObjectText: sanitizeArrayObjectText,
+	arrayObjectString: sanitizeArrayObjectString
 };

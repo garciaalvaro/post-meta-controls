@@ -2,12 +2,6 @@
 
 namespace POSTSETTINGS;
 
-// function sanitize_html( $value ) {
-// 	$value = \wp_kses_post( $value );
-
-// 	return $value;
-// }
-
 function sanitize_html_svg( $value ) {
 	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(
@@ -40,18 +34,36 @@ function sanitize_html_svg( $value ) {
 }
 
 function sanitize_string( $value ) {
-	return (string) $value;
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
+	$value = strval( $value );
+
+	return $value;
 }
 
 function sanitize_id( $value ) {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
 	return \sanitize_title( $value );
 }
 
 function sanitize_text( $value ) {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
 	return \sanitize_text_field( $value );
 }
 
 function sanitize_textarea( $value ) {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
 	return \sanitize_textarea_field( $value );
 }
 

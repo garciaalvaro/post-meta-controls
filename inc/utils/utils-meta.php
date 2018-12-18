@@ -38,11 +38,11 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 
 		case 'text':
 		case 'color':
-			return '\sanitize_text_field';
+			return __NAMESPACE__ . '\sanitize_text';
 			break;
 
 		case 'textarea':
-			return '\sanitize_textarea_field';
+			return __NAMESPACE__ . '\sanitize_textarea';
 			break;
 
 		case 'image':
@@ -52,7 +52,7 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 		case 'range':
 			$min = $props['min'];
 			$max = $props['max'];
-			return function ( $value ) use( $min, $max ) {
+			return function ( $value ) use ( $min, $max ) {
 				return sanitize_range( $value, $min, $max );
 			};
 			break;
@@ -60,7 +60,7 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 		case 'range_float':
 			$min = $props['min'];
 			$max = $props['max'];
-			return function ( $value ) use( $min, $max ) {
+			return function ( $value ) use ( $min, $max ) {
 				return sanitize_range_float( $value, $min, $max );
 			};
 			break;
@@ -70,7 +70,7 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 			$options  = $props['options'];
 			$default  = $props['default_value'];
 			$multiple = 'select' === $type && true === $props['multiple'];
-			return function ( $value ) use( $options, $default ) {
+			return function ( $value ) use ( $options, $default ) {
 				return sanitize_options( $value, $options, $default, $multiple );
 			};
 			break;

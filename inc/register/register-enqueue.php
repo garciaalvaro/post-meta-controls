@@ -7,20 +7,19 @@ namespace POSTSETTINGS;
  *
  * @since 1.0.0
  */
-function enqueue_main_script() {
+function enqueue() {
 
-	wp_enqueue_style(
-		'postsettings_css',
-		POSTSETTINGS_BUILD_DIR . 'postsettings.css',
+	\wp_enqueue_style(
+		'postsettings',
+		BUILD_DIR . 'postsettings.css',
 		array(),
-		POSTSETTINGS_PLUGIN_VERSION
+		PLUGIN_VERSION
 	);
 
-	wp_enqueue_script(
-		'postsettings_js',
-		POSTSETTINGS_BUILD_DIR . 'postsettings.js',
+	\wp_enqueue_script(
+		'postsettings',
+		BUILD_DIR . 'postsettings.js',
 		array(
-			'jquery',
 			'lodash',
 			'wp-i18n',
 			'wp-compose',
@@ -33,10 +32,10 @@ function enqueue_main_script() {
 			'wp-rich-text',
 			'wp-hooks',
 		),
-		POSTSETTINGS_PLUGIN_VERSION,
+		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
 
 }
 
-\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_main_script' );
+\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );
