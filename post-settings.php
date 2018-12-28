@@ -56,6 +56,6 @@ require_once INC_DIR . 'core/core-create_sidebar.php';
 require_once INC_DIR . 'core/core-create_instances.php';
 
 // Register.
-require_once INC_DIR . 'register/register-global.php';
-require_once INC_DIR . 'register/register-inline.php';
+require_once INC_DIR . 'register/register-create_sidebar.php';
+require_once INC_DIR . 'register/register-public_utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';

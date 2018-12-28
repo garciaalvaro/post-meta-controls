@@ -13,7 +13,7 @@ class Text extends Setting {
 		$parent_defaults = parent::get_defaults();
 
 		$this->props_defaults =
-			\wp_parse_args( $this_defaults, $parent_defaults );
+			wp_parse_args( $this_defaults, $parent_defaults );
 	}
 
 	protected function set_schema() {
@@ -27,6 +27,6 @@ class Text extends Setting {
 		$parent_schema = parent::get_schema();
 
 		$this->props_schema =
-			\wp_parse_args( $this_schema, $parent_schema );
+			wp_parse_args( $this_schema, $parent_schema );
 	}
 }

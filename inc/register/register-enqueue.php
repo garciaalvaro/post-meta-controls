@@ -9,14 +9,14 @@ namespace POSTSETTINGS;
  */
 function enqueue() {
 
-	\wp_enqueue_style(
+	wp_enqueue_style(
 		'postsettings',
 		BUILD_DIR . 'postsettings.css',
 		array(),
 		PLUGIN_VERSION
 	);
 
-	\wp_enqueue_script(
+	wp_enqueue_script(
 		'postsettings',
 		BUILD_DIR . 'postsettings.js',
 		array(
@@ -38,4 +38,4 @@ function enqueue() {
 
 }
 
-\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );

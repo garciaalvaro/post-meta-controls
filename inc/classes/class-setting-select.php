@@ -5,7 +5,8 @@ namespace POSTSETTINGS;
 class Select extends Setting {
 
 	protected function before_set_schema() {
-		parent::set_data_key_with_prefix();
+		parent::before_set_schema();
+		// parent::set_data_key_with_prefix();
 		$this->prepare_options();
 	}
 
@@ -42,7 +43,7 @@ class Select extends Setting {
 		$parent_defaults = parent::get_defaults();
 
 		$this->props_defaults =
-			\wp_parse_args( $this_defaults, $parent_defaults );
+			wp_parse_args( $this_defaults, $parent_defaults );
 	}
 
 	protected function set_schema() {
@@ -65,6 +66,6 @@ class Select extends Setting {
 		$parent_schema = parent::get_schema();
 
 		$this->props_schema =
-			\wp_parse_args( $this_schema, $parent_schema );
+			wp_parse_args( $this_schema, $parent_schema );
 	}
 }

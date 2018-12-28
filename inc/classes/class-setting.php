@@ -35,9 +35,9 @@ abstract class Setting extends Base {
 		}
 
 		$this->props['metadata_exists'] =
-			\metadata_exists(
+			metadata_exists(
 				'post',
-				\get_the_ID(),
+				get_the_ID(),
 				$this->props['data_key_with_prefix']
 			);
 	}
@@ -65,7 +65,7 @@ abstract class Setting extends Base {
 
 		foreach ( $post_types as $post_type) {
 
-			\register_post_meta(
+			register_post_meta(
 				$post_type,
 				$props['data_key_with_prefix'],
 				array(
@@ -123,7 +123,7 @@ abstract class Setting extends Base {
 
 	protected function get_defaults() {
 		return array(
-			'id'                           => \wp_generate_uuid4(),
+			'id'                           => wp_generate_uuid4(),
 			'path'                         => array(),
 			'label'                        => '',
 			'post_type'                    => 'post',

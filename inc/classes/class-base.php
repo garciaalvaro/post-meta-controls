@@ -52,7 +52,7 @@ abstract class Base {
 	private function merge_defaults() {
 		// Assign default elements if not present in $array and
 		// remove keys which are not present in $defaults.
-		$this->props = \shortcode_atts( $this->props_defaults, $this->props );
+		$this->props = shortcode_atts( $this->props_defaults, $this->props );
 	}
 
 	private function cast_schema() {
@@ -163,6 +163,10 @@ abstract class Base {
 
 	public function get_id() {
 		return isset( $this->props['id'] ) ? $this->props['id'] : false;
+	}
+
+	public function get_post_type() {
+		return $this->props['post_type'];
 	}
 
 	public function get_props_for_js() {

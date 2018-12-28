@@ -2,59 +2,66 @@
 
 namespace POSTSETTINGS;
 
-function create_sidebar( $raw_props = array() ) {
+function create_sidebar() {
 
-	if ( ! is_array( $raw_props ) || empty( $raw_props ) ) {
+	// This is the filter used to add custom sidebars inside other plugins/themes.
+	$props_raw = apply_filters( 'ps_create_sidebar', array() );
+
+	if ( ! is_array( $props_raw ) || empty( $props_raw ) ) {
 		return;
 	}
 
-	$class_instances =
+	// Create the class instances for each item: sidebars, tabs, panels and settings.
+	$instances =
 		create_instances(
-			array( 'current' => 'sidebars', 'children' => 'tabs' ),
-			array( $raw_props )
+			array(
+				'current' => 'sidebars',
+				'children' => 'tabs',
+			),
+			$props_raw
 		);
 
 	if (
-		empty( $class_instances['sidebars'] ) ||
-		empty( $class_instances['tabs'] ) ||
-		empty( $class_instances['panels'] ) ||
-		empty( $class_instances['settings'] )
+		empty( $instances['sidebars'] ) ||
+		empty( $instances['tabs'] ) ||
+		empty( $instances['panels'] ) ||
+		empty( $instances['settings'] )
 	) {
 		return;
 	}
 
-	call_register_meta( $class_instances['settings'] );
+	// Register the meta fields for those settings that are of data_type meta.
+	register_meta( $instances['settings'] );
 
-	\add_filter(
-		'ps_create_sidebar',
-		function( $props ) use ( $class_instances ) {
+	// Add the action to localize the data into the editor.
+	add_action(
+		'enqueue_block_editor_assets',
+		function() use ( $instances ) {
 
-			call_set_metadata_exists( $class_instances['settings'] );
+			// Set this property here, as the post id wasn't available before.
+			set_metadata_exists( $instances['settings'] );
 
-			$props_this = array(
-				'sidebars' => call_get_props( $class_instances['sidebars'] ),
-				'tabs'     => call_get_props( $class_instances['tabs'] ),
-				'panels'   => call_get_props( $class_instances['panels'] ),
-				'settings' => call_get_props( $class_instances['settings'] ),
+			$post_type = get_post_type();
+
+			// Create an array of properties to localize into the main script.
+			// It checks that the instance is assigned to the current post type.
+			$props = array(
+				'sidebars' => get_props( $instances['sidebars'], $post_type ),
+				'tabs'     => get_props( $instances['tabs'], $post_type ),
+				'panels'   => get_props( $instances['panels'], $post_type ),
+				'settings' => get_props( $instances['settings'], $post_type ),
 			);
 
-			$post_type       = \get_post_type();
-			$props_post_type = $props_this['sidebars'][0]['post_type'];
-
 			if (
-				empty( $props_post_type ) ||
-				( is_array( $props_post_type ) && in_array( $post_type, $props_post_type ) ) ||
-				$post_type === $props_post_type
+				empty( $props['sidebars'] ) ||
+				empty( $props['tabs'] ) ||
+				empty( $props['panels'] ) ||
+				empty( $props['settings'] )
 			) {
-				$props = array(
-					'sidebars' => \wp_parse_args( $props['sidebars'], $props_this['sidebars'] ),
-					'tabs'     => \wp_parse_args( $props['tabs'], $props_this['tabs'] ),
-					'panels'   => \wp_parse_args( $props['panels'], $props_this['panels'] ),
-					'settings' => \wp_parse_args( $props['settings'], $props_this['settings'] ),
-				);
+				return;
 			}
 
-			return $props;
+			wp_localize_script( 'postsettings', 'ps_items', $props );
 		}
 	);
 }

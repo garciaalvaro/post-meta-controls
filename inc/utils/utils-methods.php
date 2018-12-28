@@ -3,7 +3,7 @@
 namespace POSTSETTINGS;
 
 
-function call_register_meta( $setting_instances = array() ) {
+function register_meta( $setting_instances = array() ) {
 
 	foreach ( $setting_instances as $setting_instance ) {
 
@@ -12,20 +12,27 @@ function call_register_meta( $setting_instances = array() ) {
 	}
 }
 
-function call_get_props( $class_instances = array() ) {
+function get_props( $instances = array(), $post_type_current = '' ) {
 
-	$props = array();
+	$props_array = array();
 
-	foreach ( $class_instances as $class_instance ) {
+	foreach ( $instances as $instance ) {
 
-		$props[] = $class_instance->get_props_for_js();
+		$post_type = $instance->get_post_type();
 
+		if (
+			empty( $post_type ) ||
+			( is_array( $post_type ) && in_array( $post_type_current, $post_type ) ) ||
+			$post_type_current === $post_type
+		) {
+			$props_array[] = $instance->get_props_for_js();
+		}
 	}
 
-	return $props;
+	return $props_array;
 }
 
-function call_set_metadata_exists( $setting_instances = array() ) {
+function set_metadata_exists( $setting_instances = array() ) {
 
 	foreach ( $setting_instances as $setting_instance ) {
 

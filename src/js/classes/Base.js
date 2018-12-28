@@ -57,7 +57,7 @@ class Base {
 		}
 
 		const {
-			valid,
+			// valid,
 			icon_dashicon,
 			icon_svg,
 			class_name,

@@ -4,17 +4,13 @@ namespace POSTSETTINGS;
 
 class Sidebar extends Base {
 
-	public function get_post_type() {
-		return $this->props['post_type'];
-	}
-
 	public function get_data_key_prefix() {
 		return $this->props['data_key_prefix'];
 	}
 
 	protected function set_defaults() {
 		$this->props_defaults = array(
-			'id'              => \wp_generate_uuid4(),
+			'id'              => wp_generate_uuid4(),
 			'label'           => '',
 			'post_type'       => 'post',
 			'description'     => '',
@@ -38,7 +34,7 @@ class Sidebar extends Base {
 			),
 			'post_type' => array(
 				'type'   => 'id_OR_array_id',
-				'for_js' => true,
+				'for_js' => false,
 			),
 			'description' => array(
 				'type'   => 'text',

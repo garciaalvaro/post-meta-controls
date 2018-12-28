@@ -1,27 +1,12 @@
 <?php
 
-use POSTSETTINGS\create_sidebar;
-use POSTSETTINGS\sanitize_id;
-use POSTSETTINGS\sanitize_array_integer;
-use POSTSETTINGS\sanitize_integer;
-use POSTSETTINGS\sanitize_array_id;
-use POSTSETTINGS\sanitize_float;
-use POSTSETTINGS\sanitize_text;
+use function POSTSETTINGS\sanitize_id;
+use function POSTSETTINGS\sanitize_array_integer;
+use function POSTSETTINGS\sanitize_integer;
+use function POSTSETTINGS\sanitize_array_id;
+use function POSTSETTINGS\sanitize_float;
+use function POSTSETTINGS\sanitize_text;
 
-if ( ! function_exists( 'ps_create_sidebar' ) ) {
-	function ps_create_sidebar( $raw_props = array() ) {
-
-		if ( ! function_exists( 'POSTSETTINGS\create_sidebar' ) ) {
-			return false;
-		}
-
-		create_sidebar( $raw_props );
-	}
-
-	add_action( 'init', function() {
-		do_action( 'ps_init' );
-	});
-}
 
 if ( ! function_exists( 'ps_get_meta' ) ) {
 	function ps_get_meta( $key = '', $post_id = '', $single = false ) {
@@ -34,7 +19,7 @@ if ( ! function_exists( 'ps_get_meta' ) ) {
 			? $post_id
 			: get_the_ID();
 
-		// $meta_exists = \metadata_exists( 'post', $post_id, $key );
+		// $meta_exists = metadata_exists( 'post', $post_id, $key );
 
 		$meta = get_post_meta( $post_id, $key, $single );
 

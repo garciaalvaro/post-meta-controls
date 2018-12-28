@@ -6,9 +6,10 @@ class Panel extends Base {
 
 	protected function set_defaults() {
 		$this->props_defaults = array(
-			'id'             => \wp_generate_uuid4(),
+			'id'             => wp_generate_uuid4(),
 			'path'           => array(),
 			'label'          => '',
+			'post_type'      => 'post',
 			'initial_open'   => false,
 			'with_container' => true,
 		);
@@ -30,6 +31,10 @@ class Panel extends Base {
 				'type'       => 'text',
 				'for_js'     => true,
 				'conditions' => true === $this->props['with_container'] ? 'not_empty' : false,
+			),
+			'post_type' => array(
+				'type'   => 'id_OR_array_id',
+				'for_js' => false,
 			),
 			'initial_open' => array(
 				'type'   => 'boolean',
