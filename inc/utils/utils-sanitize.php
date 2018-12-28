@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 function sanitize_html_svg( $value ) {
 	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(

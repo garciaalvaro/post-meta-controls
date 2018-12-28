@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 abstract class Base {
 
 	protected $props;

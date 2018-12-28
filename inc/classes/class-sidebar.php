@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 class Sidebar extends Base {
 
 	public function get_data_key_prefix() {

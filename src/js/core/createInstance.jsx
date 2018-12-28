@@ -1,5 +1,7 @@
 import l from "../utils";
-import {
+import classes from "../classes";
+
+const {
 	Sidebar,
 	Tab,
 	Panel,
@@ -13,8 +15,7 @@ import {
 	Image,
 	CustomHTML,
 	CustomText
-} from "../classes";
-
+} = classes;
 const { isUndefined } = lodash;
 
 const createInstance = (props_raw, class_name) => {
@@ -62,12 +63,14 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Image(props_raw);
 				break;
 
-			case "custom_html":
-				instance = new CustomHTML(props_raw);
-				break;
-
 			case "custom_text":
 				instance = new CustomText(props_raw);
+				break;
+
+			case "custom_html":
+				if (typeof CustomHTML === "function") {
+					instance = new CustomHTML(props_raw);
+				}
 				break;
 
 			default:

@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 function get_meta_arg_type( $type = '' ) {
 
 	switch ( $type ) {

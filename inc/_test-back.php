@@ -1,7 +1,9 @@
 <?php
 
-
 namespace POSTSETTINGS;
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function my_function( $sidebars ) {
 
@@ -117,18 +119,10 @@ $tab1 = array(
 			// 'initial_open'   => true,
 			'settings'       => array(
 				array(
-					'type'      => 'custom_text',
+					'type'      => 'custom_html',
 					'data_type' => 'meta', // localstorage meta none option
-					'data_key'  => 'radio11',
-					'content'   => array(
-						'title' => 'Ttitulo.',
-						'paragraph' => 'has custom color attributes, options to update them.<br>directly from the menu will show (currently, core blocks are supported).',
-						'ul' => array(
-							'<div>aaa</div>qweqew qweq weqw ee.',
-							'qweppp o o',
-							'Tercer<strong>sss</strong>',
-						),
-					),
+					'data_key'  => 'custom_html1',
+					'html_string' => '<div class="zzz">zzz</div>',
 				),
 				array(
 					'type'            => 'checkbox',

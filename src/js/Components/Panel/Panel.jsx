@@ -1,6 +1,6 @@
 import l, { store_slug } from "../../utils";
 import Div from "../Utils";
-import Control from "../Control/Control";
+import Setting from "../Setting/Setting";
 
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
@@ -15,7 +15,7 @@ class Panel extends Component {
 			<Div id={`ps-panel-${id}`} className="ps-panel">
 				<PanelRow>
 					{settings.map((setting, index) => (
-						<Control key={setting.id} {...setting} />
+						<Setting key={setting.id} {...setting} />
 					))}
 				</PanelRow>
 			</Div>

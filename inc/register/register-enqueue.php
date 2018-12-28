@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 /**
  * Enqueue the plugin styles and scripts for the post/page editor.
  *
@@ -38,4 +41,4 @@ function enqueue() {
 
 }
 
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue', 910 );

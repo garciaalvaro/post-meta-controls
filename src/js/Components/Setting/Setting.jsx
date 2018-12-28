@@ -1,21 +1,23 @@
 import l from "../../utils";
 import Div from "../Utils";
-import Checkbox from "./Checkbox";
-import Radio from "./Radio";
-import Select from "./Select";
-import Range from "./Range";
-import Text from "./Text";
-import Textarea from "./Textarea";
-import Color from "./Color";
-import ImageContainer from "./ImageContainer";
-import CustomHTML from "./CustomHTML";
-import CustomText from "./CustomText";
+import controls from "../Controls";
 
-const { withState, compose } = wp.compose;
-const { withSelect } = wp.data;
+const {
+	Checkbox,
+	Radio,
+	Select,
+	Range,
+	Text,
+	Textarea,
+	Color,
+	ImageContainer,
+	CustomText,
+	CustomHTML
+} = controls;
+const { isUndefined } = lodash;
 const { Component } = wp.element;
 
-class Control extends Component {
+class Setting extends Component {
 	getControl() {
 		const { type } = this.props;
 
@@ -45,7 +47,9 @@ class Control extends Component {
 				return <ImageContainer {...this.props} />;
 
 			case "custom_html":
-				return <CustomHTML {...this.props} />;
+				if (!isUndefined(CustomHTML)) {
+					return <CustomHTML {...this.props} />;
+				}
 
 			case "custom_text":
 				return <CustomText {...this.props} />;
@@ -66,4 +70,4 @@ class Control extends Component {
 	}
 }
 
-export default Control;
+export default Setting;

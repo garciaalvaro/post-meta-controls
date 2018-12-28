@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 function create_instances(
 	$class_name = array(),
 	$props_raw = array(),
@@ -25,7 +28,7 @@ function create_instances(
 
 		$children_props_raw =
 			empty( $class_name['children'] ) || empty( $prop_raw[ $class_name['children'] ] )
-				? array()
+				? false
 				: $prop_raw[ $class_name['children'] ];
 
 		$instance = false;
@@ -110,7 +113,9 @@ function create_instances(
 					break;
 
 				case 'custom_html':
-					$instance = new CustomHTML( $prop_raw );
+					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
+						$instance = new CustomHTML( $prop_raw );
+					}
 					break;
 
 				case 'custom_text':
@@ -122,11 +127,7 @@ function create_instances(
 			}
 		}
 
-		if (
-			false !== $instance// &&
-			// ( true === $instance->is_valid() ||
-			//   'settings' === $class_name['current'] )
-		) {
+		if ( false !== $instance ) {
 
 			$instances[ $class_name['current'] ] =
 				! isset( $instances[ $class_name['current'] ] )

@@ -6,7 +6,7 @@
 	"homepage": "#",
 	"main": "index.js",
 	"scripts": {
-		"dev": "parcel watch src/index.js -o postsettings.js -d build"
+		"dev": "parcel watch src/index.js -o postsettings.js -d build & parcel watch pro/src/index.js -o postsettings-pro.js -d pro/build"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.0",

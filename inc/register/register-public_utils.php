@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 use function POSTSETTINGS\sanitize_id;
 use function POSTSETTINGS\sanitize_array_integer;
 use function POSTSETTINGS\sanitize_integer;

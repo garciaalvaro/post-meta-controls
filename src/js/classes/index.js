@@ -1,7 +1,7 @@
+import l from "../utils";
 import Panel from "./Panel";
 import Checkbox from "./Setting-Checkbox";
 import Color from "./Setting-Color";
-import CustomHTML from "./Setting-CustomHTML";
 import CustomText from "./Setting-CustomText";
 import Image from "./Setting-Image";
 import Radio from "./Setting-Radio";
@@ -12,11 +12,15 @@ import Textarea from "./Setting-Textarea";
 import Sidebar from "./Sidebar";
 import Tab from "./Tab";
 
-export {
+const { isEmpty } = lodash;
+const { applyFilters } = wp.hooks;
+
+let classes;
+
+classes = {
 	Panel,
 	Checkbox,
 	Color,
-	CustomHTML,
 	CustomText,
 	Image,
 	Radio,
@@ -27,3 +31,13 @@ export {
 	Sidebar,
 	Tab
 };
+
+const pro_settings = applyFilters("ps_add_setting", {});
+
+if (!isEmpty(pro_settings)) {
+	const { CustomHTML } = pro_settings;
+
+	classes = { ...classes, CustomHTML };
+}
+
+export default classes;

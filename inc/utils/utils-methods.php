@@ -2,6 +2,8 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function register_meta( $setting_instances = array() ) {
 

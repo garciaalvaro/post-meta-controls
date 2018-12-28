@@ -2,6 +2,9 @@
 
 namespace POSTSETTINGS;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
 function create_sidebar() {
 
 	// This is the filter used to add custom sidebars inside other plugins/themes.
@@ -62,6 +65,7 @@ function create_sidebar() {
 			}
 
 			wp_localize_script( 'postsettings', 'ps_items', $props );
-		}
+		},
+		911
 	);
 }

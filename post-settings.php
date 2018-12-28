@@ -12,9 +12,7 @@
 namespace POSTSETTINGS;
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! defined( 'PLUGIN_VERSION' ) ) {
 	define( 'PLUGIN_VERSION', '0.0.1' );
@@ -48,8 +46,7 @@ require_once INC_DIR . 'classes/class-setting-text.php';
 require_once INC_DIR . 'classes/class-setting-textarea.php';
 require_once INC_DIR . 'classes/class-setting-color.php';
 require_once INC_DIR . 'classes/class-setting-image.php';
-require_once INC_DIR . 'classes/class-setting-customHTML.php';
-require_once INC_DIR . 'classes/class-setting-CustomText.php';
+require_once INC_DIR . 'classes/class-setting-customText.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
@@ -59,3 +56,5 @@ require_once INC_DIR . 'core/core-create_instances.php';
 require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-public_utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';
+
+require_once plugin_dir_path( __FILE__ ) . 'pro/pro.php';
