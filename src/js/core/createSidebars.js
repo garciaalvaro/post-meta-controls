@@ -5,7 +5,6 @@ const { __, sprintf } = wp.i18n;
 const { isArray, forEach } = lodash;
 
 const createSidebars = raw_props => {
-	l("createSidebars");
 	if (
 		!isArray(raw_props.sidebars) ||
 		!isArray(raw_props.tabs) ||
@@ -39,7 +38,7 @@ const createSidebars = raw_props => {
 			ids.push(id);
 		}
 
-		if (name === "setting") {
+		if (name === "setting" && instance.getDataType() !== "none") {
 			const data_key = instance.getDataKey();
 			if (data_keys.includes(data_key)) {
 				const message = sprintf(already_exists_message, data_key);

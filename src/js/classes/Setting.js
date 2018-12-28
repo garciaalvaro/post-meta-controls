@@ -43,6 +43,10 @@ class Setting extends Base {
 		this.props.data_key_with_prefix = "";
 	}
 
+	getDataType() {
+		return this.props.data_type;
+	}
+
 	getDataKey() {
 		return this.props.data_key_with_prefix;
 	}
