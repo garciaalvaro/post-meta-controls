@@ -7,6 +7,7 @@ import Textarea from "./Textarea";
 import Color from "./Color";
 import ImageContainer from "./ImageContainer";
 import CustomText from "./CustomText";
+import DateTime from "./DateTime";
 import l from "../../utils";
 
 const { isEmpty } = lodash;
@@ -23,7 +24,8 @@ controls = {
 	Textarea,
 	Color,
 	ImageContainer,
-	CustomText
+	CustomText,
+	DateTime
 };
 
 const controls_pro = applyFilters("ps_add_control", {});

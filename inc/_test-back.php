@@ -9,6 +9,13 @@ function my_function( $sidebars ) {
 
 $settings = array(
 	array(
+		'type'            => 'date_time',
+		'data_type'       => 'meta', // localstorage meta none option
+		'data_key'        => 'date_time11qa2',
+		'default_value'   => "qwe",
+		'use_12hour'      => false,
+	),
+	array(
 		'type'            => 'image',
 		'data_type'       => 'meta', // localstorage meta none option
 		'data_key'        => 'image9',

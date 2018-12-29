@@ -13,8 +13,9 @@ const {
 	Textarea,
 	Color,
 	Image,
-	CustomHTML,
-	CustomText
+	CustomText,
+	DateTime,
+	CustomHTML
 } = classes;
 const { isUndefined } = lodash;
 
@@ -65,6 +66,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "custom_text":
 				instance = new CustomText(props_raw);
+				break;
+
+			case "date_time":
+				instance = new DateTime(props_raw);
 				break;
 
 			case "custom_html":

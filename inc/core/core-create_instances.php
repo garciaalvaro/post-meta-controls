@@ -112,14 +112,19 @@ function create_instances(
 					$instance = new Image( $prop_raw );
 					break;
 
+				case 'custom_text':
+					$instance = new CustomText( $prop_raw );
+					break;
+
+				case 'date_time':
+					$instance = new DateTime( $prop_raw );
+					break;
+
+				// TODO: add this to a filter somehow in the pro folder?
 				case 'custom_html':
 					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
 						$instance = new CustomHTML( $prop_raw );
 					}
-					break;
-
-				case 'custom_text':
-					$instance = new CustomText( $prop_raw );
 					break;
 
 				default:

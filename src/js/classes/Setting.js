@@ -16,7 +16,8 @@ class Setting extends Base {
 			"text",
 			"textarea",
 			"color",
-			"image"
+			"image",
+			"date_time"
 		];
 		if (
 			this.props.data_type === "meta" &&
@@ -30,7 +31,8 @@ class Setting extends Base {
 			"radio",
 			"select",
 			"range",
-			"color"
+			"color",
+			"date_time"
 		];
 		if (
 			this.props.data_type === "localstorage" &&

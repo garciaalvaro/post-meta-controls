@@ -91,6 +91,7 @@ abstract class Setting extends Base {
 			'textarea',
 			'color',
 			'image',
+			'date_time',
 		);
 		if (
 			'meta' === $this->props['data_type'] &&
@@ -105,6 +106,7 @@ abstract class Setting extends Base {
 			'select',
 			'range',
 			'color',
+			'date_time',
 		);
 		if (
 			'localstorage' === $this->props['data_type'] &&

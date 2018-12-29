@@ -12,6 +12,7 @@ const {
 	Color,
 	ImageContainer,
 	CustomText,
+	DateTime,
 	CustomHTML
 } = controls;
 const { isUndefined } = lodash;
@@ -46,13 +47,16 @@ class Setting extends Component {
 			case "image":
 				return <ImageContainer {...this.props} />;
 
+			case "custom_text":
+				return <CustomText {...this.props} />;
+
+			case "date_time":
+				return <DateTime {...this.props} />;
+
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
 					return <CustomHTML {...this.props} />;
 				}
-
-			case "custom_text":
-				return <CustomText {...this.props} />;
 
 			default:
 				return null;

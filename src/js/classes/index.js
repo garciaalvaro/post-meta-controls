@@ -3,6 +3,7 @@ import Panel from "./Panel";
 import Checkbox from "./Setting-Checkbox";
 import Color from "./Setting-Color";
 import CustomText from "./Setting-CustomText";
+import DateTime from "./Setting-DateTime";
 import Image from "./Setting-Image";
 import Radio from "./Setting-Radio";
 import Range from "./Setting-Range";
@@ -22,6 +23,7 @@ classes = {
 	Checkbox,
 	Color,
 	CustomText,
+	DateTime,
 	Image,
 	Radio,
 	Range,
