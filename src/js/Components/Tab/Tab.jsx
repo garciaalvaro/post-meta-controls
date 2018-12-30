@@ -1,4 +1,4 @@
-import l, { store_slug } from "../../utils";
+import l, { plugin_slug, store_slug } from "../../utils";
 import Div from "../Utils";
 import Panel from "../Panel/Panel";
 
@@ -11,7 +11,10 @@ class Tab extends Component {
 		const { panels, id } = this.props;
 
 		return (
-			<Div id={`ps-tab-content-${id}`} className="ps-tab-content">
+			<Div
+				id={`${plugin_slug}-tab-content-${id}`}
+				className={`${plugin_slug}-tab-content`}
+			>
 				{panels.map((panel, index) => (
 					<Panel key={panel.id} {...panel} />
 				))}
@@ -20,7 +23,6 @@ class Tab extends Component {
 	}
 }
 
-// export default Tab;
 export default compose([
 	withSelect((select, { id }) => {
 		const { getPanels } = select(store_slug);

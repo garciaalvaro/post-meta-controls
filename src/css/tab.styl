@@ -1,38 +1,21 @@
 /*
- * Test
+ * Tab
  */
-/*
- * Settings
- */
+
+$e_deceleration = cubic-bezier(0.0, 0.0, 0.2, 1)
 
 .ps-tab-content
 	position relative
 	background-color var(--background_color)
 
-.ps-tab_headers
-	display flex
-	height 50px
-	border-bottom 1px solid var(--border_color)
+.ps-sidebar
+	.components-tab-panel__tabs
+		display flex
+		height 50px
+		background-color var(--background_color)
+		border-bottom 1px solid var(--border_color)
 
-.ps-tab_navigation-container
-	position relative
-	height 50px
-	background-color var(--background_color)
-
-	&.more_than_3_tabs
-		height: 67px;
-		margin-bottom: -17px;
-
-		.ps-tab_headers-container
-			overflow-x auto
-
-		.ps-tab_headers
-			display inline-flex
-
-		button.ps-tab_header-button
-			width 90px
-
-button.ps-tab_header-button
+button.ps-tab-content
 	padding 5px
 	height 100%
 	box-shadow none
@@ -43,23 +26,17 @@ button.ps-tab_header-button
 	display flex
 	align-items center
 	justify-content center
+	outline-color currentColor
+	outline-width 1px
+	cursor pointer
+	border none
+	transition background-color .15s $e_deceleration
 
-	&.is_active
+	&:hover
+		background-color rgba(0,0,0,0.03)
+
+	&.is-active
 		margin-bottom -1px
 		font-weight 600
 		padding-bottom 1px
 		border-bottom 3px solid var(--color_primary)
-
-button.ps-tab_navigation-button
-	position: absolute;
-	top: 0;
-	width: 24px;
-	height: 49px
-	padding: 0;
-	background-color var(--background_color)
-
-button#ps-tab_navigation-button-left
-	left 0
-
-button#ps-tab_navigation-button-right
-	right 0

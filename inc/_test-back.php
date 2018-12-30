@@ -11,18 +11,25 @@ $settings = array(
 	array(
 		'type'            => 'buttons',
 		'data_type'       => 'meta', // localstorage meta none option
-		'data_key'        => 'buttons',
+		'data_key'        => 'buttons1',
+		'allow_empty'        => true,
+		'default_value'        => 'aaa',
 		'options' => array(
+array(
+	'title'=>'editor-textcolor',
+	'value'=>'editor-textcolor',
+	'icon_dashicon'=>'editor-textcolor',
+),
+array(
+	'title'=>'lightbulb',
+	'value'=>'lightbulb',
+	'icon_dashicon'=>'lightbulb',
+),
 array(
 	'title'=>'carrot',
 	'value'=>'aaa',
 	'icon_dashicon'=>'carrot',
 ),
-// array(
-// 	'title'=>'Label',
-// 	'value'=>'bbb',
-// 	'label'=>'carrot',
-// ),
 array(
 	// 'title'=>'custom svg',
 	'value'=>'ccc',
@@ -254,9 +261,10 @@ $sidebar = array(
 	'label'           => 'a',
 	'meta_key_prefix' => 'eps_',
 	'post_type' => array('page','post'),
-	'tabs' => array($tab2, $tab1 ),
+	// 'tabs' => array($tab2, $tab1 ),
+	// 'tabs' => array($tab2, $tab1 ),
 	// 'tabs' => array( $tab1, $tab2, $tab3 ),
-	// 'tabs' => array( $tab1, $tab2, $tab3, $tab4 ),
+	'tabs' => array( $tab1, $tab2, $tab3, $tab4 ),
 // 	'icon_dashicon' => '',
 	'icon_svg'      => '<svg width="24" height="24" viewBox="0 0 24 24">
 	<script>alert("svg alert")</script>

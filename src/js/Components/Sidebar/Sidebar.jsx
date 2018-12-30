@@ -1,7 +1,7 @@
-import l, { store_slug } from "../../utils";
+import l, { plugin_slug, store_slug } from "../../utils";
 import Div, { Span } from "../Utils";
 import Invalid from "./Invalid";
-import TabsContainer from "../Tab/TabsContainer";
+import Tabs from "../Tab/Tabs";
 
 const { isEmpty } = lodash;
 const { __ } = wp.i18n;
@@ -12,16 +12,16 @@ const { Component } = wp.element;
 class Sidebar extends Component {
 	render() {
 		const { id, all_warnings } = this.props;
-		const classNames = [
-			`ps-sidebar`,
+		const classes = [
+			`${plugin_slug}-sidebar`,
 			`color_scheme-type-light`,
 			`color_scheme-name-banana`
 		].join(" ");
 
 		if (isEmpty(all_warnings)) {
 			return (
-				<Div id={`ps-sidebar-${id}`} className={classNames}>
-					<TabsContainer sidebar_id={id} />
+				<Div id={`ps-sidebar-${id}`} className={classes}>
+					<Tabs sidebar_id={id} />
 				</Div>
 			);
 		} else {
