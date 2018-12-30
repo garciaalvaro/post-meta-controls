@@ -57,6 +57,7 @@ class Buttons extends Setting {
 		const this_defaults = {
 			type: "buttons",
 			default_value: "",
+			allow_empty: false,
 			options: []
 		};
 
@@ -69,6 +70,9 @@ class Buttons extends Setting {
 		const this_schema = {
 			default_value: {
 				type: "id"
+			},
+			allow_empty: {
+				type: "boolean"
 			},
 			options: {
 				type: "array_object_string",

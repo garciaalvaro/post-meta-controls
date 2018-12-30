@@ -62,6 +62,7 @@ class Buttons extends Setting {
 		$this_defaults = array(
 			'type'          => 'buttons',
 			'default_value' => '',
+			'allow_empty'   => false,
 			'options'       => array(),
 		);
 
@@ -76,6 +77,10 @@ class Buttons extends Setting {
 			'default_value' => array(
 				'type'   => 'id',
 				'for_js' => true,
+			),
+			'allow_empty' => array(
+				'type'       => 'boolean',
+				'for_js'     => true,
 			),
 			'options' => array(
 				'type'       => 'array_array_string',

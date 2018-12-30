@@ -7,8 +7,8 @@ const { Toolbar } = wp.components;
 
 class Buttons extends Component {
 	render() {
-		const { options, value, updateValue } = this.props;
-		const options_clean = options.map(option => ({
+		const { options, value, allow_empty, updateValue } = this.props;
+		const options_prepared = options.map(option => ({
 			icon: option.icon_svg ? (
 				<RawHTML>{DOMPurify.sanitize(option.icon_svg)}</RawHTML>
 			) : (
@@ -16,13 +16,19 @@ class Buttons extends Component {
 			),
 			title: option.title,
 			isActive: option.value === value,
-			onClick: () => updateValue(option.value)
+			onClick: () => {
+				if (allow_empty && option.value === value) {
+					updateValue("");
+				} else {
+					updateValue(option.value);
+				}
+			}
 		}));
 
 		return (
 			<Toolbar
 				className={`${plugin_slug}-control-buttons`}
-				controls={options_clean}
+				controls={options_prepared}
 			/>
 		);
 	}
