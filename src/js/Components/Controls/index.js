@@ -30,7 +30,7 @@ controls = {
 	Buttons
 };
 
-const controls_pro = applyFilters("ps_add_control", {});
+const controls_pro = applyFilters("ps_add_controls", {});
 
 if (!isEmpty(controls_pro)) {
 	const { CustomHTML } = controls_pro;

@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function enqueue() {
 
+	do_action( 'ps_before_enqueue' );
+
 	wp_enqueue_style(
 		'postsettings',
 		BUILD_DIR . 'postsettings.css',
@@ -39,6 +41,7 @@ function enqueue() {
 		true // Enqueue in the footer.
 	);
 
+	do_action( 'ps_after_enqueue' );
 }
 
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue', 910 );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );

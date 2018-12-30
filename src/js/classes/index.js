@@ -36,10 +36,10 @@ classes = {
 	Tab
 };
 
-const pro_settings = applyFilters("ps_add_setting", {});
+const classes_pro = applyFilters("ps_add_classes", {});
 
-if (!isEmpty(pro_settings)) {
-	const { CustomHTML } = pro_settings;
+if (!isEmpty(classes_pro)) {
+	const { CustomHTML } = classes_pro;
 
 	classes = { ...classes, CustomHTML };
 }

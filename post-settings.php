@@ -23,6 +23,9 @@ if ( ! defined( 'BUILD_DIR' ) ) {
 if ( ! defined( 'INC_DIR' ) ) {
 	define( 'INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
 }
+if ( ! defined( 'PLUGIN_DIR' ) ) {
+	define( 'PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
 
 require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
@@ -59,4 +62,6 @@ require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-global-helpers.php';
 require_once INC_DIR . 'register/register-enqueue.php';
 
-require_once plugin_dir_path( __FILE__ ) . 'pro/pro.php';
+if ( file_exists( PLUGIN_DIR . 'pro/post-settings-pro.php' ) ) {
+	require_once PLUGIN_DIR . 'pro/post-settings-pro.php';
+}

@@ -38,7 +38,7 @@ function create_sidebar() {
 
 	// Add the action to localize the data into the editor.
 	add_action(
-		'enqueue_block_editor_assets',
+		'ps_after_enqueue',
 		function() use ( $instances ) {
 
 			// Set this property here, as the post id wasn't available before.
@@ -65,7 +65,6 @@ function create_sidebar() {
 			}
 
 			wp_localize_script( 'postsettings', 'ps_items', $props );
-		},
-		911
+		}
 	);
 }
