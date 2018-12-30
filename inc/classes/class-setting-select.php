@@ -27,8 +27,8 @@ class Select extends Setting {
 			}
 
 			$options_clean[] = array(
-				'value' => $key,
-				'label' => $value,
+				'value' => sanitize_id( $key ),
+				'label' => sanitize_text( $value ),
 			);
 		}
 

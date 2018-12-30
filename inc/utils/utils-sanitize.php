@@ -118,11 +118,31 @@ function sanitize_array_text( $value ) {
 	return $value;
 }
 
+function sanitize_array_string( $value ) {
+	$value = sanitize_array( $value );
+
+	foreach ( $value as $array_key => $array_value ) {
+		$value[ $array_key ] = sanitize_string( $array_value );
+	}
+
+	return $value;
+}
+
 function sanitize_array_array_text( $value ) {
 	$value = sanitize_array( $value );
 
 	foreach ( $value as $array_key => $array_value ) {
 		$value[ $array_key ] = sanitize_array_text( $array_value );
+	}
+
+	return $value;
+}
+
+function sanitize_array_array_string( $value ) {
+	$value = sanitize_array( $value );
+
+	foreach ( $value as $array_key => $array_value ) {
+		$value[ $array_key ] = sanitize_array_string( $array_value );
 	}
 
 	return $value;

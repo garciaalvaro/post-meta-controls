@@ -18,7 +18,7 @@ function create_sidebar() {
 	$instances =
 		create_instances(
 			array(
-				'current' => 'sidebars',
+				'current'  => 'sidebars',
 				'children' => 'tabs',
 			),
 			$props_raw

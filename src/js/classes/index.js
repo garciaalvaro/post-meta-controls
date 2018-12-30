@@ -1,5 +1,6 @@
 import l from "../utils";
 import Panel from "./Panel";
+import Toolbar from "./Setting-Toolbar";
 import Checkbox from "./Setting-Checkbox";
 import Color from "./Setting-Color";
 import CustomText from "./Setting-CustomText";
@@ -20,6 +21,7 @@ let classes;
 
 classes = {
 	Panel,
+	Toolbar,
 	Checkbox,
 	Color,
 	CustomText,

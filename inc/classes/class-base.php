@@ -107,6 +107,10 @@ abstract class Base {
 					$this->props[ $key ] = sanitize_array_array_text( $value );
 					break;
 
+				case 'array_array_string':
+					$this->props[ $key ] = sanitize_array_array_string( $value );
+					break;
+
 				case 'id_OR_array_id':
 					if ( is_array( $this->props[ $key ] ) ) {
 						$this->props[ $key ] = sanitize_array_id( $value );

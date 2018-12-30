@@ -1,8 +1,6 @@
 import l, { store_slug } from "../../utils";
-import { setTimeout } from "timers";
-import { isArray } from "util";
 
-const { isEmpty, toString, get } = lodash;
+const { isEmpty, isArray, toString, get } = lodash;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;

@@ -120,6 +120,10 @@ function create_instances(
 					$instance = new DateTime( $prop_raw );
 					break;
 
+				case 'toolbar':
+					$instance = new Toolbar( $prop_raw );
+					break;
+
 				// TODO: add this to a filter somehow in the pro folder?
 				case 'custom_html':
 					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {

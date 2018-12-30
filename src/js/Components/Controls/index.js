@@ -1,3 +1,4 @@
+import l from "../../utils";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 import Select from "./Select";
@@ -8,7 +9,7 @@ import Color from "./Color";
 import ImageContainer from "./ImageContainer";
 import CustomText from "./CustomText";
 import DateTime from "./DateTime";
-import l from "../../utils";
+import Toolbar from "./Toolbar";
 
 const { isEmpty } = lodash;
 const { applyFilters } = wp.hooks;
@@ -25,7 +26,8 @@ controls = {
 	Color,
 	ImageContainer,
 	CustomText,
-	DateTime
+	DateTime,
+	Toolbar
 };
 
 const controls_pro = applyFilters("ps_add_control", {});

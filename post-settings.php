@@ -46,8 +46,9 @@ require_once INC_DIR . 'classes/class-setting-text.php';
 require_once INC_DIR . 'classes/class-setting-textarea.php';
 require_once INC_DIR . 'classes/class-setting-color.php';
 require_once INC_DIR . 'classes/class-setting-image.php';
-require_once INC_DIR . 'classes/class-setting-customText.php';
-require_once INC_DIR . 'classes/class-setting-dateTime.php';
+require_once INC_DIR . 'classes/class-setting-custom_text.php';
+require_once INC_DIR . 'classes/class-setting-date_time.php';
+require_once INC_DIR . 'classes/class-setting-toolbar.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
