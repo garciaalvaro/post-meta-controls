@@ -44,6 +44,16 @@ $settings = array(
 		),
 	),
 	array(
+		'type'            => 'checkbox',
+		'data_type'       => 'meta', // localstorage meta none option
+		'data_key'        => 'checkbox111',
+
+		// 'default_value'  => true,
+		'label'          => 'checkbox',
+		'help'           => 'checkbox',
+		'use_toggle'           => true,
+	),
+	array(
 		'type'            => 'date_time',
 		'data_type'       => 'meta', // localstorage meta none option
 		'data_key'        => 'date_time11qa2',
@@ -101,15 +111,6 @@ $settings = array(
 	// 		'aaa' => 'aaa',
 	// 		'bbb' => 'bbb',
 	// 	),
-	// ),
-	// array(
-	// 	'type'            => 'checkbox',
-	// 	'data_type'       => 'meta', // localstorage meta none option
-	// 	'data_key'        => 'checkbox',
-
-	// 	'default_value'  => true,
-	// 	'label'          => 'checkbox',
-	// 	'help'           => 'checkbox',
 	// ),
 	// array(
 	// 	'type'            => 'text',
@@ -265,10 +266,10 @@ $sidebar = array(
 	'label'           => 'a',
 	'meta_key_prefix' => 'eps_',
 	'post_type' => array('page','post'),
-	// 'tabs' => array($tab2, $tab1 ),
+	'tabs' => array($tab2, $tab1 ),
 	// 'tabs' => array($tab2, $tab1 ),
 	// 'tabs' => array( $tab1, $tab2, $tab3 ),
-	'tabs' => array( $tab1, $tab2, $tab3, $tab4 ),
+	// 'tabs' => array( $tab1, $tab2, $tab3, $tab4 ),
 // 	'icon_dashicon' => '',
 	'icon_svg'      => '<svg width="24" height="24" viewBox="0 0 24 24">
 	<script>alert("svg alert")</script>

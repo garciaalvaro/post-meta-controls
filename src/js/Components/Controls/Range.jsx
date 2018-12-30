@@ -1,11 +1,8 @@
-import l, { store_slug } from "../../utils";
-import classnames from "classnames";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
-const { toString } = lodash;
+const { toString, compact } = lodash;
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
 const { RangeControl } = wp.components;
 
@@ -23,10 +20,13 @@ class Range extends Component {
 		} = this.props;
 		const digits_length =
 			toString(Math.round(max)).length + (float_number ? 2 : 0);
-		const classes = classnames(
-			{ [`float_${digits_length}`]: float_number },
-			"ps-control-range"
-		);
+		let classes;
+		classes = [
+			`${plugin_slug}-control-range`,
+			float_number ? `float_${digits_length}` : ""
+		];
+		classes = compact(classes);
+		classes = classes.join(" ");
 
 		return (
 			<RangeControl

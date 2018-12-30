@@ -5,7 +5,9 @@ class Checkbox extends Setting {
 	setDefaults() {
 		const this_defaults = {
 			type: "checkbox",
-			default_value: true
+			default_value: false,
+			label: "",
+			use_toggle: false
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -21,6 +23,9 @@ class Checkbox extends Setting {
 			label: {
 				type: "text",
 				conditions: "not_empty"
+			},
+			use_toggle: {
+				type: "boolean"
 			}
 		};
 

@@ -1,18 +1,28 @@
-import l, { store_slug } from "../../utils";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
-const { CheckboxControl } = wp.components;
+const { CheckboxControl, ToggleControl } = wp.components;
 
 class Checkbox extends Component {
 	render() {
-		const { label, help, value, toggleValue } = this.props;
+		const { label, help, value, use_toggle, toggleValue } = this.props;
+
+		if (use_toggle) {
+			return (
+				<ToggleControl
+					className={`${plugin_slug}control-checkbox`}
+					label={label}
+					help={help}
+					checked={value}
+					onChange={toggleValue}
+				/>
+			);
+		}
 
 		return (
 			<CheckboxControl
-				className="ps-control-checkbox"
+				className={`${plugin_slug}control-checkbox`}
 				label={label}
 				help={help}
 				checked={value}

@@ -1,9 +1,8 @@
 import l from "../../utils";
-import classnames from "classnames";
 import Div from "../Utils";
 import ColorPickerWithAlpha from "./ColorPickerWithAlpha";
 
-const { map } = lodash;
+const { map, compact } = lodash;
 const { Component } = wp.element;
 const { __, sprintf } = wp.i18n;
 const { Button, Dropdown, Tooltip } = wp.components;
@@ -16,10 +15,13 @@ class ColorPalette extends Component {
 		return (
 			<Div className={"components-color-palette"}>
 				{map(colors, ({ color, name }) => {
-					const item_classes = classnames(
+					let item_classes;
+					item_classes = [
 						"components-color-palette__item",
-						{ "is-active": value === color }
-					);
+						value === color ? "is-active" : ""
+					];
+					item_classes = compact(item_classes);
+					item_classes = item_classes.join(" ");
 
 					return (
 						<Div
