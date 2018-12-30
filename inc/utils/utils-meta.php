@@ -39,10 +39,10 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 			return __NAMESPACE__ . '\sanitize_boolean';
 			break;
 
-		case 'text':
-		case 'color':
-			return __NAMESPACE__ . '\sanitize_text';
-			break;
+		// case 'text':
+		// case 'color':
+		// 	return __NAMESPACE__ . '\sanitize_text';
+		// 	break;
 
 		case 'textarea':
 			return __NAMESPACE__ . '\sanitize_textarea';
@@ -68,6 +68,7 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 			};
 			break;
 
+		case 'buttons':
 		case 'radio':
 		case 'select':
 			$options  = $props['options'];
@@ -79,7 +80,7 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 			break;
 
 		default:
-			return '\sanitize_text_field';
+			return __NAMESPACE__ . '\sanitize_text';
 			break;
 	}
 }

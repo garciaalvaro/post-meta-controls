@@ -9,7 +9,7 @@ import Color from "./Color";
 import ImageContainer from "./ImageContainer";
 import CustomText from "./CustomText";
 import DateTime from "./DateTime";
-import Toolbar from "./Toolbar";
+import Buttons from "./Buttons";
 
 const { isEmpty } = lodash;
 const { applyFilters } = wp.hooks;
@@ -27,7 +27,7 @@ controls = {
 	ImageContainer,
 	CustomText,
 	DateTime,
-	Toolbar
+	Buttons
 };
 
 const controls_pro = applyFilters("ps_add_control", {});

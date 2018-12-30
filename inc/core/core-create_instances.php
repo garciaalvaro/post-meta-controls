@@ -120,8 +120,8 @@ function create_instances(
 					$instance = new DateTime( $prop_raw );
 					break;
 
-				case 'toolbar':
-					$instance = new Toolbar( $prop_raw );
+				case 'buttons':
+					$instance = new Buttons( $prop_raw );
 					break;
 
 				// TODO: add this to a filter somehow in the pro folder?

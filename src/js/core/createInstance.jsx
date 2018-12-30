@@ -15,7 +15,7 @@ const {
 	Image,
 	CustomText,
 	DateTime,
-	Toolbar,
+	Buttons,
 	CustomHTML
 } = classes;
 const { isUndefined } = lodash;
@@ -73,8 +73,8 @@ const createInstance = (props_raw, class_name) => {
 				instance = new DateTime(props_raw);
 				break;
 
-			case "toolbar":
-				instance = new Toolbar(props_raw);
+			case "buttons":
+				instance = new Buttons(props_raw);
 				break;
 
 			case "custom_html":

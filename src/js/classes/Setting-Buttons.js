@@ -3,20 +3,20 @@ import Setting from "./Setting";
 
 const { forEach, isEmpty, isUndefined, isObject } = lodash;
 
-class Toolbar extends Setting {
+class Buttons extends Setting {
 	beforeSetSchema() {
 		super.beforeSetSchema();
-		this.prepareButtons();
+		this.prepareOptions();
 	}
 
-	prepareButtons() {
-		if (isEmpty(this.props.buttons)) {
+	prepareOptions() {
+		if (isEmpty(this.props.options)) {
 			return;
 		}
 
-		const buttons_clean = [];
+		const options_clean = [];
 
-		forEach(this.props.buttons, button_obj => {
+		forEach(this.props.options, button_obj => {
 			if (!isObject(button_obj)) {
 				return;
 			}
@@ -46,19 +46,18 @@ class Toolbar extends Setting {
 				(!isUndefined(button_clean.icon_dashicon) ||
 					!isUndefined(button_clean.icon_svg))
 			) {
-				buttons_clean.push(button_clean);
+				options_clean.push(button_clean);
 			}
 		});
 
-		this.props.buttons = buttons_clean;
+		this.props.options = options_clean;
 	}
 
 	setDefaults() {
 		const this_defaults = {
-			type: "toolbar",
+			type: "buttons",
 			default_value: "",
-			multiple: false,
-			buttons: []
+			options: []
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -69,12 +68,9 @@ class Toolbar extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "id_OR_array_id"
+				type: "id"
 			},
-			multiple: {
-				type: "boolean"
-			},
-			buttons: {
+			options: {
 				type: "array_object_string",
 				conditions: "not_empty"
 			}
@@ -86,4 +82,4 @@ class Toolbar extends Setting {
 	}
 }
 
-export default Toolbar;
+export default Buttons;

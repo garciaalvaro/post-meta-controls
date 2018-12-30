@@ -1,8 +1,6 @@
-import l, { store_slug } from "../../utils";
+import l from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
 const { SelectControl } = wp.components;
 

@@ -39,6 +39,15 @@ if ( ! function_exists( 'ps_get_radio' ) ) {
 	}
 }
 
+if ( ! function_exists( 'ps_get_buttons' ) ) {
+	function ps_get_buttons( $key = '', $post_id = '' ) {
+
+		$meta = ps_get_meta( $key, $post_id, true );
+
+		return sanitize_id( $meta );
+	}
+}
+
 if ( ! function_exists( 'ps_get_checkbox' ) ) {
 	function ps_get_checkbox( $key = '', $post_id = '' ) {
 

@@ -92,6 +92,7 @@ abstract class Setting extends Base {
 			'color',
 			'image',
 			'date_time',
+			'buttons',
 		);
 		if (
 			'meta' === $this->props['data_type'] &&
@@ -107,6 +108,7 @@ abstract class Setting extends Base {
 			'range',
 			'color',
 			'date_time',
+			'buttons',
 		);
 		if (
 			'localstorage' === $this->props['data_type'] &&

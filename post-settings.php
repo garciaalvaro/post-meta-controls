@@ -48,7 +48,7 @@ require_once INC_DIR . 'classes/class-setting-color.php';
 require_once INC_DIR . 'classes/class-setting-image.php';
 require_once INC_DIR . 'classes/class-setting-custom_text.php';
 require_once INC_DIR . 'classes/class-setting-date_time.php';
-require_once INC_DIR . 'classes/class-setting-toolbar.php';
+require_once INC_DIR . 'classes/class-setting-buttons.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
@@ -56,7 +56,7 @@ require_once INC_DIR . 'core/core-create_instances.php';
 
 // Register.
 require_once INC_DIR . 'register/register-create_sidebar.php';
-require_once INC_DIR . 'register/register-public_utils.php';
+require_once INC_DIR . 'register/register-global-helpers.php';
 require_once INC_DIR . 'register/register-enqueue.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'pro/pro.php';

@@ -29,7 +29,7 @@ export default compose([
 			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
 		const updateValue = value => {
 			updateSettingValue(id, value);
-
+			l(valid, data_type === "meta", !isEmpty(data_key_with_prefix));
 			if (save_meta) {
 				const multiple = get(props, "multiple");
 				if (type === "range" && props.float_number) {

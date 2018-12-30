@@ -13,7 +13,7 @@ const {
 	ImageContainer,
 	CustomText,
 	DateTime,
-	Toolbar,
+	Buttons,
 	CustomHTML
 } = controls;
 const { isUndefined } = lodash;
@@ -54,8 +54,8 @@ class Setting extends Component {
 			case "date_time":
 				return <DateTime {...this.props} />;
 
-			case "toolbar":
-				return <Toolbar {...this.props} />;
+			case "buttons":
+				return <Buttons {...this.props} />;
 
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {

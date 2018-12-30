@@ -9,10 +9,10 @@ function my_function( $sidebars ) {
 
 $settings = array(
 	array(
-		'type'            => 'toolbar',
+		'type'            => 'buttons',
 		'data_type'       => 'meta', // localstorage meta none option
-		'data_key'        => 'toolbar',
-		'buttons' => array(
+		'data_key'        => 'buttons',
+		'options' => array(
 array(
 	'title'=>'carrot',
 	'value'=>'aaa',
@@ -64,21 +64,21 @@ array(
 	// 		'ccc' => 'ccc',
 	// 	),
 	// ),
-	// array(
-	// 	'type'            => 'select',
-	// 	'data_type'       => 'meta', // localstorage meta none option
-	// 	'data_key'        => 'select_multiple1',
+	array(
+		'type'            => 'select',
+		'data_type'       => 'meta', // localstorage meta none option
+		'data_key'        => 'select_multiple1',
 
-	// 	'multiple'        => true,
-	// 	'default_value'   => ['bbb'],
-	// 	// 'default_value'   => ['bbb','ccc'],
-	// 	'label'           => 'select_multiple',
-	// 	'options'         => array(
-	// 		'aaa' => 'aaa',
-	// 		'bbb' => 'bbb',
-	// 		'ccc' => 'ccc',
-	// 	),
-	// ),
+		'multiple'        => true,
+		'default_value'   => ['bbb'],
+		// 'default_value'   => ['bbb','ccc'],
+		'label'           => 'select_multiple',
+		'options'         => array(
+			'aaa' => 'aaa',
+			'bbb' => 'bbb',
+			'ccc' => 'ccc',
+		),
+	),
 	// array(
 	// 	'type'            => 'radio',
 	// 	'data_type'       => 'meta', // localstorage meta none option
