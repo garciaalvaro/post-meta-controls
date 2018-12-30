@@ -12,33 +12,35 @@ $settings = array(
 		'type'            => 'buttons',
 		'data_type'       => 'meta', // localstorage meta none option
 		'data_key'        => 'buttons1',
-		'allow_empty'        => true,
-		'default_value'        => 'aaa',
+		'allow_empty'     => true,
+		'label'           => 'jjj',
+		'help'           => 'asd asdasd asdas dasdasd asd, asdasd asd asd.',
+		'default_value'   => 'aaa',
 		'options' => array(
-array(
-	'title'=>'editor-textcolor',
-	'value'=>'editor-textcolor',
-	'icon_dashicon'=>'editor-textcolor',
-),
-array(
-	'title'=>'lightbulb',
-	'value'=>'lightbulb',
-	'icon_dashicon'=>'lightbulb',
-),
-array(
-	'title'=>'carrot',
-	'value'=>'aaa',
-	'icon_dashicon'=>'carrot',
-),
-array(
-	// 'title'=>'custom svg',
-	'value'=>'ccc',
-	'icon_svg'=>'<svg width="24" height="24" viewBox="0 0 24 24">
-	<script>alert("svg alert")</script>
-	<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
-	<path fill="none" d="M0 0h24v24H0V0z" />
-</svg>',
-),
+			array(
+				'title'=>'editor-textcolor',
+				'value'=>'editor-textcolor',
+				'icon_dashicon'=>'editor-textcolor',
+			),
+			array(
+				'title'=>'lightbulb',
+				'value'=>'lightbulb',
+				'icon_dashicon'=>'lightbulb',
+			),
+			array(
+				'title'=>'carrot',
+				'value'=>'aaa',
+				'icon_dashicon'=>'carrot',
+			),
+			array(
+				// 'title'=>'custom svg',
+				'value'=>'ccc',
+				'icon_svg'=>'<svg width="24" height="24" viewBox="0 0 24 24">
+				<script>alert("svg alert")</script>
+				<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+				<path fill="none" d="M0 0h24v24H0V0z" />
+			</svg>',
+			),
 		),
 	),
 	array(
@@ -47,6 +49,8 @@ array(
 		'data_key'        => 'date_time11qa2',
 		'default_value'   => "qwe",
 		'use_12hour'      => true,
+		'label'           => 'jjj',
+		'help'           => 'asd asdasd asdas dasdasd asd, asdasd asd asd.',
 	),
 	// array(
 	// 	'type'            => 'image',

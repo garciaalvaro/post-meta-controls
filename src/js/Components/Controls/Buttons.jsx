@@ -3,11 +3,18 @@ import withStoreConnection from "./_withStoreConnection";
 import DOMPurify from "dompurify";
 
 const { Component, RawHTML } = wp.element;
-const { Toolbar } = wp.components;
+const { Toolbar, BaseControl } = wp.components;
 
 class Buttons extends Component {
 	render() {
-		const { options, value, allow_empty, updateValue } = this.props;
+		const {
+			label,
+			help,
+			options,
+			value,
+			allow_empty,
+			updateValue
+		} = this.props;
 		const options_prepared = options.map(option => ({
 			icon: option.icon_svg ? (
 				<RawHTML>{DOMPurify.sanitize(option.icon_svg)}</RawHTML>
@@ -26,10 +33,13 @@ class Buttons extends Component {
 		}));
 
 		return (
-			<Toolbar
+			<BaseControl
 				className={`${plugin_slug}-control-buttons`}
-				controls={options_prepared}
-			/>
+				label={label}
+				help={help}
+			>
+				<Toolbar controls={options_prepared} />
+			</BaseControl>
 		);
 	}
 }
