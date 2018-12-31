@@ -21,9 +21,11 @@ abstract class Setting extends Base {
 			return;
 		}
 
-		$prefix = 'ps_' !== $this->props['data_key_prefix']
+		$prefix = false !== $this->props['data_key_prefix']
 			? $this->props['data_key_prefix']
 			: $this->props['data_key_prefix_from_sidebar'];
+
+		$prefix = (string) $prefix;
 
 		$this->props['data_key_with_prefix'] = $prefix . $this->props['data_key'];
 	}
@@ -140,7 +142,7 @@ abstract class Setting extends Base {
 			'data_type'                    => 'none',
 			'metadata_exists'              => false,
 			'data_key'                     => '',
-			'data_key_prefix'              => 'ps_',
+			'data_key_prefix'              => false,
 			'data_key_with_prefix'         => '',
 			'data_key_prefix_from_sidebar' => '',
 		);
@@ -189,22 +191,20 @@ abstract class Setting extends Base {
 			),
 			'data_key' => array(
 				'type'       => 'id',
-				'for_js'     => true,
+				'for_js'     => false,
 				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
 			),
 			'data_key_prefix' => array(
 				'type'   => 'id',
-				'for_js' => true,
+				'for_js' => false,
 			),
 			'data_key_prefix_from_sidebar' => array(
-				'type'       => 'id',
-				'for_js'     => true,
-				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
+				'type'   => 'id',
+				'for_js' => false,
 			),
 			'data_key_with_prefix' => array(
-				'type'       => 'id',
-				'for_js'     => true,
-				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
+				'type'   => 'id',
+				'for_js' => true,
 			),
 		);
 	}

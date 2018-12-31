@@ -13,24 +13,18 @@ function ttest() {
 	global $post;
 	$meta = \get_post_meta( $post->ID );
 
+	unset( $meta['_edit_lock'] );
+	unset( $meta['_pingme'] );
+	unset( $meta['_encloseme'] );
 
 	global $wp_scripts;
 	// var_dump($wp_scripts->do_items());
 
 	// var_dump(\get_post_meta( $post->ID, 'ps_image5', false ) );
 
-	$html =
-		'<span width="24" height="24" viewBox="0 0 24 24">
-			<script>alert("svg alert")</script>
-			<div>hila asd asd a</div>
-		</span>';
-
-	// wp_kses( $html );
-	print_r( \wp_kses( $html,'post' ) );
-
 	// var_dump(true == 0 ? true : false);
-	var_dump(ps_get_checkbox('ps_checkbox1'));
-	var_dump(ps_get_meta('ps_checkbox1'));
+	// var_dump(ps_get_checkbox('ps_checkbox1'));
+	// var_dump(ps_get_meta('ps_checkbox1'));
 	// print_r(isset( $qqq['qwe']['we'] )?'true':'false');
 
 	// print_r(\absint(true));
@@ -48,8 +42,8 @@ function ttest() {
 	// if ( isset( $meta[ 'ps_range' ] ) ) { print_r( '<br/>ps_range: ' ); var_dump( $meta[ 'ps_range' ] ); }
 	// if ( isset( $meta[ 'ps_range_float' ] ) ) { print_r( '<br/>ps_range_float: ' ); var_dump( $meta[ 'ps_range_float' ] ); }
 
-// var_dump( $meta );
+var_dump( $meta );
 
 }
-
 // add_action( 'wp_head', __NAMESPACE__ . '\ttest' );
+

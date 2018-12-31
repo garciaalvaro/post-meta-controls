@@ -14,17 +14,17 @@ namespace POSTSETTINGS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! defined( 'PLUGIN_VERSION' ) ) {
-	define( 'PLUGIN_VERSION', '0.0.1' );
+if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
+	define( __NAMESPACE__ . '\PLUGIN_VERSION', '0.0.1' );
 }
-if ( ! defined( 'BUILD_DIR' ) ) {
-	define( 'BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
+if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
+	define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
 }
-if ( ! defined( 'INC_DIR' ) ) {
-	define( 'INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
+if ( ! defined( __NAMESPACE__ . '\INC_DIR' ) ) {
+	define( __NAMESPACE__ . '\INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
 }
-if ( ! defined( 'PLUGIN_DIR' ) ) {
-	define( 'PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
+	define( __NAMESPACE__ . '\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 require_once INC_DIR . '_test-back.php';
