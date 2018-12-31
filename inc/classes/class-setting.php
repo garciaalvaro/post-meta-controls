@@ -51,7 +51,8 @@ abstract class Setting extends Base {
 
 		if (
 			true !== $this->props['valid'] ||
-			'meta' !== $this->props['data_type']
+			'meta' !== $this->props['data_type'] ||
+			true !== $this->props['register_meta']
 		) {
 			return;
 		}
@@ -145,6 +146,7 @@ abstract class Setting extends Base {
 			'data_key_prefix'              => false,
 			'data_key_with_prefix'         => '',
 			'data_key_prefix_from_sidebar' => '',
+			'register_meta'                => true,
 		);
 	}
 
@@ -205,6 +207,10 @@ abstract class Setting extends Base {
 			'data_key_with_prefix' => array(
 				'type'   => 'id',
 				'for_js' => true,
+			),
+			'register_meta' => array(
+				'type'   => 'boolean',
+				'for_js' => false,
 			),
 		);
 	}
