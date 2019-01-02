@@ -45,5 +45,5 @@ function ttest() {
 var_dump( $meta );
 
 }
-// add_action( 'wp_head', __NAMESPACE__ . '\ttest' );
+add_action( 'wp_head', __NAMESPACE__ . '\ttest' );
 

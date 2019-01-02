@@ -27,6 +27,7 @@ class Select extends Setting {
 					value: value.value,
 					label: value.label
 				});
+				return;
 			}
 
 			if (!isString(value)) {

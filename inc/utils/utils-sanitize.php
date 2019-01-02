@@ -37,7 +37,7 @@ function sanitize_html_svg( $value ) {
 }
 
 function sanitize_string( $value ) {
-	if ( ! is_string( $value ) ) {
+	if ( ! is_string( $value ) && ! is_int( $value ) ) {
 		return '';
 	}
 
@@ -47,7 +47,7 @@ function sanitize_string( $value ) {
 }
 
 function sanitize_id( $value ) {
-	if ( ! is_string( $value ) ) {
+	if ( ! is_string( $value ) && ! is_int( $value ) ) {
 		return '';
 	}
 
@@ -55,7 +55,7 @@ function sanitize_id( $value ) {
 }
 
 function sanitize_text( $value ) {
-	if ( ! is_string( $value ) ) {
+	if ( ! is_string( $value ) && ! is_int( $value ) ) {
 		return '';
 	}
 
@@ -63,7 +63,7 @@ function sanitize_text( $value ) {
 }
 
 function sanitize_textarea( $value ) {
-	if ( ! is_string( $value ) ) {
+	if ( ! is_string( $value ) && ! is_int( $value ) ) {
 		return '';
 	}
 

@@ -22,7 +22,10 @@ class Radio extends Setting {
 		$options_clean = array();
 
 		foreach ( $this->props['options'] as $key => $value ) {
-			if ( ! is_string( $key ) || ! is_string( $value ) ) {
+			if (
+				( ! is_string( $key ) && ! is_int( $key ) ) ||
+				( ! is_string( $value ) && ! is_int( $value ) )
+			) {
 				continue;
 			}
 
