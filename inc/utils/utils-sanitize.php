@@ -25,9 +25,10 @@ function sanitize_html_svg( $value ) {
 			'x'            => true,
 			'y'            => true,
 		),
-		'g'     => array( 'class' => true, 'stroke-width' => true, 'fill' => true ),
-		'path'  => array( 'class' => true, 'stroke-width' => true, 'fill' => true, 'd' => true, ),
-		'title' => array( 'class' => true, 'title' => true ),
+		'g'       => array( 'class' => true, 'stroke-width' => true, 'fill' => true ),
+		'path'    => array( 'class' => true, 'stroke-width' => true, 'fill' => true, 'd' => true, ),
+		'polygon' => array( 'class' => true, 'stroke-width' => true, 'fill' => true, 'points' => true, ),
+		'title'   => array( 'class' => true, 'title' => true ),
 	);
 	$value = \wp_kses( $value, $allowed_svg );
 	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
@@ -108,6 +109,16 @@ function sanitize_array_integer( $value ) {
 	return $value;
 }
 
+function sanitize_array_boolean( $value ) {
+	$value = sanitize_array( $value );
+
+	foreach ( $value as $array_key => $array_value ) {
+		$value[ $array_key ] = sanitize_boolean( $array_value );
+	}
+
+	return $value;
+}
+
 function sanitize_array_text( $value ) {
 	$value = sanitize_array( $value );
 
@@ -157,7 +168,7 @@ function sanitize_options(
 
 	$value   = \sanitize_key( $value );
 	$options = sanitize_array( $options );
-	$default = true === $multiple ? '' : sanitize_id( $default );
+	$default = true === $multiple ? '' : sanitize_id( $default );// TODO, if multiple, return empty string?
 
 	$options = array_map( function( $option ) {
 		return $option['value'];

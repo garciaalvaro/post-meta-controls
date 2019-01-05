@@ -127,6 +127,10 @@ abstract class Base {
 					}
 					break;
 
+				case 'array_boolean':
+					$this->props[ $key ] = sanitize_array_boolean( $value );
+					break;
+
 				default:
 					$this->props[ $key ] = '';
 					break;
