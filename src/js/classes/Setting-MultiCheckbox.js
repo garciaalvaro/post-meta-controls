@@ -3,7 +3,7 @@ import Setting from "./Setting";
 
 const { forEach, isEmpty, isString, isObject } = lodash;
 
-class Select extends Setting {
+class MultiCheckbox extends Setting {
 	beforeSetSchema() {
 		super.beforeSetSchema();
 		this.prepareOptions();
@@ -45,10 +45,10 @@ class Select extends Setting {
 
 	setDefaults() {
 		const this_defaults = {
-			type: "select",
+			type: "multi_checkbox",
 			default_value: "",
-			multiple: false,
-			options: []
+			options: [],
+			use_toggle: false
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -59,14 +59,14 @@ class Select extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "id_OR_array_id"
-			},
-			multiple: {
-				type: "boolean"
+				type: "array_id"
 			},
 			options: {
 				type: "array_object_text",
 				conditions: "not_empty"
+			},
+			use_toggle: {
+				type: "boolean"
 			}
 		};
 
@@ -76,4 +76,4 @@ class Select extends Setting {
 	}
 }
 
-export default Select;
+export default MultiCheckbox;

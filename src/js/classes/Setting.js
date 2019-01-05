@@ -18,7 +18,8 @@ class Setting extends Base {
 			"color",
 			"image",
 			"date_time",
-			"buttons"
+			"buttons",
+			"multi_checkbox"
 		];
 		if (
 			this.props.data_type === "meta" &&
@@ -34,7 +35,8 @@ class Setting extends Base {
 			"range",
 			"color",
 			"date_time",
-			"buttons"
+			"buttons",
+			"multi_checkbox"
 		];
 		if (
 			this.props.data_type === "localstorage" &&

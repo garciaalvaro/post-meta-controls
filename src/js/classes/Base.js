@@ -173,10 +173,6 @@ class Base {
 					}
 					break;
 
-				case "array_boolean":
-					this.props[key] = sanitize.arrayBoolean(value);
-					break;
-
 				default:
 					this.props[key] = "";
 					break;

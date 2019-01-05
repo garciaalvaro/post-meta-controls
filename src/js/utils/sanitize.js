@@ -105,16 +105,6 @@ const sanitizeArrayInteger = value => {
 	return value;
 };
 
-const sanitizeArrayBoolean = value => {
-	value = sanitizeArray(value);
-
-	forEach(value, (array_value, array_index) => {
-		value[array_index] = sanitizeBoolean(array_value);
-	});
-
-	return value;
-};
-
 const sanitizeArrayText = value => {
 	value = sanitizeArray(value);
 
@@ -184,7 +174,6 @@ export default {
 	object: sanitizeObject,
 	arrayId: sanitizeArrayId,
 	arrayInteger: sanitizeArrayInteger,
-	arrayBoolean: sanitizeArrayBoolean,
 	arrayText: sanitizeArrayText,
 	objectText: sanitizeObjectText,
 	arrayEmpty: sanitizeArrayEmpty,

@@ -6,6 +6,7 @@ import Color from "./Setting-Color";
 import CustomText from "./Setting-CustomText";
 import DateTime from "./Setting-DateTime";
 import Image from "./Setting-Image";
+import MultiCheckbox from "./Setting-MultiCheckbox";
 import Radio from "./Setting-Radio";
 import Range from "./Setting-Range";
 import Select from "./Setting-Select";
@@ -27,6 +28,7 @@ classes = {
 	CustomText,
 	DateTime,
 	Image,
+	MultiCheckbox,
 	Radio,
 	Range,
 	Select,

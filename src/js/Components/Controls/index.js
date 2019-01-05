@@ -10,6 +10,7 @@ import ImageContainer from "./ImageContainer";
 import CustomText from "./CustomText";
 import DateTime from "./DateTime";
 import Buttons from "./Buttons";
+import MultiCheckbox from "./MultiCheckbox";
 
 const { isEmpty } = lodash;
 const { applyFilters } = wp.hooks;
@@ -27,7 +28,8 @@ controls = {
 	ImageContainer,
 	CustomText,
 	DateTime,
-	Buttons
+	Buttons,
+	MultiCheckbox
 };
 
 const controls_pro = applyFilters("ps_add_controls", {});

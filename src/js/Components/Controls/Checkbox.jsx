@@ -11,7 +11,7 @@ class Checkbox extends Component {
 		if (use_toggle) {
 			return (
 				<ToggleControl
-					className={`${plugin_slug}control-checkbox`}
+					className={`${plugin_slug}-control-toggle`}
 					label={label}
 					help={help}
 					checked={value}
@@ -22,7 +22,7 @@ class Checkbox extends Component {
 
 		return (
 			<CheckboxControl
-				className={`${plugin_slug}control-checkbox`}
+				className={`${plugin_slug}-control-checkbox`}
 				label={label}
 				help={help}
 				checked={value}

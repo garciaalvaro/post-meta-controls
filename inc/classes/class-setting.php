@@ -96,6 +96,7 @@ abstract class Setting extends Base {
 			'image',
 			'date_time',
 			'buttons',
+			'multi_checkbox',
 		);
 		if (
 			'meta' === $this->props['data_type'] &&
@@ -112,6 +113,7 @@ abstract class Setting extends Base {
 			'color',
 			'date_time',
 			'buttons',
+			'multi_checkbox',
 		);
 		if (
 			'localstorage' === $this->props['data_type'] &&

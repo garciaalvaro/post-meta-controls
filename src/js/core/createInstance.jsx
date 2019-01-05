@@ -16,6 +16,7 @@ const {
 	CustomText,
 	DateTime,
 	Buttons,
+	MultiCheckbox,
 	CustomHTML
 } = classes;
 const { isUndefined } = lodash;
@@ -75,6 +76,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "buttons":
 				instance = new Buttons(props_raw);
+				break;
+
+			case "multi_checkbox":
+				instance = new MultiCheckbox(props_raw);
 				break;
 
 			case "custom_html":

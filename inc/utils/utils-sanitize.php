@@ -109,16 +109,6 @@ function sanitize_array_integer( $value ) {
 	return $value;
 }
 
-function sanitize_array_boolean( $value ) {
-	$value = sanitize_array( $value );
-
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_boolean( $array_value );
-	}
-
-	return $value;
-}
-
 function sanitize_array_text( $value ) {
 	$value = sanitize_array( $value );
 

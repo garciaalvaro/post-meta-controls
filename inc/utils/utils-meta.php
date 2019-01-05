@@ -28,6 +28,7 @@ function get_meta_arg_single( $type = '', $props = array() ) {
 	$multiple =
 		( 'select' === $type || 'image' === $type ) &&
 		true === $props['multiple'];
+	$multiple = 'multi_checkbox' === $type ? true : $multiple;
 
 	return false === $multiple;
 }

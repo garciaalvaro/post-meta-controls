@@ -52,6 +52,7 @@ require_once INC_DIR . 'classes/class-setting-image.php';
 require_once INC_DIR . 'classes/class-setting-custom_text.php';
 require_once INC_DIR . 'classes/class-setting-date_time.php';
 require_once INC_DIR . 'classes/class-setting-buttons.php';
+require_once INC_DIR . 'classes/class-setting-multi_checkbox.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
