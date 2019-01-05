@@ -1,9 +1,7 @@
-import l from "../../utils";
-import Div, { Span } from "../Utils";
+import l, { Div, Span } from "../../utils";
 
 const { __, sprintf } = wp.i18n;
 const { Component } = wp.element;
-const { BaseControl } = wp.components;
 
 class Invalid extends Component {
 	render() {

@@ -1,5 +1,4 @@
-import l from "../../utils";
-import Div from "../Utils";
+import l, { Div } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -72,7 +71,7 @@ class Setting extends Component {
 	}
 
 	render() {
-		const { id, valid } = this.props;
+		const { id } = this.props;
 
 		return (
 			<Div id={`ps-control-${id}`} className="ps-control">

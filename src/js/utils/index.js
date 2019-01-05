@@ -10,6 +10,7 @@ import {
 	plugin_slug
 } from "./info-plugin";
 import store_slug from "./info-store";
+import { DivForwardRef, Div, Span, Img, P, H3, Ol, Ul, Li } from "./Components";
 
 export default l;
 export {
@@ -21,5 +22,14 @@ export {
 	plugin_namespace,
 	plugin_namespace_dash,
 	plugin_slug,
-	store_slug
+	store_slug,
+	DivForwardRef,
+	Div,
+	Span,
+	Img,
+	P,
+	H3,
+	Ol,
+	Ul,
+	Li
 };

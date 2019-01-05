@@ -1,4 +1,4 @@
-import l, { plugin_namespace_dash } from "../utils";
+import l, { plugin_namespace_dash } from "../../utils";
 import Sidebar from "./Sidebar";
 
 const { Fragment, Component } = wp.element;

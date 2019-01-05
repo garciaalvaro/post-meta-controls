@@ -1,8 +1,6 @@
-import l, { store_slug } from "../../utils";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
 const { TextareaControl } = wp.components;
 
@@ -12,7 +10,7 @@ class Textarea extends Component {
 
 		return (
 			<TextareaControl
-				className="ps-control-textarea"
+				className={`${plugin_slug}-control-textarea`}
 				label={label}
 				help={help}
 				value={value}

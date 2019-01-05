@@ -1,4 +1,12 @@
-import l from "../../utils";
+const { forwardRef } = wp.element;
+
+const DivForwardRef = forwardRef(({ children, ...rest }, ref) => {
+	return (
+		<div {...rest} ref={ref}>
+			{children}
+		</div>
+	);
+});
 
 const Div = ({ children, ...rest }) => <div {...rest}>{children}</div>;
 const Span = ({ children, ...rest }) => <span {...rest}>{children}</span>;
@@ -9,5 +17,4 @@ const Ol = ({ children, ...rest }) => <ol {...rest}>{children}</ol>;
 const Ul = ({ children, ...rest }) => <ul {...rest}>{children}</ul>;
 const Li = ({ children, ...rest }) => <li {...rest}>{children}</li>;
 
-export default Div;
-export { Span, Img, P, H3, Ol, Ul, Li };
+export { DivForwardRef, Div, Span, Img, P, H3, Ol, Ul, Li };

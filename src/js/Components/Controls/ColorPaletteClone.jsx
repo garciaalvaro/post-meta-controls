@@ -1,5 +1,4 @@
-import l from "../../utils";
-import Div from "../Utils";
+import l, { Div } from "../../utils";
 import ColorPickerWithAlpha from "./ColorPickerWithAlpha";
 
 const { map, compact } = lodash;

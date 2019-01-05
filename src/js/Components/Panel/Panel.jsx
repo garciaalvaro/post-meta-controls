@@ -1,5 +1,4 @@
-import l, { store_slug } from "../../utils";
-import Div from "../Utils";
+import l, { store_slug, Div } from "../../utils";
 import Setting from "../Setting/Setting";
 
 const { withState, compose } = wp.compose;

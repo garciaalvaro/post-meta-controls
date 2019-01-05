@@ -1,5 +1,4 @@
-import l, { store_slug } from "../../utils";
-import DivForwardRef from "../Utils/_HtmlForwardRef";
+import l, { DivForwardRef } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 import * as AColorPicker from "a-color-picker";
 

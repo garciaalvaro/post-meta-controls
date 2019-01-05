@@ -1,8 +1,6 @@
-import l from "../../utils";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { Component } = wp.element;
 const { RadioControl } = wp.components;
 
@@ -12,7 +10,7 @@ class Radio extends Component {
 
 		return (
 			<RadioControl
-				className="ps-control-radio"
+				className={`${plugin_slug}-control-radio`}
 				label={label}
 				help={help}
 				selected={value}

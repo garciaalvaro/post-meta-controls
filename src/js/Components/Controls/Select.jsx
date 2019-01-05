@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
 const { Component } = wp.element;
@@ -17,7 +17,7 @@ class Select extends Component {
 
 		return (
 			<SelectControl
-				className="ps-control-select"
+				className={`${plugin_slug}-control-select`}
 				label={label}
 				help={help}
 				value={value}

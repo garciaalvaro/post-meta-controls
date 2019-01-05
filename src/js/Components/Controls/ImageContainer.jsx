@@ -1,5 +1,4 @@
-import l, { store_slug, getImageDataObject } from "../../utils";
-import Div from "../Utils";
+import l, { store_slug, getImageDataObject, Div } from "../../utils";
 import Image from "./Image";
 
 const { isEmpty, castArray, map, get } = lodash;
@@ -49,7 +48,7 @@ class ImageContainer extends Component {
 		const { value, multiple } = this.props;
 
 		return (
-			<Div id="icp-media-container">
+			<Div className={`${plugin_slug}-control-image`}>
 				<MediaUpload
 					onSelect={onSelectHandler}
 					type="image"

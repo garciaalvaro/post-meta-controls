@@ -1,7 +1,6 @@
-import l, { store_slug } from "../../utils";
-import Div, { Img } from "../Utils/_Html";
+import l, { store_slug, Div, Img } from "../../utils";
 
-const { Component, Fragment, createRef } = wp.element;
+const { Component } = wp.element;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 
@@ -10,7 +9,7 @@ class Image extends Component {
 		const { open, url, alt } = this.props;
 
 		return (
-			<Div id="icp-image-container">
+			<Div>
 				<Img onClick={open} src={url} alt={alt} />
 			</Div>
 		);

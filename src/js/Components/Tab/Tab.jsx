@@ -1,5 +1,4 @@
-import l, { plugin_slug, store_slug } from "../../utils";
-import Div from "../Utils";
+import l, { plugin_slug, store_slug, Div } from "../../utils";
 import Panel from "../Panel/Panel";
 
 const { withState, compose } = wp.compose;

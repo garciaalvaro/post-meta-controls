@@ -1,5 +1,4 @@
-import l from "../../utils";
-import Div, { P, H3, Ol, Ul, Li } from "../Utils";
+import l, { plugin_slug, Div, P, H3, Ol, Ul, Li } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 
 const { map } = lodash;
@@ -10,7 +9,7 @@ class CustomText extends Component {
 		const { content } = this.props;
 
 		return (
-			<Div>
+			<Div className={`${plugin_slug}-control-custom_text`}>
 				{content.map(element => {
 					switch (element.type) {
 						case "p":

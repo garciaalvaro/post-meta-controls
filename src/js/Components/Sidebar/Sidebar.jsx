@@ -1,11 +1,9 @@
-import l, { plugin_slug, store_slug } from "../../utils";
-import Div, { Span } from "../Utils";
+import l, { plugin_slug, store_slug, Div, Span } from "../../utils";
 import Invalid from "./Invalid";
 import Tabs from "../Tab/Tabs";
 
 const { isEmpty } = lodash;
 const { __ } = wp.i18n;
-const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
 const { Component } = wp.element;
 
@@ -18,13 +16,7 @@ class Sidebar extends Component {
 			`color_scheme-name-banana`
 		].join(" ");
 
-		if (isEmpty(all_warnings)) {
-			return (
-				<Div id={`ps-sidebar-${id}`} className={classes}>
-					<Tabs sidebar_id={id} />
-				</Div>
-			);
-		} else {
+		if (!isEmpty(all_warnings)) {
 			return (
 				<Div>
 					<Div id="ps-invalid-header">
@@ -38,6 +30,12 @@ class Sidebar extends Component {
 				</Div>
 			);
 		}
+
+		return (
+			<Div id={`ps-sidebar-${id}`} className={classes}>
+				<Tabs sidebar_id={id} />
+			</Div>
+		);
 	}
 }
 

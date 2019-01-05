@@ -1,4 +1,4 @@
-import l, { store_slug } from "../../utils";
+import l, { plugin_slug } from "../../utils";
 import withStoreConnection from "./_withStoreConnection";
 import ColorPaletteClone from "./ColorPaletteClone";
 
@@ -21,6 +21,7 @@ class Color extends Component {
 
 		return (
 			<ColorPalette
+				className={`${plugin_slug}-control-color`}
 				colors={palette}
 				value={value}
 				onChange={updateValue}
