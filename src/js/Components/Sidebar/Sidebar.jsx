@@ -19,7 +19,7 @@ class Sidebar extends Component {
 		if (!isEmpty(all_warnings)) {
 			return (
 				<Div>
-					<Div id="ps-invalid-header">
+					<Div id={`${plugin_slug}-invalid-header`}>
 						<Span>
 							{__("The sidebar has some invalid properties:")}
 						</Span>
@@ -32,7 +32,7 @@ class Sidebar extends Component {
 		}
 
 		return (
-			<Div id={`ps-sidebar-${id}`} className={classes}>
+			<Div id={`${plugin_slug}-sidebar-${id}`} className={classes}>
 				<Tabs sidebar_id={id} />
 			</Div>
 		);

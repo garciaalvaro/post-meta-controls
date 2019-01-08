@@ -1,15 +1,15 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Textarea extends Setting {
+class Text extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'textarea',
+			'type'          => 'text',
 			'default_value' => '',
 		);
 

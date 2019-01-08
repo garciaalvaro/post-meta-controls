@@ -1,6 +1,6 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -110,4 +110,4 @@ function my_function( $sidebars ) {
 
 }
 
-add_filter( 'ps_create_sidebar', __NAMESPACE__ . '\my_function' );
+// add_filter( 'pmc_create_sidebar', __NAMESPACE__ . '\my_function' );

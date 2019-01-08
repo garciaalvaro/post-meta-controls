@@ -1,11 +1,11 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Radio extends Setting {
+class MultiCheckbox extends Setting {
 
 	protected function before_set_schema() {
 		parent::before_set_schema();
@@ -40,9 +40,10 @@ class Radio extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'radio',
+			'type'          => 'multi_checkbox',
 			'default_value' => '',
 			'options'       => array(),
+			'use_toggle'    => false,
 		);
 
 		$parent_defaults = parent::get_defaults();
@@ -54,13 +55,17 @@ class Radio extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'id',
+				'type'   => 'array_id',
 				'for_js' => true,
 			),
 			'options' => array(
 				'type'       => 'array_array_text',
 				'for_js'     => true,
 				'conditions' => 'not_empty',
+			),
+			'use_toggle' => array(
+				'type'   => 'boolean',
+				'for_js' => true,
 			),
 		);
 

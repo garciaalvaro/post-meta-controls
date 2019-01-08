@@ -1,4 +1,4 @@
-import l, { Div } from "../../utils";
+import l, { Div, plugin_slug } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -74,7 +74,10 @@ class Setting extends Component {
 		const { id } = this.props;
 
 		return (
-			<Div id={`ps-control-${id}`} className="ps-control">
+			<Div
+				id={`${plugin_slug}-control-${id}`}
+				className={`${plugin_slug}-control`}
+			>
 				{this.getControl()}
 			</Div>
 		);

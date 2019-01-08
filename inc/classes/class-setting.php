@@ -1,6 +1,6 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -10,7 +10,7 @@ abstract class Setting extends Base {
 	abstract protected function set_defaults();
 	abstract protected function set_schema();
 
-	protected function before_set_schema() {// TODO: check if this could be set to private
+	protected function before_set_schema() {
 		$this->prepare_data_type();
 		$this->set_data_key_with_prefix();
 	}

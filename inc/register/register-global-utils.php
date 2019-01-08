@@ -3,12 +3,12 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-use function POSTSETTINGS\sanitize_id;
-use function POSTSETTINGS\sanitize_array_integer;
-use function POSTSETTINGS\sanitize_integer;
-use function POSTSETTINGS\sanitize_array_id;
-use function POSTSETTINGS\sanitize_float;
-use function POSTSETTINGS\sanitize_text;
+use function POSTMETACONTROLS\sanitize_id;
+use function POSTMETACONTROLS\sanitize_array_integer;
+use function POSTMETACONTROLS\sanitize_integer;
+use function POSTMETACONTROLS\sanitize_array_id;
+use function POSTMETACONTROLS\sanitize_float;
+use function POSTMETACONTROLS\sanitize_text;
 
 
 if ( ! function_exists( 'ps_get_meta' ) ) {

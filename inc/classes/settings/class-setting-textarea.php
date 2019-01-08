@@ -1,17 +1,16 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class DateTime extends Setting {
+class Textarea extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'date_time',
+			'type'          => 'textarea',
 			'default_value' => '',
-			'use_12hour'    => false,
 		);
 
 		$parent_defaults = parent::get_defaults();
@@ -25,10 +24,6 @@ class DateTime extends Setting {
 			'default_value' => array(
 				'type'   => 'text',
 				'for_js' => true,
-			),
-			'use_12hour' => array(
-				'type'       => 'boolean',
-				'for_js'     => true,
 			),
 		);
 

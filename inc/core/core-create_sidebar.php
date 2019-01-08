@@ -1,6 +1,6 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 function create_sidebar() {
 
 	// This is the filter used to add custom sidebars inside other plugins/themes.
-	$props_raw = apply_filters( 'ps_create_sidebar', array() );
+	$props_raw = apply_filters( 'pmc_create_sidebar', array() );
 
 	if ( ! is_array( $props_raw ) || empty( $props_raw ) ) {
 		return;
@@ -38,7 +38,7 @@ function create_sidebar() {
 
 	// Add the action to localize the data into the editor.
 	add_action(
-		'ps_after_enqueue',
+		'pmc_after_enqueue',
 		function() use ( $instances ) {
 
 			// Set this property here, as the post id wasn't available before.
@@ -64,7 +64,7 @@ function create_sidebar() {
 				return;
 			}
 
-			wp_localize_script( 'postsettings', 'ps_items', $props );
+			wp_localize_script( PLUGIN_NAME, 'pmc_items', $props );
 		}
 	);
 }

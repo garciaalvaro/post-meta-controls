@@ -1,4 +1,4 @@
-import l, { store_slug, Div } from "../../utils";
+import l, { plugin_slug, store_slug, Div } from "../../utils";
 import Setting from "../Setting/Setting";
 
 const { withState, compose } = wp.compose;
@@ -11,7 +11,10 @@ class Panel extends Component {
 		const { settings, id } = this.props;
 
 		return (
-			<Div id={`ps-panel-${id}`} className="ps-panel">
+			<Div
+				id={`${plugin_slug}-panel-${id}`}
+				className={`${plugin_slug}-panel`}
+			>
 				<PanelRow>
 					{settings.map((setting, index) => (
 						<Setting key={setting.id} {...setting} />
@@ -34,7 +37,7 @@ class Panel extends Component {
 				title={label}
 				icon="welcome-widgets-menus"
 				initialOpen={initial_open}
-				className="ps-panel"
+				className={`${plugin_slug}-panel`}
 				onToggle={togglePanelInitialOpen}
 			>
 				{this.getPanelsComponent()}

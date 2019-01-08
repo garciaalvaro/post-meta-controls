@@ -3,7 +3,7 @@
  * Register a reaction post type, with REST API support
  */
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }

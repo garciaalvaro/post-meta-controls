@@ -38,7 +38,7 @@ classes = {
 	Tab
 };
 
-const classes_pro = applyFilters("ps_add_classes", {});
+const classes_pro = applyFilters("pmc_add_classes", {});
 
 if (!isEmpty(classes_pro)) {
 	const { CustomHTML } = classes_pro;

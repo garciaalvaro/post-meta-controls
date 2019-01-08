@@ -1,6 +1,6 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function enqueue() {
 
-	do_action( 'ps_before_enqueue' );
+	do_action( 'pmc_before_enqueue' );
 
 	wp_enqueue_style(
-		'postsettings',
-		BUILD_DIR . 'postsettings.css',
+		PLUGIN_NAME,
+		BUILD_DIR . PLUGIN_NAME . '.css',
 		array(),
 		PLUGIN_VERSION
 	);
 
 	wp_enqueue_script(
-		'postsettings',
-		BUILD_DIR . 'postsettings.js',
+		PLUGIN_NAME,
+		BUILD_DIR . PLUGIN_NAME . '.js',
 		array(
 			'lodash',
 			'wp-i18n',
@@ -41,7 +41,7 @@ function enqueue() {
 		true // Enqueue in the footer.
 	);
 
-	do_action( 'ps_after_enqueue' );
+	do_action( 'pmc_after_enqueue' );
 }
 
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );

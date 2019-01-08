@@ -1,12 +1,11 @@
 {
-	"name": "postsettings",
-	"name_title": "PostSettings",
+	"name": "postmetacontrols",
+	"name_title": "Post Meta Controls",
 	"version": "0.0.1",
-	"description": "PostSettings",
 	"homepage": "#",
 	"main": "index.js",
 	"scripts": {
-		"dev": "parcel watch src/index.js -o postsettings.js -d build & parcel watch pro/src/index.js -o postsettings-pro.js -d pro/build"
+		"dev": "parcel watch src/index.js -o post-meta-controls.js -d build & parcel watch pro/src/index.js -o post-meta-controls-pro.js -d pro/build"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",

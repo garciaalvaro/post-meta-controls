@@ -1,6 +1,6 @@
 <?php
 
-namespace POSTSETTINGS;
+namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -17,7 +17,7 @@ class Sidebar extends Base {
 			'label'           => '',
 			'post_type'       => 'post',
 			'description'     => '',
-			'data_key_prefix' => 'ps_',
+			'data_key_prefix' => 'pmc_',
 			'icon_dashicon'   => 'carrot',
 			'icon_svg'        => false,
 		);

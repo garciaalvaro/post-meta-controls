@@ -4,9 +4,9 @@ import createSidebars from "./createSidebars";
 
 createStore();
 
-if (typeof ps_items !== "undefined") {
-	l(ps_items);
-	createSidebars(ps_items);
+if (typeof pmc_items !== "undefined") {
+	l(pmc_items);
+	createSidebars(pmc_items);
 }
 
 // window.psCreateSidebars = createSidebars;

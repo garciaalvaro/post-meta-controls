@@ -32,7 +32,7 @@ controls = {
 	MultiCheckbox
 };
 
-const controls_pro = applyFilters("ps_add_controls", {});
+const controls_pro = applyFilters("pmc_add_controls", {});
 
 if (!isEmpty(controls_pro)) {
 	const { CustomHTML } = controls_pro;

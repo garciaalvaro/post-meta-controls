@@ -16,7 +16,7 @@ class Sidebar extends Base {
 		plugin_id = plugin_id.replace(/[^a-zA-Z0-9-]/g, "");
 		const icon =
 			icon_svg !== "" ? (
-				<RawHTML className="ps-icon">
+				<RawHTML className={`${plugin_slug}-icon`}>
 					{DOMPurify.sanitize(icon_svg)}
 				</RawHTML>
 			) : (
