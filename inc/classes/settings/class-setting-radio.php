@@ -32,7 +32,12 @@ class Radio extends Setting {
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => 'array_array_text',
+				'type'       => array(
+					'_all' => array(
+						'value' => 'id',
+						'label' => 'text',
+					),
+				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),

@@ -60,78 +60,8 @@ abstract class Base {
 
 	private function cast_schema() {
 
-		foreach ( $this->props as $key => $value ) {
+		$this->props = cast_schema( $this->props, $this->props_schema );
 
-			switch ( $this->props_schema[ $key ]['type'] ) {
-				case 'string':
-					$this->props[ $key ] = sanitize_string( $value );
-					break;
-
-				case 'html_svg':
-					$this->props[ $key ] = sanitize_html_svg( $value );
-					break;
-
-				case 'id':
-					$this->props[ $key ] = sanitize_id( $value );
-					break;
-
-				case 'text':
-					$this->props[ $key ] = sanitize_text( $value );
-					break;
-
-				case 'float':
-					$this->props[ $key ] = sanitize_float( $value );
-					break;
-
-				case 'integer':
-					$this->props[ $key ] = sanitize_integer( $value );
-					break;
-
-				case 'boolean':
-					$this->props[ $key ] = sanitize_boolean( $value );
-					break;
-
-				case 'array_integer':
-					$this->props[ $key ] = sanitize_array_integer( $value );
-					break;
-
-				case 'array_id':
-					$this->props[ $key ] = sanitize_array_id( $value );
-					break;
-
-				case 'array_text':
-					$this->props[ $key ] = sanitize_array_text( $value );
-					break;
-
-				case 'array_array_text':
-					$this->props[ $key ] = sanitize_array_array_text( $value );
-					break;
-
-				case 'array_array_string':
-					$this->props[ $key ] = sanitize_array_array_string( $value );
-					break;
-
-				case 'id_OR_array_id':
-					if ( is_array( $this->props[ $key ] ) ) {
-						$this->props[ $key ] = sanitize_array_id( $value );
-					} else {
-						$this->props[ $key ] = sanitize_id( $value );
-					}
-					break;
-
-				case 'integer_OR_array_integer':
-					if ( is_array( $this->props[ $key ] ) ) {
-						$this->props[ $key ] = sanitize_array_integer( $value );
-					} else {
-						$this->props[ $key ] = sanitize_integer( $value );
-					}
-					break;
-
-				default:
-					$this->props[ $key ] = '';
-					break;
-			}
-		}
 	}
 
 	private function validate_props() {

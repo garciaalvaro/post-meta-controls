@@ -29,11 +29,16 @@ class MultiCheckbox extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'array_id',
+				'type'   => array( '_all' => 'id' ),
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => 'array_array_text',
+				'type'       => array(
+					'_all' => array(
+						'value' => 'id',
+						'label' => 'text',
+					),
+				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),

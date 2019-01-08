@@ -26,17 +26,21 @@ class Panel extends Base {
 				'conditions' => 'not_empty',
 			),
 			'path' => array(
-				'type'       => 'array_id',
+				'type'       => array( '_all' => 'id' ),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),
 			'label' => array(
 				'type'       => 'text',
 				'for_js'     => true,
-				'conditions' => true === $this->props['with_container'] ? 'not_empty' : false,
+				'conditions' => true === $this->props['with_container']
+					? 'not_empty'
+					: false,
 			),
 			'post_type' => array(
-				'type'   => 'id_OR_array_id',
+				'type'   => is_array( $this->props['post_type'] )
+					? array( '_all' => 'id' )
+					: 'id',
 				'for_js' => false,
 			),
 			'initial_open' => array(

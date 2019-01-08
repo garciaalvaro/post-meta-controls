@@ -59,7 +59,12 @@ class Color extends Setting {
 				'for_js' => true,
 			),
 			'palette' => array(
-				'type'   => 'array_array_text',
+				'type'   => array(
+					'_all' => array(
+						'name'  => 'id',
+						'color' => 'text',
+					),
+				),
 				'for_js' => true,
 			),
 		);

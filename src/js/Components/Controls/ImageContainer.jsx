@@ -1,4 +1,9 @@
-import l, { store_slug, getImageDataObject, Div } from "../../utils";
+import l, {
+	plugin_slug,
+	store_slug,
+	getImageDataObject,
+	Div
+} from "../../utils";
 import Image from "./Image";
 
 const { isEmpty, castArray, map, get } = lodash;

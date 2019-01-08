@@ -38,6 +38,7 @@ require_once INC_DIR . '_test-front.php';
 require_once INC_DIR . 'utils/utils-sanitize.php';
 
 // Utils from classes.
+require_once INC_DIR . 'classes/utils/utils-cast_schema.php';
 require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
 require_once INC_DIR . 'classes/utils/utils-meta.php';
 require_once INC_DIR . 'classes/utils/utils-methods.php';

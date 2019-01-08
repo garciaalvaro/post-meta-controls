@@ -23,7 +23,9 @@ class Image extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'integer_OR_array_integer',
+				'type'   => is_array( $this->props['default_value'] )
+					? array( '_all' => 'integer' )
+					: 'integer',
 				'for_js' => true,
 			),
 			'multiple' => array(

@@ -7,56 +7,56 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class Buttons extends Setting {
 
-	protected function before_set_schema() {
-		Setting::before_set_schema();
-		$this->prepare_options();
-	}
+	// protected function before_set_schema() {
+	// 	Setting::before_set_schema();
+	// 	$this->prepare_options();
+	// }
 
-	private function prepare_options() {
+	// private function prepare_options() {
 
-		if ( empty( $this->props['options'] ) ) {
-			return;
-		}
+	// 	if ( empty( $this->props['options'] ) ) {
+	// 		return;
+	// 	}
 
-		$options_clean = array();
+	// 	$options_clean = array();
 
-		foreach ( $this->props['options'] as $option ) {
-			if ( ! is_array( $option ) ) {
-				continue;
-			}
+	// 	foreach ( $this->props['options'] as $option ) {
+	// 		if ( ! is_array( $option ) ) {
+	// 			continue;
+	// 		}
 
-			$option_clean = array();
+	// 		$option_clean = array();
 
-			if ( ! empty( $option['icon_svg'] ) && is_string( $option['icon_svg'] ) ) {
-				$option_clean['icon_svg'] = sanitize_html_svg( $option['icon_svg'] );
-			} elseif (
-				! empty( $option['icon_dashicon'] ) &&
-				is_string( $option['icon_dashicon'] )
-			) {
-				$option_clean['icon_dashicon'] = sanitize_id( $option['icon_dashicon'] );
-			}
+	// 		if ( ! empty( $option['icon_svg'] ) && is_string( $option['icon_svg'] ) ) {
+	// 			$option_clean['icon_svg'] = sanitize_html_svg( $option['icon_svg'] );
+	// 		} elseif (
+	// 			! empty( $option['icon_dashicon'] ) &&
+	// 			is_string( $option['icon_dashicon'] )
+	// 		) {
+	// 			$option_clean['icon_dashicon'] = sanitize_id( $option['icon_dashicon'] );
+	// 		}
 
-			if ( ! empty( $option['title'] ) && is_string( $option['title'] ) ) {
-				$option_clean['title'] = sanitize_text( $option['title'] );
-			}
+	// 		if ( ! empty( $option['title'] ) && is_string( $option['title'] ) ) {
+	// 			$option_clean['title'] = sanitize_text( $option['title'] );
+	// 		}
 
-			if ( ! empty( $option['value'] ) && is_string( $option['value'] ) ) {
-				$option_clean['value'] = sanitize_id( $option['value'] );
-			}
+	// 		if ( ! empty( $option['value'] ) && is_string( $option['value'] ) ) {
+	// 			$option_clean['value'] = sanitize_id( $option['value'] );
+	// 		}
 
-			if (
-				! empty( $option_clean['value'] ) &&
-				(
-					! empty( $option_clean['icon_dashicon'] ) ||
-					! empty( $option_clean['icon_svg'] )
-				)
-			) {
-				$options_clean[] = $option_clean;
-			}
-		}
+	// 		if (
+	// 			! empty( $option_clean['value'] ) &&
+	// 			(
+	// 				! empty( $option_clean['icon_dashicon'] ) ||
+	// 				! empty( $option_clean['icon_svg'] )
+	// 			)
+	// 		) {
+	// 			$options_clean[] = $option_clean;
+	// 		}
+	// 	}
 
-		$this->props['options'] = $options_clean;
-	}
+	// 	$this->props['options'] = $options_clean;
+	// }
 
 	protected function set_defaults() {
 		$this_defaults = array(
@@ -83,7 +83,14 @@ class Buttons extends Setting {
 				'for_js'     => true,
 			),
 			'options' => array(
-				'type'       => 'array_array_string',
+				'type'       => array(
+					'_all' => array(
+						'value'         => 'id',
+						'title'         => 'text',
+						'icon_dashicon' => 'id',
+						'icon_svg'      => 'html_svg',
+					),
+				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),

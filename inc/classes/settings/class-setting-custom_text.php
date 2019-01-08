@@ -69,7 +69,12 @@ class CustomText extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'content' => array(
-				'type'       => 'array_array_text',
+				'type'       => array(
+					'_all' => array(
+						'type'    => 'id',
+						'content' => 'string',
+					),
+				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),

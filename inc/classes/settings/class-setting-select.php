@@ -29,11 +29,18 @@ class Select extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'id_OR_array_id',
+				'type'   => is_array( $this->props['default_value'] )
+					? array( '_all' => 'id' )
+					: 'id',
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => 'array_array_text',
+				'type'       => array(
+					'_all' => array(
+						'value' => 'id',
+						'label' => 'text',
+					),
+				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),

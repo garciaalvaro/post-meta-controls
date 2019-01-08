@@ -160,7 +160,7 @@ abstract class Setting extends Base {
 				'conditions' => 'not_empty',
 			),
 			'path' => array(
-				'type'       => 'array_id',
+				'type'       => array( '_all' => 'id' ),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
 			),
@@ -169,7 +169,9 @@ abstract class Setting extends Base {
 				'for_js' => true,
 			),
 			'post_type' => array(
-				'type'   => 'id_OR_array_id',
+				'type'   => is_array( $this->props['post_type'] )
+					? array( '_all' => 'id' )
+					: 'id',
 				'for_js' => false,
 			),
 			'type' => array(
@@ -196,7 +198,9 @@ abstract class Setting extends Base {
 			'data_key' => array(
 				'type'       => 'id',
 				'for_js'     => false,
-				'conditions' => 'none' !== $this->props['data_type'] ? 'not_empty' : false,
+				'conditions' => 'none' !== $this->props['data_type']
+					? 'not_empty'
+					: false,
 			),
 			'data_key_prefix' => array(
 				'type'   => 'id',
