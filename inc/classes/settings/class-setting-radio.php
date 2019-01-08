@@ -5,11 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Radio extends SettingWithOptions {
+class Radio extends Setting {
 
 	protected function before_set_schema() {
 		Setting::before_set_schema();
-		SettingWithOptions::prepare_options();
+		$this->props['options'] = prepare_options( $this->props['options'] );
 	}
 
 	protected function set_defaults() {

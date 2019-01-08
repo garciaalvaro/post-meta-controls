@@ -5,11 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class MultiCheckbox extends SettingWithOptions {
+class MultiCheckbox extends Setting {
 
 	protected function before_set_schema() {
 		Setting::before_set_schema();
-		SettingWithOptions::prepare_options();
+		$this->props['options'] = prepare_options( $this->props['options'] );
 	}
 
 	protected function set_defaults() {

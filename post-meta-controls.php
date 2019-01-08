@@ -34,10 +34,13 @@ if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
 require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
 
-// Utils.
-require_once INC_DIR . 'utils/utils-meta.php';
-require_once INC_DIR . 'utils/utils-methods.php';
+// Utils shared.
 require_once INC_DIR . 'utils/utils-sanitize.php';
+
+// Utils from classes.
+require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
+require_once INC_DIR . 'classes/utils/utils-meta.php';
+require_once INC_DIR . 'classes/utils/utils-methods.php';
 
 // Classes.
 require_once INC_DIR . 'classes/class-base.php';
@@ -47,7 +50,6 @@ require_once INC_DIR . 'classes/class-sidebar.php';
 require_once INC_DIR . 'classes/class-tab.php';
 
 // Classes Settings.
-require_once INC_DIR . 'classes/settings/class-with_options.php';
 require_once INC_DIR . 'classes/settings/class-setting-buttons.php';
 require_once INC_DIR . 'classes/settings/class-setting-checkbox.php';
 require_once INC_DIR . 'classes/settings/class-setting-color.php';

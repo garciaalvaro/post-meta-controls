@@ -3,6 +3,7 @@ import icons from "./icons";
 import sanitize from "./sanitize";
 import validate from "./validate";
 import getImageDataObject from "./getImageDataObject";
+import prepareOptions from "./prepareOptions";
 import {
 	plugin_name,
 	plugin_namespace,
@@ -18,6 +19,7 @@ export {
 	sanitize,
 	validate,
 	getImageDataObject,
+	prepareOptions,
 	plugin_name,
 	plugin_namespace,
 	plugin_namespace_dash,

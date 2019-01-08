@@ -1,45 +1,10 @@
-import l from "../utils";
+import l, { prepareOptions } from "../utils";
 import Setting from "./Setting";
-
-const { forEach, isEmpty, isString, isObject } = lodash;
 
 class Radio extends Setting {
 	beforeSetSchema() {
 		super.beforeSetSchema();
-		this.prepareOptions();
-	}
-
-	prepareOptions() {
-		if (isEmpty(this.props.options)) {
-			return;
-		}
-
-		const options_clean = [];
-
-		forEach(this.props.options, (value, key) => {
-			// If the option is already prepared
-			if (
-				isObject(value) &&
-				isString(value.value) &&
-				isString(value.label)
-			) {
-				options_clean.push({
-					value: value.value,
-					label: value.label
-				});
-			}
-
-			if (!isString(value)) {
-				return;
-			}
-
-			options_clean.push({
-				value: key,
-				label: value
-			});
-		});
-
-		this.props.options = options_clean;
+		this.props.options = prepareOptions(this.props.options);
 	}
 
 	setDefaults() {
