@@ -17,7 +17,7 @@ class Range extends Setting {
 			'float_number'  => false,
 		);
 
-		$parent_defaults = parent::get_defaults();
+		$parent_defaults = Setting::get_defaults();
 
 		$this->props_defaults =
 			wp_parse_args( $this_defaults, $parent_defaults );
@@ -52,7 +52,7 @@ class Range extends Setting {
 			),
 		);
 
-		$parent_schema = parent::get_schema();
+		$parent_schema = Setting::get_schema();
 
 		$this->props_schema =
 			wp_parse_args( $this_schema, $parent_schema );

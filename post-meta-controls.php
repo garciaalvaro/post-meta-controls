@@ -47,6 +47,7 @@ require_once INC_DIR . 'classes/class-sidebar.php';
 require_once INC_DIR . 'classes/class-tab.php';
 
 // Classes Settings.
+require_once INC_DIR . 'classes/settings/class-with_options.php';
 require_once INC_DIR . 'classes/settings/class-setting-buttons.php';
 require_once INC_DIR . 'classes/settings/class-setting-checkbox.php';
 require_once INC_DIR . 'classes/settings/class-setting-color.php';

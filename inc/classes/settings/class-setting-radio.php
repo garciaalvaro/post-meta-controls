@@ -5,37 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Radio extends Setting {
+class Radio extends SettingWithOptions {
 
 	protected function before_set_schema() {
-		parent::before_set_schema();
-		// parent::set_data_key_with_prefix();
-		$this->prepare_options();
-	}
-
-	private function prepare_options() {
-
-		if ( empty( $this->props['options'] ) ) {
-			return;
-		}
-
-		$options_clean = array();
-
-		foreach ( $this->props['options'] as $key => $value ) {
-			if (
-				( ! is_string( $key ) && ! is_int( $key ) ) ||
-				( ! is_string( $value ) && ! is_int( $value ) )
-			) {
-				continue;
-			}
-
-			$options_clean[] = array(
-				'value' => sanitize_id( $key ),
-				'label' => sanitize_text( $value ),
-			);
-		}
-
-		$this->props['options'] = $options_clean;
+		Setting::before_set_schema();
+		SettingWithOptions::prepare_options();
 	}
 
 	protected function set_defaults() {
@@ -45,7 +19,7 @@ class Radio extends Setting {
 			'options'       => array(),
 		);
 
-		$parent_defaults = parent::get_defaults();
+		$parent_defaults = Setting::get_defaults();
 
 		$this->props_defaults =
 			wp_parse_args( $this_defaults, $parent_defaults );
@@ -64,7 +38,7 @@ class Radio extends Setting {
 			),
 		);
 
-		$parent_schema = parent::get_schema();
+		$parent_schema = Setting::get_schema();
 
 		$this->props_schema =
 			wp_parse_args( $this_schema, $parent_schema );

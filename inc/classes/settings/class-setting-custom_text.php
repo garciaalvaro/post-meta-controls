@@ -8,8 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 class CustomText extends Setting {
 
 	protected function before_set_schema() {
-		parent::before_set_schema();
-		// parent::set_data_key_with_prefix();
+		Setting::before_set_schema();
 		$this->prepare_content();
 	}
 
@@ -61,7 +60,7 @@ class CustomText extends Setting {
 			'content' => '',
 		);
 
-		$parent_defaults = parent::get_defaults();
+		$parent_defaults = Setting::get_defaults();
 
 		$this->props_defaults =
 			wp_parse_args( $this_defaults, $parent_defaults );
@@ -76,7 +75,7 @@ class CustomText extends Setting {
 			),
 		);
 
-		$parent_schema = parent::get_schema();
+		$parent_schema = Setting::get_schema();
 
 		$this->props_schema =
 			wp_parse_args( $this_schema, $parent_schema );
