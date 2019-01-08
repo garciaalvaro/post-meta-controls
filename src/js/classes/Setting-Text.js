@@ -5,7 +5,8 @@ class Text extends Setting {
 	setDefaults() {
 		const this_defaults = {
 			type: "text",
-			default_value: ""
+			default_value: "",
+			placeholder: ""
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -16,6 +17,9 @@ class Text extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
+				type: "text"
+			},
+			placeholder: {
 				type: "text"
 			}
 		};

@@ -11,9 +11,10 @@ class Textarea extends Setting {
 		$this_defaults = array(
 			'type'          => 'textarea',
 			'default_value' => '',
+			'placeholder'   => '',
 		);
 
-		$parent_defaults = parent::get_defaults();
+		$parent_defaults = Setting::get_defaults();
 
 		$this->props_defaults =
 			wp_parse_args( $this_defaults, $parent_defaults );
@@ -25,9 +26,13 @@ class Textarea extends Setting {
 				'type'   => 'text',
 				'for_js' => true,
 			),
+			'placeholder' => array(
+				'type'   => 'text',
+				'for_js' => true,
+			),
 		);
 
-		$parent_schema = parent::get_schema();
+		$parent_schema = Setting::get_schema();
 
 		$this->props_schema =
 			wp_parse_args( $this_schema, $parent_schema );
