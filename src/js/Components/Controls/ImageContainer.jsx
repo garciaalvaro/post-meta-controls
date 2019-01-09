@@ -1,65 +1,88 @@
-import l, {
-	plugin_slug,
-	store_slug,
-	getImageDataObject,
-	Div
-} from "../../utils";
+import l, { plugin_slug, store_slug, prepareImageData, Div } from "../../utils";
 import Image from "./Image";
+import {
+	SortableContainer,
+	SortableElement,
+	arrayMove
+} from "react-sortable-hoc";
 
-const { isEmpty, castArray, map, get } = lodash;
+const { isEmpty, castArray, pull, get } = lodash;
+const { __ } = wp.i18n;
 const { withState, compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
+const { Button } = wp.components;
+
+const SortableItem = SortableElement(({ value, custom }) => (
+	<li>
+		<Image
+			image_data={value}
+			removeImage={custom.removeImage}
+			setting_id={custom.setting_id}
+			multiple={custom.multiple}
+		/>
+	</li>
+));
+
+const SortableList = SortableContainer(({ items, custom }) => (
+	<ul>
+		{items.map((image_data, index) => (
+			<SortableItem
+				key={`item-${index}`}
+				index={index}
+				value={image_data}
+				custom={custom}
+			/>
+		))}
+	</ul>
+));
 
 class ImageContainer extends Component {
-	renderHandler = ({ open }) => {
-		const { id: setting_id, value: images_id, multiple } = this.props;
+	onSortEnd = ({ oldIndex, newIndex }) => {
+		let { value: images_id, updateValue } = this.props;
 
-		if (isEmpty(images_id)) {
-			//TODO: is images_id always an array?
-			return (
-				<Div
-					onClick={open}
-					style={{
-						height: 100,
-						backgroundColor: "#fc0",
-						width: "100%"
-					}}
-				/>
-			);
-		} else {
-			return map(images_id, image_id => (
-				<Image
-					key={image_id}
-					open={open}
-					setting_id={setting_id}
-					image_id={image_id}
-					multiple={multiple}
-				/>
-			));
-		}
+		images_id = arrayMove(images_id, oldIndex, newIndex);
+
+		updateValue(images_id);
 	};
 
-	onSelectHandler = image_data_raw => {
+	updateImages = image_data_raw => {
 		image_data_raw = castArray(image_data_raw);
-		const data = getImageDataObject(image_data_raw, false);
+		const image_data = prepareImageData(image_data_raw, false);
 
-		this.props.updateValue(data);
+		this.props.updateValue(image_data);
+	};
+
+	removeImage = image_id => {
+		let { value: images_id, updateValue } = this.props;
+
+		images_id = pull(images_id, { id: image_id });
+
+		updateValue(images_id);
 	};
 
 	render() {
-		const { onSelectHandler, renderHandler } = this;
-		const { value, multiple } = this.props;
-
+		const { updateImages, removeImage, onSortEnd } = this;
+		const { value, multiple, setting_id } = this.props;
+		l(value);
 		return (
 			<Div className={`${plugin_slug}-control-image`}>
 				<MediaUpload
-					onSelect={onSelectHandler}
-					type="image"
+					onSelect={updateImages}
+					allowedTypes={["image"]}
 					value={value}
 					multiple={multiple}
-					render={renderHandler}
+					render={({ open }) => (
+						<Button onClick={open} isDefault>
+							{__("Open Media Library")}
+						</Button>
+					)}
+				/>
+				<SortableList
+					items={value}
+					onSortEnd={onSortEnd}
+					custom={{ removeImage, setting_id, multiple }}
 				/>
 			</Div>
 		);

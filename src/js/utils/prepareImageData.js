@@ -2,7 +2,7 @@ import l from "./log";
 
 const { reduce, get } = lodash;
 
-const getImageDataObject = (image_data_raw, from_rest_api) =>
+const prepareImageData = (image_data_raw, from_rest_api) =>
 	reduce(
 		image_data_raw,
 		(data, image_data_raw_this) => {
@@ -35,4 +35,4 @@ const getImageDataObject = (image_data_raw, from_rest_api) =>
 		{ value: [], image_data: [] }
 	);
 
-export default getImageDataObject;
+export default prepareImageData;

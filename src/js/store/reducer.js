@@ -24,7 +24,8 @@ const reducer = (state = initial_state, action) => {
 						data_key_with_prefix,
 						default_value,
 						metadata_exists,
-						data_type
+						data_type,
+						type
 					} = setting;
 
 					let value = default_value;
@@ -45,7 +46,11 @@ const reducer = (state = initial_state, action) => {
 					const multiple = get(setting, "multiple");
 
 					if (multiple === true) {
-						value = castArray(value);
+						if (type === "image" && value === 0) {
+							value = [];
+						} else {
+							value = castArray(value);
+						}
 					} else if (multiple === false) {
 						value =
 							isArray(value) && !isEmpty(value)
