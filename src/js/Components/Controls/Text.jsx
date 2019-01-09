@@ -1,5 +1,4 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { Component } = wp.element;
 const { TextControl } = wp.components;
@@ -21,4 +20,4 @@ class Text extends Component {
 	}
 }
 
-export default withStoreConnection(Text);
+export default Text;

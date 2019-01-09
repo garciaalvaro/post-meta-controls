@@ -8,7 +8,7 @@ const { PanelBody, PanelRow } = wp.components;
 
 class Panel extends Component {
 	getPanelsComponent() {
-		const { settings, id } = this.props;
+		const { settings_id, id } = this.props;
 
 		return (
 			<Div
@@ -16,8 +16,8 @@ class Panel extends Component {
 				className={`${plugin_slug}-panel`}
 			>
 				<PanelRow>
-					{settings.map((setting, index) => (
-						<Setting key={setting.id} {...setting} />
+					{settings_id.map((setting_id, index) => (
+						<Setting key={setting_id} id={setting_id} />
 					))}
 				</PanelRow>
 			</Div>
@@ -54,13 +54,12 @@ class Panel extends Component {
 	}
 }
 
-// export default Sidebar;
 export default compose([
 	withSelect((select, { id }) => {
-		const { getSettings } = select(store_slug);
+		const { getSettingsId } = select(store_slug);
 
 		return {
-			settings: getSettings(id)
+			settings_id: getSettingsId(id)
 		};
 	}),
 	withDispatch((dispatch, { id }) => {

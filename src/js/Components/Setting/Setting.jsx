@@ -1,4 +1,4 @@
-import l, { Div, plugin_slug } from "../../utils";
+import l, { Div, plugin_slug, store_slug } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -18,51 +18,54 @@ const {
 } = controls;
 const { isUndefined } = lodash;
 const { Component } = wp.element;
+const { compose } = wp.compose;
+const { withSelect, withDispatch } = wp.data;
 
 class Setting extends Component {
 	getControl() {
-		const { type } = this.props;
+		const { props } = this;
+		const { type } = props;
 
 		switch (type) {
 			case "checkbox":
-				return <Checkbox {...this.props} />;
+				return <Checkbox {...props} />;
 
 			case "radio":
-				return <Radio {...this.props} />;
+				return <Radio {...props} />;
 
 			case "select":
-				return <Select {...this.props} />;
+				return <Select {...props} />;
 
 			case "range":
-				return <Range {...this.props} />;
+				return <Range {...props} />;
 
 			case "text":
-				return <Text {...this.props} />;
+				return <Text {...props} />;
 
 			case "textarea":
-				return <Textarea {...this.props} />;
+				return <Textarea {...props} />;
 
 			case "color":
-				return <Color {...this.props} />;
+				return <Color {...props} />;
 
 			case "image":
-				return <ImageContainer {...this.props} />;
+				return <ImageContainer {...props} />;
 
 			case "custom_text":
-				return <CustomText {...this.props} />;
+				return <CustomText {...props} />;
 
 			case "date_time":
-				return <DateTime {...this.props} />;
+				return <DateTime {...props} />;
 
 			case "buttons":
-				return <Buttons {...this.props} />;
+				return <Buttons {...props} />;
 
 			case "multi_checkbox":
-				return <MultiCheckbox {...this.props} />;
+				return <MultiCheckbox {...props} />;
 
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
-					return <CustomHTML {...this.props} />;
+					return <CustomHTML {...props} />;
 				}
 
 			default:
@@ -84,4 +87,66 @@ class Setting extends Component {
 	}
 }
 
-export default Setting;
+export default compose([
+	withSelect((select, { id }) => {
+		const { getEditedPostAttribute } = select("core/editor");
+		const { getSetting, getPersistedProp } = select(store_slug);
+		const setting = getSetting(id);
+		let {
+			data_type,
+			value,
+			default_value,
+			data_key_with_prefix,
+			metadata_exists
+		} = setting;
+		const use_meta = data_type === "meta";
+		const use_local = data_type === "localstorage";
+
+		// If the data_type is meta we will get the value from
+		// the "core/editor" store.
+		value =
+			use_meta && metadata_exists
+				? getEditedPostAttribute("meta")[data_key_with_prefix]
+				: value;
+		// If the data_type is localstorage we will get the value from
+		// the settings_persisted prop of the plugin store.
+		value =
+			use_local && isUndefined(value)
+				? getPersistedProp(data_key_with_prefix)
+				: value;
+		// If there is no value yet set the default.
+		value = isUndefined(value) ? default_value : value;
+
+		return {
+			...setting,
+			value
+		};
+	}),
+	withDispatch((dispatch, props, { select }) => {
+		const { id, data_type, data_key_with_prefix } = props;
+		const { updateSettingProp } = dispatch(store_slug);
+		const { editPost } = dispatch("core/editor");
+		const { getSettingProp } = select(store_slug);
+		const use_meta = data_type === "meta";
+		const metadata_exists = getSettingProp(id, "metadata_exists");
+
+		return {
+			updateValue: value => {
+				// If the data_type is meta we will save the value to
+				// the "core/editor" store. Otherwise we will save it in
+				// the plugin store.
+				if (use_meta) {
+					editPost({
+						meta: { [data_key_with_prefix]: value }
+					});
+
+					if (!metadata_exists) {
+						updateSettingProp(id, "metadata_exists", true);
+					}
+				} else {
+					updateSettingProp(id, "value", value);
+				}
+			}
+		};
+	})
+])(Setting);

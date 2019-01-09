@@ -1,12 +1,18 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { Component } = wp.element;
 const { CheckboxControl, ToggleControl } = wp.components;
 
 class Checkbox extends Component {
+	toggleValue = () => {
+		const { value, updateValue } = this.props;
+
+		updateValue(!value);
+	};
+
 	render() {
-		const { label, help, value, use_toggle, toggleValue } = this.props;
+		const { props, toggleValue } = this;
+		const { label, help, value, use_toggle } = props;
 
 		if (use_toggle) {
 			return (
@@ -32,4 +38,4 @@ class Checkbox extends Component {
 	}
 }
 
-export default withStoreConnection(Checkbox);
+export default Checkbox;

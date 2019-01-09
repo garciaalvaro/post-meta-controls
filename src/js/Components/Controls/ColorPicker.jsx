@@ -1,6 +1,6 @@
 // import l, { store_slug } from "../../utils";
 // import DivForwardRef from "../Utils/_HtmlForwardRef";
-// import withStoreConnection from "./_withStoreConnection";
+//
 // import * as AColorPicker from "a-color-picker";
 
 // const { isNil } = lodash;
@@ -51,4 +51,4 @@
 // 	}
 // }
 
-// export default withStoreConnection(ColorPicker);
+// export default ColorPicker;

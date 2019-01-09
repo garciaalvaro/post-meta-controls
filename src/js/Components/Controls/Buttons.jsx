@@ -1,5 +1,5 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
+
 import DOMPurify from "dompurify";
 
 const { Component, RawHTML } = wp.element;
@@ -44,4 +44,4 @@ class Buttons extends Component {
 	}
 }
 
-export default withStoreConnection(Buttons);
+export default Buttons;

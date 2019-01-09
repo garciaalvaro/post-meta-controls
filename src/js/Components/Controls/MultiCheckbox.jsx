@@ -1,5 +1,4 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { without } = lodash;
 const { Component } = wp.element;
@@ -64,4 +63,4 @@ class MultiCheckbox extends Component {
 	}
 }
 
-export default withStoreConnection(MultiCheckbox);
+export default MultiCheckbox;

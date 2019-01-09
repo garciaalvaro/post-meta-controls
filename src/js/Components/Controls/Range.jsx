@@ -1,5 +1,4 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { toString, compact } = lodash;
 
@@ -43,4 +42,4 @@ class Range extends Component {
 	}
 }
 
-export default withStoreConnection(Range);
+export default Range;

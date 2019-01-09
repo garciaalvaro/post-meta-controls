@@ -1,5 +1,4 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { Component } = wp.element;
 const { DateTimePicker, BaseControl } = wp.components;
@@ -24,4 +23,4 @@ class DateTime extends Component {
 	}
 }
 
-export default withStoreConnection(DateTime);
+export default DateTime;

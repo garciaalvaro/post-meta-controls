@@ -1,5 +1,4 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { Component } = wp.element;
 const { TextareaControl } = wp.components;
@@ -21,4 +20,4 @@ class Textarea extends Component {
 	}
 }
 
-export default withStoreConnection(Textarea);
+export default Textarea;

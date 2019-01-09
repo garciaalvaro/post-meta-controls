@@ -16,70 +16,68 @@ const reducer = (state = initial_state, action) => {
 	}
 
 	switch (action.type) {
-		case "SET_INITIAL_VALUES": {
-			l("meta", action.meta);
-			const next_settings = produce(next_state.settings, draft => {
-				draft.map(setting => {
-					const {
-						data_key_with_prefix,
-						default_value,
-						metadata_exists,
-						data_type,
-						type
-					} = setting;
+		// case "SET_INITIAL_VALUES": {
+		// 	l("meta", action.meta);
+		// 	const next_settings = produce(next_state.settings, draft => {
+		// 		draft.map(setting => {
+		// 			const {
+		// 				data_key_with_prefix,
+		// 				default_value,
+		// 				metadata_exists,
+		// 				data_type,
+		// 				type
+		// 			} = setting;
 
-					let value = default_value;
+		// 			let value = default_value;
 
-					if (data_type === "meta" && metadata_exists) {
-						value = get(action.meta, [data_key_with_prefix]);
-					} else if (data_type === "localstorage") {
-						const localstorage_value = get(
-							next_state.settings_persisted,
-							[data_key_with_prefix]
-						);
+		// 			if (data_type === "meta" && metadata_exists) {
+		// 				value = get(action.meta, [data_key_with_prefix]);
+		// 			} else if (data_type === "localstorage") {
+		// 				const localstorage_value = get(
+		// 					next_state.settings_persisted,
+		// 					[data_key_with_prefix]
+		// 				);
 
-						value = isUndefined(localstorage_value)
-							? default_value
-							: localstorage_value;
-					}
+		// 				value = isUndefined(localstorage_value)
+		// 					? default_value
+		// 					: localstorage_value;
+		// 			}
 
-					const multiple = get(setting, "multiple");
+		// 			const multiple = get(setting, "multiple");
 
-					if (multiple === true) {
-						if (type === "image" && value === 0) {
-							value = [];
-						} else {
-							value = castArray(value);
-						}
-					} else if (multiple === false) {
-						value =
-							isArray(value) && !isEmpty(value)
-								? [value[0]]
-								: castArray(value);
-					}
+		// 			if (multiple === true) {
+		// 				if (type === "image" && value === 0) {
+		// 					value = [];
+		// 				} else {
+		// 					value = castArray(value);
+		// 				}
+		// 			} else if (multiple === false) {
+		// 				value =
+		// 					isArray(value) && !isEmpty(value)
+		// 						? [value[0]]
+		// 						: castArray(value);
+		// 			}
 
-					setting.value = value;
-				});
-			});
+		// 			setting.value = value;
+		// 		});
+		// 	});
 
-			return {
-				...next_state,
-				settings: next_settings
-			};
-		}
-		case "UPDATE_SETTING_VALUE": {
+		// 	return {
+		// 		...next_state,
+		// 		settings: next_settings
+		// 	};
+		// }
+		case "UPDATE_SETTING_PROP": {
 			next_state = produce(next_state, draft_state => {
-				const setting = find(draft_state.settings, { id: action.id });
-				setting.value = action.value;
+				const setting = find(draft_state.settings, {
+					id: action.setting_id
+				});
 
-				const data_type = get(setting, "data_type");
-				const data_key_with_prefix = get(
-					setting,
-					"data_key_with_prefix"
-				);
+				setting[action.prop] = action.value;
+
 				if (
-					data_type === "localstorage" &&
-					!isUndefined(data_key_with_prefix)
+					action.prop === "value" &&
+					setting.data_type === "localstorage"
 				) {
 					draft_state.settings_persisted[data_key_with_prefix] =
 						action.value;
@@ -99,23 +97,6 @@ const reducer = (state = initial_state, action) => {
 					});
 
 					setting.image_data.push(action.image_data);
-				}
-			);
-
-			return {
-				...next_state,
-				settings: next_settings
-			};
-		}
-		case "UPDATE_IMAGE_DATA": {
-			const next_settings = produce(
-				next_state.settings,
-				draft_settings => {
-					const setting = find(draft_settings, {
-						id: action.setting_id
-					});
-
-					setting.image_data = action.image_data;
 				}
 			);
 

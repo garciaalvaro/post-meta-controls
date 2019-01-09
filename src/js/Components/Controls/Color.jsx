@@ -1,5 +1,5 @@
 import l, { plugin_slug } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
+
 import ColorPaletteClone from "./ColorPaletteClone";
 
 const { Component } = wp.element;
@@ -30,4 +30,4 @@ class Color extends Component {
 	}
 }
 
-export default withStoreConnection(Color);
+export default Color;

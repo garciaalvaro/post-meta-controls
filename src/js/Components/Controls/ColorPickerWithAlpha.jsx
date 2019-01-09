@@ -1,5 +1,5 @@
 import l, { DivForwardRef } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
+
 import * as AColorPicker from "a-color-picker";
 
 const { isNil } = lodash;
@@ -50,4 +50,4 @@ class ColorPickerWithAlpha extends Component {
 	}
 }
 
-export default withStoreConnection(ColorPickerWithAlpha);
+export default ColorPickerWithAlpha;

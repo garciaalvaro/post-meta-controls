@@ -23,10 +23,16 @@ const selectors = {
 	getSidebar(state, id) {
 		return find(state.sidebars, { id: id });
 	},
-	getSettings(state, parent_id) {
-		return state.settings.filter(
-			setting => last(setting.path) === parent_id
-		);
+	getSettingsId(state, parent_id) {
+		return state.settings
+			.filter(setting => last(setting.path) === parent_id)
+			.map(({ id }) => id);
+	},
+	getSetting(state, id) {
+		return find(state.settings, { id: id });
+	},
+	getSettingProp(state, setting_id, prop) {
+		return find(state.settings, { id: setting_id })[prop];
 	},
 	getPanels(state, parent_id) {
 		return state.panels.filter(panel => last(panel.path) === parent_id);
@@ -40,19 +46,12 @@ const selectors = {
 	getTabs(state, parent_id) {
 		return state.tabs.filter(tab => last(tab.path) === parent_id);
 	},
-	getImageData(state, setting_id, image_id) {
-		const setting = find(state.settings, { id: setting_id });
-
-		return find(setting.image_data, { id: image_id });
+	getPersistedProp(state, data_key) {
+		return state.settings_persisted[data_key];
 	}
 };
 
 const resolvers = {
-	*getSidebar() {
-		const meta = yield actions.fetchMeta();
-
-		return actions.setInitialValues(meta);
-	},
 	*getImageData(setting_id, image_id) {
 		let image_data_raw = yield actions.fetchImageData(image_id);
 		image_data_raw = castArray(image_data_raw);

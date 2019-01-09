@@ -1,5 +1,4 @@
 import l, { plugin_slug, Div, P, H3, Ol, Ul, Li } from "../../utils";
-import withStoreConnection from "./_withStoreConnection";
 
 const { map } = lodash;
 const { Component } = wp.element;
@@ -54,4 +53,4 @@ class CustomText extends Component {
 	}
 }
 
-export default withStoreConnection(CustomText);
+export default CustomText;
