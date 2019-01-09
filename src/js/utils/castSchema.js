@@ -36,6 +36,10 @@ const castSchema = (elements, schema) => {
 				elements[key] = sanitize.id(value);
 				break;
 
+			case "url":
+				elements[key] = sanitize.url(value);
+				break;
+
 			case "text":
 				elements[key] = sanitize.text(value);
 				break;

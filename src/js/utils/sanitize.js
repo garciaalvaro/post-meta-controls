@@ -22,6 +22,23 @@ const sanitizeHtml = value => {
 	return value;
 };
 
+const sanitizeUrl = value => {
+	if (!isString(value)) {
+		return "#";
+	}
+
+	/* https://stackoverflow.com/a/3809435 | CC BY-SA 3.0 */
+	const url_regex = new RegExp(
+		/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+	);
+
+	if (!value.match(url_regex)) {
+		return "#";
+	}
+
+	return value;
+};
+
 const sanitizeId = value => {
 	if (!isString(value)) {
 		return "";
@@ -165,6 +182,7 @@ const sanitizeArrayObjectString = value => {
 
 export default {
 	id: sanitizeId,
+	url: sanitizeUrl,
 	html: sanitizeHtml,
 	text: sanitizeText,
 	boolean: sanitizeBoolean,

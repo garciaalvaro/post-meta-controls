@@ -19,7 +19,8 @@ class CustomText extends Setting {
 				type: {
 					_all: {
 						type: "id",
-						content: { _all: "text" }
+						content: { _all: "text" },
+						href: "url"
 					}
 				},
 				conditions: "not_empty"

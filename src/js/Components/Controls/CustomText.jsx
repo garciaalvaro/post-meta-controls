@@ -1,6 +1,6 @@
-import l, { plugin_slug, Div, P, H3, Ol, Ul, Li } from "../../utils";
+import l, { plugin_slug, Div, A, P, H3, Ol, Ul, Li } from "../../utils";
 
-const { map } = lodash;
+const { isUndefined, map } = lodash;
 const { Component } = wp.element;
 
 class CustomText extends Component {
@@ -19,6 +19,19 @@ class CustomText extends Component {
 						case "title":
 						case "h3":
 							return <H3 key={root_index}>{element.content}</H3>;
+							break;
+
+						case "link":
+						case "a":
+							const url = !isUndefined(element.href)
+								? element.href
+								: "#";
+
+							return (
+								<A key={root_index} href={url}>
+									{element.content}
+								</A>
+							);
 							break;
 
 						case "ordered_list":

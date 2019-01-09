@@ -26,6 +26,7 @@ class CustomText extends Setting {
 					'_all' => array(
 						'type'    => 'id',
 						'content' => array( '_all' => 'text' ),
+						'href'    => 'text',
 					),
 				),
 				'for_js'     => true,
