@@ -12,7 +12,7 @@ function cast_schema( $elements = array(), $schema = array() ) {
 		if ( isset( $schema[ $key ]['type'] ) ) {
 			$type = $schema[ $key ]['type'];
 		} elseif ( isset( $schema[ $key ] ) ) {
-			$type = isset( $schema[ $key ] );
+			$type = $schema[ $key ];
 		} elseif ( isset( $schema['_all'] ) ) {
 			$type = $schema['_all'];
 		} else {
@@ -21,6 +21,8 @@ function cast_schema( $elements = array(), $schema = array() ) {
 		}
 
 		if ( is_array( $type ) ) {
+			$value = cast_array( $value );
+
 			$elements[ $key ] = cast_schema( $value, $type );
 			continue;
 		}
@@ -28,6 +30,10 @@ function cast_schema( $elements = array(), $schema = array() ) {
 		switch ( $type ) {
 			case 'string':
 				$elements[ $key ] = sanitize_string( $value );
+				break;
+
+			case 'html':
+				$elements[ $key ] = sanitize_html( $value );
 				break;
 
 			case 'html_svg':

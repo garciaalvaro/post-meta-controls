@@ -1,11 +1,12 @@
-import l from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
-class CustomHTML extends Setting {
+class Text extends Setting {
 	setDefaults() {
 		const this_defaults = {
-			type: "custom_html",
-			html_string: ""
+			type: "text",
+			default_value: "",
+			placeholder: ""
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -15,9 +16,11 @@ class CustomHTML extends Setting {
 
 	setSchema() {
 		const this_schema = {
-			html_string: {
-				type: "html",
-				conditions: "not_empty"
+			default_value: {
+				type: "text"
+			},
+			placeholder: {
+				type: "text"
 			}
 		};
 
@@ -27,4 +30,4 @@ class CustomHTML extends Setting {
 	}
 }
 
-export default CustomHTML;
+export default Text;

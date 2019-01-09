@@ -1,4 +1,4 @@
-import l, { Div, Span } from "../../utils";
+import l, { Div, Span, plugin_slug } from "../../utils";
 
 const { __, sprintf } = wp.i18n;
 const { Component } = wp.element;

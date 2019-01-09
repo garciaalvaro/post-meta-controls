@@ -15,7 +15,7 @@ class MultiCheckbox extends Setting {
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'          => 'multi_checkbox',
-			'default_value' => '',
+			'default_value' => '', // It will be passed through cast_array().
 			'options'       => array(),
 			'use_toggle'    => false,
 		);

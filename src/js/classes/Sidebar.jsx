@@ -54,7 +54,7 @@ class Sidebar extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_object_text"
+				type: { _all: { title: "text", message: "text" } }
 			},
 			id: {
 				type: "id",
@@ -77,7 +77,7 @@ class Sidebar extends Base {
 				type: "id"
 			},
 			settings_id: {
-				type: "array_id"
+				type: { _all: "integer" }
 			}
 		};
 	}

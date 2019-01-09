@@ -9,24 +9,24 @@ class CustomText extends Component {
 
 		return (
 			<Div className={`${plugin_slug}-control-custom_text`}>
-				{content.map(element => {
+				{content.map((element, root_index) => {
 					switch (element.type) {
-						case "p":
 						case "paragraph":
-							return <P>{element.content}</P>;
+						case "p":
+							return <P key={root_index}>{element.content}</P>;
 							break;
 
 						case "title":
 						case "h3":
-							return <H3>{element.content}</H3>;
+							return <H3 key={root_index}>{element.content}</H3>;
 							break;
 
 						case "ordered_list":
 						case "ol":
 							return (
-								<Ol>
-									{map(element.content, li => (
-										<Li>{li}</Li>
+								<Ol key={root_index}>
+									{map(element.content_array, (li, index) => (
+										<Li key={index}>{li}</Li>
 									))}
 								</Ol>
 							);
@@ -35,9 +35,9 @@ class CustomText extends Component {
 						case "unordered_list":
 						case "ul":
 							return (
-								<Ul>
-									{map(element.content, li => (
-										<Li>{li}</Li>
+								<Ul key={root_index}>
+									{map(element.content_array, (li, index) => (
+										<Li key={index}>{li}</Li>
 									))}
 								</Ul>
 							);

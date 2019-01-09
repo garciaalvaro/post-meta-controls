@@ -86,17 +86,17 @@ abstract class Setting extends Base {
 
 	private function prepare_data_type() {
 		$types_can_have_meta = array(
+			'buttons',
 			'checkbox',
+			'color',
+			'date_time',
+			'image',
+			'multi_checkbox',
 			'radio',
-			'select',
 			'range',
+			'select',
 			'text',
 			'textarea',
-			'color',
-			'image',
-			'date_time',
-			'buttons',
-			'multi_checkbox',
 		);
 		if (
 			'meta' === $this->props['data_type'] &&
@@ -106,14 +106,14 @@ abstract class Setting extends Base {
 		}
 
 		$types_can_have_localstorage = array(
+			'buttons',
 			'checkbox',
-			'radio',
-			'select',
-			'range',
 			'color',
 			'date_time',
-			'buttons',
 			'multi_checkbox',
+			'radio',
+			'range',
+			'select',
 		);
 		if (
 			'localstorage' === $this->props['data_type'] &&
@@ -138,7 +138,7 @@ abstract class Setting extends Base {
 			'id'                           => wp_generate_uuid4(),
 			'path'                         => array(),
 			'label'                        => '',
-			'post_type'                    => 'post',
+			'post_type'                    => 'post', // It will be passed through cast_array().
 			'type'                         => '',
 			'description'                  => '',
 			'help'                         => '',
@@ -169,9 +169,7 @@ abstract class Setting extends Base {
 				'for_js' => true,
 			),
 			'post_type' => array(
-				'type'   => is_array( $this->props['post_type'] )
-					? array( '_all' => 'id' )
-					: 'id',
+				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
 			),
 			'type' => array(

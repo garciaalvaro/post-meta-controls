@@ -15,7 +15,7 @@ class Sidebar extends Base {
 		$this->props_defaults = array(
 			'id'              => wp_generate_uuid4(),
 			'label'           => '',
-			'post_type'       => 'post',
+			'post_type'       => 'post', // It will be passed through cast_array().
 			'description'     => '',
 			'data_key_prefix' => 'pmc_',
 			'icon_dashicon'   => 'carrot',
@@ -36,9 +36,7 @@ class Sidebar extends Base {
 				'conditions' => 'not_empty',
 			),
 			'post_type' => array(
-				'type'   => is_array( $this->props['post_type'] )
-					? array( '_all' => 'id' )
-					: 'id',
+				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
 			),
 			'description' => array(

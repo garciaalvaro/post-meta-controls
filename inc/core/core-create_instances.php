@@ -27,7 +27,8 @@ function create_instances(
 		}
 
 		$children_props_raw =
-			empty( $class_name['children'] ) || empty( $prop_raw[ $class_name['children'] ] )
+			empty( $class_name['children'] ) ||
+			empty( $prop_raw[ $class_name['children'] ] )
 				? false
 				: $prop_raw[ $class_name['children'] ];
 

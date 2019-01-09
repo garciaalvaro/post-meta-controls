@@ -1,16 +1,12 @@
-import l, { prepareOptions } from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
-class Radio extends Setting {
-	beforeSetSchema() {
-		super.beforeSetSchema();
-		this.props.options = prepareOptions(this.props.options);
-	}
-
+class Buttons extends Setting {
 	setDefaults() {
 		const this_defaults = {
-			type: "radio",
+			type: "buttons",
 			default_value: "",
+			allow_empty: false,
 			options: []
 		};
 
@@ -24,8 +20,18 @@ class Radio extends Setting {
 			default_value: {
 				type: "id"
 			},
+			allow_empty: {
+				type: "boolean"
+			},
 			options: {
-				type: "array_object_text",
+				type: {
+					_all: {
+						value: "id",
+						title: "text",
+						icon_dashicon: "id",
+						icon_svg: "html"
+					}
+				},
 				conditions: "not_empty"
 			}
 		};
@@ -36,4 +42,4 @@ class Radio extends Setting {
 	}
 }
 
-export default Radio;
+export default Buttons;

@@ -26,14 +26,14 @@ class Panel extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_object_text"
+				type: { _all: { title: "text", message: "text" } }
 			},
 			id: {
 				type: "id",
 				conditions: "not_empty"
 			},
 			path: {
-				type: "array_id",
+				type: { _all: "id" },
 				conditions: "not_empty"
 			},
 			label: {

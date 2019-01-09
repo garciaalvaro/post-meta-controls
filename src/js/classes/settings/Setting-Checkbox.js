@@ -1,12 +1,13 @@
-import l from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
-class Text extends Setting {
+class Checkbox extends Setting {
 	setDefaults() {
 		const this_defaults = {
-			type: "text",
-			default_value: "",
-			placeholder: ""
+			type: "checkbox",
+			default_value: false,
+			label: "",
+			use_toggle: false
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -17,10 +18,14 @@ class Text extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "text"
+				type: "boolean"
 			},
-			placeholder: {
-				type: "text"
+			label: {
+				type: "text",
+				conditions: "not_empty"
+			},
+			use_toggle: {
+				type: "boolean"
 			}
 		};
 
@@ -30,4 +35,4 @@ class Text extends Setting {
 	}
 }
 
-export default Text;
+export default Checkbox;

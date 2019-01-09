@@ -34,8 +34,8 @@ class CustomText extends Setting {
 				}
 
 				$content_clean[] = array(
-					'type'    => $key,
-					'content' => wp_json_encode( $list_clean ),
+					'type'          => $key,
+					'content_array' => $list_clean,
 				);
 
 				continue;
@@ -71,8 +71,9 @@ class CustomText extends Setting {
 			'content' => array(
 				'type'       => array(
 					'_all' => array(
-						'type'    => 'id',
-						'content' => 'string',
+						'type'          => 'id',
+						'content'       => 'text',
+						'content_array' => array( '_all' => 'text' ),
 					),
 				),
 				'for_js'     => true,

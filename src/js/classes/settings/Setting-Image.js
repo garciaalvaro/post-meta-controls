@@ -1,5 +1,5 @@
-import l from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
 class Image extends Setting {
 	setDefaults() {
@@ -18,13 +18,13 @@ class Image extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "integer_OR_array_integer"
+				type: this.props.multiple ? { _all: "integer" } : "integer"
 			},
 			multiple: {
 				type: "boolean"
 			},
 			image_data: {
-				type: "array_empty"
+				type: "array_empty" // TODO: This should be private?
 			}
 		};
 

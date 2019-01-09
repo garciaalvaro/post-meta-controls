@@ -30,9 +30,18 @@ function sanitize_html_svg( $value ) {
 		'polygon' => array( 'class' => true, 'stroke-width' => true, 'fill' => true, 'points' => true, ),
 		'title'   => array( 'class' => true, 'title' => true ),
 	);
-	$value = \wp_kses( $value, $allowed_svg );
+	$value = wp_kses( $value, $allowed_svg );
 	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
 	$value = preg_replace( '/ stroke-width=("|\')/', ' strokeWidth$1', $value );
+	$value = wp_json_encode( $value );
+
+	return $value;
+}
+
+function sanitize_html( $value ) {
+	$value = wp_kses_post( $value );
+	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
+	$value = wp_json_encode( $value );
 
 	return $value;
 }
@@ -89,65 +98,77 @@ function sanitize_array( $value ) {
 	return is_array( $value ) ? $value : array();
 }
 
-function sanitize_array_id( $value ) {
-	$value = sanitize_array( $value );
-
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_id( $array_value );
+function cast_array( $value ) {
+	if ( is_array( $value ) ) {
+		return $value;
 	}
 
-	return $value;
-}
-
-function sanitize_array_integer( $value ) {
-	$value = sanitize_array( $value );
-
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_integer( $array_value );
+	if ( is_string( $value ) || is_int( $value ) || is_bool( $value ) ) {
+		return array( $value );
 	}
 
-	return $value;
+	return array();
 }
 
-function sanitize_array_text( $value ) {
-	$value = sanitize_array( $value );
+// function sanitize_array_id( $value ) {
+// 	$value = sanitize_array( $value );
 
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_text( $array_value );
-	}
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_id( $array_value );
+// 	}
 
-	return $value;
-}
+// 	return $value;
+// }
 
-function sanitize_array_string( $value ) {
-	$value = sanitize_array( $value );
+// function sanitize_array_integer( $value ) {
+// 	$value = sanitize_array( $value );
 
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_string( $array_value );
-	}
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_integer( $array_value );
+// 	}
 
-	return $value;
-}
+// 	return $value;
+// }
 
-function sanitize_array_array_text( $value ) {
-	$value = sanitize_array( $value );
+// function sanitize_array_text( $value ) {
+// 	$value = sanitize_array( $value );
 
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_array_text( $array_value );
-	}
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_text( $array_value );
+// 	}
 
-	return $value;
-}
+// 	return $value;
+// }
 
-function sanitize_array_array_string( $value ) {
-	$value = sanitize_array( $value );
+// function sanitize_array_string( $value ) {
+// 	$value = sanitize_array( $value );
 
-	foreach ( $value as $array_key => $array_value ) {
-		$value[ $array_key ] = sanitize_array_string( $array_value );
-	}
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_string( $array_value );
+// 	}
 
-	return $value;
-}
+// 	return $value;
+// }
+
+// function sanitize_array_array_text( $value ) {
+// 	$value = sanitize_array( $value );
+
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_array_text( $array_value );
+// 	}
+
+// 	return $value;
+// }
+
+// function sanitize_array_array_string( $value ) {
+// 	$value = sanitize_array( $value );
+
+// 	foreach ( $value as $array_key => $array_value ) {
+// 		$value[ $array_key ] = sanitize_array_string( $array_value );
+// 	}
+
+// 	return $value;
+// }
 
 function sanitize_options(
 	$value = '',

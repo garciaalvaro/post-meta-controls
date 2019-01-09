@@ -10,7 +10,7 @@ class Image extends Setting {
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'          => 'image',
-			'default_value' => 0,
+			'default_value' => 0, // It will be passed through cast_array().
 			'multiple'      => false,
 		);
 
@@ -23,7 +23,7 @@ class Image extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => is_array( $this->props['default_value'] )
+				'type'   => true === $this->props['multiple']
 					? array( '_all' => 'integer' )
 					: 'integer',
 				'for_js' => true,

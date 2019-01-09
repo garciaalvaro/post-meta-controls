@@ -12,7 +12,7 @@ class Panel extends Base {
 			'id'             => wp_generate_uuid4(),
 			'path'           => array(),
 			'label'          => '',
-			'post_type'      => 'post',
+			'post_type'      => 'post', // It will be passed through cast_array().
 			'initial_open'   => false,
 			'with_container' => true,
 		);
@@ -38,9 +38,7 @@ class Panel extends Base {
 					: false,
 			),
 			'post_type' => array(
-				'type'   => is_array( $this->props['post_type'] )
-					? array( '_all' => 'id' )
-					: 'id',
+				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
 			),
 			'initial_open' => array(

@@ -9,17 +9,17 @@ class Setting extends Base {
 
 	prepareDataType() {
 		const types_can_have_meta = [
-			"checkbox",
-			"radio",
-			"select",
-			"range",
-			"text",
-			"textarea",
-			"color",
-			"image",
-			"date_time",
 			"buttons",
-			"multi_checkbox"
+			"checkbox",
+			"color",
+			"date_time",
+			"image",
+			"multi_checkbox",
+			"radio",
+			"range",
+			"select",
+			"text",
+			"textarea"
 		];
 		if (
 			this.props.data_type === "meta" &&
@@ -29,14 +29,14 @@ class Setting extends Base {
 		}
 
 		const types_can_have_localstorage = [
+			"buttons",
 			"checkbox",
-			"radio",
-			"select",
-			"range",
 			"color",
 			"date_time",
-			"buttons",
-			"multi_checkbox"
+			"multi_checkbox",
+			"radio",
+			"range",
+			"select"
 		];
 		if (
 			this.props.data_type === "localstorage" &&
@@ -57,7 +57,7 @@ class Setting extends Base {
 		return this.props.data_key_with_prefix;
 	}
 
-	getPrivates() {
+	setPrivates() {
 		return ["class_name", "warnings"];
 	}
 
@@ -84,14 +84,14 @@ class Setting extends Base {
 				conditions: "not_empty"
 			},
 			warnings: {
-				type: "array_object_text"
+				type: { _all: { title: "text", message: "text" } }
 			},
 			id: {
 				type: "id",
 				conditions: "not_empty"
 			},
 			path: {
-				type: "array_id",
+				type: { _all: "id" },
 				conditions: "not_empty"
 			},
 			label: {

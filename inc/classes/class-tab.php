@@ -12,7 +12,7 @@ class Tab extends Base {
 			'id'        => wp_generate_uuid4(),
 			'path'      => array(),
 			'label'     => '',
-			'post_type' => 'post',
+			'post_type' => 'post', // It will be passed through cast_array().
 		);
 	}
 
@@ -34,9 +34,7 @@ class Tab extends Base {
 				'conditions' => 'not_empty',
 			),
 			'post_type' => array(
-				'type'   => is_array( $this->props['post_type'] )
-					? array( '_all' => 'id' )
-					: 'id',
+				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
 			),
 		);

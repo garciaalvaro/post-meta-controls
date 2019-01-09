@@ -34,36 +34,16 @@ const createInstance = (props_raw, class_name) => {
 		const { type } = props_raw;
 
 		switch (type) {
+			case "buttons":
+				instance = new Buttons(props_raw);
+				break;
+
 			case "checkbox":
 				instance = new Checkbox(props_raw);
 				break;
 
-			case "radio":
-				instance = new Radio(props_raw);
-				break;
-
-			case "select":
-				instance = new Select(props_raw);
-				break;
-
-			case "range":
-				instance = new Range(props_raw);
-				break;
-
-			case "text":
-				instance = new Text(props_raw);
-				break;
-
-			case "textarea":
-				instance = new Textarea(props_raw);
-				break;
-
 			case "color":
 				instance = new Color(props_raw);
-				break;
-
-			case "image":
-				instance = new Image(props_raw);
 				break;
 
 			case "custom_text":
@@ -74,12 +54,32 @@ const createInstance = (props_raw, class_name) => {
 				instance = new DateTime(props_raw);
 				break;
 
-			case "buttons":
-				instance = new Buttons(props_raw);
+			case "image":
+				instance = new Image(props_raw);
 				break;
 
 			case "multi_checkbox":
 				instance = new MultiCheckbox(props_raw);
+				break;
+
+			case "radio":
+				instance = new Radio(props_raw);
+				break;
+
+			case "range":
+				instance = new Range(props_raw);
+				break;
+
+			case "select":
+				instance = new Select(props_raw);
+				break;
+
+			case "text":
+				instance = new Text(props_raw);
+				break;
+
+			case "textarea":
+				instance = new Textarea(props_raw);
 				break;
 
 			case "custom_html":

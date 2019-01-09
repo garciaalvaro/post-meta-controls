@@ -1,6 +1,7 @@
 import l from "./log";
 import icons from "./icons";
 import sanitize from "./sanitize";
+import castSchema from "./castSchema";
 import validate from "./validate";
 import prepareImageData from "./prepareImageData";
 import prepareOptions from "./prepareOptions";
@@ -17,6 +18,7 @@ export default l;
 export {
 	icons,
 	sanitize,
+	castSchema,
 	validate,
 	prepareImageData,
 	prepareOptions,

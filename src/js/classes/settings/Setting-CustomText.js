@@ -1,12 +1,11 @@
-import l from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
-class Textarea extends Setting {
+class CustomText extends Setting {
 	setDefaults() {
 		const this_defaults = {
-			type: "textarea",
-			default_value: "",
-			placeholder: ""
+			type: "custom_text",
+			content: ""
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -16,11 +15,15 @@ class Textarea extends Setting {
 
 	setSchema() {
 		const this_schema = {
-			default_value: {
-				type: "text"
-			},
-			placeholder: {
-				type: "text"
+			content: {
+				type: {
+					_all: {
+						type: "id",
+						content: "text",
+						content_array: { _all: "text" }
+					}
+				},
+				conditions: "not_empty"
 			}
 		};
 
@@ -30,4 +33,4 @@ class Textarea extends Setting {
 	}
 }
 
-export default Textarea;
+export default CustomText;

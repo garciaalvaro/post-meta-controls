@@ -1,4 +1,4 @@
-import l, { sanitize, store_slug } from "../utils";
+import l, { castSchema, store_slug } from "../utils";
 
 const {
 	isUndefined,
@@ -99,85 +99,7 @@ class Base {
 	}
 
 	castSchema() {
-		forEach(this.props, (value, key) => {
-			switch (this.props_schema[key].type) {
-				case "html":
-					this.props[key] = sanitize.html(value);
-					break;
-
-				case "id":
-					this.props[key] = sanitize.id(value);
-					break;
-
-				case "text":
-					this.props[key] = sanitize.text(value);
-					break;
-
-				case "integer":
-					this.props[key] = sanitize.integer(value);
-					break;
-
-				case "float":
-					this.props[key] = sanitize.float(value);
-					break;
-
-				case "boolean":
-					this.props[key] = sanitize.boolean(value);
-					break;
-
-				case "array_integer":
-					this.props[key] = sanitize.arrayInteger(value);
-					break;
-
-				case "array_id":
-					this.props[key] = sanitize.arrayId(value);
-					break;
-
-				case "array_empty":
-					this.props[key] = sanitize.arrayEmpty(value);
-					break;
-
-				case "object_empty":
-					this.props[key] = sanitize.objectEmpty(value);
-					break;
-
-				case "object_text":
-					this.props[key] = sanitize.objectText(value);
-					break;
-
-				case "array_text":
-					this.props[key] = sanitize.arrayText(value);
-					break;
-
-				case "array_object_text":
-					this.props[key] = sanitize.arrayObjectText(value);
-					break;
-
-				case "array_object_string":
-					this.props[key] = sanitize.arrayObjectString(value);
-					break;
-
-				case "id_OR_array_id":
-					if (isArray(this.props[key])) {
-						this.props[key] = sanitize.arrayId(value);
-					} else {
-						this.props[key] = sanitize.id(value);
-					}
-					break;
-
-				case "integer_OR_array_integer":
-					if (isArray(this.props[key])) {
-						this.props[key] = sanitize.arrayInteger(value);
-					} else {
-						this.props[key] = sanitize.integer(value);
-					}
-					break;
-
-				default:
-					this.props[key] = "";
-					break;
-			}
-		});
+		this.props = castSchema(this.props, this.props_schema);
 	}
 
 	validateProps() {
@@ -212,12 +134,13 @@ class Base {
 	}
 
 	addWarning(prop_key, message) {
+		l(prop_key, message);
 		const { class_name, warnings } = this.props;
 		const type =
 			class_name === "setting" && this.props.type !== ""
 				? `${this.props.type} `
 				: "";
-		const title = __(`${prop_key} (${type + class_name})`);
+		const title = __(`${prop_key} property in ${type} ${class_name}`);
 
 		this.props.warnings = warnings.concat({
 			title,

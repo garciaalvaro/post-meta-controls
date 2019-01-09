@@ -1,7 +1,7 @@
-import l, { prepareOptions } from "../utils";
-import Setting from "./Setting";
+import l, { prepareOptions } from "../../utils";
+import Setting from "../Setting";
 
-class MultiCheckbox extends Setting {
+class Radio extends Setting {
 	beforeSetSchema() {
 		super.beforeSetSchema();
 		this.props.options = prepareOptions(this.props.options);
@@ -9,10 +9,9 @@ class MultiCheckbox extends Setting {
 
 	setDefaults() {
 		const this_defaults = {
-			type: "multi_checkbox",
+			type: "radio",
 			default_value: "",
-			options: [],
-			use_toggle: false
+			options: []
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -23,14 +22,11 @@ class MultiCheckbox extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "array_id"
+				type: "id"
 			},
 			options: {
-				type: "array_object_text",
+				type: { _all: { value: "id", label: "text" } },
 				conditions: "not_empty"
-			},
-			use_toggle: {
-				type: "boolean"
 			}
 		};
 
@@ -40,4 +36,4 @@ class MultiCheckbox extends Setting {
 	}
 }
 
-export default MultiCheckbox;
+export default Radio;

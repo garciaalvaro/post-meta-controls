@@ -1,5 +1,5 @@
-import l from "../utils";
-import Setting from "./Setting";
+import l from "../../utils";
+import Setting from "../Setting";
 
 class DateTime extends Setting {
 	afterCastSchema() {

@@ -4,17 +4,17 @@ import createInstance from "./createInstance.jsx";
 const { __, sprintf } = wp.i18n;
 const { isArray, forEach } = lodash;
 
-const createSidebars = raw_props => {
+const createSidebars = props_raw => {
 	if (
-		!isArray(raw_props.sidebars) ||
-		!isArray(raw_props.tabs) ||
-		!isArray(raw_props.panels) ||
-		!isArray(raw_props.settings)
+		!isArray(props_raw.sidebars) ||
+		!isArray(props_raw.tabs) ||
+		!isArray(props_raw.panels) ||
+		!isArray(props_raw.settings)
 	) {
 		return;
 	}
 
-	const { sidebars, tabs, panels, settings } = raw_props;
+	const { sidebars, tabs, panels, settings } = props_raw;
 
 	const ids = [];
 	const data_keys = [];
