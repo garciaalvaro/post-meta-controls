@@ -28,8 +28,8 @@ function cast_schema( $elements = array(), $schema = array() ) {
 		}
 
 		switch ( $type ) {
-			case 'string':
-				$elements[ $key ] = sanitize_string( $value );
+			case 'html_raw':
+				$elements[ $key ] = sanitize_html_raw( $value );
 				break;
 
 			case 'html':

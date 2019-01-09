@@ -46,12 +46,12 @@ function sanitize_html( $value ) {
 	return $value;
 }
 
-function sanitize_string( $value ) {
-	if ( ! is_string( $value ) && ! is_int( $value ) ) {
+function sanitize_html_raw( $value ) {
+	if ( ! is_string( $value ) ) {
 		return '';
 	}
 
-	$value = strval( $value );
+	$value = wp_json_encode( $value );
 
 	return $value;
 }
