@@ -25,7 +25,7 @@ class CustomText extends Component {
 						case "ol":
 							return (
 								<Ol key={root_index}>
-									{map(element.content_array, (li, index) => (
+									{map(element.content, (li, index) => (
 										<Li key={index}>{li}</Li>
 									))}
 								</Ol>
@@ -36,7 +36,7 @@ class CustomText extends Component {
 						case "ul":
 							return (
 								<Ul key={root_index}>
-									{map(element.content_array, (li, index) => (
+									{map(element.content, (li, index) => (
 										<Li key={index}>{li}</Li>
 									))}
 								</Ul>

@@ -7,53 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class CustomText extends Setting {
 
-	protected function before_set_schema() {
-		Setting::before_set_schema();
-		$this->prepare_content();
-	}
-
-	private function prepare_content() {
-
-		if ( empty( $this->props['content'] ) ) {
-			return;
-		}
-
-		$content_clean = array();
-
-		foreach ( $this->props['content'] as $key => $value ) {
-			if ( is_array( $value ) ) {
-				$list       = $value;
-				$list_clean = array();
-
-				foreach ( $list as $li_value ) {
-					if ( ! is_string( $li_value ) ) {
-						continue;
-					}
-
-					$list_clean[] = $li_value;
-				}
-
-				$content_clean[] = array(
-					'type'          => $key,
-					'content_array' => $list_clean,
-				);
-
-				continue;
-			}
-
-			if ( ! is_string( $key ) || ! is_string( $value ) ) {
-				continue;
-			}
-
-			$content_clean[] = array(
-				'type'    => $key,
-				'content' => $value,
-			);
-		}
-
-		$this->props['content'] = $content_clean;
-	}
-
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'    => 'custom_text',
@@ -71,9 +24,8 @@ class CustomText extends Setting {
 			'content' => array(
 				'type'       => array(
 					'_all' => array(
-						'type'          => 'id',
-						'content'       => 'text',
-						'content_array' => array( '_all' => 'text' ),
+						'type'    => 'id',
+						'content' => array( '_all' => 'text' ),
 					),
 				),
 				'for_js'     => true,

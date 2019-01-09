@@ -19,8 +19,7 @@ class CustomText extends Setting {
 				type: {
 					_all: {
 						type: "id",
-						content: "text",
-						content_array: { _all: "text" }
+						content: { _all: "text" }
 					}
 				},
 				conditions: "not_empty"
