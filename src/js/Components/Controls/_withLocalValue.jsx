@@ -1,6 +1,6 @@
 import l from "../../utils";
 
-const { throttle } = lodash;
+const { throttle, isUndefined } = lodash;
 const { compose, withState } = wp.compose;
 const { Component } = wp.element;
 
@@ -26,13 +26,15 @@ const withLocalValue = WrappedComponent => {
 			}
 		);
 
-		updateValueLocal = (value_local_new, update_meta = true) => {
+		updateValueLocal = (value_local_new, value_meta_new) => {
 			const { props, updateValueThrottled } = this;
 			const { setState } = props;
 
 			setState({ value_local: value_local_new }, () => {
-				if (update_meta) {
+				if (isUndefined(value_meta_new)) {
 					updateValueThrottled(value_local_new);
+				} else if (value_meta_new !== false) {
+					updateValueThrottled(value_meta_new);
 				}
 			});
 		};

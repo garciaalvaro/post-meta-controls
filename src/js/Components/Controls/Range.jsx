@@ -14,9 +14,9 @@ class Range extends Component {
 
 	updateNumber = value => {
 		const { float_number, updateValueLocal } = this.props;
-		value = float_number ? toString(value) : value;
+		const value_meta = float_number ? toString(value) : value;
 
-		updateValueLocal(value);
+		updateValueLocal(value, value_meta);
 	};
 
 	updateClasses = () => {
