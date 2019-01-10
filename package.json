@@ -23,6 +23,7 @@
 	},
 	"dependencies": {
 		"a-color-picker": "^1.1.7",
+		"array-move": "^1.0.0",
 		"dompurify": "^1.0.8",
 		"immer": "^1.9.3",
 		"react": "^16.7.0",

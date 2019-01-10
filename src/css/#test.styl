@@ -2,8 +2,43 @@
  * Test
  */
 
+$e_standard = cubic-bezier(0.4, 0.0, 0.2, 1)
+
 .a
 	color red
+
+.pmc-image-container
+	position relative
+	margin-top 1.2em
+
+	&:hover
+		button.pmc-image-remove
+			fill rgba(255,255,255,.8)
+
+.pmc-dragging_image
+.pmc-image
+	// https://stackoverflow.com/a/18294634 | CC BY-SA 3.0
+	cursor move // fallback if grab cursor is unsupported
+	cursor grab
+	cursor -moz-grab
+	cursor -webkit-grab
+
+button.pmc-image-remove
+	padding 5px
+	width 30px
+	height 30px
+	position absolute
+	top 0
+	right 0
+	fill rgba(255,255,255,.4)
+	z-index 1
+	transition fill .3s .1s $e_standard
+
+.pmc-dragging_image
+	z-index 999
+
+	img
+		max-width 100%
 
 .is-toggled
 	#pmc-pinned-logo

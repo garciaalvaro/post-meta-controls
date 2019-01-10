@@ -5,9 +5,8 @@ class Image extends Setting {
 	setDefaults() {
 		const this_defaults = {
 			type: "select",
-			default_value: 0,
-			multiple: false,
-			image_data: []
+			default_value: 0, // It will be passed through castArray().
+			multiple: false
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -22,9 +21,6 @@ class Image extends Setting {
 			},
 			multiple: {
 				type: "boolean"
-			},
-			image_data: {
-				type: "array_empty" // TODO: This should be private?
 			}
 		};
 

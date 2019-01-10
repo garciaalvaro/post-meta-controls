@@ -1,77 +1,161 @@
-import l, { plugin_slug, store_slug, prepareImageData, Div } from "../../utils";
+import l, { plugin_slug, Div, prepareImageData } from "../../utils";
 import Image from "./Image";
-import {
-	SortableContainer,
-	SortableElement,
-	arrayMove
-} from "react-sortable-hoc";
+import arrayMove from "array-move";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
-const { isEmpty, castArray, pull, get } = lodash;
+const { isUndefined, isArray, isEmpty, find, castArray, pull } = lodash;
 const { __ } = wp.i18n;
-const { withState, compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
 const { Button } = wp.components;
+const { withState } = wp.compose;
+const { apiFetch } = wp;
 
-const SortableItem = SortableElement(({ value, custom }) => (
-	<li>
+const SortableItem = SortableElement(({ value, custom }) => {
+	return (
 		<Image
 			image_data={value}
 			removeImage={custom.removeImage}
 			setting_id={custom.setting_id}
 			multiple={custom.multiple}
 		/>
-	</li>
-));
+	);
+});
 
-const SortableList = SortableContainer(({ items, custom }) => (
-	<ul>
-		{items.map((image_data, index) => (
-			<SortableItem
-				key={`item-${index}`}
-				index={index}
-				value={image_data}
-				custom={custom}
-			/>
-		))}
-	</ul>
-));
+const SortableList = SortableContainer(({ items, custom }) => {
+	return (
+		<Div className={`${plugin_slug}-images-container`}>
+			{items.map((value, index) => (
+				<SortableItem
+					key={`item-${index}`}
+					index={index}
+					value={value}
+					custom={custom}
+				/>
+			))}
+		</Div>
+	);
+});
 
 class ImageContainer extends Component {
-	onSortEnd = ({ oldIndex, newIndex }) => {
-		let { value: images_id, updateValue } = this.props;
+	updateImagesData = images_id => {
+		const { setState } = this.props;
+		const images_id_list = castArray(images_id).join(",");
 
-		images_id = arrayMove(images_id, oldIndex, newIndex);
+		const path = `wp/v2/media/?include=${images_id_list}`;
 
-		updateValue(images_id);
+		apiFetch({ path }).then(images_data_raw => {
+			if (isUndefined(images_data_raw)) {
+				// TODO: notice of not found images, option to remove.
+				return;
+			}
+
+			let images_data;
+			images_data = prepareImageData(images_data_raw, true);
+			// The sorting of the elements from images_data_raw is not
+			// the same as the one from the id, so we need to order it.
+			images_data = images_id.map(id => find(images_data, { id: id }));
+
+			setState({ images_data });
+		});
 	};
 
-	updateImages = image_data_raw => {
-		image_data_raw = castArray(image_data_raw);
-		const image_data = prepareImageData(image_data_raw, false);
+	componentDidMount = () => {
+		const { updateImagesData, props } = this;
+		const { value } = props;
 
-		this.props.updateValue(image_data);
+		updateImagesData(value);
+	};
+
+	onSortEnd = ({ oldIndex, newIndex }) => {
+		let {
+			value: images_id,
+			images_data,
+			updateValue,
+			setState
+		} = this.props;
+
+		images_id = arrayMove(images_id, oldIndex, newIndex);
+		images_data = arrayMove(images_data, oldIndex, newIndex);
+
+		updateValue(images_id);
+		setState({ images_data });
+	};
+
+	updateImagesId = image_data_raw => {
+		const { updateImagesData, props } = this;
+		const { updateValue } = props;
+		let images_id;
+
+		images_id = castArray(image_data_raw).map(({ id }) => id);
+		images_id = isArray(image_data_raw) ? images_id : images_id[0];
+
+		updateValue(images_id);
+		updateImagesData(images_id);
 	};
 
 	removeImage = image_id => {
-		let { value: images_id, updateValue } = this.props;
+		let {
+			value: images_id,
+			images_data,
+			updateValue,
+			setState
+		} = this.props;
 
-		images_id = pull(images_id, { id: image_id });
+		images_id = pull(images_id, image_id);
+		images_data = pull(images_data, find(images_data, { id: image_id })); // TODO: improve
 
 		updateValue(images_id);
+		setState({ images_data });
+	};
+
+	getImagesComponent = () => {
+		const { removeImage, onSortEnd, props } = this;
+		let { value: images_id, images_data, setting_id, multiple } = props;
+
+		images_id = castArray(images_id);
+		images_data = castArray(images_data);
+
+		if (
+			isEmpty(images_id) ||
+			images_id[0] === 0 ||
+			isUndefined(images_data[0])
+		) {
+			return null;
+		}
+
+		if (images_id.length === 1) {
+			return (
+				<Image
+					image_data={images_data[0]}
+					removeImage={removeImage}
+					setting_id={setting_id}
+					multiple={multiple}
+				/>
+			);
+		}
+
+		return (
+			<SortableList
+				distance={3} // Needed so clicks can be triggered
+				helperClass={`${plugin_slug}-dragging_image`}
+				items={images_data}
+				onSortEnd={onSortEnd}
+				custom={{ removeImage, setting_id, multiple }}
+			/>
+		);
 	};
 
 	render() {
-		const { updateImages, removeImage, onSortEnd } = this;
-		const { value, multiple, setting_id } = this.props;
-		l(value);
+		const { updateImagesId, getImagesComponent } = this;
+		const { value: images_id, multiple } = this.props;
+
 		return (
 			<Div className={`${plugin_slug}-control-image`}>
 				<MediaUpload
-					onSelect={updateImages}
+					onSelect={updateImagesId}
 					allowedTypes={["image"]}
-					value={value}
+					value={images_id}
 					multiple={multiple}
 					render={({ open }) => (
 						<Button onClick={open} isDefault>
@@ -79,44 +163,10 @@ class ImageContainer extends Component {
 						</Button>
 					)}
 				/>
-				<SortableList
-					items={value}
-					onSortEnd={onSortEnd}
-					custom={{ removeImage, setting_id, multiple }}
-				/>
+				{getImagesComponent()}
 			</Div>
 		);
 	}
 }
 
-export default compose([
-	withDispatch((dispatch, props) => {
-		const {
-			id: setting_id,
-			valid,
-			data_type,
-			data_key_with_prefix
-		} = props;
-		const { updateImageData, updateSettingValue } = dispatch(store_slug);
-		const { editPost } = dispatch("core/editor");
-		const save_meta =
-			valid && data_type === "meta" && !isEmpty(data_key_with_prefix);
-
-		return {
-			updateValue: data => {
-				let { value, image_data } = data;
-
-				updateImageData(setting_id, image_data);
-				updateSettingValue(setting_id, value);
-
-				value = get(props, "multiple") === false ? value[0] : value;
-
-				if (save_meta) {
-					editPost({
-						meta: { [data_key_with_prefix]: value }
-					});
-				}
-			}
-		};
-	})
-])(ImageContainer);
+export default withState({ images_data: [] })(ImageContainer);
