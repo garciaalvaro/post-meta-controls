@@ -40,11 +40,6 @@ function get_meta_arg_sanitize( $type = '', $props = array() ) {
 			return __NAMESPACE__ . '\sanitize_boolean';
 			break;
 
-		// case 'text':
-		// case 'color':
-		// 	return __NAMESPACE__ . '\sanitize_text';
-		// 	break;
-
 		case 'textarea':
 			return __NAMESPACE__ . '\sanitize_textarea';
 			break;

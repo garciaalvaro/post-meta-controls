@@ -7,7 +7,7 @@ const { isUndefined, isArray, isEmpty, find, castArray, pull } = lodash;
 const { __ } = wp.i18n;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
-const { Button } = wp.components;
+const { Button, BaseControl } = wp.components;
 const { withState } = wp.compose;
 const { apiFetch } = wp;
 
@@ -147,11 +147,15 @@ class ImageContainer extends Component {
 	};
 
 	render() {
-		const { updateImagesId, getImagesComponent } = this;
-		const { value: images_id, multiple } = this.props;
+		const { updateImagesId, getImagesComponent, props } = this;
+		const { value: images_id, multiple, label, help } = props;
 
 		return (
-			<Div className={`${plugin_slug}-control-image`}>
+			<BaseControl
+				label={label}
+				className={`${plugin_slug}-control-image`}
+				help={help}
+			>
 				<MediaUpload
 					onSelect={updateImagesId}
 					allowedTypes={["image"]}
@@ -164,7 +168,7 @@ class ImageContainer extends Component {
 					)}
 				/>
 				{getImagesComponent()}
-			</Div>
+			</BaseControl>
 		);
 	}
 }

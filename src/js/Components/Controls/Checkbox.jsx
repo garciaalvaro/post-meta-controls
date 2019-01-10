@@ -1,7 +1,7 @@
 import l, { plugin_slug } from "../../utils";
 
 const { Component } = wp.element;
-const { CheckboxControl, ToggleControl } = wp.components;
+const { BaseControl, CheckboxControl, ToggleControl } = wp.components;
 
 class Checkbox extends Component {
 	toggleValue = () => {
@@ -12,28 +12,30 @@ class Checkbox extends Component {
 
 	render() {
 		const { props, toggleValue } = this;
-		const { label, help, value, use_toggle } = props;
-
-		if (use_toggle) {
-			return (
-				<ToggleControl
-					className={`${plugin_slug}-control-toggle`}
-					label={label}
-					help={help}
-					checked={value}
-					onChange={toggleValue}
-				/>
-			);
-		}
+		const { input_label, label, help, value, use_toggle } = props;
 
 		return (
-			<CheckboxControl
-				className={`${plugin_slug}-control-checkbox`}
+			<BaseControl
 				label={label}
+				className={`${plugin_slug}-control-checkbox-container`}
 				help={help}
-				checked={value}
-				onChange={toggleValue}
-			/>
+			>
+				{use_toggle ? (
+					<ToggleControl
+						className={`${plugin_slug}-control-toggle`}
+						label={input_label}
+						checked={value}
+						onChange={toggleValue}
+					/>
+				) : (
+					<CheckboxControl
+						className={`${plugin_slug}-control-checkbox`}
+						label={input_label}
+						checked={value}
+						onChange={toggleValue}
+					/>
+				)}
+			</BaseControl>
 		);
 	}
 }

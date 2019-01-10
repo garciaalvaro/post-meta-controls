@@ -6,7 +6,7 @@ class Checkbox extends Setting {
 		const this_defaults = {
 			type: "checkbox",
 			default_value: false,
-			label: "",
+			input_label: "",
 			use_toggle: false
 		};
 
@@ -20,7 +20,7 @@ class Checkbox extends Setting {
 			default_value: {
 				type: "boolean"
 			},
-			label: {
+			input_label: {
 				type: "text",
 				conditions: "not_empty"
 			},

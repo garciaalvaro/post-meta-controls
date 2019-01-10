@@ -90,7 +90,6 @@ function sanitize_integer( $value ) {
 
 function sanitize_boolean( $value ) {
 	// https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
-	// return isset( $value ) && true == $value ? "ttt" : "fff";
 	return isset( $value ) && true == $value ? true : false;
 }
 
@@ -109,66 +108,6 @@ function cast_array( $value ) {
 
 	return array();
 }
-
-// function sanitize_array_id( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_id( $array_value );
-// 	}
-
-// 	return $value;
-// }
-
-// function sanitize_array_integer( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_integer( $array_value );
-// 	}
-
-// 	return $value;
-// }
-
-// function sanitize_array_text( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_text( $array_value );
-// 	}
-
-// 	return $value;
-// }
-
-// function sanitize_array_string( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_string( $array_value );
-// 	}
-
-// 	return $value;
-// }
-
-// function sanitize_array_array_text( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_array_text( $array_value );
-// 	}
-
-// 	return $value;
-// }
-
-// function sanitize_array_array_string( $value ) {
-// 	$value = sanitize_array( $value );
-
-// 	foreach ( $value as $array_key => $array_value ) {
-// 		$value[ $array_key ] = sanitize_array_string( $array_value );
-// 	}
-
-// 	return $value;
-// }
 
 function sanitize_options(
 	$value = '',

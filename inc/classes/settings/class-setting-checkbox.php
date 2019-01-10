@@ -9,10 +9,10 @@ class Checkbox extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'checkbox',
-			'default_value' => false,
-			'label'         => '',
-			'use_toggle'    => false,
+			'type'           => 'checkbox',
+			'default_value'  => false,
+			'input_label' => '',
+			'use_toggle'     => false,
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -27,7 +27,7 @@ class Checkbox extends Setting {
 				'type'   => 'boolean',
 				'for_js' => true,
 			),
-			'label' => array(
+			'input_label' => array(
 				'type'       => 'text',
 				'for_js'     => true,
 				'conditions' => 'not_empty',

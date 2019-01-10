@@ -2,6 +2,7 @@ import l, { Span, plugin_slug } from "../../utils";
 import withLocalValue from "./_withLocalValue";
 import tinycolor from "tinycolor2";
 
+const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const {
@@ -33,9 +34,10 @@ class Color extends Component {
 		let color_with_alpha = color;
 
 		if (alpha_control) {
-			color_with_alpha = tinycolor(color)
-				.setAlpha(alpha / 100)
-				.toRgbString();
+			const color_tiny = tinycolor(color);
+			color_with_alpha = color_tiny.isValid()
+				? color_tiny.setAlpha(alpha / 100).toRgbString()
+				: "";
 		}
 
 		return color_with_alpha;
@@ -54,6 +56,7 @@ class Color extends Component {
 	updateColor = color => {
 		const { getColorWithAlpha, props } = this;
 		const { setState, updateValueLocal } = props;
+		color = isUndefined(color) ? "" : color;
 
 		setState({ color: color }, () => {
 			const color_with_alpha = getColorWithAlpha();
@@ -69,7 +72,8 @@ class Color extends Component {
 			alpha,
 			palette,
 			alpha_control,
-			label
+			label,
+			help
 		} = props;
 
 		return (
@@ -80,11 +84,8 @@ class Color extends Component {
 						<ColorIndicator colorValue={value_local} />
 					</Fragment>
 				}
-				className={[
-					`${plugin_slug}-background_color`,
-					`${plugin_slug}-control`,
-					`${plugin_slug}-control-colorpalette`
-				].join(" ")}
+				className={`${plugin_slug}-control-color-container`}
+				help={help}
 			>
 				<ColorPalette
 					className={`${plugin_slug}-control-color`}
