@@ -1,7 +1,7 @@
 import l, { Span, plugin_slug } from "../../utils";
+import withLocalValue from "./_withLocalValue";
 import tinycolor from "tinycolor2";
 
-const { throttle } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const {
@@ -10,42 +10,26 @@ const {
 	ColorIndicator,
 	RangeControl
 } = wp.components;
-const { withState } = wp.compose;
+const { withState, compose } = wp.compose;
 
 class Color extends Component {
 	componentDidMount = () => {
-		const { setState, value: color_meta } = this.props;
+		const { setState, value, alpha_control } = this.props;
 
-		const color_meta_tiny = tinycolor(color_meta);
+		const color_tiny = tinycolor(value);
 
-		if (!color_meta_tiny.isValid()) {
-			setState({ color_with_alpha: color_meta });
+		if (!color_tiny.isValid()) {
 			return;
 		}
 
-		const alpha = color_meta_tiny.getAlpha() * 100;
-		const color = color_meta_tiny.toHexString();
+		const alpha = alpha_control ? color_tiny.getAlpha() * 100 : 100;
+		const color = color_tiny.toHexString();
 
-		setState({ alpha: alpha, color: color, color_with_alpha: color_meta });
+		setState({ alpha: alpha, color: color });
 	};
 
-	// Throttle the meta update.
-	updateValueThrottled = throttle(
-		color_with_alpha => {
-			const { updateValue } = this.props;
-
-			updateValue(color_with_alpha);
-		},
-		2000,
-		{
-			leading: true,
-			trailing: true
-		}
-	);
-
-	updateColorWithAlpha = () => {
-		const { updateValueThrottled, props } = this;
-		const { setState, color, alpha_control, alpha } = props;
+	getColorWithAlpha = () => {
+		const { color, alpha_control, alpha } = this.props;
 		let color_with_alpha = color;
 
 		if (alpha_control) {
@@ -54,29 +38,33 @@ class Color extends Component {
 				.toRgbString();
 		}
 
-		setState({ color_with_alpha: color_with_alpha }, () =>
-			updateValueThrottled(color_with_alpha)
-		);
+		return color_with_alpha;
 	};
 
 	updateAlpha = alpha => {
-		const { updateColorWithAlpha, props } = this;
-		const { setState } = props;
+		const { getColorWithAlpha, props } = this;
+		const { setState, updateValueLocal } = props;
 
-		setState({ alpha: alpha }, updateColorWithAlpha);
+		setState({ alpha: alpha }, () => {
+			const color_with_alpha = getColorWithAlpha();
+			updateValueLocal(color_with_alpha);
+		});
 	};
 
 	updateColor = color => {
-		const { updateColorWithAlpha, props } = this;
-		const { setState } = props;
+		const { getColorWithAlpha, props } = this;
+		const { setState, updateValueLocal } = props;
 
-		setState({ color: color }, updateColorWithAlpha);
+		setState({ color: color }, () => {
+			const color_with_alpha = getColorWithAlpha();
+			updateValueLocal(color_with_alpha);
+		});
 	};
 
 	render() {
 		const { updateColor, updateAlpha, props } = this;
 		const {
-			color_with_alpha,
+			value_local,
 			color,
 			alpha,
 			palette,
@@ -89,7 +77,7 @@ class Color extends Component {
 				label={
 					<Fragment>
 						<Span>{label}</Span>
-						<ColorIndicator colorValue={color_with_alpha} />
+						<ColorIndicator colorValue={value_local} />
 					</Fragment>
 				}
 				className={[
@@ -120,6 +108,6 @@ class Color extends Component {
 	}
 }
 
-export default withState({ color_with_alpha: "", color: "", alpha: 100 })(
+export default compose([withState({ color: "", alpha: 100 }), withLocalValue])(
 	Color
 );
