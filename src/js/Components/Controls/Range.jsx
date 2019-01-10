@@ -1,22 +1,26 @@
 import l, { plugin_slug } from "../../utils";
+import withLocalValue from "./_withLocalValue";
 
 const { toString, compact } = lodash;
 
+const { compose, withState } = wp.compose;
 const { Component } = wp.element;
 const { RangeControl } = wp.components;
 
 class Range extends Component {
-	render() {
-		const {
-			min,
-			max,
-			step,
-			label,
-			help,
-			value,
-			float_number,
-			updateValue
-		} = this.props;
+	componentDidMount = () => {
+		this.updateClasses();
+	};
+
+	updateNumber = value => {
+		const { float_number, updateValueLocal } = this.props;
+		value = float_number ? toString(value) : value;
+
+		updateValueLocal(value);
+	};
+
+	updateClasses = () => {
+		const { max, float_number, setState } = this.props;
 		const digits_length =
 			toString(Math.round(max)).length + (float_number ? 2 : 0);
 		let classes;
@@ -27,19 +31,26 @@ class Range extends Component {
 		classes = compact(classes);
 		classes = classes.join(" ");
 
+		setState({ classes: classes });
+	};
+
+	render() {
+		const { updateNumber, props } = this;
+		const { min, max, step, label, help, value_local, classes } = props;
+
 		return (
 			<RangeControl
 				className={classes}
 				label={label}
 				help={help}
-				value={value}
+				value={value_local}
 				min={min}
 				max={max}
 				step={step}
-				onChange={updateValue}
+				onChange={updateNumber}
 			/>
 		);
 	}
 }
 
-export default Range;
+export default compose([withState({ classes: "" }), withLocalValue])(Range);
