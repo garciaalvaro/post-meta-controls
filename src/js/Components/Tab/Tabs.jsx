@@ -1,4 +1,4 @@
-import l, { plugin_slug, store_slug } from "../../utils";
+import l, { plugin_slug, store_slug, prepareIcon, Span } from "../../utils";
 import Tab from "./Tab";
 
 const { compose } = wp.compose;
@@ -16,7 +16,14 @@ class Tabs extends Component {
 
 		const tabs_prepared = tabs.map(tab => ({
 			name: tab.id,
-			title: tab.label,
+			title: (
+				<Fragment>
+					{prepareIcon(tab.icon_svg, tab.icon_dashicon, "tab")}
+					<Span className={`${plugin_slug}-tab-label`}>
+						{tab.label}
+					</Span>
+				</Fragment>
+			),
 			className: `${plugin_slug}-tab-content`,
 			id: `${plugin_slug}-tab-content-${tab.id}`
 		}));

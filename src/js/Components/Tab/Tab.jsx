@@ -1,5 +1,5 @@
 import l, { plugin_slug, store_slug, Div } from "../../utils";
-import Panel from "../Panel/Panel";
+import PanelContainer from "../Panel/PanelContainer";
 
 const { withState, compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -15,7 +15,7 @@ class Tab extends Component {
 				className={`${plugin_slug}-tab-content`}
 			>
 				{panels.map((panel, index) => (
-					<Panel key={panel.id} {...panel} />
+					<PanelContainer key={panel.id} {...panel} />
 				))}
 			</Div>
 		);

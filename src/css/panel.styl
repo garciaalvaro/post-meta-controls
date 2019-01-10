@@ -2,6 +2,23 @@
  * Panel
  */
 
+.pmc-panel + .pmc-panel
+	border-top 1.5px solid rgba(0,0,0,0.1)
+
+.pmc-panel-label-container
+	color #191e23
+	font-weight 600
+	padding 15px
+	position relative
+	text-align left
+	width 100%
+	display flex
+
+.pmc-panel-icon svg
+	max-height 18px
+	display block
+	margin-right 8px
+
 .pmc-tab-content
 
 	.components-panel__body:first-child
@@ -12,7 +29,6 @@
 		padding 0
 		display flex
 		flex-direction column
-		padding-bottom 100px
 
 	.pmc-panel
 		padding 0
@@ -28,3 +44,7 @@
 		h2:hover
 		button:focus
 			background transparent
+
+		&:last-child
+			.components-panel__row
+				padding-bottom 100px

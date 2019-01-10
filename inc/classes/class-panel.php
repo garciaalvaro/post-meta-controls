@@ -9,12 +9,14 @@ class Panel extends Base {
 
 	protected function set_defaults() {
 		$this->props_defaults = array(
-			'id'             => wp_generate_uuid4(),
-			'path'           => array(),
-			'label'          => '',
-			'post_type'      => 'post', // It will be passed through cast_array().
-			'initial_open'   => false,
-			'with_container' => true,
+			'id'            => wp_generate_uuid4(),
+			'path'          => array(),
+			'label'         => '',
+			'post_type'     => 'post', // It will be passed through cast_array().
+			'initial_open'  => false,
+			'collapsible'   => true,
+			'icon_dashicon' => '',
+			'icon_svg'      => '',
 		);
 	}
 
@@ -33,7 +35,7 @@ class Panel extends Base {
 			'label' => array(
 				'type'       => 'text',
 				'for_js'     => true,
-				'conditions' => true === $this->props['with_container']
+				'conditions' => true === $this->props['collapsible']
 					? 'not_empty'
 					: false,
 			),
@@ -45,8 +47,16 @@ class Panel extends Base {
 				'type'   => 'boolean',
 				'for_js' => true,
 			),
-			'with_container' => array(
+			'collapsible' => array(
 				'type'   => 'boolean',
+				'for_js' => true,
+			),
+			'icon_dashicon' => array(
+				'type'   => 'id',
+				'for_js' => true,
+			),
+			'icon_svg' => array(
+				'type'   => 'html_svg',
 				'for_js' => true,
 			),
 		);

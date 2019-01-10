@@ -5,6 +5,7 @@ import castSchema from "./castSchema";
 import validate from "./validate";
 import prepareImageData from "./prepareImageData";
 import prepareOptions from "./prepareOptions";
+import prepareIcon from "./prepareIcon";
 import {
 	plugin_name,
 	plugin_namespace,
@@ -33,6 +34,7 @@ export {
 	validate,
 	prepareImageData,
 	prepareOptions,
+	prepareIcon,
 	plugin_name,
 	plugin_namespace,
 	plugin_namespace_dash,

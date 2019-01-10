@@ -13,7 +13,9 @@ class Tab extends Base {
 			warnings: [],
 			id: uuid(),
 			path: [],
-			label: ""
+			label: "",
+			icon_dashicon: "",
+			icon_svg: ""
 		};
 	}
 
@@ -37,6 +39,12 @@ class Tab extends Base {
 			label: {
 				type: "text",
 				conditions: "not_empty"
+			},
+			icon_dashicon: {
+				type: "id"
+			},
+			icon_svg: {
+				type: "html"
 			}
 		};
 	}

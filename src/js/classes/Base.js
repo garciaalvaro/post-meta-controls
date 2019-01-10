@@ -56,16 +56,16 @@ class Base {
 			return;
 		}
 
-		const {
-			// valid,
-			icon_dashicon,
-			icon_svg,
-			class_name,
-			...filtered_props
-		} = this.props;
+		const { class_name, ...filtered_props } = this.props;
 
 		if (class_name === "sidebar") {
-			dispatch(store_slug).addSidebar(filtered_props);
+			const {
+				icon_dashicon,
+				icon_svg,
+				...sidebar_filtered_props
+			} = filtered_props;
+
+			dispatch(store_slug).addSidebar(sidebar_filtered_props);
 		} else if (class_name === "tab") {
 			dispatch(store_slug).addTab(filtered_props);
 		} else if (class_name === "panel") {

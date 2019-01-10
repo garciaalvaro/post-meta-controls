@@ -28,6 +28,11 @@ const castSchema = (elements, schema) => {
 
 		switch (schema_type) {
 			case "html":
+				if (value === "") {
+					elements[key] = "";
+					break;
+				}
+
 				value = JSON.parse(value);
 				elements[key] = sanitize.html(value);
 				break;

@@ -9,10 +9,12 @@ class Tab extends Base {
 
 	protected function set_defaults() {
 		$this->props_defaults = array(
-			'id'        => wp_generate_uuid4(),
-			'path'      => array(),
-			'label'     => '',
-			'post_type' => 'post', // It will be passed through cast_array().
+			'id'            => wp_generate_uuid4(),
+			'path'          => array(),
+			'label'         => '',
+			'post_type'     => 'post', // It will be passed through cast_array().
+			'icon_dashicon' => '',
+			'icon_svg'      => '',
 		);
 	}
 
@@ -36,6 +38,14 @@ class Tab extends Base {
 			'post_type' => array(
 				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
+			),
+			'icon_dashicon' => array(
+				'type'   => 'id',
+				'for_js' => true,
+			),
+			'icon_svg' => array(
+				'type'   => 'html_svg',
+				'for_js' => true,
 			),
 		);
 	}

@@ -19,7 +19,7 @@ class Sidebar extends Base {
 			'description'     => '',
 			'data_key_prefix' => 'pmc_',
 			'icon_dashicon'   => 'carrot',
-			'icon_svg'        => false,
+			'icon_svg'        => '',
 		);
 	}
 

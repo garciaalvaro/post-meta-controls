@@ -15,7 +15,9 @@ class Panel extends Base {
 			path: [],
 			label: "",
 			initial_open: false,
-			with_container: true
+			collapsible: true,
+			icon_dashicon: "",
+			icon_svg: ""
 		};
 	}
 
@@ -39,13 +41,19 @@ class Panel extends Base {
 			label: {
 				type: "text",
 				conditions:
-					this.props.with_container === true ? "not_empty" : false
+					this.props.collapsible === true ? "not_empty" : false
 			},
 			initial_open: {
 				type: "boolean"
 			},
-			with_container: {
+			collapsible: {
 				type: "boolean"
+			},
+			icon_dashicon: {
+				type: "id"
+			},
+			icon_svg: {
+				type: "html"
 			}
 		};
 	}

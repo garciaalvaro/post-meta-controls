@@ -6,6 +6,10 @@ namespace POSTMETACONTROLS;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function sanitize_html_svg( $value ) {
+	if ( empty( $value ) ) {
+		return '';
+	}
+
 	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(
 		'svg' => array(
