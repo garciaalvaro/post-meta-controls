@@ -1,6 +1,7 @@
 import l, { Span, plugin_slug } from "../../utils";
 import tinycolor from "tinycolor2";
 
+const { throttle } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const {
@@ -18,52 +19,77 @@ class Color extends Component {
 		const color_meta_tiny = tinycolor(color_meta);
 
 		if (!color_meta_tiny.isValid()) {
+			setState({ color_with_alpha: color_meta });
 			return;
 		}
 
 		const alpha = color_meta_tiny.getAlpha() * 100;
 		const color = color_meta_tiny.toHexString();
 
-		setState({ alpha: alpha, color: color });
+		setState({ alpha: alpha, color: color, color_with_alpha: color_meta });
 	};
 
-	updateColorMeta = () => {
-		const { color, alpha_control, alpha, updateValue } = this.props;
-		let color_meta = color;
+	// Throttle the meta update.
+	updateValueThrottled = throttle(
+		color_with_alpha => {
+			const { updateValue } = this.props;
+
+			updateValue(color_with_alpha);
+		},
+		2000,
+		{
+			leading: true,
+			trailing: true
+		}
+	);
+
+	updateColorWithAlpha = () => {
+		const { updateValueThrottled, props } = this;
+		const { setState, color, alpha_control, alpha } = props;
+		let color_with_alpha = color;
 
 		if (alpha_control) {
-			color_meta = tinycolor(color)
+			color_with_alpha = tinycolor(color)
 				.setAlpha(alpha / 100)
 				.toRgbString();
 		}
 
-		updateValue(color_meta);
+		setState({ color_with_alpha: color_with_alpha }, () =>
+			updateValueThrottled(color_with_alpha)
+		);
 	};
 
 	updateAlpha = alpha => {
-		const { updateColorMeta, props } = this;
+		const { updateColorWithAlpha, props } = this;
 		const { setState } = props;
 
-		setState({ alpha: alpha }, updateColorMeta);
+		setState({ alpha: alpha }, updateColorWithAlpha);
 	};
 
 	updateColor = color => {
-		const { updateColorMeta, props } = this;
+		const { updateColorWithAlpha, props } = this;
 		const { setState } = props;
 
-		setState({ color: color }, updateColorMeta);
+		setState({ color: color }, updateColorWithAlpha);
 	};
 
 	render() {
 		const { updateColor, updateAlpha, props } = this;
-		const { value, color, alpha, palette, alpha_control, label } = props;
+		const {
+			color_with_alpha,
+			color,
+			alpha,
+			palette,
+			alpha_control,
+			label
+		} = props;
 
 		return (
 			<BaseControl
 				label={
 					<Fragment>
 						<Span>{label}</Span>
-						<ColorIndicator colorValue={value} />
+						<ColorIndicator colorValue={color_with_alpha} />
 					</Fragment>
 				}
 				className={[
@@ -94,4 +120,6 @@ class Color extends Component {
 	}
 }
 
-export default withState({ color: "", alpha: 100 })(Color);
+export default withState({ color_with_alpha: "", color: "", alpha: 100 })(
+	Color
+);

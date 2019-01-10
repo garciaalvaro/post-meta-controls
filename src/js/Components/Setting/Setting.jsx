@@ -140,7 +140,7 @@ export default compose([
 					editPost({
 						meta: { [data_key_with_prefix]: value }
 					});
-					l("updateValue");
+
 					if (!metadata_exists) {
 						updateSettingProp(id, "metadata_exists", true);
 					}
