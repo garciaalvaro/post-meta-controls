@@ -1,6 +1,10 @@
+import sanitize from "./sanitize";
+
 const { forEach, isString, isObject } = lodash;
 
 const prepareOptions = options => {
+	options = sanitize.array(options);
+
 	const options_clean = [];
 
 	forEach(options, (value, key) => {

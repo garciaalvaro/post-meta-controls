@@ -7,6 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function prepare_options( $options = array() ) {
 
+	$options = sanitize_array( $options );
+
 	$options_clean = array();
 
 	foreach ( $options as $key => $value ) {

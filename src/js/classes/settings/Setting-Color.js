@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l, { sanitize } from "../../utils";
 import Setting from "../Setting";
 
 const { forEach, isEmpty, isString, isObject } = lodash;
@@ -10,13 +10,10 @@ class Color extends Setting {
 	}
 
 	preparePalette() {
-		if (isEmpty(this.props.palette)) {
-			return;
-		}
-
+		const palette = sanitize.array(this.props.palette);
 		const palette_clean = [];
 
-		forEach(this.props.palette, (value, key) => {
+		forEach(palette, (value, key) => {
 			// If the option is already prepared
 			if (
 				isObject(value) &&
@@ -27,6 +24,8 @@ class Color extends Setting {
 					name: value.name,
 					color: value.color
 				});
+
+				return;
 			}
 
 			if (!isString(value)) {
@@ -46,7 +45,7 @@ class Color extends Setting {
 		const this_defaults = {
 			type: "color",
 			default_value: "",
-			alpha: false,
+			alpha_control: false,
 			palette: []
 		};
 
@@ -58,8 +57,8 @@ class Color extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: { type: "id" },
-			alpha: { type: "boolean" },
-			palette: { type: "array_object_text" }
+			alpha_control: { type: "boolean" },
+			palette: { type: { _all: { name: "id", color: "text" } } }
 		};
 
 		const parent_schema = this.getSchema();

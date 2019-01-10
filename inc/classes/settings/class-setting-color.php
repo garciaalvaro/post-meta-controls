@@ -14,13 +14,11 @@ class Color extends Setting {
 
 	private function prepare_palette() {
 
-		if ( empty( $this->props['palette'] ) ) {
-			return;
-		}
+		$palette = sanitize_array( $this->props['palette'] );
 
 		$palette_clean = array();
 
-		foreach ( $this->props['palette'] as $key => $value ) {
+		foreach ( $palette as $key => $value ) {
 			if ( ! is_string( $key ) || ! is_string( $value ) ) {
 				continue;
 			}
@@ -38,7 +36,7 @@ class Color extends Setting {
 		$this_defaults = array(
 			'type'          => 'color',
 			'default_value' => '',
-			'alpha'         => false,
+			'alpha_control' => false,
 			'palette'       => array(),
 		);
 
@@ -54,7 +52,7 @@ class Color extends Setting {
 				'type'   => 'id',
 				'for_js' => true,
 			),
-			'alpha' => array(
+			'alpha_control' => array(
 				'type'   => 'boolean',
 				'for_js' => true,
 			),

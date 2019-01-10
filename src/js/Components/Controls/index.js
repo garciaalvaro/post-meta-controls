@@ -1,16 +1,16 @@
 import l from "../../utils";
+import Buttons from "./Buttons";
 import Checkbox from "./Checkbox";
-import Radio from "./Radio";
-import Select from "./Select";
-import Range from "./Range";
-import Text from "./Text";
-import Textarea from "./Textarea";
 import Color from "./Color";
-import ImageContainer from "./ImageContainer";
 import CustomText from "./CustomText";
 import DateTime from "./DateTime";
-import Buttons from "./Buttons";
+import ImageContainer from "./ImageContainer";
 import MultiCheckbox from "./MultiCheckbox";
+import Radio from "./Radio";
+import Range from "./Range";
+import Select from "./Select";
+import Text from "./Text";
+import Textarea from "./Textarea";
 
 const { isEmpty } = lodash;
 const { applyFilters } = wp.hooks;
@@ -18,26 +18,24 @@ const { applyFilters } = wp.hooks;
 let controls;
 
 controls = {
+	Buttons,
 	Checkbox,
-	Radio,
-	Select,
-	Range,
-	Text,
-	Textarea,
 	Color,
-	ImageContainer,
 	CustomText,
 	DateTime,
-	Buttons,
-	MultiCheckbox
+	ImageContainer,
+	MultiCheckbox,
+	Radio,
+	Range,
+	Select,
+	Text,
+	Textarea
 };
 
 const controls_pro = applyFilters("pmc_add_controls", {});
 
 if (!isEmpty(controls_pro)) {
-	const { CustomHTML } = controls_pro;
-
-	controls = { ...controls, CustomHTML };
+	controls = { ...controls, ...controls_pro };
 }
 
 export default controls;

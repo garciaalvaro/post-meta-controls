@@ -2,18 +2,19 @@ import l, { Div, plugin_slug, store_slug } from "../../utils";
 import controls from "../Controls";
 
 const {
+	Buttons,
 	Checkbox,
-	Radio,
-	Select,
-	Range,
-	Text,
-	Textarea,
 	Color,
-	ImageContainer,
 	CustomText,
 	DateTime,
-	Buttons,
+	ImageContainer,
 	MultiCheckbox,
+	Radio,
+	Range,
+	Select,
+	Text,
+	Textarea,
+	// TODO: Pro
 	CustomHTML
 } = controls;
 const { isUndefined } = lodash;
@@ -139,7 +140,7 @@ export default compose([
 					editPost({
 						meta: { [data_key_with_prefix]: value }
 					});
-
+					l("updateValue");
 					if (!metadata_exists) {
 						updateSettingProp(id, "metadata_exists", true);
 					}
