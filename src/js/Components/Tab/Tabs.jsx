@@ -10,6 +10,10 @@ class Tabs extends Component {
 	render() {
 		const { tabs, sidebar_id, active_tab, updateActiveTab } = this.props;
 
+		if (tabs.length === 1) {
+			return <Tab id={tabs[0].id} />;
+		}
+
 		const tabs_prepared = tabs.map(tab => ({
 			name: tab.id,
 			title: tab.label,
