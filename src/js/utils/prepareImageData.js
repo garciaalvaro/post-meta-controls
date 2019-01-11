@@ -2,7 +2,7 @@ import l from "./log";
 
 const { reduce, get } = lodash;
 
-const prepareImageData = (images_data_raw, from_rest_api) =>
+const prepareImageData = (images_data_raw, from_rest_api = false) =>
 	reduce(
 		images_data_raw,
 		(images_data, image_data_raw) => {

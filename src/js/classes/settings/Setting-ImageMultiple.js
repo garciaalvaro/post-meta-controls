@@ -1,11 +1,11 @@
 import l from "../../utils";
 import Setting from "../Setting";
 
-class Image extends Setting {
+class ImageMultiple extends Setting {
 	setDefaults() {
 		const this_defaults = {
-			type: "image",
-			default_value: 0
+			type: "image_multiple",
+			default_value: []
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -16,7 +16,7 @@ class Image extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "integer"
+				type: { _all: "integer" }
 			}
 		};
 
@@ -26,4 +26,4 @@ class Image extends Setting {
 	}
 }
 
-export default Image;
+export default ImageMultiple;

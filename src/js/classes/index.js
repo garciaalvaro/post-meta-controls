@@ -10,6 +10,7 @@ import Color from "./settings/Setting-Color";
 import CustomText from "./settings/Setting-CustomText";
 import DateTime from "./settings/Setting-DateTime";
 import Image from "./settings/Setting-Image";
+import ImageMultiple from "./settings/Setting-ImageMultiple";
 import Radio from "./settings/Setting-Radio";
 import Range from "./settings/Setting-Range";
 import Select from "./settings/Setting-Select";
@@ -33,6 +34,7 @@ classes = {
 	CustomText,
 	DateTime,
 	Image,
+	ImageMultiple,
 	Radio,
 	Range,
 	Select,

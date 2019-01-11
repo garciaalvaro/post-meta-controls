@@ -113,6 +113,10 @@ function create_instances(
 					$instance = new Image( $prop_raw );
 					break;
 
+				case 'image_multiple':
+					$instance = new ImageMultiple( $prop_raw );
+					break;
+
 				case 'custom_text':
 					$instance = new CustomText( $prop_raw );
 					break;

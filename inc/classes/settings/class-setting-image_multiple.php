@@ -5,12 +5,12 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Image extends Setting {
+class ImageMultiple extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'image',
-			'default_value' => 0,
+			'type'          => 'image_multiple',
+			'default_value' => array(),
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -22,7 +22,7 @@ class Image extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'integer',
+				'type'   =>  array( '_all' => 'integer' ),
 				'for_js' => true,
 			),
 		);

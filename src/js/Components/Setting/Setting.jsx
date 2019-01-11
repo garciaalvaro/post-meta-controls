@@ -8,7 +8,8 @@ const {
 	Color,
 	CustomText,
 	DateTime,
-	ImageContainer,
+	Image,
+	ImageMultiple,
 	Radio,
 	Range,
 	Select,
@@ -50,7 +51,10 @@ class Setting extends Component {
 				return <Color {...props} />;
 
 			case "image":
-				return <ImageContainer {...props} />;
+				return <Image {...props} />;
+
+			case "image_multiple":
+				return <ImageMultiple {...props} />;
 
 			case "custom_text":
 				return <CustomText {...props} />;

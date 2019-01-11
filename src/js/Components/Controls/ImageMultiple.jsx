@@ -1,9 +1,8 @@
-import l, { plugin_slug, Div, prepareImageData } from "../../utils";
-import Image from "./Image";
+import l, { Div, Img, plugin_slug, prepareImageData, icons } from "../../utils";
 import arrayMove from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
-const { isUndefined, isArray, isEmpty, find, castArray, pull } = lodash;
+const { isUndefined, isEmpty, find, castArray, pull } = lodash;
 const { __ } = wp.i18n;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
@@ -12,13 +11,19 @@ const { withState } = wp.compose;
 const { apiFetch } = wp;
 
 const SortableItem = SortableElement(({ value, custom }) => {
+	const { removeImage } = custom;
+	const { id, url, alt } = value;
+
 	return (
-		<Image
-			image_data={value}
-			removeImage={custom.removeImage}
-			setting_id={custom.setting_id}
-			multiple={custom.multiple}
-		/>
+		<Div className={`${plugin_slug}-image-container`}>
+			<Img className={`${plugin_slug}-image`} src={url} alt={alt} />
+			<Button
+				className={`${plugin_slug}-image-remove`}
+				onClick={() => removeImage(id)}
+			>
+				{icons.remove}
+			</Button>
+		</Div>
 	);
 });
 
@@ -51,7 +56,7 @@ class ImageContainer extends Component {
 			}
 
 			let images_data;
-			images_data = prepareImageData(images_data_raw, true);
+			images_data = prepareImageData(castArray(images_data_raw), true);
 			// The sorting of the elements from images_data_raw is not
 			// the same as the one from the id, so we need to order it.
 			images_data = images_id.map(id => find(images_data, { id: id }));
@@ -62,9 +67,11 @@ class ImageContainer extends Component {
 
 	componentDidMount = () => {
 		const { updateImagesData, props } = this;
-		const { value } = props;
+		const { value: images_id } = props;
 
-		updateImagesData(value);
+		if (!isEmpty(images_id)) {
+			updateImagesData(images_id);
+		}
 	};
 
 	onSortEnd = ({ oldIndex, newIndex }) => {
@@ -82,16 +89,13 @@ class ImageContainer extends Component {
 		setState({ images_data });
 	};
 
-	updateImagesId = image_data_raw => {
-		const { updateImagesData, props } = this;
-		const { updateValue } = props;
-		let images_id;
-
-		images_id = castArray(image_data_raw).map(({ id }) => id);
-		images_id = isArray(image_data_raw) ? images_id : images_id[0];
+	updateImages = images_data_raw => {
+		const { updateValue, setState } = this.props;
+		const images_data = prepareImageData(castArray(images_data_raw));
+		const images_id = images_data.map(({ id }) => id);
 
 		updateValue(images_id);
-		updateImagesData(images_id);
+		setState({ images_data });
 	};
 
 	removeImage = image_id => {
@@ -111,56 +115,41 @@ class ImageContainer extends Component {
 
 	getImagesComponent = () => {
 		const { removeImage, onSortEnd, props } = this;
-		let { value: images_id, images_data, setting_id, multiple } = props;
+		let { value: images_id, images_data, setting_id } = props;
 
 		images_id = castArray(images_id);
 		images_data = castArray(images_data);
 
-		if (
-			isEmpty(images_id) ||
-			images_id[0] === 0 ||
-			isUndefined(images_data[0])
-		) {
+		if (isEmpty(images_id)) {
 			return null;
-		}
-
-		if (images_id.length === 1) {
-			return (
-				<Image
-					image_data={images_data[0]}
-					removeImage={removeImage}
-					setting_id={setting_id}
-					multiple={multiple}
-				/>
-			);
 		}
 
 		return (
 			<SortableList
-				distance={3} // Needed so clicks can be triggered
+				distance={3} // Needed, so clicks can be triggered
 				helperClass={`${plugin_slug}-dragging_image`}
 				items={images_data}
 				onSortEnd={onSortEnd}
-				custom={{ removeImage, setting_id, multiple }}
+				custom={{ removeImage, setting_id }}
 			/>
 		);
 	};
 
 	render() {
-		const { updateImagesId, getImagesComponent, props } = this;
-		const { value: images_id, multiple, label, help } = props;
+		const { updateImages, getImagesComponent, props } = this;
+		const { value: images_id, label, help } = props;
 
 		return (
 			<BaseControl
 				label={label}
-				className={`${plugin_slug}-control-image`}
+				className={`${plugin_slug}-control-image_multiple`}
 				help={help}
 			>
 				<MediaUpload
-					onSelect={updateImagesId}
+					onSelect={updateImages}
 					allowedTypes={["image"]}
 					value={images_id}
-					multiple={multiple}
+					multiple={true}
 					render={({ open }) => (
 						<Button onClick={open} isDefault>
 							{__("Open Media Library")}

@@ -13,6 +13,7 @@ const {
 	CustomText,
 	DateTime,
 	Image,
+	ImageMultiple,
 	Radio,
 	Range,
 	Select,
@@ -44,6 +45,10 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Checkbox(props_raw);
 				break;
 
+			case "checkbox_multiple":
+				instance = new CheckboxMultiple(props_raw);
+				break;
+
 			case "color":
 				instance = new Color(props_raw);
 				break;
@@ -60,8 +65,8 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Image(props_raw);
 				break;
 
-			case "checkbox_multiple":
-				instance = new CheckboxMultiple(props_raw);
+			case "image_multiple":
+				instance = new ImageMultiple(props_raw);
 				break;
 
 			case "radio":

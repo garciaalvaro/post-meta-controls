@@ -15,6 +15,7 @@ class Setting extends Base {
 			"color",
 			"date_time",
 			"image",
+			"image_multiple",
 			"radio",
 			"range",
 			"select",

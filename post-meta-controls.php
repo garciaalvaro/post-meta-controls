@@ -53,11 +53,12 @@ require_once INC_DIR . 'classes/class-tab.php';
 // Classes Settings.
 require_once INC_DIR . 'classes/settings/class-setting-buttons.php';
 require_once INC_DIR . 'classes/settings/class-setting-checkbox.php';
+require_once INC_DIR . 'classes/settings/class-setting-checkbox_multiple.php';
 require_once INC_DIR . 'classes/settings/class-setting-color.php';
 require_once INC_DIR . 'classes/settings/class-setting-custom_text.php';
 require_once INC_DIR . 'classes/settings/class-setting-date_time.php';
 require_once INC_DIR . 'classes/settings/class-setting-image.php';
-require_once INC_DIR . 'classes/settings/class-setting-checkbox_multiple.php';
+require_once INC_DIR . 'classes/settings/class-setting-image_multiple.php';
 require_once INC_DIR . 'classes/settings/class-setting-radio.php';
 require_once INC_DIR . 'classes/settings/class-setting-range.php';
 require_once INC_DIR . 'classes/settings/class-setting-select.php';
