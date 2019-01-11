@@ -116,20 +116,19 @@ function cast_array( $value ) {
 function sanitize_options(
 	$value = '',
 	$options = array(),
-	$default = '',
-	$multiple = false
+	$default_value = ''
 ) {
 
-	$value   = \sanitize_key( $value );
-	$options = sanitize_array( $options );
-	$default = true === $multiple ? '' : sanitize_id( $default );// TODO, if multiple, return empty string?
+	$value         = \sanitize_key( $value );
+	$options       = sanitize_array( $options );
+	$default_value = \sanitize_key( $default_value );
 
 	$options = array_map( function( $option ) {
 		return $option['value'];
 	}, $options );
 
-	// If the input is a valid key, return it; otherwise, return the default.
-	return in_array( $value, $options ) ? $value : $default;
+	// If the input is a valid key, return it; otherwise, return the default_value.
+	return in_array( $value, $options ) ? $value : $default_value;
 }
 
 function sanitize_range( $value = 1, $min = 0, $max = 1 ) {

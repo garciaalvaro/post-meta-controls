@@ -11,7 +11,6 @@ class Select extends Setting {
 		const this_defaults = {
 			type: "select",
 			default_value: "", // It will be passed through castArray().
-			multiple: false,
 			options: []
 		};
 
@@ -23,10 +22,7 @@ class Select extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: this.props.multiple ? { _all: "id" } : "id"
-			},
-			multiple: {
-				type: "boolean"
+				type: "id"
 			},
 			options: {
 				type: { _all: { value: "id", label: "text" } },

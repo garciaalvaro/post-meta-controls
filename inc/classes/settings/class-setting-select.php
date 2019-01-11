@@ -17,7 +17,6 @@ class Select extends Setting {
 			'type'          => 'select',
 			'default_value' => '', // It will be passed through cast_array().
 			'options'       => array(),
-			'multiple'      => false,
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -29,9 +28,7 @@ class Select extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => true === $this->props['multiple']
-					? array( '_all' => 'id' )
-					: 'id',
+				'type'   => 'id',
 				'for_js' => true,
 			),
 			'options' => array(
@@ -43,10 +40,6 @@ class Select extends Setting {
 				),
 				'for_js'     => true,
 				'conditions' => 'not_empty',
-			),
-			'multiple' => array(
-				'type'   => 'boolean',
-				'for_js' => true,
 			),
 		);
 

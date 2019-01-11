@@ -25,9 +25,7 @@ function get_meta_type( $type = '' ) {
 
 function get_meta_single( $type = '', $props = array() ) {
 
-	$multiple =
-		( 'select' === $type || 'image' === $type ) &&
-		true === $props['multiple'];
+	$multiple = 'image' === $type && true === $props['multiple'];
 	$multiple = 'checkbox_multiple' === $type ? true : $multiple;
 
 	return false === $multiple;
@@ -69,9 +67,8 @@ function get_meta_sanitize( $type = '', $props = array() ) {
 		case 'select':
 			$options  = $props['options'];
 			$default  = $props['default_value'];
-			$multiple = 'select' === $type && true === $props['multiple'];
 			return function ( $value ) use ( $options, $default ) {
-				return sanitize_options( $value, $options, $default, $multiple );
+				return sanitize_options( $value, $options, $default );
 			};
 			break;
 

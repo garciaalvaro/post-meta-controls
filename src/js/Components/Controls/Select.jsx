@@ -5,14 +5,7 @@ const { SelectControl } = wp.components;
 
 class Select extends Component {
 	render() {
-		const {
-			options,
-			label,
-			help,
-			value,
-			updateValue,
-			multiple
-		} = this.props;
+		const { options, label, help, value, updateValue } = this.props;
 
 		return (
 			<SelectControl
@@ -21,7 +14,6 @@ class Select extends Component {
 				help={help}
 				value={value}
 				options={options}
-				multiple={multiple}
 				onChange={updateValue}
 			/>
 		);
