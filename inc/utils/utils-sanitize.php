@@ -155,3 +155,27 @@ function sanitize_range_float( $value = 1, $min = 0, $max = 1 ) {
 
 	return (string) $value;
 }
+
+/**
+ * Sanitize color text input for HEX, rgb and rgba.
+ *
+ * https://stackoverflow.com/a/31245990 | CC BY-SA 3.0
+ *
+ * @param string $color   Slug to sanitize.
+ */
+function sanitize_color( $value ) {
+
+	$color          = sanitize_text_field( $value );
+	$regex_rgb_rgba = '/rgba?\(((25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,\s*?){2}(25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,?\s*([01]\.?\d*?)?\)/';
+	$regex_hex      = '/#([a-fA-F0-9]{3}){1,2}\b/';
+
+	// If the color is hex, rgb, rgba, or empty return it.
+	if (
+		true == preg_match( $regex_hex, $color ) ||
+		true == preg_match( $regex_rgb_rgba, $color )
+	) {
+		return $color;
+	}
+
+	return '';
+}

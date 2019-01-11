@@ -4,132 +4,245 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 use function POSTMETACONTROLS\sanitize_id;
-use function POSTMETACONTROLS\sanitize_array_integer;
 use function POSTMETACONTROLS\sanitize_integer;
-use function POSTMETACONTROLS\sanitize_array_id;
 use function POSTMETACONTROLS\sanitize_float;
 use function POSTMETACONTROLS\sanitize_text;
+use function POSTMETACONTROLS\sanitize_array;
+use function POSTMETACONTROLS\sanitize_color;
 
+if ( ! function_exists( 'pmc_get_meta' ) ) {
+	function pmc_get_meta( $type = '', $meta_key = '', $post_id = '' ) {
 
-if ( ! function_exists( 'ps_get_meta' ) ) {
-	function ps_get_meta( $key = '', $post_id = '', $single = false ) {
+		if (
+			empty( $meta_key ) ||
+			! is_string( $meta_key ) ||
+			! is_int( $post_id )
+		) {
+			return false;// TODO: return null?
+		}
 
-		if ( empty( $key ) || ! is_string( $key ) ) {
+		$post_id = '' === $post_id ? get_the_ID() : $post_id;
+
+		switch ( $type ) {
+			case 'buttons':
+			case 'checkbox':
+			case 'color':
+			case 'custom_text':
+			case 'date_time':
+			case 'image':
+			case 'radio':
+			case 'range':
+			case 'select':
+			case 'text':
+			case 'textarea':
+				$value = get_post_meta( $post_id, $meta_key, true );
+				break;
+
+			case 'checkbox_multiple':
+			case 'image_multiple':
+				$value = get_post_meta( $post_id, $meta_key, false );
+				break;
+
+			default:
+				$value = false;// TODO: return null?
+				break;
+		}
+
+		// If the value is the same as the one returned by a non-existent meta key
+		// we make sure it exists, and if it doesn't we return false.
+		if ( '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
+			$exists = metadata_exists( 'post', $post_id, $meta_key );
+
+			if ( false === $exists ) {
+				return false;
+			}
+		}
+
+		return $value;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_buttons' ) ) {
+	function pmc_get_buttons( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'buttons', $meta_key, $post_id );
+
+		if ( false === $meta ) {
 			return false;
 		}
 
-		$post_id = '' !== $post_id && is_string( $key )
-			? $post_id
-			: get_the_ID();
-
-		// $meta_exists = metadata_exists( 'post', $post_id, $key );
-
-		$meta = get_post_meta( $post_id, $key, $single );
+		$meta = sanitize_id( $meta );
 
 		return $meta;
 	}
 }
 
-if ( ! function_exists( 'ps_get_radio' ) ) {
-	function ps_get_radio( $key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_checkbox' ) ) {
+	function pmc_get_checkbox( $meta_key = '', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, true );
+		$meta = pmc_get_meta( 'checkbox', $meta_key, $post_id );
 
-		return sanitize_id( $meta );
-	}
-}
+		if ( false === $meta ) {
+			return '';// What should return, null?
+		}
 
-if ( ! function_exists( 'ps_get_buttons' ) ) {
-	function ps_get_buttons( $key = '', $post_id = '' ) {
-
-		$meta = ps_get_meta( $key, $post_id, true );
-
-		return sanitize_id( $meta );
-	}
-}
-
-if ( ! function_exists( 'ps_get_checkbox' ) ) {
-	function ps_get_checkbox( $key = '', $post_id = '' ) {
-
-		$meta = ps_get_meta( $key, $post_id, true );
 		$meta = '1' === $meta ? true : false;
 
 		return $meta;
 	}
 }
 
-if ( ! function_exists( 'ps_get_image' ) ) {
-	function ps_get_image( $key = '', $size = 'large', $single = true, $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_checkbox_multiple' ) ) {
+	function pmc_get_checkbox_multiple( $meta_key = '', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, $single );
-		$meta = is_array( $meta )
-			? sanitize_array_integer( $meta )
-			: sanitize_integer( $meta );
+		$meta = pmc_get_meta( 'checkbox_multiple', $meta_key, $post_id );
 
-		if ( is_array( $meta ) ) {
-			$image = array();
-
-			foreach ( $meta as $image_id ) {
-				$image[] = wp_get_attachment_image( $image_id, $size );
-			}
-		} else {
-			$image = wp_get_attachment_image( $meta, $size );
+		if ( false === $meta ) {
+			return false;
 		}
 
-		return $image;
+		$meta       = sanitize_array( $meta );
+		$meta_clean = array();
+
+		foreach ( $meta as $key => $value ) {
+			$value = sanitize_id( $value );
+
+			if ( '' !== $value ) {
+				$meta_clean[] = $value;
+			}
+		}
+
+		return $meta_clean;
 	}
 }
 
-if ( ! function_exists( 'ps_get_image_data' ) ) {
-	function ps_get_image_data( $key = '', $size = 'large', $single = true, $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_color' ) ) {
+	function pmc_get_color( $meta_key = '', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, $single );
-		$meta = is_array( $meta )
-			? sanitize_array_integer( $meta )
-			: sanitize_integer( $meta );
+		$meta = pmc_get_meta( 'color', $meta_key, $post_id );
 
-		if ( is_array( $meta ) ) {
-			$image = array();
-
-			foreach ( $meta as $image_id ) {
-				$image[] = wp_get_attachment_image_src( $image_id, $size );
-			}
-		} else {
-			$image = wp_get_attachment_image_src( $meta, $size );
+		if ( false === $meta ) {
+			return false;
 		}
 
-		return $image;
-	}
-}
-
-if ( ! function_exists( 'ps_get_select' ) ) {
-	function ps_get_select( $key = '', $post_id = '', $single = true ) {
-
-		$meta = ps_get_meta( $key, $post_id, $single );
-		$meta = is_array( $meta )
-			? sanitize_array_id( $meta )
-			: sanitize_id( $meta );
+		$meta = sanitize_color( $meta );
 
 		return $meta;
 	}
 }
 
-if ( ! function_exists( 'ps_get_color' ) ) {
-	function ps_get_color( $key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_custom_text' ) ) {
+	function pmc_get_custom_text( $meta_key = '', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, true );
+		$meta = pmc_get_meta( 'custom_text', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
 		$meta = sanitize_text( $meta );
 
-		// TODO: get correct string, alpha option
+		return $meta;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_date_time' ) ) {
+	function pmc_get_date_time( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'date_time', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_text( $meta );
 
 		return $meta;
 	}
 }
 
-if ( ! function_exists( 'ps_get_range' ) ) {
-	function ps_get_range( $key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_image' ) ) {
+	function pmc_get_image( $meta_key = '', $post_id = '', $size = 'large' ) {
 
-		$meta = ps_get_meta( $key, $post_id, true );
+		$meta = pmc_get_meta( 'image', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_integer( $meta );
+		$meta = wp_get_attachment_image_src( $meta, $size );// If not found returns false.
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$image = array(
+			'url'    => $meta[0],
+			'width'  => $meta[1],
+			'height' => $meta[2],
+		);
+
+		return $image;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
+	function pmc_get_image_multiple( $meta_key = '', $post_id = '', $size = 'large' ) {
+
+		$meta = pmc_get_meta( 'image_multiple', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta       = sanitize_array( $meta );
+		$meta_clean = array();
+
+		foreach ( $meta as $key => $id ) {
+			$id = sanitize_integer( $id );
+
+			if ( 0 !== $id ) {
+				$image = wp_get_attachment_image_src( $id, $size );
+
+				if ( false !== $image ) {
+					$meta_clean[ $id ] = array(
+						'url'    => $image[0],
+						'width'  => $image[1],
+						'height' => $image[2],
+					);
+				}
+			}
+		}
+
+		return $meta_clean;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_radio' ) ) {
+	function pmc_get_radio( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'radio', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_id( $meta );
+
+		return $meta;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_range' ) ) {
+	function pmc_get_range( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'range', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
 		$meta = (string) (float) $meta === $meta
 			? sanitize_float( $meta )
 			: sanitize_integer( $meta );
@@ -138,21 +251,48 @@ if ( ! function_exists( 'ps_get_range' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ps_get_text' ) ) {
-	function ps_get_text( $key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_select' ) ) {
+	function pmc_get_select( $meta_key = '', $post_id = '', $single = true ) {
 
-		$meta = ps_get_meta( $key, $post_id, true );
-		$meta = (string) $meta;
+		$meta = pmc_get_meta( 'select', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_id( $meta );
 
 		return $meta;
 	}
 }
 
-if ( ! function_exists( 'ps_get_textarea' ) ) {
-	function ps_get_textarea( $key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_text' ) ) {
+	function pmc_get_text( $meta_key = '', $post_id = '' ) {
 
-		$meta = ps_get_meta( $key, $post_id, true );
-		$meta = (string) $meta;
+		$meta = pmc_get_meta( 'text', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_text( $meta );
+		// $meta = (string) $meta;
+
+		return $meta;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_textarea' ) ) {
+	function pmc_get_textarea( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'textarea', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_textarea( $meta );
+		// $meta = (string) $meta;
 
 		return $meta;
 	}
