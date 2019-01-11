@@ -13,6 +13,7 @@ function get_meta_type( $type = '' ) {
 			break;
 
 		case 'image':
+		case 'image_multiple':
 		case 'range':
 			return 'integer';
 			break;
@@ -23,12 +24,13 @@ function get_meta_type( $type = '' ) {
 	}
 }
 
-function get_meta_single( $type = '', $props = array() ) {
+function get_meta_single( $type = '' ) {
 
-	$multiple = 'image' === $type && true === $props['multiple'];
-	$multiple = 'checkbox_multiple' === $type ? true : $multiple;
+	if ( 'checkbox_multiple' === $type || 'image_multiple' === $type ) {
+		return false;
+	}
 
-	return false === $multiple;
+	return true;
 }
 
 function get_meta_sanitize( $type = '', $props = array() ) {
@@ -43,6 +45,7 @@ function get_meta_sanitize( $type = '', $props = array() ) {
 			break;
 
 		case 'image':
+		case 'image_multiple':
 			return '\absint';
 			break;
 
@@ -65,10 +68,12 @@ function get_meta_sanitize( $type = '', $props = array() ) {
 		case 'buttons':
 		case 'radio':
 		case 'select':
-			$options  = $props['options'];
-			$default  = $props['default_value'];
+		case 'checkbox_multiple':
+			$options     = $props['options'];
+			$default     = $props['default_value'];
+			$is_multiple = 'checkbox_multiple' === $props['type'];
 			return function ( $value ) use ( $options, $default ) {
-				return sanitize_options( $value, $options, $default );
+				return sanitize_options( $value, $options, $default, $is_multiple );
 			};
 			break;
 

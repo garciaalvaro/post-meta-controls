@@ -116,12 +116,13 @@ function cast_array( $value ) {
 function sanitize_options(
 	$value = '',
 	$options = array(),
-	$default_value = ''
+	$default_value = '',
+	$is_multiple = false
 ) {
 
 	$value         = \sanitize_key( $value );
 	$options       = sanitize_array( $options );
-	$default_value = \sanitize_key( $default_value );
+	$default_value = $is_multiple ? '' : \sanitize_key( $default_value );
 
 	$options = array_map( function( $option ) {
 		return $option['value'];
