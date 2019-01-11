@@ -5,11 +5,11 @@ import Tab from "./Tab";
 // Settings:
 import Buttons from "./settings/Setting-Buttons";
 import Checkbox from "./settings/Setting-Checkbox";
+import CheckboxMultiple from "./settings/Setting-CheckboxMultiple";
 import Color from "./settings/Setting-Color";
 import CustomText from "./settings/Setting-CustomText";
 import DateTime from "./settings/Setting-DateTime";
 import Image from "./settings/Setting-Image";
-import MultiCheckbox from "./settings/Setting-MultiCheckbox";
 import Radio from "./settings/Setting-Radio";
 import Range from "./settings/Setting-Range";
 import Select from "./settings/Setting-Select";
@@ -28,11 +28,11 @@ classes = {
 	// Settings:
 	Buttons,
 	Checkbox,
+	CheckboxMultiple,
 	Color,
 	CustomText,
 	DateTime,
 	Image,
-	MultiCheckbox,
 	Radio,
 	Range,
 	Select,

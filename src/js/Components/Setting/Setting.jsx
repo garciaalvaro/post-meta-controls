@@ -4,11 +4,11 @@ import controls from "../Controls";
 const {
 	Buttons,
 	Checkbox,
+	CheckboxMultiple,
 	Color,
 	CustomText,
 	DateTime,
 	ImageContainer,
-	MultiCheckbox,
 	Radio,
 	Range,
 	Select,
@@ -61,8 +61,8 @@ class Setting extends Component {
 			case "buttons":
 				return <Buttons {...props} />;
 
-			case "multi_checkbox":
-				return <MultiCheckbox {...props} />;
+			case "checkbox_multiple":
+				return <CheckboxMultiple {...props} />;
 
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {

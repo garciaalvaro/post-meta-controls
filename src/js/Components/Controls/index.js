@@ -1,11 +1,11 @@
 import l from "../../utils";
 import Buttons from "./Buttons";
 import Checkbox from "./Checkbox";
+import CheckboxMultiple from "./CheckboxMultiple";
 import Color from "./Color";
 import CustomText from "./CustomText";
 import DateTime from "./DateTime";
 import ImageContainer from "./ImageContainer";
-import MultiCheckbox from "./MultiCheckbox";
 import Radio from "./Radio";
 import Range from "./Range";
 import Select from "./Select";
@@ -20,11 +20,11 @@ let controls;
 controls = {
 	Buttons,
 	Checkbox,
+	CheckboxMultiple,
 	Color,
 	CustomText,
 	DateTime,
 	ImageContainer,
-	MultiCheckbox,
 	Radio,
 	Range,
 	Select,

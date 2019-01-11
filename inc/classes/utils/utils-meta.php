@@ -5,7 +5,7 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-function get_meta_arg_type( $type = '' ) {
+function get_meta_type( $type = '' ) {
 
 	switch ( $type ) {
 		case 'checkbox':
@@ -23,17 +23,17 @@ function get_meta_arg_type( $type = '' ) {
 	}
 }
 
-function get_meta_arg_single( $type = '', $props = array() ) {
+function get_meta_single( $type = '', $props = array() ) {
 
 	$multiple =
 		( 'select' === $type || 'image' === $type ) &&
 		true === $props['multiple'];
-	$multiple = 'multi_checkbox' === $type ? true : $multiple;
+	$multiple = 'checkbox_multiple' === $type ? true : $multiple;
 
 	return false === $multiple;
 }
 
-function get_meta_arg_sanitize( $type = '', $props = array() ) {
+function get_meta_sanitize( $type = '', $props = array() ) {
 
 	switch ( $type ) {
 		case 'checkbox':

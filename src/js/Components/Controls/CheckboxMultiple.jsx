@@ -4,7 +4,7 @@ const { without } = lodash;
 const { Component } = wp.element;
 const { BaseControl, CheckboxControl, ToggleControl } = wp.components;
 
-class MultiCheckbox extends Component {
+class CheckboxMultiple extends Component {
 	onChangeHandler = (value_item, option_value) => {
 		let { value, updateValue } = this.props;
 
@@ -26,7 +26,7 @@ class MultiCheckbox extends Component {
 			<BaseControl
 				label={label}
 				help={help}
-				className={`${plugin_slug}-control-multi_checkbox`}
+				className={`${plugin_slug}-control-checkbox_multiple`}
 			>
 				{options.map((option, index) => {
 					if (use_toggle) {
@@ -63,4 +63,4 @@ class MultiCheckbox extends Component {
 	}
 }
 
-export default MultiCheckbox;
+export default CheckboxMultiple;

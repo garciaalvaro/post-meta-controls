@@ -5,7 +5,7 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class MultiCheckbox extends Setting {
+class CheckboxMultiple extends Setting {
 
 	protected function before_set_schema() {
 		Setting::before_set_schema();
@@ -14,7 +14,7 @@ class MultiCheckbox extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'multi_checkbox',
+			'type'          => 'checkbox_multiple',
 			'default_value' => '', // It will be passed through cast_array().
 			'options'       => array(),
 			'use_toggle'    => false,

@@ -125,8 +125,8 @@ function create_instances(
 					$instance = new Buttons( $prop_raw );
 					break;
 
-				case 'multi_checkbox':
-					$instance = new MultiCheckbox( $prop_raw );
+				case 'checkbox_multiple':
+					$instance = new CheckboxMultiple( $prop_raw );
 					break;
 
 				// TODO: add this to a filter somehow in the pro folder?

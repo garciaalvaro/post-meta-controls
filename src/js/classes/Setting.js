@@ -11,10 +11,10 @@ class Setting extends Base {
 		const types_can_have_meta = [
 			"buttons",
 			"checkbox",
+			"checkbox_multiple",
 			"color",
 			"date_time",
 			"image",
-			"multi_checkbox",
 			"radio",
 			"range",
 			"select",
@@ -31,9 +31,9 @@ class Setting extends Base {
 		const types_can_have_localstorage = [
 			"buttons",
 			"checkbox",
+			"checkbox_multiple",
 			"color",
 			"date_time",
-			"multi_checkbox",
 			"radio",
 			"range",
 			"select"

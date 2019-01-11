@@ -1,7 +1,7 @@
 import l, { prepareOptions } from "../../utils";
 import Setting from "../Setting";
 
-class MultiCheckbox extends Setting {
+class CheckboxMultiple extends Setting {
 	beforeSetSchema() {
 		super.beforeSetSchema();
 		this.props.options = prepareOptions(this.props.options);
@@ -9,7 +9,7 @@ class MultiCheckbox extends Setting {
 
 	setDefaults() {
 		const this_defaults = {
-			type: "multi_checkbox",
+			type: "checkbox_multiple",
 			default_value: "", // It will be passed through castArray().
 			options: [],
 			use_toggle: false
@@ -40,4 +40,4 @@ class MultiCheckbox extends Setting {
 	}
 }
 
-export default MultiCheckbox;
+export default CheckboxMultiple;

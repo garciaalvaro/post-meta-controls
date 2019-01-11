@@ -61,9 +61,9 @@ abstract class Setting extends Base {
 		$type  = 'range' === $props['type'] && true === $props['float_number']
 			? 'range_float'
 			: $props['type'];
-		$meta_type     = get_meta_arg_type( $type );
-		$meta_sanitize = get_meta_arg_sanitize( $type, $props );
-		$meta_single   = get_meta_arg_single( $type, $props );
+		$meta_type     = get_meta_type( $type );
+		$meta_sanitize = get_meta_sanitize( $type, $props );
+		$meta_single   = get_meta_single( $type, $props );
 		$post_types    = $this->props['post_type'];
 		$post_types    = is_string( $post_types )
 			? array( $post_types )
@@ -88,10 +88,10 @@ abstract class Setting extends Base {
 		$types_can_have_meta = array(
 			'buttons',
 			'checkbox',
+			'checkbox_multiple',
 			'color',
 			'date_time',
 			'image',
-			'multi_checkbox',
 			'radio',
 			'range',
 			'select',
@@ -108,9 +108,9 @@ abstract class Setting extends Base {
 		$types_can_have_localstorage = array(
 			'buttons',
 			'checkbox',
+			'checkbox_multiple',
 			'color',
 			'date_time',
-			'multi_checkbox',
 			'radio',
 			'range',
 			'select',

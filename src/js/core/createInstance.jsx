@@ -5,18 +5,20 @@ const {
 	Sidebar,
 	Tab,
 	Panel,
+	// Settings:
+	Buttons,
 	Checkbox,
-	Radio,
-	Select,
-	Range,
-	Text,
-	Textarea,
+	CheckboxMultiple,
 	Color,
-	Image,
 	CustomText,
 	DateTime,
-	Buttons,
-	MultiCheckbox,
+	Image,
+	Radio,
+	Range,
+	Select,
+	Text,
+	Textarea,
+	// Pro:
 	CustomHTML
 } = classes;
 const { isUndefined } = lodash;
@@ -58,8 +60,8 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Image(props_raw);
 				break;
 
-			case "multi_checkbox":
-				instance = new MultiCheckbox(props_raw);
+			case "checkbox_multiple":
+				instance = new CheckboxMultiple(props_raw);
 				break;
 
 			case "radio":
