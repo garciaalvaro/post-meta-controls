@@ -1,4 +1,4 @@
-import l, { Div, plugin_slug, store_slug } from "../../utils";
+import l, { store_slug } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -7,11 +7,12 @@ const {
 	CheckboxMultiple,
 	Color,
 	CustomText,
-	DateTime,
+	DateRange,
 	Image,
 	ImageMultiple,
 	Radio,
 	Range,
+	RangeFloat,
 	Select,
 	Text,
 	Textarea,
@@ -29,26 +30,23 @@ class Setting extends Component {
 		const { type } = props;
 
 		switch (type) {
+			case "buttons":
+				return <Buttons {...props} />;
+
 			case "checkbox":
 				return <Checkbox {...props} />;
 
-			case "radio":
-				return <Radio {...props} />;
-
-			case "select":
-				return <Select {...props} />;
-
-			case "range":
-				return <Range {...props} />;
-
-			case "text":
-				return <Text {...props} />;
-
-			case "textarea":
-				return <Textarea {...props} />;
+			case "checkbox_multiple":
+				return <CheckboxMultiple {...props} />;
 
 			case "color":
 				return <Color {...props} />;
+
+			case "custom_text":
+				return <CustomText {...props} />;
+
+			case "date_range":
+				return <DateRange {...props} />;
 
 			case "image":
 				return <Image {...props} />;
@@ -56,17 +54,23 @@ class Setting extends Component {
 			case "image_multiple":
 				return <ImageMultiple {...props} />;
 
-			case "custom_text":
-				return <CustomText {...props} />;
+			case "radio":
+				return <Radio {...props} />;
 
-			case "date_time":
-				return <DateTime {...props} />;
+			case "range":
+				return <Range {...props} />;
 
-			case "buttons":
-				return <Buttons {...props} />;
+			case "range_float":
+				return <RangeFloat {...props} />;
 
-			case "checkbox_multiple":
-				return <CheckboxMultiple {...props} />;
+			case "select":
+				return <Select {...props} />;
+
+			case "text":
+				return <Text {...props} />;
+
+			case "textarea":
+				return <Textarea {...props} />;
 
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
@@ -79,16 +83,18 @@ class Setting extends Component {
 	}
 
 	render() {
-		const { id } = this.props;
+		// const { id } = this.props;
 
-		return (
-			<Div
-				id={`${plugin_slug}-control-${id}`}
-				className={`${plugin_slug}-control`}
-			>
-				{this.getControl()}
-			</Div>
-		);
+		return this.getControl();
+
+		// return (
+		// 	<Div
+		// 		id={`${plugin_slug}-control-${id}`}
+		// 		className={`${plugin_slug}-control`}
+		// 	>
+		// 		{this.getControl()}
+		// 	</Div>
+		// );
 	}
 }
 
@@ -144,7 +150,7 @@ export default compose([
 					editPost({
 						meta: { [data_key_with_prefix]: value }
 					});
-
+					l("updateValue", value);
 					if (!metadata_exists) {
 						updateSettingProp(id, "metadata_exists", true);
 					}

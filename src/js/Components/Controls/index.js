@@ -4,11 +4,12 @@ import Checkbox from "./Checkbox";
 import CheckboxMultiple from "./CheckboxMultiple";
 import Color from "./Color";
 import CustomText from "./CustomText";
-import DateTime from "./DateTime";
+import DateRange from "./DateRange";
 import Image from "./Image";
 import ImageMultiple from "./ImageMultiple";
 import Radio from "./Radio";
 import Range from "./Range";
+import RangeFloat from "./RangeFloat";
 import Select from "./Select";
 import Text from "./Text";
 import Textarea from "./Textarea";
@@ -24,11 +25,12 @@ controls = {
 	CheckboxMultiple,
 	Color,
 	CustomText,
-	DateTime,
+	DateRange,
 	Image,
 	ImageMultiple,
 	Radio,
 	Range,
+	RangeFloat,
 	Select,
 	Text,
 	Textarea

@@ -3,7 +3,7 @@ import Setting from "../Setting";
 
 const { __, sprintf } = wp.i18n;
 
-class Range extends Setting {
+class RangeFloat extends Setting {
 	setDefaults() {
 		const this_defaults = {
 			type: "range",
@@ -21,10 +21,10 @@ class Range extends Setting {
 	setSchema() {
 		const this_schema = {
 			default_value: {
-				type: "integer"
+				type: "float"
 			},
 			step: {
-				type: "integer",
+				type: "float",
 				conditions: [
 					{
 						value: this.props.step > 0,
@@ -45,10 +45,10 @@ class Range extends Setting {
 				]
 			},
 			min: {
-				type: "integer"
+				type: "float"
 			},
 			max: {
-				type: "integer",
+				type: "float",
 				conditions: [
 					{
 						value: this.props.max > this.props.min,
@@ -68,4 +68,4 @@ class Range extends Setting {
 	}
 }
 
-export default Range;
+export default RangeFloat;

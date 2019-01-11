@@ -26,7 +26,11 @@ function get_meta_type( $type = '' ) {
 
 function get_meta_single( $type = '' ) {
 
-	if ( 'checkbox_multiple' === $type || 'image_multiple' === $type ) {
+	if (
+		'date_range' === $type ||
+		'checkbox_multiple' === $type ||
+		'image_multiple' === $type
+	) {
 		return false;
 	}
 

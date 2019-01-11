@@ -9,7 +9,7 @@ class Select extends Component {
 
 		return (
 			<SelectControl
-				className={`${plugin_slug}-control-select`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-select`}
 				label={label}
 				help={help}
 				value={value}

@@ -84,7 +84,7 @@ class Color extends Component {
 						<ColorIndicator colorValue={value_local} />
 					</Fragment>
 				}
-				className={`${plugin_slug}-control-color-container`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-color-container`}
 				help={help}
 			>
 				<ColorPalette

@@ -9,8 +9,11 @@ function register_meta( $setting_instances = array() ) {
 
 	foreach ( $setting_instances as $setting_instance ) {
 
-		$setting_instance->register_meta();
+		if ( 'date_range' === $setting_instance->get_setting_type() ) {
+			$setting_instance->enqueue_locale();
+		}
 
+		$setting_instance->register_meta();
 	}
 }
 

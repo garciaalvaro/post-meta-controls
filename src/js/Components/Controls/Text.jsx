@@ -9,7 +9,7 @@ class Text extends Component {
 
 		return (
 			<TextControl
-				className={`${plugin_slug}-control-text`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-text`}
 				label={label}
 				help={help}
 				placeholder={placeholder}

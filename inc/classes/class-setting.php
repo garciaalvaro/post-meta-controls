@@ -10,6 +10,10 @@ abstract class Setting extends Base {
 	abstract protected function set_defaults();
 	abstract protected function set_schema();
 
+	public function get_setting_type() {
+		return $this->props['type'];
+	}
+
 	protected function before_set_schema() {
 		$this->prepare_data_type();
 		$this->set_data_key_with_prefix();
@@ -57,10 +61,8 @@ abstract class Setting extends Base {
 			return;
 		}
 
-		$props = $this->props;
-		$type  = 'range' === $props['type'] && true === $props['float_number']
-			? 'range_float'
-			: $props['type'];
+		$props         = $this->props;
+		$type          = $props['type'];
 		$meta_type     = get_meta_type( $type );
 		$meta_sanitize = get_meta_sanitize( $type, $props );
 		$meta_single   = get_meta_single( $type );
@@ -90,11 +92,12 @@ abstract class Setting extends Base {
 			'checkbox',
 			'checkbox_multiple',
 			'color',
-			'date_time',
+			'date_range',
 			'image',
 			'image_multiple',
 			'radio',
 			'range',
+			'range_float',
 			'select',
 			'text',
 			'textarea',
@@ -111,9 +114,10 @@ abstract class Setting extends Base {
 			'checkbox',
 			'checkbox_multiple',
 			'color',
-			'date_time',
+			'date_range',
 			'radio',
 			'range',
+			'range_float',
 			'select',
 		);
 		if (

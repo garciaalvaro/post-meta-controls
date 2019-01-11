@@ -81,32 +81,28 @@ function create_instances(
 			$prop_raw['post_type'] = $post_type;
 
 			switch ( $prop_raw['type'] ) {
+				case 'buttons':
+					$instance = new Buttons( $prop_raw );
+					break;
+
 				case 'checkbox':
 					$instance = new Checkbox( $prop_raw );
 					break;
 
-				case 'radio':
-					$instance = new Radio( $prop_raw );
-					break;
-
-				case 'select':
-					$instance = new Select( $prop_raw );
-					break;
-
-				case 'range':
-					$instance = new Range( $prop_raw );
-					break;
-
-				case 'text':
-					$instance = new Text( $prop_raw );
-					break;
-
-				case 'textarea':
-					$instance = new Textarea( $prop_raw );
+				case 'checkbox_multiple':
+					$instance = new CheckboxMultiple( $prop_raw );
 					break;
 
 				case 'color':
 					$instance = new Color( $prop_raw );
+					break;
+
+				case 'custom_text':
+					$instance = new CustomText( $prop_raw );
+					break;
+
+				case 'date_range':
+					$instance = new DateRange( $prop_raw );
 					break;
 
 				case 'image':
@@ -117,20 +113,28 @@ function create_instances(
 					$instance = new ImageMultiple( $prop_raw );
 					break;
 
-				case 'custom_text':
-					$instance = new CustomText( $prop_raw );
+				case 'radio':
+					$instance = new Radio( $prop_raw );
 					break;
 
-				case 'date_time':
-					$instance = new DateTime( $prop_raw );
+				case 'range':
+					$instance = new Range( $prop_raw );
 					break;
 
-				case 'buttons':
-					$instance = new Buttons( $prop_raw );
+				case 'range_float':
+					$instance = new RangeFloat( $prop_raw );
 					break;
 
-				case 'checkbox_multiple':
-					$instance = new CheckboxMultiple( $prop_raw );
+				case 'select':
+					$instance = new Select( $prop_raw );
+					break;
+
+				case 'text':
+					$instance = new Text( $prop_raw );
+					break;
+
+				case 'textarea':
+					$instance = new Textarea( $prop_raw );
 					break;
 
 				// TODO: add this to a filter somehow in the pro folder?

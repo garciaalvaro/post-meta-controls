@@ -1,7 +1,7 @@
 import l from "../../utils";
 import Setting from "../Setting";
 
-class DateTime extends Setting {
+class DateRange extends Setting {
 	afterCastSchema() {
 		this.prepareDefaultDate();
 	}
@@ -22,9 +22,10 @@ class DateTime extends Setting {
 
 	setDefaults() {
 		const this_defaults = {
-			type: "date_time",
-			default_value: new Date(),
-			use_12hour: false
+			type: "date_range",
+			default_value: "",
+			format: "DD/MM/YYYY",
+			locale: "en"
 		};
 
 		const parent_defaults = this.getDefaults();
@@ -37,8 +38,11 @@ class DateTime extends Setting {
 			default_value: {
 				type: "text"
 			},
-			use_12hour: {
-				type: "boolean"
+			format: {
+				type: "text"
+			},
+			locale: {
+				type: "id"
 			}
 		};
 
@@ -48,4 +52,4 @@ class DateTime extends Setting {
 	}
 }
 
-export default DateTime;
+export default DateRange;

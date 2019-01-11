@@ -5,11 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class Range extends Setting {
+class RangeFloat extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'range',
+			'type'          => 'range_float',
 			'default_value' => 0,
 			'step'          => 1,
 			'min'           => 0,
@@ -25,11 +25,11 @@ class Range extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'integer',
+				'type'   => 'float',
 				'for_js' => true,
 			),
 			'step' => array(
-				'type'       => 'integer',
+				'type'       => 'float',
 				'for_js'     => true,
 				'conditions' => array(
 					$this->props['step'] > 0,
@@ -37,11 +37,11 @@ class Range extends Setting {
 				),
 			),
 			'min' => array(
-				'type'   => 'integer',
+				'type'   => 'float',
 				'for_js' => true,
 			),
 			'max' => array(
-				'type'       => 'integer',
+				'type'       => 'float',
 				'for_js'     => true,
 				'conditions' => $this->props['max'] > $this->props['min'],
 			),

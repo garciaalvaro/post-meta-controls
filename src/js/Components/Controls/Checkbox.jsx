@@ -17,7 +17,7 @@ class Checkbox extends Component {
 		return (
 			<BaseControl
 				label={label}
-				className={`${plugin_slug}-control-checkbox-container`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-checkbox-container`}
 				help={help}
 			>
 				{use_toggle ? (

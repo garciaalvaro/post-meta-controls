@@ -13,11 +13,12 @@ class Setting extends Base {
 			"checkbox",
 			"checkbox_multiple",
 			"color",
-			"date_time",
+			"date_range",
 			"image",
 			"image_multiple",
 			"radio",
 			"range",
+			"range_float",
 			"select",
 			"text",
 			"textarea"
@@ -34,9 +35,10 @@ class Setting extends Base {
 			"checkbox",
 			"checkbox_multiple",
 			"color",
-			"date_time",
+			"date_range",
 			"radio",
 			"range",
+			"range_float",
 			"select"
 		];
 		if (

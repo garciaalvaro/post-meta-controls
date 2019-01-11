@@ -28,16 +28,17 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 			case 'checkbox':
 			case 'color':
 			case 'custom_text':
-			case 'date_time':
 			case 'image':
 			case 'radio':
 			case 'range':
+			case 'range_float':
 			case 'select':
 			case 'text':
 			case 'textarea':
 				$value = get_post_meta( $post_id, $meta_key, true );
 				break;
 
+			case 'date_range':
 			case 'checkbox_multiple':
 			case 'image_multiple':
 				$value = get_post_meta( $post_id, $meta_key, false );
@@ -146,10 +147,10 @@ if ( ! function_exists( 'pmc_get_custom_text' ) ) {
 	}
 }
 
-if ( ! function_exists( 'pmc_get_date_time' ) ) {
-	function pmc_get_date_time( $meta_key = '', $post_id = '' ) {
+if ( ! function_exists( 'pmc_get_date_range' ) ) {
+	function pmc_get_date_range( $meta_key = '', $post_id = '' ) {
 
-		$meta = pmc_get_meta( 'date_time', $meta_key, $post_id );
+		$meta = pmc_get_meta( 'date_range', $meta_key, $post_id );
 
 		if ( false === $meta ) {
 			return false;
@@ -243,9 +244,22 @@ if ( ! function_exists( 'pmc_get_range' ) ) {
 			return false;
 		}
 
-		$meta = (string) (float) $meta === $meta
-			? sanitize_float( $meta )
-			: sanitize_integer( $meta );
+		$meta = sanitize_integer( $meta );
+
+		return $meta;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_range_float' ) ) {
+	function pmc_get_range_float( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'range_float', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta = sanitize_float( $meta );
 
 		return $meta;
 	}

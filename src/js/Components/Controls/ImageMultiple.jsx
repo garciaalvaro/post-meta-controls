@@ -142,7 +142,7 @@ class ImageContainer extends Component {
 		return (
 			<BaseControl
 				label={label}
-				className={`${plugin_slug}-control-image_multiple`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-image_multiple`}
 				help={help}
 			>
 				<MediaUpload

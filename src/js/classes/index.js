@@ -8,11 +8,12 @@ import Checkbox from "./settings/Setting-Checkbox";
 import CheckboxMultiple from "./settings/Setting-CheckboxMultiple";
 import Color from "./settings/Setting-Color";
 import CustomText from "./settings/Setting-CustomText";
-import DateTime from "./settings/Setting-DateTime";
+import DateRange from "./settings/Setting-DateRange";
 import Image from "./settings/Setting-Image";
 import ImageMultiple from "./settings/Setting-ImageMultiple";
 import Radio from "./settings/Setting-Radio";
 import Range from "./settings/Setting-Range";
+import RangeFloat from "./settings/Setting-RangeFloat";
 import Select from "./settings/Setting-Select";
 import Text from "./settings/Setting-Text";
 import Textarea from "./settings/Setting-Textarea";
@@ -32,11 +33,12 @@ classes = {
 	CheckboxMultiple,
 	Color,
 	CustomText,
-	DateTime,
+	DateRange,
 	Image,
 	ImageMultiple,
 	Radio,
 	Range,
+	RangeFloat,
 	Select,
 	Text,
 	Textarea

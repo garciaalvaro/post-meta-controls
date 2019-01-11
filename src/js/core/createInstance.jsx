@@ -11,11 +11,12 @@ const {
 	CheckboxMultiple,
 	Color,
 	CustomText,
-	DateTime,
+	DateRange,
 	Image,
 	ImageMultiple,
 	Radio,
 	Range,
+	RangeFloat,
 	Select,
 	Text,
 	Textarea,
@@ -57,8 +58,8 @@ const createInstance = (props_raw, class_name) => {
 				instance = new CustomText(props_raw);
 				break;
 
-			case "date_time":
-				instance = new DateTime(props_raw);
+			case "date_range":
+				instance = new DateRange(props_raw);
 				break;
 
 			case "image":
@@ -75,6 +76,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "range":
 				instance = new Range(props_raw);
+				break;
+
+			case "range_float":
+				instance = new RangeFloat(props_raw);
 				break;
 
 			case "select":

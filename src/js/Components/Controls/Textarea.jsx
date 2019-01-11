@@ -9,7 +9,7 @@ class Textarea extends Component {
 
 		return (
 			<TextareaControl
-				className={`${plugin_slug}-control-textarea`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-textarea`}
 				label={label}
 				help={help}
 				placeholder={placeholder}

@@ -34,7 +34,7 @@ class Buttons extends Component {
 
 		return (
 			<BaseControl
-				className={`${plugin_slug}-control-buttons`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-buttons`}
 				label={label}
 				help={help}
 			>

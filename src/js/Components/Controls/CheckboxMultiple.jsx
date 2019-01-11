@@ -26,7 +26,7 @@ class CheckboxMultiple extends Component {
 			<BaseControl
 				label={label}
 				help={help}
-				className={`${plugin_slug}-control-checkbox_multiple`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-checkbox_multiple`}
 			>
 				{options.map((option, index) => {
 					if (use_toggle) {

@@ -8,7 +8,9 @@ class CustomText extends Component {
 		const { content } = this.props;
 
 		return (
-			<Div className={`${plugin_slug}-control-custom_text`}>
+			<Div
+				className={`${plugin_slug}-control ${plugin_slug}-control-custom_text`}
+			>
 				{content.map((element, root_index) => {
 					switch (element.type) {
 						case "paragraph":

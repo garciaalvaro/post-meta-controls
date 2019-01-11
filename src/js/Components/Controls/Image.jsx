@@ -62,7 +62,7 @@ class Image extends Component {
 			<BaseControl
 				label={label}
 				help={help}
-				className={`${plugin_slug}-control-image`}
+				className={`${plugin_slug}-control ${plugin_slug}-control-image`}
 			>
 				<MediaUpload
 					onSelect={updateImage}
