@@ -9,7 +9,7 @@ const { Component } = wp.element;
 const { BaseControl } = wp.components;
 
 // Trigger action that will load the locale, if one is set.
-wp.hooks.doAction("pmc.add_moment_locale", moment);
+wp.hooks.doAction("postMetaControls.addMomentLocale", moment);
 
 class DateRange extends Component {
 	constructor(props) {
