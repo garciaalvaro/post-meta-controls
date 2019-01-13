@@ -20,7 +20,7 @@ const {
 	// TODO: Pro
 	CustomHTML
 } = controls;
-const { isUndefined } = lodash;
+const { isUndefined, compact } = lodash;
 const { Component } = wp.element;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
@@ -88,11 +88,17 @@ class Setting extends Component {
 	}
 
 	getClasses = () => {
+		const { type, combine_with_previous } = this.props;
+
 		let classes;
 		classes = [
 			`${plugin_slug}-control`,
-			`${plugin_slug}-control-${this.props.type}`
+			`${plugin_slug}-control-${type}`,
+			combine_with_previous
+				? `${plugin_slug}-control-combine_with_previous`
+				: ""
 		];
+		classes = compact(classes);
 		classes = classes.join(" ");
 
 		return classes;

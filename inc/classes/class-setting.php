@@ -156,6 +156,7 @@ abstract class Setting extends Base {
 			'data_key_with_prefix'         => '',
 			'data_key_prefix_from_sidebar' => '',
 			'register_meta'                => true,
+			'combine_with_previous'        => false,
 		);
 	}
 
@@ -222,6 +223,10 @@ abstract class Setting extends Base {
 			'register_meta' => array(
 				'type'   => 'boolean',
 				'for_js' => false,
+			),
+			'combine_with_previous' => array(
+				'type'   => 'boolean',
+				'for_js' => true,
 			),
 		);
 	}

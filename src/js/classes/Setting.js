@@ -78,7 +78,8 @@ class Setting extends Base {
 			help: "",
 			data_type: "none",
 			metadata_exists: false,
-			data_key_with_prefix: ""
+			data_key_with_prefix: "",
+			combine_with_previous: false
 		};
 	}
 
@@ -122,6 +123,9 @@ class Setting extends Base {
 				type: "id",
 				conditions:
 					this.props.data_type !== "none" ? "not_empty" : false
+			},
+			combine_with_previous: {
+				type: "boolean"
 			}
 		};
 	}
