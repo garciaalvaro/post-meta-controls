@@ -5,6 +5,7 @@ import CheckboxMultiple from "./CheckboxMultiple";
 import Color from "./Color";
 import CustomText from "./CustomText";
 import DateRange from "./DateRange";
+import DateSingle from "./DateSingle";
 import Image from "./Image";
 import ImageMultiple from "./ImageMultiple";
 import Radio from "./Radio";
@@ -26,6 +27,7 @@ controls = {
 	Color,
 	CustomText,
 	DateRange,
+	DateSingle,
 	Image,
 	ImageMultiple,
 	Radio,

@@ -12,6 +12,7 @@ const {
 	Color,
 	CustomText,
 	DateRange,
+	DateSingle,
 	Image,
 	ImageMultiple,
 	Radio,
@@ -60,6 +61,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "date_range":
 				instance = new DateRange(props_raw);
+				break;
+
+			case "date_single":
+				instance = new DateSingle(props_raw);
 				break;
 
 			case "image":

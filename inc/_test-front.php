@@ -27,7 +27,8 @@ function ttest() {
 	var_dump( pmc_get_checkbox_multiple( 'checkbox_multiple_key', $post_id ) );
 	var_dump( pmc_get_color( 'color_key', $post_id ) );
 	var_dump( pmc_get_custom_text( 'custom_text_key', $post_id ) );
-	var_dump( pmc_get_date( 'date_key', $post_id ) );
+	var_dump( pmc_get_date_range( 'date_range_key', $post_id ) );
+	var_dump( pmc_get_date_single( 'date_single_key', $post_id ) );
 	var_dump( pmc_get_image( 'image_key', $post_id ) );
 	var_dump( pmc_get_image_multiple( 'image_multiple_key', $post_id ) );
 	var_dump( pmc_get_radio( 'radio_key', $post_id ) );

@@ -8,6 +8,7 @@ const {
 	Color,
 	CustomText,
 	DateRange,
+	DateSingle,
 	Image,
 	ImageMultiple,
 	Radio,
@@ -47,6 +48,9 @@ class Setting extends Component {
 
 			case "date_range":
 				return <DateRange {...props} />;
+
+			case "date_single":
+				return <DateSingle {...props} />;
 
 			case "image":
 				return <Image {...props} />;

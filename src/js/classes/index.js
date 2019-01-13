@@ -9,6 +9,7 @@ import CheckboxMultiple from "./settings/Setting-CheckboxMultiple";
 import Color from "./settings/Setting-Color";
 import CustomText from "./settings/Setting-CustomText";
 import DateRange from "./settings/Setting-DateRange";
+import DateSingle from "./settings/Setting-DateSingle";
 import Image from "./settings/Setting-Image";
 import ImageMultiple from "./settings/Setting-ImageMultiple";
 import Radio from "./settings/Setting-Radio";
@@ -34,6 +35,7 @@ classes = {
 	Color,
 	CustomText,
 	DateRange,
+	DateSingle,
 	Image,
 	ImageMultiple,
 	Radio,

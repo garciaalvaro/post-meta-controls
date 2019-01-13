@@ -28,6 +28,7 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 			case 'checkbox':
 			case 'color':
 			case 'custom_text':
+			case 'date_single':
 			case 'image':
 			case 'radio':
 			case 'range':
@@ -151,6 +152,26 @@ if ( ! function_exists( 'pmc_get_date_range' ) ) {
 	function pmc_get_date_range( $meta_key = '', $post_id = '' ) {
 
 		$meta = pmc_get_meta( 'date_range', $meta_key, $post_id );
+
+		if ( false === $meta ) {
+			return false;
+		}
+
+		$meta       = sanitize_array( $meta );
+		$meta_clean = array();
+
+		foreach ( $meta as $key => $value ) {
+			$meta_clean[] = sanitize_text( $value );
+		}
+
+		return $meta_clean;
+	}
+}
+
+if ( ! function_exists( 'pmc_get_date_single' ) ) {
+	function pmc_get_date_single( $meta_key = '', $post_id = '' ) {
+
+		$meta = pmc_get_meta( 'date_single', $meta_key, $post_id );
 
 		if ( false === $meta ) {
 			return false;

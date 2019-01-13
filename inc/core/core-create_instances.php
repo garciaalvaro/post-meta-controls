@@ -105,6 +105,10 @@ function create_instances(
 					$instance = new DateRange( $prop_raw );
 					break;
 
+				case 'date_single':
+					$instance = new DateSingle( $prop_raw );
+					break;
+
 				case 'image':
 					$instance = new Image( $prop_raw );
 					break;

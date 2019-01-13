@@ -5,11 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class DateRange extends Setting {
+class DateSingle extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'date_range',
+			'type'          => 'date_single',
 			'default_value' => '',
 			'format'        => 'DD/MM/YYYY',
 			'locale'        => 'en',
