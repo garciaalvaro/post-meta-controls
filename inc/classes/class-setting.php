@@ -14,6 +14,10 @@ abstract class Setting extends Base {
 		return $this->props['type'];
 	}
 
+	public function get_data_key_with_prefix() {
+		return $this->props['data_key_with_prefix'];
+	}
+
 	protected function before_set_schema() {
 		$this->prepare_data_type();
 		$this->set_data_key_with_prefix();

@@ -69,6 +69,12 @@ const actions = {
 			prop,
 			value
 		};
+	},
+	updateMetadataExists(data_key) {
+		return {
+			type: "UPDATE_METADATA_EXISTS",
+			data_key
+		};
 	}
 };
 

@@ -157,7 +157,9 @@ export default compose([
 	}),
 	withDispatch((dispatch, props, { select }) => {
 		const { id, data_type, data_key_with_prefix } = props;
-		const { updateSettingProp } = dispatch(store_slug);
+		const { updateSettingProp, updateMetadataExists } = dispatch(
+			store_slug
+		);
 		const { editPost } = dispatch("core/editor");
 		const { getSettingProp } = select(store_slug);
 		const use_meta = data_type === "meta";
@@ -172,9 +174,9 @@ export default compose([
 					editPost({
 						meta: { [data_key_with_prefix]: value }
 					});
-					l("updateValue", value);
+
 					if (!metadata_exists) {
-						updateSettingProp(id, "metadata_exists", true);
+						updateMetadataExists(data_key_with_prefix);
 					}
 				} else {
 					updateSettingProp(id, "value", value);

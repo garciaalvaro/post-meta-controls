@@ -38,6 +38,9 @@ const createSidebars = props_raw => {
 			ids.push(id);
 		}
 
+		// We are allowing several controls to share the same data_key.
+		// To prevent it, uncomment the code below.
+		/*
 		if (name === "setting" && instance.getDataType() !== "none") {
 			const data_key = instance.getDataKey();
 			if (data_keys.includes(data_key)) {
@@ -47,6 +50,7 @@ const createSidebars = props_raw => {
 				data_keys.push(data_key);
 			}
 		}
+		*/
 
 		instance.dispatch();
 

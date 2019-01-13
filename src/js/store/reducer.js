@@ -2,7 +2,7 @@ import l from "../utils";
 import initial_state from "./initial_state";
 import produce from "immer";
 
-const { isUndefined, isEmpty, isArray, get, find, castArray } = lodash;
+const { isUndefined, forEach, find } = lodash;
 
 const reducer = (state = initial_state, action) => {
 	let next_state;
@@ -86,6 +86,23 @@ const reducer = (state = initial_state, action) => {
 
 			return {
 				...next_state
+			};
+		}
+		case "UPDATE_METADATA_EXISTS": {
+			const next_settings = produce(
+				next_state.settings,
+				draft_settings => {
+					forEach(draft_settings, setting => {
+						if (setting.data_key_with_prefix === action.data_key) {
+							setting.metadata_exists = true;
+						}
+					});
+				}
+			);
+
+			return {
+				...next_state,
+				settings: next_settings
 			};
 		}
 		case "ADD_INITIAL_IMAGE_DATA": {
