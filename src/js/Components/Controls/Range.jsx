@@ -1,7 +1,6 @@
-import l, { plugin_slug } from "../../utils";
+import l from "../../utils";
 import withLocalValue from "./_withLocalValue";
 
-const { compose, withState } = wp.compose;
 const { Component } = wp.element;
 const { RangeControl } = wp.components;
 
@@ -18,7 +17,7 @@ class Range extends Component {
 
 		return (
 			<RangeControl
-				className={`${plugin_slug}-control ${plugin_slug}-control-range`}
+				className={classes}
 				label={label}
 				help={help}
 				value={value_local}
@@ -31,4 +30,4 @@ class Range extends Component {
 	}
 }
 
-export default compose([withState({ classes: "" }), withLocalValue])(Range);
+export default withLocalValue(Range);

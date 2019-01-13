@@ -5,12 +5,10 @@ const { Component } = wp.element;
 
 class CustomText extends Component {
 	render() {
-		const { content } = this.props;
+		const { content, classes } = this.props;
 
 		return (
-			<Div
-				className={`${plugin_slug}-control ${plugin_slug}-control-custom_text`}
-			>
+			<Div className={classes}>
 				{content.map((element, root_index) => {
 					switch (element.type) {
 						case "paragraph":

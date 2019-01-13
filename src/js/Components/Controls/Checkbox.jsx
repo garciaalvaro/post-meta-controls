@@ -12,24 +12,20 @@ class Checkbox extends Component {
 
 	render() {
 		const { props, toggleValue } = this;
-		const { input_label, label, help, value, use_toggle } = props;
+		const { input_label, label, help, value, use_toggle, classes } = props;
 
 		return (
-			<BaseControl
-				label={label}
-				className={`${plugin_slug}-control ${plugin_slug}-control-checkbox-container`}
-				help={help}
-			>
+			<BaseControl label={label} className={classes} help={help}>
 				{use_toggle ? (
 					<ToggleControl
-						className={`${plugin_slug}-control-toggle`}
+						className={`${plugin_slug}-input-toggle`}
 						label={input_label}
 						checked={value}
 						onChange={toggleValue}
 					/>
 				) : (
 					<CheckboxControl
-						className={`${plugin_slug}-control-checkbox`}
+						className={`${plugin_slug}-input-checkbox`}
 						label={input_label}
 						checked={value}
 						onChange={toggleValue}

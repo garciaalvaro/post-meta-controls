@@ -1,4 +1,4 @@
-import l, { store_slug } from "../../utils";
+import l, { store_slug, plugin_slug } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -29,62 +29,74 @@ class Setting extends Component {
 	getControl() {
 		const { props } = this;
 		const { type } = props;
+		const extended_props = { ...props, classes: this.getClasses() };
 
 		switch (type) {
 			case "buttons":
-				return <Buttons {...props} />;
+				return <Buttons {...extended_props} />;
 
 			case "checkbox":
-				return <Checkbox {...props} />;
+				return <Checkbox {...extended_props} />;
 
 			case "checkbox_multiple":
-				return <CheckboxMultiple {...props} />;
+				return <CheckboxMultiple {...extended_props} />;
 
 			case "color":
-				return <Color {...props} />;
+				return <Color {...extended_props} />;
 
 			case "custom_text":
-				return <CustomText {...props} />;
+				return <CustomText {...extended_props} />;
 
 			case "date_range":
-				return <DateRange {...props} />;
+				return <DateRange {...extended_props} />;
 
 			case "date_single":
-				return <DateSingle {...props} />;
+				return <DateSingle {...extended_props} />;
 
 			case "image":
-				return <Image {...props} />;
+				return <Image {...extended_props} />;
 
 			case "image_multiple":
-				return <ImageMultiple {...props} />;
+				return <ImageMultiple {...extended_props} />;
 
 			case "radio":
-				return <Radio {...props} />;
+				return <Radio {...extended_props} />;
 
 			case "range":
-				return <Range {...props} />;
+				return <Range {...extended_props} />;
 
 			case "range_float":
-				return <RangeFloat {...props} />;
+				return <RangeFloat {...extended_props} />;
 
 			case "select":
-				return <Select {...props} />;
+				return <Select {...extended_props} />;
 
 			case "text":
-				return <Text {...props} />;
+				return <Text {...extended_props} />;
 
 			case "textarea":
-				return <Textarea {...props} />;
+				return <Textarea {...extended_props} />;
 
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
-					return <CustomHTML {...props} />;
+					return <CustomHTML {...extended_props} />;
 				}
 
 			default:
 				return null;
 		}
 	}
+
+	getClasses = () => {
+		let classes;
+		classes = [
+			`${plugin_slug}-control`,
+			`${plugin_slug}-control-${this.props.type}`
+		];
+		classes = classes.join(" ");
+
+		return classes;
+	};
 
 	render() {
 		// const { id } = this.props;

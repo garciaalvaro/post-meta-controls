@@ -20,27 +20,31 @@ class RangeFloat extends Component {
 	};
 
 	updateClasses = () => {
-		const { max, setState } = this.props;
+		const { max, setState, classes } = this.props;
 		const digits_length = toString(Math.round(max)).length + 2;
-		let classes;
-		classes = [
-			`${plugin_slug}-control `,
-			`${plugin_slug}-control-range`,
-			`float_${digits_length}`
-		];
-		classes = compact(classes);
-		classes = classes.join(" ");
+		let classes_extended;
+		classes_extended = [classes, `float_${digits_length}`];
+		classes_extended = compact(classes_extended);
+		classes_extended = classes_extended.join(" ");
 
-		setState({ classes: classes });
+		setState({ classes_extended });
 	};
 
 	render() {
 		const { updateNumber, props } = this;
-		const { min, max, step, label, help, value_local, classes } = props;
+		const {
+			min,
+			max,
+			step,
+			label,
+			help,
+			value_local,
+			classes_extended
+		} = props;
 
 		return (
 			<RangeControl
-				className={classes}
+				className={classes_extended}
 				label={label}
 				help={help}
 				value={value_local}
@@ -53,6 +57,6 @@ class RangeFloat extends Component {
 	}
 }
 
-export default compose([withState({ classes: "" }), withLocalValue])(
+export default compose([withState({ classes_extended: "" }), withLocalValue])(
 	RangeFloat
 );

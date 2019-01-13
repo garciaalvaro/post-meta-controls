@@ -47,15 +47,12 @@ class DateRange extends Component {
 			updateValue,
 			id,
 			label,
-			help
+			help,
+			classes
 		} = this.props;
 
 		return (
-			<BaseControl
-				label={label}
-				help={help}
-				className={`${plugin_slug}-control ${plugin_slug}-control-date_range`}
-			>
+			<BaseControl label={label} help={help} className={classes}>
 				<DateRangePicker
 					displayFormat={format}
 					small={true}

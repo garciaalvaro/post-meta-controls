@@ -9,7 +9,7 @@ class Radio extends Component {
 
 		return (
 			<RadioControl
-				className={`${plugin_slug}-control ${plugin_slug}-control-radio`}
+				className={classes}
 				label={label}
 				help={help}
 				selected={value}

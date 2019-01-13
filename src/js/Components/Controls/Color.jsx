@@ -73,7 +73,8 @@ class Color extends Component {
 			palette,
 			alpha_control,
 			label,
-			help
+			help,
+			classes
 		} = props;
 
 		return (
@@ -84,11 +85,11 @@ class Color extends Component {
 						<ColorIndicator colorValue={value_local} />
 					</Fragment>
 				}
-				className={`${plugin_slug}-control ${plugin_slug}-control-color-container`}
+				className={classes}
 				help={help}
 			>
 				<ColorPalette
-					className={`${plugin_slug}-control-color`}
+					className={`${plugin_slug}-input-colorpalette`}
 					colors={palette}
 					value={color}
 					onChange={updateColor}
@@ -96,7 +97,7 @@ class Color extends Component {
 				{alpha_control && (
 					<RangeControl
 						label={__("Color opacity")}
-						className={`${plugin_slug}-control-range`}
+						className={`${plugin_slug}-input-range`}
 						value={alpha}
 						step={1}
 						min={0}

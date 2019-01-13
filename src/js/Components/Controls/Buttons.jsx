@@ -13,7 +13,8 @@ class Buttons extends Component {
 			options,
 			value,
 			allow_empty,
-			updateValue
+			updateValue,
+			classes
 		} = this.props;
 		const options_prepared = options.map(option => ({
 			icon: option.icon_svg ? (
@@ -33,11 +34,7 @@ class Buttons extends Component {
 		}));
 
 		return (
-			<BaseControl
-				className={`${plugin_slug}-control ${plugin_slug}-control-buttons`}
-				label={label}
-				help={help}
-			>
+			<BaseControl className={classes} label={label} help={help}>
 				<Toolbar controls={options_prepared} />
 			</BaseControl>
 		);

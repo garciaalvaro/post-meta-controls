@@ -20,14 +20,10 @@ class CheckboxMultiple extends Component {
 	};
 
 	render() {
-		const { label, help, value, options, use_toggle } = this.props;
+		const { label, help, value, options, use_toggle, classes } = this.props;
 
 		return (
-			<BaseControl
-				label={label}
-				help={help}
-				className={`${plugin_slug}-control ${plugin_slug}-control-checkbox_multiple`}
-			>
+			<BaseControl label={label} help={help} className={classes}>
 				{options.map((option, index) => {
 					if (use_toggle) {
 						return (

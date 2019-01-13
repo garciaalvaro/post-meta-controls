@@ -5,11 +5,18 @@ const { TextControl } = wp.components;
 
 class Text extends Component {
 	render() {
-		const { label, help, placeholder, value, updateValue } = this.props;
+		const {
+			label,
+			help,
+			placeholder,
+			value,
+			updateValue,
+			classes
+		} = this.props;
 
 		return (
 			<TextControl
-				className={`${plugin_slug}-control ${plugin_slug}-control-text`}
+				className={classes}
 				label={label}
 				help={help}
 				placeholder={placeholder}

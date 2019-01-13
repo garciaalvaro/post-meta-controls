@@ -40,15 +40,12 @@ class DateSingle extends Component {
 			updateValue,
 			id,
 			label,
-			help
+			help,
+			classes
 		} = this.props;
 
 		return (
-			<BaseControl
-				label={label}
-				help={help}
-				className={`${plugin_slug}-control ${plugin_slug}-control-date_single`}
-			>
+			<BaseControl label={label} help={help} className={classes}>
 				<SingleDatePicker
 					displayFormat={format}
 					small={true}

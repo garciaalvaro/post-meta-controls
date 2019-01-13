@@ -5,11 +5,18 @@ const { SelectControl } = wp.components;
 
 class Select extends Component {
 	render() {
-		const { options, label, help, value, updateValue } = this.props;
+		const {
+			options,
+			label,
+			help,
+			value,
+			updateValue,
+			classes
+		} = this.props;
 
 		return (
 			<SelectControl
-				className={`${plugin_slug}-control ${plugin_slug}-control-select`}
+				className={classes}
 				label={label}
 				help={help}
 				value={value}

@@ -137,14 +137,10 @@ class ImageContainer extends Component {
 
 	render() {
 		const { updateImages, getImagesComponent, props } = this;
-		const { value: images_id, label, help } = props;
+		const { value: images_id, label, help, classes } = props;
 
 		return (
-			<BaseControl
-				label={label}
-				className={`${plugin_slug}-control ${plugin_slug}-control-image_multiple`}
-				help={help}
-			>
+			<BaseControl label={label} className={classes} help={help}>
 				<MediaUpload
 					onSelect={updateImages}
 					allowedTypes={["image"]}

@@ -56,14 +56,10 @@ class Image extends Component {
 
 	render() {
 		const { updateImage, removeImage, props } = this;
-		const { value: image_id, label, help, url, alt } = props;
+		const { value: image_id, label, help, url, alt, classes } = props;
 
 		return (
-			<BaseControl
-				label={label}
-				help={help}
-				className={`${plugin_slug}-control ${plugin_slug}-control-image`}
-			>
+			<BaseControl label={label} help={help} className={classes}>
 				<MediaUpload
 					onSelect={updateImage}
 					allowedTypes={["image"]}
