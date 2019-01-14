@@ -1,4 +1,4 @@
-import l, { store_slug, plugin_slug } from "../../utils";
+import l, { store_slug, plugin_slug, prepareValue } from "../../utils";
 import controls from "../Controls";
 
 const {
@@ -123,30 +123,11 @@ export default compose([
 		const { getEditedPostAttribute } = select("core/editor");
 		const { getSetting, getPersistedProp } = select(store_slug);
 		const setting = getSetting(id);
-		let {
-			data_type,
-			value,
-			default_value,
-			data_key_with_prefix,
-			metadata_exists
-		} = setting;
-		const use_meta = data_type === "meta";
-		const use_local = data_type === "localstorage";
-
-		// If the data_type is meta we will get the value from
-		// the "core/editor" store.
-		value =
-			use_meta && metadata_exists
-				? getEditedPostAttribute("meta")[data_key_with_prefix]
-				: value;
-		// If the data_type is localstorage we will get the value from
-		// the settings_persisted prop of the plugin store.
-		value =
-			use_local && isUndefined(value)
-				? getPersistedProp(data_key_with_prefix)
-				: value;
-		// If there is no value yet set the default.
-		value = isUndefined(value) ? default_value : value;
+		const value = prepareValue(
+			setting,
+			getPersistedProp,
+			getEditedPostAttribute
+		);
 
 		return {
 			...setting,

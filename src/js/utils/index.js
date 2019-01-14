@@ -6,6 +6,7 @@ import validate from "./validate";
 import prepareImageData from "./prepareImageData";
 import prepareOptions from "./prepareOptions";
 import prepareIcon from "./prepareIcon";
+import prepareValue from "./prepareValue";
 import {
 	plugin_name,
 	plugin_namespace,
@@ -35,6 +36,7 @@ export {
 	prepareImageData,
 	prepareOptions,
 	prepareIcon,
+	prepareValue,
 	plugin_name,
 	plugin_namespace,
 	plugin_namespace_dash,

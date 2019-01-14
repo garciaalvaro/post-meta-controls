@@ -121,6 +121,8 @@ abstract class Setting extends Base {
 			'color',
 			'date_range',
 			'date_single',
+			'image',
+			'image_multiple',
 			'radio',
 			'range',
 			'range_float',
