@@ -1,6 +1,6 @@
 import l, { Div, Img, plugin_slug, prepareImageData, icons } from "../../utils";
 
-const { isUndefined, castArray } = lodash;
+const { isFinite, castArray } = lodash;
 const { __ } = wp.i18n;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
@@ -13,20 +13,20 @@ class Image extends Component {
 		const { setState } = this.props;
 		const path = `wp/v2/media/${image_id}`;
 
-		apiFetch({ path }).then(image_data_raw => {
-			if (isUndefined(image_data_raw)) {
-				// TODO: notice of not found images, option to remove.
-				return;
-			}
+		apiFetch({ path }).then(
+			image_data_raw => {
+				const image_data = prepareImageData(
+					castArray(image_data_raw),
+					true
+				);
+				// The sorting of the elements from image_data_raw is not
+				// the same as the one from the id, so we need to order it.
+				const { url, alt } = image_data[0];
 
-			let image_data;
-			image_data = prepareImageData(castArray(image_data_raw), true);
-			// The sorting of the elements from image_data_raw is not
-			// the same as the one from the id, so we need to order it.
-			const { url, alt } = image_data[0];
-
-			setState({ url: url, alt: alt });
-		});
+				setState({ url: url, alt: alt });
+			},
+			() => setState({ image_id_not_found: image_id })
+		);
 	};
 
 	componentDidMount = () => {
@@ -44,19 +44,27 @@ class Image extends Component {
 		const { id, url, alt } = image_data;
 
 		updateValue(id);
-		setState({ url, alt });
+		setState({ url, alt, image_id_not_found: false });
 	};
 
 	removeImage = () => {
 		let { updateValue, setState } = this.props;
 
 		updateValue(0);
-		setState({ url: "", alt: "" });
+		setState({ url: "", alt: "", image_id_not_found: false });
 	};
 
 	render() {
 		const { updateImage, removeImage, props } = this;
-		const { value: image_id, label, help, url, alt, classes } = props;
+		const {
+			value: image_id,
+			label,
+			help,
+			url,
+			alt,
+			classes,
+			image_id_not_found
+		} = props;
 
 		return (
 			<BaseControl label={label} help={help} className={classes}>
@@ -70,13 +78,11 @@ class Image extends Component {
 						</Button>
 					)}
 				/>
-				{url !== "" && (
+				{isFinite(image_id_not_found) ? (
 					<Div className={`${plugin_slug}-image-container`}>
-						<Img
-							className={`${plugin_slug}-image`}
-							src={url}
-							alt={alt}
-						/>
+						<Div
+							className={`${plugin_slug}-image-not_found `}
+						>{`Image with id ${image_id_not_found} was not found`}</Div>
 						<Button
 							className={`${plugin_slug}-image-remove`}
 							onClick={removeImage}
@@ -84,10 +90,28 @@ class Image extends Component {
 							{icons.remove}
 						</Button>
 					</Div>
+				) : (
+					url !== "" && (
+						<Div className={`${plugin_slug}-image-container`}>
+							<Img
+								className={`${plugin_slug}-image`}
+								src={url}
+								alt={alt}
+							/>
+							<Button
+								className={`${plugin_slug}-image-remove`}
+								onClick={removeImage}
+							>
+								{icons.remove}
+							</Button>
+						</Div>
+					)
 				)}
 			</BaseControl>
 		);
 	}
 }
 
-export default withState({ url: "", alt: "" })(Image);
+export default withState({ url: "", alt: "", image_id_not_found: false })(
+	Image
+);

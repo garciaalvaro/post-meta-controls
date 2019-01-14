@@ -4,6 +4,11 @@
 
 $e_standard = cubic-bezier(0.4, 0.0, 0.2, 1)
 
+.pmc-image-not_found
+	background rgba(0,0,0,0.08)
+	padding 50px
+	box-shadow 0 0 2px rgba(0,0,0,0.2)
+
 .pmc-image-container
 	position relative
 	margin-top 1.2em
@@ -11,7 +16,8 @@ $e_standard = cubic-bezier(0.4, 0.0, 0.2, 1)
 
 	&:hover
 		button.pmc-image-remove
-			fill rgba(255,255,255,.8)
+			fill rgba(0,0,0,.8)
+			background-color rgba(255,255,255,.4)
 
 .pmc-dragging_image
 .pmc-control-image_multiple .pmc-image
@@ -28,9 +34,15 @@ button.pmc-image-remove
 	position absolute
 	top 0
 	right 0
-	fill rgba(255,255,255,.4)
 	z-index 1
-	transition fill .3s .1s $e_standard
+	transition fill .3s .1s $e_standard, background-color .3s .1s $e_standard
+	background-color transparent
+	margin 2px
+	fill rgba(0,0,0,.55)
+	border-radius 50%
+
+	svg
+		height 20px
 
 .pmc-dragging_image
 	z-index 999

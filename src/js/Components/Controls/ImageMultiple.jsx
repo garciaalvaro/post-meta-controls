@@ -2,7 +2,16 @@ import l, { Div, Img, plugin_slug, prepareImageData, icons } from "../../utils";
 import arrayMove from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
-const { isUndefined, isEmpty, find, castArray, pull } = lodash;
+const {
+	isUndefined,
+	isEmpty,
+	isFinite,
+	find,
+	forEach,
+	castArray,
+	pull,
+	compact
+} = lodash;
 const { __ } = wp.i18n;
 const { MediaUpload } = wp.editor;
 const { Component } = wp.element;
@@ -12,6 +21,25 @@ const { apiFetch } = wp;
 
 const SortableItem = SortableElement(({ value, custom }) => {
 	const { removeImage } = custom;
+
+	// If the image id was not found in the library we display a message
+	// inside a div with the option to remove it.
+	if (isFinite(value)) {
+		return (
+			<Div className={`${plugin_slug}-image-container`}>
+				<Div
+					className={`${plugin_slug}-image-not_found `}
+				>{`Image with id ${value} was not found`}</Div>
+				<Button
+					className={`${plugin_slug}-image-remove`}
+					onClick={() => removeImage(value)}
+				>
+					{icons.remove}
+				</Button>
+			</Div>
+		);
+	}
+
 	const { id, url, alt } = value;
 
 	return (
@@ -51,7 +79,7 @@ class ImageContainer extends Component {
 
 		apiFetch({ path }).then(images_data_raw => {
 			if (isUndefined(images_data_raw)) {
-				// TODO: notice of not found images, option to remove.
+				setState({ images_data: images_id });
 				return;
 			}
 
@@ -59,7 +87,15 @@ class ImageContainer extends Component {
 			images_data = prepareImageData(castArray(images_data_raw), true);
 			// The sorting of the elements from images_data_raw is not
 			// the same as the one from the id, so we need to order it.
-			images_data = images_id.map(id => find(images_data, { id: id }));
+			images_data = images_id.map(id => {
+				const image_data = find(images_data, { id: id });
+				if (!isUndefined(image_data)) {
+					return image_data;
+				}
+
+				return id;
+			});
+			images_data = compact(images_data);
 
 			setState({ images_data });
 		});
@@ -105,12 +141,23 @@ class ImageContainer extends Component {
 			updateValue,
 			setState
 		} = this.props;
+		const images_data_clean = [];
 
 		images_id = pull(images_id, image_id);
-		images_data = pull(images_data, find(images_data, { id: image_id })); // TODO: improve
+
+		forEach(images_data, image_data => {
+			if (
+				image_data === image_id ||
+				(!isFinite(image_data) && image_data.id === image_id)
+			) {
+				return;
+			}
+
+			images_data_clean.push(image_data);
+		});
 
 		updateValue(images_id);
-		setState({ images_data });
+		setState({ images_data: images_data_clean });
 	};
 
 	getImagesComponent = () => {
