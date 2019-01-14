@@ -23,7 +23,7 @@ function qregister_sidebar( $sidebars ) {
 						'data_key'      => 'qqq',
 						'default_value' => 50,
 						'label'         => __( 'Range Label', 'my_plugin' ),
-						// 'combine_with_previous' => true,
+						// 'no_border_top' => true,
 						// Properties of this Setting type:
 						'min'           => 0,
 						'max'           => 100,

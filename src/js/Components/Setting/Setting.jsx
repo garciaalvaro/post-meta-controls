@@ -88,15 +88,13 @@ class Setting extends Component {
 	}
 
 	getClasses = () => {
-		const { type, combine_with_previous } = this.props;
+		const { type, no_border_top } = this.props;
 
 		let classes;
 		classes = [
 			`${plugin_slug}-control`,
 			`${plugin_slug}-control-${type}`,
-			combine_with_previous
-				? `${plugin_slug}-control-combine_with_previous`
-				: ""
+			no_border_top ? `${plugin_slug}-control-no_border_top` : ""
 		];
 		classes = compact(classes);
 		classes = classes.join(" ");
