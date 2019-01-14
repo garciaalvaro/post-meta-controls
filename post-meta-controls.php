@@ -58,7 +58,6 @@ require_once INC_DIR . 'classes/settings/class-setting-checkbox.php';
 require_once INC_DIR . 'classes/settings/class-setting-checkbox_multiple.php';
 require_once INC_DIR . 'classes/settings/class-setting-color.php';
 require_once INC_DIR . 'classes/settings/class-setting-custom_text.php';
-// require_once INC_DIR . 'classes/settings/class-setting-date_single.php';
 require_once INC_DIR . 'classes/settings/class-setting-date_range.php';
 require_once INC_DIR . 'classes/settings/class-setting-date_single.php';
 require_once INC_DIR . 'classes/settings/class-setting-image.php';

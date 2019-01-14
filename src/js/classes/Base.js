@@ -122,7 +122,7 @@ class Base {
 					addWarning(prop_key, message);
 				}
 			} else if (isArray(conditions)) {
-				forEach(conditions, (value, message) => {
+				forEach(conditions, ({ value, message }) => {
 					if (false === value) {
 						addWarning(prop_key, message);
 					}

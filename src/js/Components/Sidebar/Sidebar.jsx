@@ -1,4 +1,4 @@
-import l, { plugin_slug, store_slug } from "../../utils";
+import l, { Div, plugin_slug, store_slug } from "../../utils";
 import Invalids from "../Invalid/Invalids";
 import Tabs from "../Tab/Tabs";
 
@@ -16,15 +16,21 @@ class Sidebar extends Component {
 		].join(" ");
 
 		if (isEmpty(warnings)) {
-			return <Tabs sidebar_id={sidebar_id} classes={classes} />;
+			return (
+				<Div id={sidebar_id} className={classes}>
+					<Tabs sidebar_id={sidebar_id} />
+				</Div>
+			);
 		}
 
 		return (
-			<Invalids
-				sidebar_id={sidebar_id}
-				classes={classes}
-				warnings={warnings}
-			/>
+			<Div id={sidebar_id} className={classes}>
+				<Invalids
+					sidebar_id={sidebar_id}
+					classes={classes}
+					warnings={warnings}
+				/>
+			</Div>
 		);
 	}
 }

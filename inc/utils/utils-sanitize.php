@@ -62,6 +62,21 @@ function sanitize_html( $value ) {
 }
 
 /**
+ * Sanitize HTML raw.
+ *
+ * @since 1.0.0
+ */
+function sanitize_html_raw( $value ) {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
+	$value = wp_json_encode( $value );
+
+	return $value;
+}
+
+/**
  * Sanitize string and/or integer.
  *
  * @since 1.0.0

@@ -41,6 +41,10 @@ function cast_schema( $elements = array(), $schema = array() ) {
 				$elements[ $key ] = sanitize_html_svg( $value );
 				break;
 
+			case 'html_raw':
+				$elements[ $key ] = sanitize_html_raw( $value );
+				break;
+
 			case 'id':
 				$elements[ $key ] = sanitize_id( $value );
 				break;

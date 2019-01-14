@@ -8,13 +8,7 @@ const { TabPanel } = wp.components;
 
 class Tabs extends Component {
 	render() {
-		const {
-			tabs,
-			classes,
-			sidebar_id,
-			active_tab,
-			updateActiveTab
-		} = this.props;
+		const { tabs, active_tab, updateActiveTab } = this.props;
 
 		if (tabs.length === 1) {
 			return <Tab tab_id={tabs[0].id} />;
@@ -36,8 +30,6 @@ class Tabs extends Component {
 
 		return (
 			<TabPanel
-				id={sidebar_id}
-				className={classes}
 				activeClass="is-active"
 				onSelect={updateActiveTab}
 				tabs={tabs_prepared}
