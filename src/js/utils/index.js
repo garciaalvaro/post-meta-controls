@@ -7,25 +7,9 @@ import prepareImageData from "./prepareImageData";
 import prepareOptions from "./prepareOptions";
 import prepareIcon from "./prepareIcon";
 import prepareValue from "./prepareValue";
-import {
-	plugin_name,
-	plugin_namespace,
-	plugin_namespace_dash,
-	plugin_slug
-} from "./info-plugin";
+import { plugin_namespace, plugin_slug } from "./info-plugin";
 import store_slug from "./info-store";
-import {
-	DivForwardRef,
-	Div,
-	Span,
-	Img,
-	A,
-	P,
-	H3,
-	Ol,
-	Ul,
-	Li
-} from "./Components";
+import { Div, Span, Img, A, P, H3, Ol, Ul, Li } from "./Components";
 
 export default l;
 export {
@@ -37,12 +21,9 @@ export {
 	prepareOptions,
 	prepareIcon,
 	prepareValue,
-	plugin_name,
 	plugin_namespace,
-	plugin_namespace_dash,
 	plugin_slug,
 	store_slug,
-	DivForwardRef,
 	Div,
 	Span,
 	Img,

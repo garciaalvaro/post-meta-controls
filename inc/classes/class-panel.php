@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Panel
+ */
 class Panel extends Base {
 
 	protected function set_defaults() {

@@ -46,7 +46,7 @@ classes = {
 	Textarea
 };
 
-const classes_pro = applyFilters("pmc_add_classes", {});
+const classes_pro = applyFilters("pmcAddClasses", {});
 
 if (!isEmpty(classes_pro)) {
 	classes = { ...classes, ...classes_pro };

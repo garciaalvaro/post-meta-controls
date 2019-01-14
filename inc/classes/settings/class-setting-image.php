@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting Image
+ */
 class Image extends Setting {
 
 	protected function set_defaults() {

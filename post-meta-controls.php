@@ -35,6 +35,7 @@ require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
 
 // Utils shared.
+require_once INC_DIR . 'utils/utils-cast_array.php';
 require_once INC_DIR . 'utils/utils-sanitize.php';
 
 // Utils from classes.

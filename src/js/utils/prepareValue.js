@@ -27,6 +27,8 @@ const prepareValue = (setting, getPersistedProp, getEditedPostAttribute) => {
 	if (isUndefined(value)) {
 		value = default_value;
 	}
+
+	return value;
 };
 
 export default prepareValue;

@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting
+ */
 abstract class Setting extends Base {
 
 	abstract protected function set_defaults();
@@ -66,14 +69,10 @@ abstract class Setting extends Base {
 		}
 
 		$props         = $this->props;
-		$type          = $props['type'];
-		$meta_type     = get_meta_type( $type );
-		$meta_sanitize = get_meta_sanitize( $type, $props );
-		$meta_single   = get_meta_single( $type );
-		$post_types    = $this->props['post_type'];
-		$post_types    = is_string( $post_types )
-			? array( $post_types )
-			: $post_types;
+		$meta_type     = get_meta_type( $props['type'] );
+		$meta_single   = get_meta_single( $props['type'] );
+		$meta_sanitize = get_meta_sanitize( $props );
+		$post_types    = cast_array( $props['post_type'] );
 
 		foreach ( $post_types as $post_type) {
 
@@ -91,7 +90,11 @@ abstract class Setting extends Base {
 	}
 
 	private function prepare_data_type() {
-		$types_can_have_meta = array(
+
+		$data_type    = $this->props['data_type'];
+		$setting_type = $this->props['type'];
+
+		$setting_types_can_have_meta = array(
 			'buttons',
 			'checkbox',
 			'checkbox_multiple',
@@ -108,13 +111,13 @@ abstract class Setting extends Base {
 			'textarea',
 		);
 		if (
-			'meta' === $this->props['data_type'] &&
-			in_array( $this->props['type'], $types_can_have_meta )
+			'meta' === $data_type &&
+			in_array( $setting_type, $setting_types_can_have_meta )
 		) {
 			return;
 		}
 
-		$types_can_have_localstorage = array(
+		$setting_types_can_have_localstorage = array(
 			'buttons',
 			'checkbox',
 			'checkbox_multiple',
@@ -129,8 +132,8 @@ abstract class Setting extends Base {
 			'select',
 		);
 		if (
-			'localstorage' === $this->props['data_type'] &&
-			in_array( $this->props['type'], $types_can_have_localstorage )
+			'localstorage' === $data_type &&
+			in_array( $setting_type, $setting_types_can_have_localstorage )
 		) {
 			return;
 		}
@@ -153,7 +156,6 @@ abstract class Setting extends Base {
 			'label'                        => '',
 			'post_type'                    => 'post', // It will be passed through cast_array().
 			'type'                         => '',
-			'description'                  => '',
 			'help'                         => '',
 			'data_type'                    => 'none',
 			'metadata_exists'              => false,
@@ -162,7 +164,7 @@ abstract class Setting extends Base {
 			'data_key_with_prefix'         => '',
 			'data_key_prefix_from_sidebar' => '',
 			'register_meta'                => true,
-			'no_border_top'        => false,
+			'ui_border_top'                => true,
 		);
 	}
 
@@ -190,10 +192,6 @@ abstract class Setting extends Base {
 				'type'       => 'id',
 				'for_js'     => true,
 				'conditions' => 'not_empty',
-			),
-			'description' => array(
-				'type'   => 'text',
-				'for_js' => true,
 			),
 			'help' => array(
 				'type'   => 'text',
@@ -230,7 +228,7 @@ abstract class Setting extends Base {
 				'type'   => 'boolean',
 				'for_js' => false,
 			),
-			'no_border_top' => array(
+			'ui_border_top' => array(
 				'type'   => 'boolean',
 				'for_js' => true,
 			),

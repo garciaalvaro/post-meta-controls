@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting Select
+ */
 class Select extends Setting {
 
 	protected function before_set_schema() {
@@ -32,7 +35,7 @@ class Select extends Setting {
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => array(
+				'type' => array(
 					'_all' => array(
 						'value' => 'id',
 						'label' => 'text',

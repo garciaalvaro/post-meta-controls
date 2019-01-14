@@ -1,7 +1,7 @@
 import l, { plugin_slug } from "../utils";
 import DOMPurify from "dompurify";
 import uuid from "uuid/v4";
-import SidebarContainer from "../Components/Sidebar/SidebarContainer";
+import SidebarRegister from "../Components/Sidebar/SidebarRegister";
 import Base from "./Base";
 
 const { registerPlugin } = wp.plugins;
@@ -25,7 +25,7 @@ class Sidebar extends Base {
 
 		registerPlugin(plugin_id, {
 			icon: icon ? icon : "carrot",
-			render: () => <SidebarContainer sidebar_id={id} />
+			render: () => <SidebarRegister sidebar_id={id} />
 		});
 	}
 
@@ -39,7 +39,6 @@ class Sidebar extends Base {
 			warnings: [],
 			id: uuid(),
 			label: "",
-			description: "",
 			active_tab: false,
 			settings_id: [],
 			icon_dashicon: "carrot",
@@ -63,9 +62,6 @@ class Sidebar extends Base {
 			label: {
 				type: "text",
 				conditions: "not_empty"
-			},
-			description: {
-				type: "text"
 			},
 			icon_dashicon: {
 				type: "id"

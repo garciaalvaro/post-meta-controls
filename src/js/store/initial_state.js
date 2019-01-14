@@ -1,11 +1,11 @@
 import l from "../utils";
 
 const initial_state = {
-	sidebars: [],
-	tabs: [],
 	panels: [],
 	settings: [],
-	settings_persisted: {}
+	settings_persisted: {},
+	sidebars: [],
+	tabs: []
 };
 
 export default initial_state;

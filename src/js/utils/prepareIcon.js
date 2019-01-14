@@ -10,11 +10,15 @@ const prepareIcon = (icon_svg, icon_dashicon, type) => {
 		return null;
 	}
 
-	return icon_svg !== "" ? (
-		<RawHTML className={`${plugin_slug}-${type}-icon`}>
-			{DOMPurify.sanitize(icon_svg)}
-		</RawHTML>
-	) : (
+	if (icon_svg !== "") {
+		return (
+			<RawHTML className={`${plugin_slug}-${type}-icon`}>
+				{DOMPurify.sanitize(icon_svg)}
+			</RawHTML>
+		);
+	}
+
+	return (
 		<Div className={`${plugin_slug}-${type}-icon`}>
 			<Dashicon icon={icon_dashicon} />
 		</Div>

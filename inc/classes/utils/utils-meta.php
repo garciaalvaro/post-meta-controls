@@ -5,9 +5,14 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-function get_meta_type( $type = '' ) {
+/**
+ * Get the meta type given the setting type.
+ *
+ * @since 1.0.0
+ */
+function get_meta_type( $setting_type = '' ) {
 
-	switch ( $type ) {
+	switch ( $setting_type ) {
 		case 'checkbox':
 			return 'boolean';
 			break;
@@ -24,12 +29,17 @@ function get_meta_type( $type = '' ) {
 	}
 }
 
-function get_meta_single( $type = '' ) {
+/**
+ * Get the meta single property value given the setting type.
+ *
+ * @since 1.0.0
+ */
+function get_meta_single( $setting_type = '' ) {
 
 	if (
-		'date_range' === $type ||
-		'checkbox_multiple' === $type ||
-		'image_multiple' === $type
+		'date_range' === $setting_type ||
+		'checkbox_multiple' === $setting_type ||
+		'image_multiple' === $setting_type
 	) {
 		return false;
 	}
@@ -37,9 +47,14 @@ function get_meta_single( $type = '' ) {
 	return true;
 }
 
-function get_meta_sanitize( $type = '', $props = array() ) {
+/**
+ * Get the meta sanitize callback function.
+ *
+ * @since 1.0.0
+ */
+function get_meta_sanitize( $props = array() ) {
 
-	switch ( $type ) {
+	switch ( $props['type'] ) {
 		case 'checkbox':
 			return __NAMESPACE__ . '\sanitize_boolean';
 			break;
@@ -73,11 +88,13 @@ function get_meta_sanitize( $type = '', $props = array() ) {
 		case 'radio':
 		case 'select':
 		case 'checkbox_multiple':
-			$options     = $props['options'];
-			$default     = $props['default_value'];
-			$is_multiple = 'checkbox_multiple' === $props['type'];
-			return function ( $value ) use ( $options, $default ) {
-				return sanitize_options( $value, $options, $default, $is_multiple );
+			$options       = $props['options'];
+			$default_value = 'checkbox_multiple' === $props['type']
+				? ''
+				: $props['default_value'];
+
+			return function ( $value ) use ( $options, $default_value ) {
+				return sanitize_options( $value, $options, $default_value );
 			};
 			break;
 

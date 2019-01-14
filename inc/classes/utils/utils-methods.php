@@ -5,22 +5,21 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Trigger the register_meta method.
+ *
+ * @since 1.0.0
+ */
 function register_meta( $setting_instances = array() ) {
 
 	$data_key_array = array();
 
 	foreach ( $setting_instances as $setting_instance ) {
 
-		$type = $setting_instance->get_setting_type();
-
-		if ( 'date_range' === $type || 'date_single' === $type ) {
-			$setting_instance->enqueue_locale();
-		}
-
 		$data_key = $setting_instance->get_data_key_with_prefix();
 
 		// We only register the first setting with a certain meta_key,
-		// but let it be modified with several controls inside js.
+		// though we let it be modified with other setting controls inside js.
 		if ( ! in_array( $data_key, $data_key_array ) ) {
 
 			$setting_instance->register_meta();
@@ -31,6 +30,28 @@ function register_meta( $setting_instances = array() ) {
 	}
 }
 
+/**
+ * Trigger the enqueue_locale method and enqueue date scripts.
+ *
+ * @since 1.0.0
+ */
+function enqueue_locale( $setting_instances = array() ) {
+
+	foreach ( $setting_instances as $setting_instance ) {
+
+		$type = $setting_instance->get_setting_type();
+
+		if ( 'date_range' === $type || 'date_single' === $type ) {
+			$setting_instance->enqueue_locale();
+		}
+	}
+}
+
+/**
+ * Get the clean props array for the given class instances.
+ *
+ * @since 1.0.0
+ */
 function get_props( $instances = array(), $post_type_current = '' ) {
 
 	$props_array = array();
@@ -39,6 +60,7 @@ function get_props( $instances = array(), $post_type_current = '' ) {
 
 		$post_type = $instance->get_post_type();
 
+		// Only push the props from the settings that belong to the current post type.
 		if (
 			empty( $post_type ) ||
 			( is_array( $post_type ) && in_array( $post_type_current, $post_type ) ) ||
@@ -51,6 +73,11 @@ function get_props( $instances = array(), $post_type_current = '' ) {
 	return $props_array;
 }
 
+/**
+ * Set metadata_exists prop value.
+ *
+ * @since 1.0.0
+ */
 function set_metadata_exists( $setting_instances = array() ) {
 
 	foreach ( $setting_instances as $setting_instance ) {

@@ -1,7 +1,7 @@
 import l, { sanitize } from "../../utils";
 import Setting from "../Setting";
 
-const { forEach, isEmpty, isString, isObject } = lodash;
+const { forEach, isString, isObject } = lodash;
 
 class Color extends Setting {
 	beforeSetSchema() {

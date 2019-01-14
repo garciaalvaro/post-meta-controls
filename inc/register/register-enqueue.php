@@ -6,7 +6,7 @@ namespace POSTMETACONTROLS;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Enqueue the plugin styles and scripts for the post/page editor.
+ * Enqueue the plugin styles and scripts, and the main function object.
  *
  * @since 1.0.0
  */

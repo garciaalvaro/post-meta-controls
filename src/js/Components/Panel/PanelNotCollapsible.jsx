@@ -10,7 +10,7 @@ class PanelNotCollapsible extends Component {
 
 		return (
 			<Div
-				id={`${plugin_slug}-panel-${id}`}
+				id={id}
 				className={`${plugin_slug}-panel ${plugin_slug}-panel-no-collapsible`}
 			>
 				{label && (
@@ -23,7 +23,7 @@ class PanelNotCollapsible extends Component {
 				)}
 				<PanelRow>
 					{settings_id.map(setting_id => (
-						<Setting key={setting_id} id={setting_id} />
+						<Setting key={setting_id} setting_id={setting_id} />
 					))}
 				</PanelRow>
 			</Div>

@@ -5,6 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Get an array of moment.js locale names.
+ *
+ * @since 1.0.0
+ */
 function get_date_locale() {
 
 	return array(

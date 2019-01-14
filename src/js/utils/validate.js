@@ -34,10 +34,6 @@ const validateConditions = (conditions, prop_key, props) => {
 		let warnings = [];
 
 		forEach(conditions, condition => {
-			// if (is_valid === false) {
-			// 	return false;
-			// }
-
 			let {
 				operator,
 				argument_1,

@@ -1,5 +1,5 @@
 import l, { store_slug, plugin_slug, prepareValue } from "../../utils";
-import controls from "../Controls";
+import settings from "./Settings";
 
 const {
 	Buttons,
@@ -19,19 +19,33 @@ const {
 	Textarea,
 	// TODO: Pro
 	CustomHTML
-} = controls;
+} = settings;
 const { isUndefined, compact } = lodash;
 const { Component } = wp.element;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 
 class Setting extends Component {
-	getControl() {
-		const { props } = this;
-		const { type } = props;
-		const extended_props = { ...props, classes: this.getClasses() };
+	getClasses = () => {
+		const { type, ui_border_top } = this.props;
 
-		switch (type) {
+		let classes;
+		classes = [
+			`${plugin_slug}-setting`,
+			`${plugin_slug}-setting-${type}`,
+			!ui_border_top ? `${plugin_slug}-no_border_top` : ""
+		];
+		classes = compact(classes);
+		classes = classes.join(" ");
+
+		return classes;
+	};
+
+	render() {
+		const { getClasses, props } = this;
+		const extended_props = { ...props, classes: getClasses() };
+
+		switch (props.type) {
 			case "buttons":
 				return <Buttons {...extended_props} />;
 
@@ -77,6 +91,7 @@ class Setting extends Component {
 			case "textarea":
 				return <Textarea {...extended_props} />;
 
+			// Pro:
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
 					return <CustomHTML {...extended_props} />;
@@ -86,43 +101,13 @@ class Setting extends Component {
 				return null;
 		}
 	}
-
-	getClasses = () => {
-		const { type, no_border_top } = this.props;
-
-		let classes;
-		classes = [
-			`${plugin_slug}-control`,
-			`${plugin_slug}-control-${type}`,
-			no_border_top ? `${plugin_slug}-control-no_border_top` : ""
-		];
-		classes = compact(classes);
-		classes = classes.join(" ");
-
-		return classes;
-	};
-
-	render() {
-		// const { id } = this.props;
-
-		return this.getControl();
-
-		// return (
-		// 	<Div
-		// 		id={`${plugin_slug}-control-${id}`}
-		// 		className={`${plugin_slug}-control`}
-		// 	>
-		// 		{this.getControl()}
-		// 	</Div>
-		// );
-	}
 }
 
 export default compose([
-	withSelect((select, { id }) => {
+	withSelect((select, { setting_id }) => {
 		const { getEditedPostAttribute } = select("core/editor");
 		const { getSetting, getPersistedProp } = select(store_slug);
-		const setting = getSetting(id);
+		const setting = getSetting(setting_id);
 		const value = prepareValue(
 			setting,
 			getPersistedProp,

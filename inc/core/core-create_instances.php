@@ -5,6 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Create instances of the classes.
+ *
+ * @since 1.0.0
+ */
 function create_instances(
 	$class_name = array(),
 	$props_raw = array(),
@@ -141,7 +146,7 @@ function create_instances(
 					$instance = new Textarea( $prop_raw );
 					break;
 
-				// TODO: add this to a filter somehow in the pro folder?
+				// Pro:
 				case 'custom_html':
 					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
 						$instance = new CustomHTML( $prop_raw );

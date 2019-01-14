@@ -16,153 +16,6 @@ const reducer = (state = initial_state, action) => {
 	}
 
 	switch (action.type) {
-		// case "SET_INITIAL_VALUES": {
-		// 	l("meta", action.meta);
-		// 	const next_settings = produce(next_state.settings, draft => {
-		// 		draft.map(setting => {
-		// 			const {
-		// 				data_key_with_prefix,
-		// 				default_value,
-		// 				metadata_exists,
-		// 				data_type,
-		// 				type
-		// 			} = setting;
-
-		// 			let value = default_value;
-
-		// 			if (data_type === "meta" && metadata_exists) {
-		// 				value = get(action.meta, [data_key_with_prefix]);
-		// 			} else if (data_type === "localstorage") {
-		// 				const localstorage_value = get(
-		// 					next_state.settings_persisted,
-		// 					[data_key_with_prefix]
-		// 				);
-
-		// 				value = isUndefined(localstorage_value)
-		// 					? default_value
-		// 					: localstorage_value;
-		// 			}
-
-		// 			const multiple = get(setting, "multiple");
-
-		// 			if (multiple === true) {
-		// 				if (type === "image" && value === 0) {
-		// 					value = [];
-		// 				} else {
-		// 					value = castArray(value);
-		// 				}
-		// 			} else if (multiple === false) {
-		// 				value =
-		// 					isArray(value) && !isEmpty(value)
-		// 						? [value[0]]
-		// 						: castArray(value);
-		// 			}
-
-		// 			setting.value = value;
-		// 		});
-		// 	});
-
-		// 	return {
-		// 		...next_state,
-		// 		settings: next_settings
-		// 	};
-		// }
-		case "UPDATE_SETTING_PROP": {
-			next_state = produce(next_state, draft_state => {
-				const setting = find(draft_state.settings, {
-					id: action.setting_id
-				});
-
-				setting[action.prop] = action.value;
-
-				if (
-					action.prop === "value" &&
-					setting.data_type === "localstorage"
-				) {
-					draft_state.settings_persisted[data_key_with_prefix] =
-						action.value;
-				}
-			});
-
-			return {
-				...next_state
-			};
-		}
-		case "UPDATE_METADATA_EXISTS": {
-			const next_settings = produce(
-				next_state.settings,
-				draft_settings => {
-					forEach(draft_settings, setting => {
-						if (setting.data_key_with_prefix === action.data_key) {
-							setting.metadata_exists = true;
-						}
-					});
-				}
-			);
-
-			return {
-				...next_state,
-				settings: next_settings
-			};
-		}
-		case "ADD_INITIAL_IMAGE_DATA": {
-			const next_settings = produce(
-				next_state.settings,
-				draft_settings => {
-					const setting = find(draft_settings, {
-						id: action.setting_id
-					});
-
-					setting.image_data.push(action.image_data);
-				}
-			);
-
-			return {
-				...next_state,
-				settings: next_settings
-			};
-		}
-		case "UPDATE_ACTIVE_TAB": {
-			const next_sidebars = produce(
-				next_state.sidebars,
-				draft_sidebars => {
-					const sidebar = find(draft_sidebars, {
-						id: action.sidebar_id
-					});
-
-					sidebar.active_tab = action.tab_id;
-				}
-			);
-
-			return {
-				...next_state,
-				sidebars: next_sidebars
-			};
-		}
-		case "TOGGLE_PANEL_INITIAL_OPEN": {
-			const next_panels = produce(next_state.panels, draft_panels => {
-				const panel = find(draft_panels, { id: action.id });
-
-				panel.initial_open = !panel.initial_open;
-			});
-
-			return {
-				...next_state,
-				panels: next_panels
-			};
-		}
-		case "ADD_SIDEBAR": {
-			return {
-				...next_state,
-				sidebars: [...next_state.sidebars, action.sidebar]
-			};
-		}
-		case "ADD_TAB": {
-			return {
-				...next_state,
-				tabs: [...next_state.tabs, action.tab]
-			};
-		}
 		case "ADD_PANEL": {
 			return {
 				...next_state,
@@ -189,6 +42,85 @@ const reducer = (state = initial_state, action) => {
 				...next_state,
 				settings: [...next_state.settings, action.setting],
 				sidebars: next_sidebars
+			};
+		}
+		case "ADD_SIDEBAR": {
+			return {
+				...next_state,
+				sidebars: [...next_state.sidebars, action.sidebar]
+			};
+		}
+		case "ADD_TAB": {
+			return {
+				...next_state,
+				tabs: [...next_state.tabs, action.tab]
+			};
+		}
+		case "TOGGLE_PANEL_INITIAL_OPEN": {
+			const next_panels = produce(next_state.panels, draft_panels => {
+				const panel = find(draft_panels, { id: action.id });
+
+				panel.initial_open = !panel.initial_open;
+			});
+
+			return {
+				...next_state,
+				panels: next_panels
+			};
+		}
+		case "UPDATE_ACTIVE_TAB": {
+			const next_sidebars = produce(
+				next_state.sidebars,
+				draft_sidebars => {
+					const sidebar = find(draft_sidebars, {
+						id: action.sidebar_id
+					});
+
+					sidebar.active_tab = action.tab_id;
+				}
+			);
+
+			return {
+				...next_state,
+				sidebars: next_sidebars
+			};
+		}
+		case "UPDATE_METADATA_EXISTS": {
+			const next_settings = produce(
+				next_state.settings,
+				draft_settings => {
+					forEach(draft_settings, setting => {
+						if (setting.data_key_with_prefix === action.data_key) {
+							setting.metadata_exists = true;
+						}
+					});
+				}
+			);
+
+			return {
+				...next_state,
+				settings: next_settings
+			};
+		}
+		case "UPDATE_SETTING_PROP": {
+			next_state = produce(next_state, draft_state => {
+				const setting = find(draft_state.settings, {
+					id: action.setting_id
+				});
+
+				setting[action.prop] = action.value;
+
+				if (
+					action.prop === "value" &&
+					setting.data_type === "localstorage"
+				) {
+					draft_state.settings_persisted[data_key_with_prefix] =
+						action.value;
+				}
+			});
+
+			return {
+				...next_state
 			};
 		}
 	}

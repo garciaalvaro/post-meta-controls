@@ -52,7 +52,6 @@ const sanitizeText = value => {
 		return "";
 	}
 	value = escape(value);
-	// value = DOMPurify.sanitize(value);
 
 	return value;
 };

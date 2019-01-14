@@ -5,14 +5,17 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting Checkbox
+ */
 class Checkbox extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'           => 'checkbox',
-			'default_value'  => false,
-			'input_label' => '',
-			'use_toggle'     => false,
+			'type'          => 'checkbox',
+			'default_value' => false,
+			'input_label'   => '',
+			'use_toggle'    => false,
 		);
 
 		$parent_defaults = Setting::get_defaults();

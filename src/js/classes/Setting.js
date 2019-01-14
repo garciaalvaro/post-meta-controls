@@ -8,6 +8,7 @@ class Setting extends Base {
 	}
 
 	prepareDataType() {
+		const { data_type, type } = this.props;
 		const types_can_have_meta = [
 			"buttons",
 			"checkbox",
@@ -24,10 +25,8 @@ class Setting extends Base {
 			"text",
 			"textarea"
 		];
-		if (
-			this.props.data_type === "meta" &&
-			types_can_have_meta.includes(this.props.type)
-		) {
+
+		if (data_type === "meta" && types_can_have_meta.includes(type)) {
 			return;
 		}
 
@@ -45,9 +44,10 @@ class Setting extends Base {
 			"range_float",
 			"select"
 		];
+
 		if (
-			this.props.data_type === "localstorage" &&
-			types_can_have_localstorage.includes(this.props.type)
+			data_type === "localstorage" &&
+			types_can_have_localstorage.includes(type)
 		) {
 			return;
 		}
@@ -76,12 +76,11 @@ class Setting extends Base {
 			path: [],
 			label: "",
 			type: "",
-			description: "",
 			help: "",
 			data_type: "none",
 			metadata_exists: false,
 			data_key_with_prefix: "",
-			no_border_top: false
+			ui_border_top: true
 		};
 	}
 
@@ -109,9 +108,6 @@ class Setting extends Base {
 				type: "id",
 				conditions: "not_empty"
 			},
-			description: {
-				type: "text"
-			},
 			help: {
 				type: "text"
 			},
@@ -126,7 +122,7 @@ class Setting extends Base {
 				conditions:
 					this.props.data_type !== "none" ? "not_empty" : false
 			},
-			no_border_top: {
+			ui_border_top: {
 				type: "boolean"
 			}
 		};

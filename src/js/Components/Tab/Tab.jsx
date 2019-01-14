@@ -1,21 +1,18 @@
 import l, { plugin_slug, store_slug, Div } from "../../utils";
-import PanelContainer from "../Panel/PanelContainer";
+import Panel from "../Panel/Panel";
 
-const { withState, compose } = wp.compose;
+const { compose } = wp.compose;
 const { withSelect } = wp.data;
 const { Component } = wp.element;
 
 class Tab extends Component {
 	render() {
-		const { panels, id } = this.props;
+		const { panels_id, tab_id } = this.props;
 
 		return (
-			<Div
-				id={`${plugin_slug}-tab-content-${id}`}
-				className={`${plugin_slug}-tab-content`}
-			>
-				{panels.map((panel, index) => (
-					<PanelContainer key={panel.id} {...panel} />
+			<Div id={tab_id} className={`${plugin_slug}-tab-content`}>
+				{panels_id.map(panel_id => (
+					<Panel key={panel_id} panel_id={panel_id} />
 				))}
 			</Div>
 		);
@@ -23,11 +20,11 @@ class Tab extends Component {
 }
 
 export default compose([
-	withSelect((select, { id }) => {
-		const { getPanels } = select(store_slug);
+	withSelect((select, { tab_id }) => {
+		const { getPanelsId } = select(store_slug);
 
 		return {
-			panels: getPanels(id)
+			panels_id: getPanelsId(tab_id)
 		};
 	})
 ])(Tab);

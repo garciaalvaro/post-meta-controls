@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting Color
+ */
 class Color extends Setting {
 
 	protected function before_set_schema() {
@@ -57,7 +60,7 @@ class Color extends Setting {
 				'for_js' => true,
 			),
 			'palette' => array(
-				'type'   => array(
+				'type' => array(
 					'_all' => array(
 						'name'  => 'id',
 						'color' => 'text',

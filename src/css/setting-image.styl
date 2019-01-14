@@ -1,0 +1,51 @@
+/*
+ * Setting - Image
+ */
+
+$e_standard = cubic-bezier(0.4, 0.0, 0.2, 1)
+
+.pmc-image-not_found
+	background rgba(0,0,0,0.08)
+	padding 50px
+	box-shadow 0 0 2px rgba(0,0,0,0.2)
+
+.pmc-image-container
+	position relative
+	margin-top 1.2em
+	text-align center
+
+	&:hover
+		button.pmc-image-remove
+			fill rgba(0,0,0,.8)
+			background-color rgba(255,255,255,.4)
+
+.pmc-dragging_image
+.pmc-setting-image_multiple .pmc-image
+	// https://stackoverflow.com/a/18294634 | CC BY-SA 3.0
+	cursor move // fallback if grab cursor is unsupported
+	cursor grab
+	cursor -moz-grab
+	cursor -webkit-grab
+
+button.pmc-image-remove
+	padding 5px
+	width 30px
+	height 30px
+	position absolute
+	top 0
+	right 0
+	z-index 1
+	transition fill .3s .1s $e_standard, background-color .3s .1s $e_standard
+	background-color transparent
+	margin 2px
+	fill rgba(0,0,0,.55)
+	border-radius 50%
+
+	svg
+		height 20px
+
+.pmc-dragging_image
+	z-index 999
+
+	img
+		max-width 100%

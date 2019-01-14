@@ -8,10 +8,16 @@ const { TabPanel } = wp.components;
 
 class Tabs extends Component {
 	render() {
-		const { tabs, sidebar_id, active_tab, updateActiveTab } = this.props;
+		const {
+			tabs,
+			classes,
+			sidebar_id,
+			active_tab,
+			updateActiveTab
+		} = this.props;
 
 		if (tabs.length === 1) {
-			return <Tab id={tabs[0].id} />;
+			return <Tab tab_id={tabs[0].id} />;
 		}
 
 		const tabs_prepared = tabs.map(tab => ({
@@ -25,18 +31,19 @@ class Tabs extends Component {
 				</Fragment>
 			),
 			className: `${plugin_slug}-tab-content`,
-			id: `${plugin_slug}-tab-content-${tab.id}`
+			id: `${tab.id}-tab-content`
 		}));
 
 		return (
 			<TabPanel
-				id={`${plugin_slug}-sidebar-${sidebar_id}`}
+				id={sidebar_id}
+				className={classes}
 				activeClass="is-active"
 				onSelect={updateActiveTab}
 				tabs={tabs_prepared}
 				initialTabName={active_tab}
 			>
-				{tab => <Tab id={tab.name} />}
+				{tab => <Tab tab_id={tab.name} />}
 			</TabPanel>
 		);
 	}
@@ -47,7 +54,7 @@ export default compose([
 		const { updateActiveTab } = dispatch(store_slug);
 
 		return {
-			updateActiveTab: id => updateActiveTab(sidebar_id, id)
+			updateActiveTab: tab_id => updateActiveTab(sidebar_id, tab_id)
 		};
 	}),
 	withSelect((select, { sidebar_id }) => {

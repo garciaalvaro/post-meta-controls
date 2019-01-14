@@ -26,14 +26,14 @@ class PanelCollapsible extends Component {
 						</Span>
 					</Fragment>
 				}
-				id={`${plugin_slug}-panel-${id}`}
+				id={id}
 				initialOpen={initial_open}
 				className={`${plugin_slug}-panel ${plugin_slug}-panel-collapsible`}
 				onToggle={togglePanelInitialOpen}
 			>
 				<PanelRow>
 					{settings_id.map(setting_id => (
-						<Setting key={setting_id} id={setting_id} />
+						<Setting key={setting_id} setting_id={setting_id} />
 					))}
 				</PanelRow>
 			</PanelBody>

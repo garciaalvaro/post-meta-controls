@@ -5,6 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Prepare the array of options.
+ *
+ * @since 1.0.0
+ */
 function prepare_options( $options = array() ) {
 
 	$options = sanitize_array( $options );

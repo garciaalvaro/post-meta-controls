@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base
+ */
 abstract class Base {
 
 	protected $props;
@@ -52,19 +55,26 @@ abstract class Base {
 		}
 	}
 
+	/**
+	 * Assign default properties if not present in the given array and
+	 * remove keys which are not present in $props_defaults.
+	 */
 	private function merge_defaults() {
-		// Assign default elements if not present in $array and
-		// remove keys which are not present in $defaults.
 		$this->props = shortcode_atts( $this->props_defaults, $this->props );
 	}
 
+	/**
+	 * Cast the given properties to the required schema.
+	 */
 	private function cast_schema() {
-
 		$this->props = cast_schema( $this->props, $this->props_schema );
-
 	}
 
+	/**
+	 * Set the validity of the class checking if each prop fits the given conditions.
+	 */
 	private function validate_props() {
+
 		foreach ( $this->props_schema as $key => $schema ) {
 
 			if ( ! isset( $schema['conditions'] ) || false === $schema['conditions'] ) {
@@ -94,12 +104,8 @@ abstract class Base {
 			: true;
 	}
 
-	public function is_valid() {
-		return ! empty( $this->props['valid'] );
-	}
-
 	public function get_id() {
-		return isset( $this->props['id'] ) ? $this->props['id'] : false;
+		return $this->props['id'];
 	}
 
 	public function get_post_type() {

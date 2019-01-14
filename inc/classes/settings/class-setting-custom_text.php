@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting CustomText
+ */
 class CustomText extends Setting {
 
 	protected function set_defaults() {
@@ -22,7 +25,7 @@ class CustomText extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'content' => array(
-				'type'       => array(
+				'type' => array(
 					'_all' => array(
 						'type'    => 'id',
 						'content' => array( '_all' => 'text' ),

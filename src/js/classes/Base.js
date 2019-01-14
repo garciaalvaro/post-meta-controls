@@ -90,7 +90,7 @@ class Base {
 	}
 
 	mergeDefaults() {
-		// Assign default elements if not present in array and
+		// Assign default props if not present in array and
 		// remove keys which are not present in defaults.
 		this.props = assign(
 			this.props_defaults,
@@ -134,7 +134,6 @@ class Base {
 	}
 
 	addWarning(prop_key, message) {
-		l(prop_key, message);
 		const { class_name, warnings } = this.props;
 		const type =
 			class_name === "setting" && this.props.type !== ""
@@ -146,10 +145,6 @@ class Base {
 			title,
 			message
 		});
-	}
-
-	isValid() {
-		return this.props.valid === true;
 	}
 
 	getId() {

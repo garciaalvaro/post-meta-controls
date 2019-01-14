@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Sidebar
+ */
 class Sidebar extends Base {
 
 	public function get_data_key_prefix() {
@@ -16,7 +19,6 @@ class Sidebar extends Base {
 			'id'              => wp_generate_uuid4(),
 			'label'           => '',
 			'post_type'       => 'post', // It will be passed through cast_array().
-			'description'     => '',
 			'data_key_prefix' => 'pmc_',
 			'icon_dashicon'   => 'carrot',
 			'icon_svg'        => '',
@@ -38,10 +40,6 @@ class Sidebar extends Base {
 			'post_type' => array(
 				'type'   => array( '_all' => 'id' ),
 				'for_js' => false,
-			),
-			'description' => array(
-				'type'   => 'text',
-				'for_js' => true,
 			),
 			'data_key_prefix' => array(
 				'type'   => 'id',

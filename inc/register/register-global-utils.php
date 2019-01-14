@@ -287,7 +287,7 @@ if ( ! function_exists( 'pmc_get_range_float' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_select' ) ) {
-	function pmc_get_select( $meta_key = '', $post_id = '', $single = true ) {
+	function pmc_get_select( $meta_key = '', $post_id = '' ) {
 
 		$meta = pmc_get_meta( 'select', $meta_key, $post_id );
 
@@ -311,7 +311,6 @@ if ( ! function_exists( 'pmc_get_text' ) ) {
 		}
 
 		$meta = sanitize_text( $meta );
-		// $meta = (string) $meta;
 
 		return $meta;
 	}
@@ -327,7 +326,6 @@ if ( ! function_exists( 'pmc_get_textarea' ) ) {
 		}
 
 		$meta = sanitize_textarea( $meta );
-		// $meta = (string) $meta;
 
 		return $meta;
 	}

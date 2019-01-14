@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting Buttons
+ */
 class Buttons extends Setting {
 
 	protected function set_defaults() {
@@ -32,7 +35,7 @@ class Buttons extends Setting {
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => array(
+				'type' => array(
 					'_all' => array(
 						'value'         => 'id',
 						'title'         => 'text',

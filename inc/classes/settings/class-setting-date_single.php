@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting DateSingle
+ */
 class DateSingle extends Setting {
 
 	protected function set_defaults() {
@@ -52,11 +55,13 @@ class DateSingle extends Setting {
 			return;
 		}
 
-		// Add the action to localize the data into the editor.
+		// Add the action to enqueue the locale script.
 		add_action(
 			'pmc_before_enqueue',
 			function() use ( $locale ) {
 
+				// Enqueue the selected locale script. This way we load each file
+				// only if it is going to be used.
 				wp_enqueue_script(
 					PLUGIN_NAME . '-moment_locale-' . $locale,
 					BUILD_DIR . 'moment-locale/' . $locale . '.js',

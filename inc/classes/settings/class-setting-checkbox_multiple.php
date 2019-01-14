@@ -5,6 +5,9 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Class Base Setting CheckboxMultiple
+ */
 class CheckboxMultiple extends Setting {
 
 	protected function before_set_schema() {
@@ -33,7 +36,7 @@ class CheckboxMultiple extends Setting {
 				'for_js' => true,
 			),
 			'options' => array(
-				'type'       => array(
+				'type' => array(
 					'_all' => array(
 						'value' => 'id',
 						'label' => 'text',

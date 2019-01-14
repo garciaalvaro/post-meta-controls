@@ -2,24 +2,6 @@ import l from "../../utils";
 import Setting from "../Setting";
 
 class DateRange extends Setting {
-	afterCastSchema() {
-		this.prepareDefaultDate();
-	}
-
-	prepareDefaultDate() {
-		// Check that the default value returns a valid date.
-		if (this.props.metadata_exists === false) {
-			const default_value = new Date(this.props.default_value);
-
-			/* https://stackoverflow.com/a/1353711 | CC BY-SA 3.0 */
-			if (default_value instanceof Date && !isNaN(default_value)) {
-				this.props.default_value = default_value;
-			} else {
-				this.props.default_value = "";
-			}
-		}
-	}
-
 	setDefaults() {
 		const this_defaults = {
 			type: "date_range",

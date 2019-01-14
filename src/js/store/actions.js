@@ -1,41 +1,16 @@
 import l from "../utils";
 
 const actions = {
-	// setInitialValues(meta) {
-	// 	return {
-	// 		type: "SET_INITIAL_VALUES",
-	// 		meta
-	// 	};
-	// },
-	fetchMeta() {
+	addPanel(panel) {
 		return {
-			type: "FETCH_META"
+			type: "ADD_PANEL",
+			panel
 		};
 	},
-	addInitialImageData(setting_id, image_data) {
+	addSetting(setting) {
 		return {
-			type: "ADD_INITIAL_IMAGE_DATA",
-			setting_id,
-			image_data
-		};
-	},
-	fetchImageData(image_id) {
-		return {
-			type: "FETCH_IMAGE_DATA",
-			image_id
-		};
-	},
-	updateActiveTab(sidebar_id, tab_id) {
-		return {
-			type: "UPDATE_ACTIVE_TAB",
-			sidebar_id,
-			tab_id
-		};
-	},
-	togglePanelInitialOpen(id) {
-		return {
-			type: "TOGGLE_PANEL_INITIAL_OPEN",
-			id
+			type: "ADD_SETTING",
+			setting
 		};
 	},
 	addSidebar(sidebar) {
@@ -50,16 +25,23 @@ const actions = {
 			tab
 		};
 	},
-	addPanel(panel) {
+	togglePanelInitialOpen(id) {
 		return {
-			type: "ADD_PANEL",
-			panel
+			type: "TOGGLE_PANEL_INITIAL_OPEN",
+			id
 		};
 	},
-	addSetting(setting) {
+	updateActiveTab(sidebar_id, tab_id) {
 		return {
-			type: "ADD_SETTING",
-			setting
+			type: "UPDATE_ACTIVE_TAB",
+			sidebar_id,
+			tab_id
+		};
+	},
+	updateMetadataExists(data_key) {
+		return {
+			type: "UPDATE_METADATA_EXISTS",
+			data_key
 		};
 	},
 	updateSettingProp(setting_id, prop, value) {
@@ -69,24 +51,7 @@ const actions = {
 			prop,
 			value
 		};
-	},
-	updateMetadataExists(data_key) {
-		return {
-			type: "UPDATE_METADATA_EXISTS",
-			data_key
-		};
 	}
 };
 
-const controls = {
-	// FETCH_META(action) {
-	// 	return wp.data.select("core/editor").getCurrentPostAttribute("meta");
-	// },
-	FETCH_IMAGE_DATA(action) {
-		const path = `wp/v2/media/${action.image_id}`;
-
-		return wp.apiFetch({ path });
-	}
-};
-
-export { actions, controls };
+export default actions;

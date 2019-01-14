@@ -5,12 +5,18 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Sanitize HTML svg.
+ *
+ * https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0
+ *
+ * @since 1.0.0
+ */
 function sanitize_html_svg( $value ) {
 	if ( empty( $value ) ) {
 		return '';
 	}
 
-	/* https://wordpress.stackexchange.com/a/316943 | CC BY-SA 3.0 */
 	$allowed_svg = array(
 		'svg' => array(
 			'class'           => true,
@@ -42,6 +48,11 @@ function sanitize_html_svg( $value ) {
 	return $value;
 }
 
+/**
+ * Sanitize HTML.
+ *
+ * @since 1.0.0
+ */
 function sanitize_html( $value ) {
 	$value = wp_kses_post( $value );
 	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
@@ -50,79 +61,100 @@ function sanitize_html( $value ) {
 	return $value;
 }
 
-function sanitize_html_raw( $value ) {
-	if ( ! is_string( $value ) ) {
+/**
+ * Sanitize string and/or integer.
+ *
+ * @since 1.0.0
+ */
+function sanitize_string_integer( $value ) {
+	if ( ! is_string( $value ) && ! is_int( $value ) ) {
 		return '';
 	}
-
-	$value = wp_json_encode( $value );
 
 	return $value;
 }
 
+/**
+ * Sanitize id.
+ *
+ * @since 1.0.0
+ */
 function sanitize_id( $value ) {
-	if ( ! is_string( $value ) && ! is_int( $value ) ) {
-		return '';
-	}
+	$value = sanitize_string_integer( $value );
 
 	return \sanitize_title( $value );
 }
 
+/**
+ * Sanitize text.
+ *
+ * @since 1.0.0
+ */
 function sanitize_text( $value ) {
-	if ( ! is_string( $value ) && ! is_int( $value ) ) {
-		return '';
-	}
+	$value = sanitize_string_integer( $value );
 
 	return \sanitize_text_field( $value );
 }
 
+/**
+ * Sanitize textarea.
+ *
+ * @since 1.0.0
+ */
 function sanitize_textarea( $value ) {
-	if ( ! is_string( $value ) && ! is_int( $value ) ) {
-		return '';
-	}
+	$value = sanitize_string_integer( $value );
 
 	return \sanitize_textarea_field( $value );
 }
 
+/**
+ * Sanitize float.
+ *
+ * @since 1.0.0
+ */
 function sanitize_float( $value ) {
 	return round( abs( floatval( $value ) ), 2 );
 }
 
+/**
+ * Sanitize integer.
+ *
+ * @since 1.0.0
+ */
 function sanitize_integer( $value ) {
 	return \absint( $value );
 }
 
+/**
+ * Sanitize boolean.
+ *
+ * https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
+ *
+ * @since 1.0.0
+ */
 function sanitize_boolean( $value ) {
-	// https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
 	return isset( $value ) && true == $value ? true : false;
 }
 
+/**
+ * Sanitize array.
+ *
+ * @since 1.0.0
+ */
 function sanitize_array( $value ) {
 	return is_array( $value ) ? $value : array();
 }
 
-function cast_array( $value ) {
-	if ( is_array( $value ) ) {
-		return $value;
-	}
-
-	if ( is_string( $value ) || is_int( $value ) || is_bool( $value ) ) {
-		return array( $value );
-	}
-
-	return array();
-}
-
-function sanitize_options(
-	$value = '',
-	$options = array(),
-	$default_value = '',
-	$is_multiple = false
-) {
+/**
+ * Sanitize value inside an options array.
+ *
+ * @since 1.0.0
+ */
+function sanitize_options( $value = '', $options = array(), $default_value = '' ) {
 
 	$value         = \sanitize_key( $value );
 	$options       = sanitize_array( $options );
-	$default_value = $is_multiple ? '' : \sanitize_key( $default_value );
+	$default_value = \sanitize_key( $default_value );
 
 	$options = array_map( function( $option ) {
 		return $option['value'];
@@ -132,6 +164,11 @@ function sanitize_options(
 	return in_array( $value, $options ) ? $value : $default_value;
 }
 
+/**
+ * Sanitize number range.
+ *
+ * @since 1.0.0
+ */
 function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
 
 	$value = \absint( $value );
@@ -144,6 +181,11 @@ function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
 	return $value;
 }
 
+/**
+ * Sanitize float range.
+ *
+ * @since 1.0.0
+ */
 function sanitize_range_float( $value = 1, $min = 0, $max = 1 ) {
 
 	$value = sanitize_float( $value );
@@ -161,7 +203,7 @@ function sanitize_range_float( $value = 1, $min = 0, $max = 1 ) {
  *
  * https://stackoverflow.com/a/31245990 | CC BY-SA 3.0
  *
- * @param string $color   Slug to sanitize.
+ * @since 1.0.0
  */
 function sanitize_color( $value ) {
 
@@ -169,7 +211,7 @@ function sanitize_color( $value ) {
 	$regex_rgb_rgba = '/rgba?\(((25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,\s*?){2}(25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,?\s*([01]\.?\d*?)?\)/';
 	$regex_hex      = '/#([a-fA-F0-9]{3}){1,2}\b/';
 
-	// If the color is hex, rgb, rgba, or empty return it.
+	// If the color is HEX, rgb or rgba return it.
 	if (
 		true == preg_match( $regex_hex, $color ) ||
 		true == preg_match( $regex_rgb_rgba, $color )

@@ -5,6 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Cast an array of properties and values given a schema array.
+ *
+ * @since 1.0.0
+ */
 function cast_schema( $elements = array(), $schema = array() ) {
 
 	foreach ( $elements as $key => $value ) {
@@ -28,10 +33,6 @@ function cast_schema( $elements = array(), $schema = array() ) {
 		}
 
 		switch ( $type ) {
-			case 'html_raw':
-				$elements[ $key ] = sanitize_html_raw( $value );
-				break;
-
 			case 'html':
 				$elements[ $key ] = sanitize_html( $value );
 				break;

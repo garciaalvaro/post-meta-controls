@@ -5,6 +5,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Create sidebar properties array
+ *
+ * @since 1.0.0
+ */
 function create_sidebar() {
 
 	// This is the filter used to add custom sidebars inside other plugins/themes.
@@ -33,8 +38,11 @@ function create_sidebar() {
 		return;
 	}
 
-	// Register the meta fields for those settings that are of data_type meta.
+	// Register the meta fields for those settings that are of meta data_type.
 	register_meta( $instances['settings'] );
+
+	// Enqueue the locale moment.js scripts.
+	enqueue_locale( $instances['settings'] );
 
 	// Add the action to localize the data into the editor.
 	add_action(
