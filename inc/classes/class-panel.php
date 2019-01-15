@@ -16,7 +16,7 @@ class Panel extends Base {
 			'path'          => array(),
 			'label'         => '',
 			'post_type'     => 'post', // It will be passed through cast_array().
-			'initial_open'  => false,
+			'initial_open'  => true,
 			'collapsible'   => true,
 			'icon_dashicon' => '',
 			'icon_svg'      => '',

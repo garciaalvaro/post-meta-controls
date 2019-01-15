@@ -4,7 +4,7 @@
 $panel = array(
 	'label'         => __( 'Panel label', 'my_plugin' ), // Required if 'collapsible' is true.
 	'collapsible'   => true, // If true the panel will collapse and expand on click.
-	'initial_open'  => false, // This option is applicable only if 'collapsible' is true.
+	'initial_open'  => true, // This option is applicable only if 'collapsible' is true.
 	// Either 'icon_svg' or 'icon_dashicon' can be set. Both are optional.
 	// 'icon_svg' takes preference over 'icon_dashicon'.
 	'icon_svg'      => // svg string.
