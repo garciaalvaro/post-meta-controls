@@ -46,7 +46,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 		);
 	}
 
-	const { id, url, alt } = value;
+	const { url, alt } = value;
 
 	return (
 		<Div className={`${plugin_slug}-image-container`}>
@@ -92,7 +92,7 @@ class ImageContainer extends Component {
 			let images_data;
 			images_data = prepareImageData(castArray(images_data_raw), true);
 			// The sorting of the elements from images_data_raw is not
-			// the same as the one from the id, so we need to order it.
+			// the same as the one from the so we need to order it.
 			images_data = images_id.map(id => {
 				const image_data = find(images_data, { id: id });
 				if (!isUndefined(image_data)) {
@@ -190,10 +190,10 @@ class ImageContainer extends Component {
 
 	render() {
 		const { updateImages, getImagesComponent, props } = this;
-		const { id, value: images_id, label, help, classes } = props;
+		const { value: images_id, label, help } = props;
 
 		return (
-			<BaseControl id={id} label={label} className={classes} help={help}>
+			<BaseControl label={label} help={help}>
 				<MediaUpload
 					onSelect={updateImages}
 					allowedTypes={["image"]}

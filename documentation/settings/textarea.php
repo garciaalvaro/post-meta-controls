@@ -4,6 +4,9 @@
 $textarea = array(
 	// Setting properties:
 	'type'            => 'textarea', // Required.
+	// Optionally, an id may be specified. It will be used by the plugin to
+	// identify the setting and will be applied to the control html.
+	'id'              => 'textarea_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'textarea_key', // Required if 'data_type' is 'meta' or 'localstorage'.
 	// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.

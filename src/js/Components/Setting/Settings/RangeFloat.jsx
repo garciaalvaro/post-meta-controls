@@ -31,21 +31,10 @@ class RangeFloat extends Component {
 
 	render() {
 		const { updateNumber, props } = this;
-		const {
-			id,
-			min,
-			max,
-			step,
-			label,
-			help,
-			value_local,
-			classes_extended
-		} = props;
+		const { min, max, step, label, help, value_local } = props;
 
 		return (
 			<RangeControl
-				id={id}
-				className={classes_extended}
 				label={label}
 				help={help}
 				value={value_local}

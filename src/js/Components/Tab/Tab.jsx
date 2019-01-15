@@ -10,7 +10,7 @@ class Tab extends Component {
 		const { panels_id, tab_id } = this.props;
 
 		return (
-			<Div id={tab_id} className={`${plugin_slug}-tab-content`}>
+			<Div id={tab_id} className={`${plugin_slug}-tab`}>
 				{panels_id.map(panel_id => (
 					<Panel key={panel_id} panel_id={panel_id} />
 				))}

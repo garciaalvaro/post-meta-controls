@@ -1,4 +1,4 @@
-import l, { store_slug, plugin_slug, prepareValue } from "../../utils";
+import l, { Div, store_slug, plugin_slug, prepareValue } from "../../utils";
 import settings from "./Settings";
 
 const {
@@ -41,65 +41,80 @@ class Setting extends Component {
 		return classes;
 	};
 
-	render() {
-		const { getClasses, props } = this;
-		const extended_props = { ...props, classes: getClasses() };
+	getControl = () => {
+		const { props } = this;
 
 		switch (props.type) {
 			case "buttons":
-				return <Buttons {...extended_props} />;
+				return <Buttons {...props} />;
 
 			case "checkbox":
-				return <Checkbox {...extended_props} />;
+				return <Checkbox {...props} />;
 
 			case "checkbox_multiple":
-				return <CheckboxMultiple {...extended_props} />;
+				return <CheckboxMultiple {...props} />;
 
 			case "color":
-				return <Color {...extended_props} />;
+				return <Color {...props} />;
 
 			case "custom_text":
-				return <CustomText {...extended_props} />;
+				return <CustomText {...props} />;
 
 			case "date_range":
-				return <DateRange {...extended_props} />;
+				return <DateRange {...props} />;
 
 			case "date_single":
-				return <DateSingle {...extended_props} />;
+				return <DateSingle {...props} />;
 
 			case "image":
-				return <Image {...extended_props} />;
+				return <Image {...props} />;
 
 			case "image_multiple":
-				return <ImageMultiple {...extended_props} />;
+				return <ImageMultiple {...props} />;
 
 			case "radio":
-				return <Radio {...extended_props} />;
+				return <Radio {...props} />;
 
 			case "range":
-				return <Range {...extended_props} />;
+				return <Range {...props} />;
 
 			case "range_float":
-				return <RangeFloat {...extended_props} />;
+				return <RangeFloat {...props} />;
 
 			case "select":
-				return <Select {...extended_props} />;
+				return <Select {...props} />;
 
 			case "text":
-				return <Text {...extended_props} />;
+				return <Text {...props} />;
 
 			case "textarea":
-				return <Textarea {...extended_props} />;
+				return <Textarea {...props} />;
 
 			// Pro:
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
-					return <CustomHTML {...extended_props} />;
+					return <CustomHTML {...props} />;
 				}
 
 			default:
 				return null;
 		}
+	};
+
+	render() {
+		const { getClasses, getControl, props } = this;
+		const { id } = props;
+		const control = getControl();
+
+		if (control === null) {
+			return null;
+		}
+
+		return (
+			<Div id={id} className={getClasses()}>
+				{control}
+			</Div>
+		);
 	}
 }
 

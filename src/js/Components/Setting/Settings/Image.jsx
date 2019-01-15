@@ -26,7 +26,7 @@ class Image extends Component {
 					true
 				);
 				// The sorting of the elements from image_data_raw is not
-				// the same as the one from the id, so we need to order it.
+				// the same as the one from the so we need to order it.
 				const { url, alt } = image_data[0];
 
 				setState({ url: url, alt: alt });
@@ -47,7 +47,7 @@ class Image extends Component {
 	updateImage = image_data_raw => {
 		const { updateValue, setState } = this.props;
 		const image_data = prepareImageData(castArray(image_data_raw))[0];
-		const { id, url, alt } = image_data;
+		const { url, alt } = image_data;
 
 		updateValue(id);
 		setState({ url, alt, image_id_not_found: false });
@@ -63,18 +63,16 @@ class Image extends Component {
 	render() {
 		const { updateImage, removeImage, props } = this;
 		const {
-			id,
 			value: image_id,
 			label,
 			help,
 			url,
 			alt,
-			classes,
 			image_id_not_found
 		} = props;
 
 		return (
-			<BaseControl id={id} label={label} help={help} className={classes}>
+			<BaseControl label={label} help={help}>
 				<MediaUpload
 					onSelect={updateImage}
 					allowedTypes={["image"]}

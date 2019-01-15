@@ -4,6 +4,9 @@
 $image_multiple = array(
 	// Setting properties:
 	'type'            => 'image_multiple', // Required.
+	// Optionally, an id may be specified. It will be used by the plugin to
+	// identify the setting and will be applied to the control html.
+	'id'              => 'image_multiple_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'image_multiple_key', // Required if 'data_type' is 'meta' or 'localstorage'.
 	// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.

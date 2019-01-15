@@ -24,8 +24,7 @@ class Tabs extends Component {
 					</Span>
 				</Fragment>
 			),
-			className: `${plugin_slug}-tab-content`,
-			id: `${tab.id}-tab-content`
+			className: `${plugin_slug}-tab-button`
 		}));
 
 		return (

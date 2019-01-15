@@ -20,7 +20,7 @@ $e_deceleration = cubic-bezier(0.0, 0.0, 0.2, 1)
 	display block
 	margin-right 8px
 
-button.pmc-tab-content
+button.pmc-tab-button
 	padding 5px
 	height 100%
 	box-shadow none
@@ -36,6 +36,7 @@ button.pmc-tab-content
 	cursor pointer
 	border none
 	transition background-color .15s $e_deceleration
+	outline none
 
 	&:hover
 		background-color rgba(0,0,0,0.03)
@@ -43,5 +44,5 @@ button.pmc-tab-content
 	&.is-active
 		margin-bottom -1px
 		font-weight 600
-		padding-bottom 1px
+		padding-bottom 3px
 		border-bottom 3px solid var(--color_primary)

@@ -3,6 +3,9 @@
 
 $tab = array(
 	'label'         => __( 'Tab label', 'my_plugin' ), // Required.
+	// Optionally, an id may be specified. It will be used by the plugin to
+	// identify the tab and will be applied to the tab html.
+	'id'            => 'tab_id',
 	// Either 'icon_svg' or 'icon_dashicon' can be set. Both are optional.
 	// 'icon_svg' takes preference over 'icon_dashicon'.
 	'icon_svg'      => // svg string.

@@ -2,6 +2,7 @@
 
 
 $sidebar = array(
+	'id'              => 'sidebar_id', // Required.
 	'label'           => __( 'Sidebar label', 'my_plugin' ), // Required.
 	// Post types where this sidebar will be assigned and where each
 	// setting meta will be registered (if the setting 'data_type' is 'meta').

@@ -1,9 +1,9 @@
-import l, { Span, plugin_slug, store_slug } from "../../utils";
+import l, { Div, Span, plugin_slug, store_slug } from "../../utils";
 import Setting from "../Setting/Setting";
 
 const { withDispatch } = wp.data;
 const { Component, Fragment } = wp.element;
-const { PanelBody, PanelRow } = wp.components;
+const { PanelBody } = wp.components;
 
 class PanelCollapsible extends Component {
 	render() {
@@ -31,11 +31,11 @@ class PanelCollapsible extends Component {
 				className={`${plugin_slug}-panel ${plugin_slug}-panel-collapsible`}
 				onToggle={togglePanelInitialOpen}
 			>
-				<PanelRow>
+				<Div id={id} className={`${plugin_slug}-panel-content`}>
 					{settings_id.map(setting_id => (
 						<Setting key={setting_id} setting_id={setting_id} />
 					))}
-				</PanelRow>
+				</Div>
 			</PanelBody>
 		);
 	}

@@ -1,14 +1,14 @@
-import l, { Div, A, P, H3, Ol, Ul, Li } from "../../../utils";
+import l, { A, P, H3, Ol, Ul, Li } from "../../../utils";
 
 const { isUndefined, map } = lodash;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 
 class CustomText extends Component {
 	render() {
-		const { id, content, classes } = this.props;
+		const { content } = this.props;
 
 		return (
-			<Div id={id} className={classes}>
+			<Fragment>
 				{content.map((element, root_index) => {
 					switch (element.type) {
 						case "paragraph":
@@ -61,7 +61,7 @@ class CustomText extends Component {
 							break;
 					}
 				})}
-			</Div>
+			</Fragment>
 		);
 	}
 }

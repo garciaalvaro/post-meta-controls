@@ -67,27 +67,23 @@ class Color extends Component {
 	render() {
 		const { updateColor, updateAlpha, props } = this;
 		const {
-			id,
 			value_local,
 			color,
 			alpha,
 			palette,
 			alpha_control,
 			label,
-			help,
-			classes
+			help
 		} = props;
 
 		return (
 			<BaseControl
-				id={id}
 				label={
 					<Fragment>
 						<Span>{label}</Span>
 						<ColorIndicator colorValue={value_local} />
 					</Fragment>
 				}
-				className={classes}
 				help={help}
 			>
 				<ColorPalette

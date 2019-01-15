@@ -48,12 +48,11 @@ class DateRange extends Component {
 			setState,
 			updateValue,
 			label,
-			help,
-			classes
+			help
 		} = this.props;
 
 		return (
-			<BaseControl id={id} label={label} help={help} className={classes}>
+			<BaseControl label={label} help={help}>
 				<DateRangePicker
 					displayFormat={format}
 					small={true}

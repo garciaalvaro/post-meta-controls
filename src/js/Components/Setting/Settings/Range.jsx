@@ -13,12 +13,10 @@ class Range extends Component {
 
 	render() {
 		const { updateNumber, props } = this;
-		const { id, min, max, step, label, help, value_local, classes } = props;
+		const { min, max, step, label, help, value_local } = props;
 
 		return (
 			<RangeControl
-				id={id}
-				className={classes}
 				label={label}
 				help={help}
 				value={value_local}

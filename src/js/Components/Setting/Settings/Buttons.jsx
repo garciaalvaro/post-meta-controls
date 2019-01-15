@@ -7,14 +7,12 @@ const { Toolbar, BaseControl } = wp.components;
 class Buttons extends Component {
 	render() {
 		const {
-			id,
 			label,
 			help,
 			options,
 			value,
 			allow_empty,
-			updateValue,
-			classes
+			updateValue
 		} = this.props;
 		const options_prepared = options.map(option => ({
 			icon: option.icon_svg ? (
@@ -34,7 +32,7 @@ class Buttons extends Component {
 		}));
 
 		return (
-			<BaseControl id={id} className={classes} label={label} help={help}>
+			<BaseControl label={label} help={help}>
 				<Toolbar controls={options_prepared} />
 			</BaseControl>
 		);

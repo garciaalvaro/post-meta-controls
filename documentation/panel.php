@@ -3,6 +3,9 @@
 
 $panel = array(
 	'label'         => __( 'Panel label', 'my_plugin' ), // Required if 'collapsible' is true.
+	// Optionally, an id may be specified. It will be used by the plugin to
+	// identify the panel and will be applied to the panel html.
+	'id'            => 'panel_id',
 	'collapsible'   => true, // If true the panel will collapse and expand on click.
 	'initial_open'  => true, // This option is applicable only if 'collapsible' is true.
 	// Either 'icon_svg' or 'icon_dashicon' can be set. Both are optional.

@@ -12,18 +12,10 @@ class Checkbox extends Component {
 
 	render() {
 		const { props, toggleValue } = this;
-		const {
-			id,
-			input_label,
-			label,
-			help,
-			value,
-			use_toggle,
-			classes
-		} = props;
+		const { input_label, label, help, value, use_toggle } = props;
 
 		return (
-			<BaseControl id={id} label={label} className={classes} help={help}>
+			<BaseControl label={label} help={help}>
 				{use_toggle ? (
 					<ToggleControl
 						label={input_label}
