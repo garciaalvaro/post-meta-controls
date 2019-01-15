@@ -38,7 +38,15 @@ const selectors = {
 		return state.tabs.filter(tab => last(tab.path) === parent_id);
 	},
 	getWarnings(state, sidebar_id) {
-		const sidebar = filter(state.sidebars, { id: sidebar_id });
+		const sidebars = filter(state.sidebars, { id: sidebar_id });
+
+		// If there is more than one sidebar returned it means two or more sidebars
+		// share the same id. In that case we only return this warning. Otherwise,
+		// the warnings from one sidebar's elements would be shared with the duplicated.
+		if (sidebars.length > 1) {
+			return flatten(sidebars.map(item => item.warnings));
+		}
+
 		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);
 		const panels = state.panels.filter(
 			({ path }) => path[0] === sidebar_id
@@ -47,7 +55,7 @@ const selectors = {
 			({ path }) => path[0] === sidebar_id
 		);
 		let warnings;
-		warnings = flatten([sidebar, tabs, panels, settings]);
+		warnings = flatten([sidebars, tabs, panels, settings]);
 		warnings = warnings.map(item => item.warnings);
 		warnings = flatten(warnings);
 

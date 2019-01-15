@@ -11,7 +11,7 @@ const {
 	pick,
 	forEach
 } = lodash;
-const { __ } = wp.i18n;
+const { __, sprintf } = wp.i18n;
 const { dispatch } = wp.data;
 
 class Base {
@@ -139,7 +139,13 @@ class Base {
 			class_name === "setting" && this.props.type !== ""
 				? `${this.props.type} `
 				: "";
-		const title = __(`${prop_key} property in ${type} ${class_name}`);
+		/* translators: %s: property, %s: setting type, %s: element type. */
+		const title = sprintf(
+			__(`'%s' property in %s%s`),
+			prop_key,
+			type,
+			class_name
+		);
 
 		this.props.warnings = warnings.concat({
 			title,
