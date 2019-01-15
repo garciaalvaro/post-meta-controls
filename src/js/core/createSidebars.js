@@ -21,11 +21,15 @@ const initInstance = (element, name) => {
 	if (ids.includes(id)) {
 		const message = sprintf(already_exists_message, id);
 		instance.addWarning("id", message);
+
+		if (name === "sidebar") {
+			instance.setIdAlreadyExists();
+		}
 	} else {
 		ids.push(id);
 	}
 
-	// We are allowing several controls to share the same data_key.
+	// We are allowing settings to share the same data_key.
 	// To prevent it, uncomment the code below.
 	/*
 	if (name === "setting" && instance.getDataType() !== "none") {

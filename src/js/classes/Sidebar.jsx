@@ -9,11 +9,19 @@ const { RawHTML } = wp.element;
 
 class Sidebar extends Base {
 	registerPlugin() {
-		const { id, icon_dashicon, icon_svg } = this.props;
+		const { id, icon_dashicon, icon_svg, id_already_exists } = this.props;
 		let plugin_id;
-		plugin_id = `${plugin_slug}-${id}`;
-		plugin_id = plugin_id.replace(/_/g, "-");
-		plugin_id = plugin_id.replace(/[^a-zA-Z0-9-]/g, "");
+
+		if (id_already_exists) {
+			// If it is not valid we register still register the plugin sidebar
+			// with a different id. This way we can still include the warnings.
+			plugin_id = `${plugin_slug}-${uuid()}`;
+		} else {
+			plugin_id = `${plugin_slug}-${id}`;
+			plugin_id = plugin_id.replace(/_/g, "-");
+			plugin_id = plugin_id.replace(/[^a-zA-Z0-9-]/g, "");
+		}
+
 		const icon =
 			icon_svg !== "" ? (
 				<RawHTML className={`${plugin_slug}-icon`}>
@@ -25,8 +33,14 @@ class Sidebar extends Base {
 
 		registerPlugin(plugin_id, {
 			icon: icon ? icon : "carrot",
-			render: () => <SidebarRegister sidebar_id={id} />
+			render: () => (
+				<SidebarRegister plugin_id={plugin_id} sidebar_id={id} />
+			)
 		});
+	}
+
+	setIdAlreadyExists() {
+		this.props.id_already_exists = true;
 	}
 
 	setPrivates() {
@@ -42,7 +56,8 @@ class Sidebar extends Base {
 			active_tab: false,
 			settings_id: [],
 			icon_dashicon: "carrot",
-			icon_svg: ""
+			icon_svg: "",
+			id_already_exists: false
 		};
 	}
 
@@ -74,6 +89,9 @@ class Sidebar extends Base {
 			},
 			settings_id: {
 				type: { _all: "integer" }
+			},
+			id_already_exists: {
+				type: "boolean"
 			}
 		};
 	}

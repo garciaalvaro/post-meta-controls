@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "../../utils";
+import l from "../../utils";
 import Sidebar from "./Sidebar";
 
 const { Fragment, Component } = wp.element;
@@ -6,8 +6,7 @@ const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 
 class SidebarRegister extends Component {
 	render() {
-		const { sidebar_id, label } = this.props;
-		const plugin_id = `${plugin_slug}-${sidebar_id}`;
+		const { plugin_id, sidebar_id, label } = this.props;
 
 		return (
 			<Fragment>

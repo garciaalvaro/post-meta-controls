@@ -38,7 +38,7 @@ const selectors = {
 		return state.tabs.filter(tab => last(tab.path) === parent_id);
 	},
 	getWarnings(state, sidebar_id) {
-		const sidebar = find(state.sidebars, { id: sidebar_id });
+		const sidebar = filter(state.sidebars, { id: sidebar_id });
 		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);
 		const panels = state.panels.filter(
 			({ path }) => path[0] === sidebar_id
