@@ -10,7 +10,7 @@ class RangeFloat extends Setting {
 			default_value: 0,
 			step: 1,
 			min: 0,
-			max: 1
+			max: 100
 		};
 
 		const parent_defaults = this.getDefaults();

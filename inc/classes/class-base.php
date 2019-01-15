@@ -74,34 +74,9 @@ abstract class Base {
 	 * Set the validity of the class checking if each prop fits the given conditions.
 	 */
 	private function validate_props() {
+		$is_valid = validate_conditions( $this->props, $this->props_schema );
 
-		foreach ( $this->props_schema as $key => $schema ) {
-
-			if ( ! isset( $schema['conditions'] ) || false === $schema['conditions'] ) {
-				continue;
-			}
-
-			$conditions = $schema['conditions'];
-
-			if ( 'not_empty' === $conditions && empty( $this->props[ $key ] ) ) {
-				$this->props['valid'] = false;
-				return;
-			} elseif ( is_bool( $conditions ) && false === $conditions ) {
-				$this->props['valid'] = false;
-				return;
-			} elseif ( is_array( $conditions ) ) {
-				foreach ( $conditions as $condition ) {
-					if ( false === $condition ) {
-						$this->props['valid'] = false;
-						return;
-					}
-				}
-			}
-		}
-
-		$this->props['valid'] = isset( $this->props['valid'] )
-			? false
-			: true;
+		$this->props['valid'] = $is_valid;
 	}
 
 	public function get_id() {

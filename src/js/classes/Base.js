@@ -103,34 +103,43 @@ class Base {
 	}
 
 	validateProps() {
-		const { props, props_schema, addWarning } = this;
+		const { props, props_schema: schemas, validateCondition } = this;
 
-		forEach(props_schema, (schema, prop_key) => {
-			if (isUndefined(schema.conditions) || schema.conditions === false) {
+		forEach(schemas, (schema, key) => {
+			if (isUndefined(schema.conditions) || false === schema.conditions) {
 				return;
 			}
 
-			const { conditions } = schema;
-			const prop = props[prop_key];
+			const conditions = schema.conditions;
 
-			if (conditions === "not_empty") {
-				if (
-					(isEmpty(prop) && (isArray(prop) || isObject(prop))) ||
-					(isString(prop) && prop === "")
-				) {
-					const message = __("This property can't be empty.");
-					addWarning(prop_key, message);
-				}
-			} else if (isArray(conditions)) {
-				forEach(conditions, ({ value, message }) => {
-					if (false === value) {
-						addWarning(prop_key, message);
-					}
+			if (isArray(conditions)) {
+				forEach(conditions, condition => {
+					validateCondition.call(this, condition, props[key], key);
 				});
+			} else {
+				validateCondition.call(this, conditions, props[key], key);
 			}
 		});
 
 		this.props.valid = isEmpty(this.props.warnings);
+	}
+
+	validateCondition(condition, value, key) {
+		const { addWarning } = this;
+
+		if ("not_empty" === condition) {
+			if (
+				value === "" ||
+				(isEmpty(value) && (isArray(value) || isObject(value)))
+			) {
+				const message = __("This property can't be empty.");
+				addWarning(key, message);
+			}
+		} else if (isObject(condition) && condition.value === false) {
+			addWarning(key, condition.message);
+		}
+
+		return true;
 	}
 
 	addWarning(prop_key, message) {
