@@ -53,21 +53,21 @@ require_once INC_DIR . 'classes/class-sidebar.php';
 require_once INC_DIR . 'classes/class-tab.php';
 
 // Classes Settings.
-require_once INC_DIR . 'classes/settings/class-setting-buttons.php';
-require_once INC_DIR . 'classes/settings/class-setting-checkbox.php';
-require_once INC_DIR . 'classes/settings/class-setting-checkbox_multiple.php';
-require_once INC_DIR . 'classes/settings/class-setting-color.php';
-require_once INC_DIR . 'classes/settings/class-setting-custom_text.php';
-require_once INC_DIR . 'classes/settings/class-setting-date_range.php';
-require_once INC_DIR . 'classes/settings/class-setting-date_single.php';
-require_once INC_DIR . 'classes/settings/class-setting-image.php';
-require_once INC_DIR . 'classes/settings/class-setting-image_multiple.php';
-require_once INC_DIR . 'classes/settings/class-setting-radio.php';
-require_once INC_DIR . 'classes/settings/class-setting-range.php';
-require_once INC_DIR . 'classes/settings/class-setting-range_float.php';
-require_once INC_DIR . 'classes/settings/class-setting-select.php';
-require_once INC_DIR . 'classes/settings/class-setting-text.php';
-require_once INC_DIR . 'classes/settings/class-setting-textarea.php';
+require_once INC_DIR . 'classes/settings/class-buttons.php';
+require_once INC_DIR . 'classes/settings/class-checkbox.php';
+require_once INC_DIR . 'classes/settings/class-checkbox_multiple.php';
+require_once INC_DIR . 'classes/settings/class-color.php';
+require_once INC_DIR . 'classes/settings/class-custom_text.php';
+require_once INC_DIR . 'classes/settings/class-date_range.php';
+require_once INC_DIR . 'classes/settings/class-date_single.php';
+require_once INC_DIR . 'classes/settings/class-image.php';
+require_once INC_DIR . 'classes/settings/class-image_multiple.php';
+require_once INC_DIR . 'classes/settings/class-radio.php';
+require_once INC_DIR . 'classes/settings/class-range.php';
+require_once INC_DIR . 'classes/settings/class-range_float.php';
+require_once INC_DIR . 'classes/settings/class-select.php';
+require_once INC_DIR . 'classes/settings/class-text.php';
+require_once INC_DIR . 'classes/settings/class-textarea.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
