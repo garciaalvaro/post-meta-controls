@@ -66,7 +66,7 @@ function qregister_sidebar( $sidebars ) {
 
 }
 
-add_filter( 'pmc_create_sidebar', __NAMESPACE__ . '\qregister_sidebar' );
+// add_filter( 'pmc_create_sidebar', __NAMESPACE__ . '\qregister_sidebar' );
 
 
 

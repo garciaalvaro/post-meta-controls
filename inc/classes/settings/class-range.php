@@ -13,7 +13,7 @@ class Range extends Setting {
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'          => 'range',
-			'default_value' => 0,
+			'default_value' => 50,
 			'step'          => 1,
 			'min'           => 0,
 			'max'           => 100,
