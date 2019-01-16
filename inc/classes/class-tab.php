@@ -10,6 +10,7 @@ class Tab extends Base {
 	protected function set_defaults() {
 		$this->props_defaults = array(
 			'id'            => wp_generate_uuid4(),
+			'id_prefix'     => '',
 			'path'          => array(),
 			'label'         => '',
 			'post_type'     => 'post', // It will be passed through cast_array().
@@ -24,6 +25,10 @@ class Tab extends Base {
 				'type'       => 'id',
 				'for_js'     => true,
 				'conditions' => 'not_empty',
+			),
+			'id_prefix' => array(
+				'type'   => 'id',
+				'for_js' => true,
 			),
 			'path' => array(
 				'type'       => array( '_all' => 'id' ),

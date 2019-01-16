@@ -35,6 +35,9 @@ abstract class Base {
 		// Schema.
 		$this->set_schema();
 		$this->cast_schema();
+
+		$this->set_id_with_prefix();
+
 		$this->validate_props();
 	}
 
@@ -77,6 +80,15 @@ abstract class Base {
 		$is_valid = validate_conditions( $this->props, $this->props_schema );
 
 		$this->props['valid'] = $is_valid;
+	}
+
+	private function set_id_with_prefix() {
+
+		if ( empty( $this->props['id'] ) ) {
+			return;
+		}
+
+		$this->props['id'] = $this->props['id_prefix'] . $this->props['id'];
 	}
 
 	public function get_id() {

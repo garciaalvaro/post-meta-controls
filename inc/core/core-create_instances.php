@@ -15,6 +15,7 @@ function create_instances(
 	$props_raw = array(),
 	$path = array(),
 	$data_key_prefix_from_sidebar = '',
+	$id_prefix = '',
 	$post_type = '',
 	$instances = array()
 ) {
@@ -50,9 +51,12 @@ function create_instances(
 				'children' => 'panels',
 			);
 			$data_key_prefix_from_sidebar = $instance->get_data_key_prefix();
+			$id_prefix                    = $instance->get_id_prefix();
 			$post_type                    = $instance->get_post_type();
 
 		} elseif ( 'tabs' === $class_name['current'] ) {
+
+			$prop_raw['id_prefix'] = $id_prefix;
 
 			$prop_raw['post_type'] = $post_type;
 			$instance              = new Tab( $prop_raw );
@@ -63,6 +67,8 @@ function create_instances(
 			);
 
 		} elseif ( 'panels' === $class_name['current'] ) {
+
+			$prop_raw['id_prefix'] = $id_prefix;
 
 			$prop_raw['post_type'] = $post_type;
 			$instance              = new Panel( $prop_raw );
@@ -82,6 +88,8 @@ function create_instances(
 
 			$prop_raw['data_key_prefix_from_sidebar'] =
 				$data_key_prefix_from_sidebar;
+
+			$prop_raw['id_prefix'] = $id_prefix;
 
 			$prop_raw['post_type'] = $post_type;
 
@@ -178,6 +186,7 @@ function create_instances(
 				$children_props_raw,
 				$children_path,
 				$data_key_prefix_from_sidebar,
+				$id_prefix,
 				$post_type,
 				$instances
 			);

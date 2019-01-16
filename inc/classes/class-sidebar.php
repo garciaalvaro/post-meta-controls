@@ -14,9 +14,14 @@ class Sidebar extends Base {
 		return $this->props['data_key_prefix'];
 	}
 
+	public function get_id_prefix() {
+		return $this->props['id_prefix'];
+	}
+
 	protected function set_defaults() {
 		$this->props_defaults = array(
 			'id'              => wp_generate_uuid4(),
+			'id_prefix'       => '',
 			'label'           => '',
 			'post_type'       => 'post', // It will be passed through cast_array().
 			'data_key_prefix' => 'pmc_',
@@ -32,6 +37,10 @@ class Sidebar extends Base {
 				'type'       => 'id',
 				'for_js'     => true,
 				'conditions' => 'not_empty',
+			),
+			'id_prefix' => array(
+				'type'       => 'id',
+				'for_js'     => true,
 			),
 			'label' => array(
 				'type'       => 'text',
