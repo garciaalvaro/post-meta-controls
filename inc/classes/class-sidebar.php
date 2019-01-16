@@ -22,6 +22,7 @@ class Sidebar extends Base {
 			'data_key_prefix' => 'pmc_',
 			'icon_dashicon'   => 'carrot',
 			'icon_svg'        => '',
+			'ui_color_scheme' => 'light',
 		);
 	}
 
@@ -51,6 +52,10 @@ class Sidebar extends Base {
 			),
 			'icon_svg' => array(
 				'type'   => 'html_svg',
+				'for_js' => true,
+			),
+			'ui_color_scheme' => array(
+				'type'   => 'id',
 				'for_js' => true,
 			),
 		);

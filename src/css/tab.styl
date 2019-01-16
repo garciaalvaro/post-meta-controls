@@ -6,14 +6,11 @@ $e_deceleration = cubic-bezier(0.0, 0.0, 0.2, 1)
 
 .pmc-tab-content
 	position relative
-	background-color var(--background_color)
 
 .pmc-sidebar
 	.components-tab-panel__tabs
 		display flex
 		height 50px
-		background-color var(--background_color)
-		border-bottom 1px solid var(--border_color)
 
 .pmc-tab-icon svg
 	max-height 18px
@@ -25,7 +22,6 @@ button.pmc-tab-button
 	height 100%
 	box-shadow none
 	width 50%
-	color var(--text_color)
 	background transparent
 	transition background-color 0.15s cubic-bezier(0, 0, 0.2, 1)
 	display flex
@@ -37,9 +33,10 @@ button.pmc-tab-button
 	border none
 	transition background-color .15s $e_deceleration
 	outline none
+	border-bottom 1px solid var(--border_color)
 
 	&:hover
-		background-color rgba(0,0,0,0.03)
+		background-color var(--border_color_softer)
 
 	&.is-active
 		margin-bottom -1px

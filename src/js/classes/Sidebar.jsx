@@ -57,7 +57,8 @@ class Sidebar extends Base {
 			settings_id: [],
 			icon_dashicon: "carrot",
 			icon_svg: "",
-			id_already_exists: false
+			id_already_exists: false,
+			ui_color_scheme: "light"
 		};
 	}
 
@@ -92,6 +93,9 @@ class Sidebar extends Base {
 			},
 			id_already_exists: {
 				type: "boolean"
+			},
+			ui_color_scheme: {
+				type: "id"
 			}
 		};
 	}

@@ -44,7 +44,7 @@ const selectors = {
 		// share the same id. In that case we only return this warning. Otherwise,
 		// the warnings from one sidebar's elements would be shared with the duplicated.
 		if (sidebars.length > 1) {
-			return flatten(sidebars.map(item => item.warnings));
+			return sidebars[1].warnings;
 		}
 
 		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);

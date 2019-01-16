@@ -17,7 +17,7 @@ const {
 	Select,
 	Text,
 	Textarea,
-	// TODO: Pro
+	// Pro
 	CustomHTML
 } = settings;
 const { isUndefined, compact } = lodash;

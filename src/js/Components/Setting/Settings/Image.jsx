@@ -45,7 +45,7 @@ class Image extends Component {
 	};
 
 	updateImage = image_data_raw => {
-		const { updateValue, setState } = this.props;
+		const { id, updateValue, setState } = this.props;
 		const image_data = prepareImageData(castArray(image_data_raw))[0];
 		const { url, alt } = image_data;
 
@@ -78,7 +78,10 @@ class Image extends Component {
 					allowedTypes={["image"]}
 					value={image_id}
 					render={({ open }) => (
-						<Button onClick={open} isDefault>
+						<Button
+							onClick={open}
+							className={`${plugin_slug}-image-button`}
+						>
 							{__("Open Media Library")}
 						</Button>
 					)}
@@ -87,7 +90,7 @@ class Image extends Component {
 					<Div className={`${plugin_slug}-image-container`}>
 						<Div
 							className={`${plugin_slug}-image-not_found `}
-						>{`Image with id ${image_id_not_found} was not found`}</Div>
+						>{`Image with id ${image_id_not_found} was not found.`}</Div>
 						<Button
 							className={`${plugin_slug}-image-remove`}
 							onClick={removeImage}

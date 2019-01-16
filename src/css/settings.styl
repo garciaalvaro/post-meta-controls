@@ -9,9 +9,12 @@
 	margin 0
 
 	+ .pmc-setting
-		border-top 1px solid rgba(0,0,0,0.1)
+		border-top 1px solid var(--border_color)
 	+ .invalid
 		border-top 4px solid transparent
+
+	&:first-child
+		border-top 1px dotted var(--border_color)
 
 	&.pmc-no_border_top
 		border-top none

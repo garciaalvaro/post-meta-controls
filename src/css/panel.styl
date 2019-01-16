@@ -3,10 +3,9 @@
  */
 
 .pmc-panel + .pmc-panel
-	border-top 1.5px solid rgba(0,0,0,0.1)
+	border-top 1.5px solid var(--border_color)
 
 .pmc-panel-label-container
-	color #191e23
 	font-weight 600
 	padding 15px
 	position relative
@@ -24,6 +23,12 @@
 	flex-direction column
 
 .pmc-tab
+	.components-panel__body
+		border-bottom none
+
+		&:first-child
+			border-top none
+
 	.components-panel__row
 		margin 0
 		padding 0
@@ -32,11 +37,6 @@
 
 	.pmc-panel
 		padding 0
-
-		button
-			color var(--text_color)
-		svg
-			color var(--fill_color)
 
 		> h2.components-panel__body-title
 			margin 0

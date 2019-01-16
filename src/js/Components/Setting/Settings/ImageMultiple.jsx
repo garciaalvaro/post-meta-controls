@@ -35,7 +35,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 			<Div className={`${plugin_slug}-image-container`}>
 				<Div
 					className={`${plugin_slug}-image-not_found `}
-				>{`Image with id ${value} was not found`}</Div>
+				>{`Image with id ${value} was not found.`}</Div>
 				<Button
 					className={`${plugin_slug}-image-remove`}
 					onClick={() => removeImage(value)}
@@ -46,7 +46,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 		);
 	}
 
-	const { url, alt } = value;
+	const { id, url, alt } = value;
 
 	return (
 		<Div className={`${plugin_slug}-image-container`}>
@@ -200,7 +200,10 @@ class ImageContainer extends Component {
 					value={images_id}
 					multiple={true}
 					render={({ open }) => (
-						<Button onClick={open} isDefault>
+						<Button
+							onClick={open}
+							className={`${plugin_slug}-image-button`}
+						>
 							{__("Open Media Library")}
 						</Button>
 					)}
