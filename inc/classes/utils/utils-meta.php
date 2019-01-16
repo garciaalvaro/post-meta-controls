@@ -17,6 +17,10 @@ function get_meta_type( $setting_type = '' ) {
 			return 'boolean';
 			break;
 
+		case 'range_float':
+			return 'number';
+			break;
+
 		case 'image':
 		case 'image_multiple':
 		case 'range':
@@ -56,7 +60,7 @@ function get_meta_sanitize( $props = array() ) {
 
 	switch ( $props['type'] ) {
 		case 'checkbox':
-			return __NAMESPACE__ . '\sanitize_boolean';
+			return __NAMESPACE__ . '\sanitize_checkbox';
 			break;
 
 		case 'textarea':

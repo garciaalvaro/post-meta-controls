@@ -41,8 +41,6 @@ function sanitize_html_svg( $value ) {
 		'title'   => array( 'class' => true, 'title' => true ),
 	);
 	$value = wp_kses( $value, $allowed_svg );
-	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
-	$value = preg_replace( '/ stroke-width=("|\')/', ' strokeWidth$1', $value );
 	$value = wp_json_encode( $value );
 
 	return $value;
@@ -55,7 +53,6 @@ function sanitize_html_svg( $value ) {
  */
 function sanitize_html( $value ) {
 	$value = wp_kses_post( $value );
-	$value = preg_replace( '/ class=("|\')/', ' className$1', $value );
 	$value = wp_json_encode( $value );
 
 	return $value;
@@ -152,6 +149,17 @@ function sanitize_boolean( $value ) {
 }
 
 /**
+ * Sanitize checkbox.
+ *
+ * @since 1.0.0
+ */
+function sanitize_checkbox( $value ) {
+	$value = sanitize_boolean( $value );
+
+	return true === $value ? '1' : '0';
+}
+
+/**
  * Sanitize array.
  *
  * @since 1.0.0
@@ -171,11 +179,15 @@ function sanitize_options( $value = '', $options = array(), $default_value = '' 
 	$options       = sanitize_array( $options );
 	$default_value = \sanitize_key( $default_value );
 
+	if ( empty( $options ) ) {
+		return $default_value;
+	}
+
 	$options = array_map( function( $option ) {
 		return $option['value'];
 	}, $options );
 
-	// If the input is a valid key, return it; otherwise, return the default_value.
+	// If the input is a valid key, return it. Otherwise, return the default_value.
 	return in_array( $value, $options ) ? $value : $default_value;
 }
 
@@ -184,7 +196,7 @@ function sanitize_options( $value = '', $options = array(), $default_value = '' 
  *
  * @since 1.0.0
  */
-function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
+function sanitize_range( $value = 50, $min = 0, $max = 100 ) {
 
 	$value = \absint( $value );
 	$min   = \absint( $min );
@@ -201,7 +213,7 @@ function sanitize_range( $value = 1, $min = 0, $max = 1 ) {
  *
  * @since 1.0.0
  */
-function sanitize_range_float( $value = 1, $min = 0, $max = 1 ) {
+function sanitize_range_float( $value = 50, $min = 0, $max = 100 ) {
 
 	$value = sanitize_float( $value );
 	$min   = sanitize_float( $min );

@@ -13,9 +13,8 @@ class RangeFloat extends Component {
 
 	updateNumber = value => {
 		const { updateValueLocal } = this.props;
-		const value_meta = toString(value);
 
-		updateValueLocal(value, value_meta);
+		updateValueLocal(value);
 	};
 
 	updateClasses = () => {
