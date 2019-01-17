@@ -114,8 +114,9 @@ const reducer = (state = initial_state, action) => {
 					action.prop === "value" &&
 					setting.data_type === "localstorage"
 				) {
-					draft_state.settings_persisted[data_key_with_prefix] =
-						action.value;
+					draft_state.settings_persisted[
+						setting.data_key_with_prefix
+					] = action.value;
 				}
 			});
 

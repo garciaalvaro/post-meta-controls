@@ -2,7 +2,7 @@ import l, { Div, plugin_slug, store_slug } from "../../utils";
 import Invalids from "../Invalid/Invalids";
 import Tabs from "../Tab/Tabs";
 
-const { isEmpty } = lodash;
+const { isEmpty, compact } = lodash;
 const { withSelect } = wp.data;
 const { Component } = wp.element;
 
@@ -13,7 +13,7 @@ class Sidebar extends Component {
 		switch (ui_color_scheme) {
 			case "light":
 				return {
-					id: "plain_light",
+					id: false,
 					type: "light"
 				};
 
@@ -97,7 +97,7 @@ class Sidebar extends Component {
 
 			default:
 				return {
-					id: "plain_light",
+					id: false,
 					type: "light"
 				};
 		}
@@ -105,11 +105,16 @@ class Sidebar extends Component {
 
 	getClasses = () => {
 		const color_scheme = this.getColorScheme();
-		const classes = [
+		let classes;
+		classes = [
 			`${plugin_slug}-sidebar`,
 			`${plugin_slug}-color_scheme-type-${color_scheme.type}`,
-			`${plugin_slug}-color_scheme-name-${color_scheme.id}`
-		].join(" ");
+			color_scheme.id === false
+				? ""
+				: `${plugin_slug}-color_scheme-name-${color_scheme.id}`
+		];
+		classes = compact(classes);
+		classes = classes.join(" ");
 
 		return classes;
 	};

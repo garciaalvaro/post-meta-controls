@@ -1,12 +1,13 @@
-import l from "../../../utils";
+import l, { plugin_slug } from "../../../utils";
 import moment from "moment";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 
 const { isArray, isNil } = lodash;
+const { __ } = wp.i18n;
 const { withState } = wp.compose;
 const { Component } = wp.element;
-const { BaseControl } = wp.components;
+const { BaseControl, Button } = wp.components;
 const { doAction } = wp.hooks;
 
 // Trigger action that will load the locale, if one is set.
@@ -19,6 +20,23 @@ class DateRange extends Component {
 		// Specify the locale.
 		moment.locale(props.locale);
 	}
+
+	clearDate = () => {
+		const { setState, updateValue } = this.props;
+
+		setState({
+			start_date: null,
+			end_date: null,
+			focused_input: null
+		});
+
+		// If there is no value selected we save an empty string.
+		// This is needed because meta_key_exists would turn false otherwise,
+		// which makes it impossible to differentiate between a post that has
+		// no values selected and one which hasnt save any value, and this permits us
+		// to use the default_value correctly.
+		updateValue([""]);
+	};
 
 	componentDidMount = () => {
 		const { value: date, setState, format } = this.props;
@@ -39,6 +57,7 @@ class DateRange extends Component {
 	};
 
 	render() {
+		const { clearDate, props } = this;
 		const {
 			id,
 			focused_input,
@@ -49,7 +68,7 @@ class DateRange extends Component {
 			updateValue,
 			label,
 			help
-		} = this.props;
+		} = props;
 
 		return (
 			<BaseControl label={label} help={help}>
@@ -79,6 +98,14 @@ class DateRange extends Component {
 					focusedInput={focused_input}
 					onFocusChange={focused_input => setState({ focused_input })}
 				/>
+				<Button
+					onClick={clearDate}
+					className={`${plugin_slug}-date-clear`}
+					isDefault
+					isSmall
+				>
+					{__("Clear")}
+				</Button>
 			</BaseControl>
 		);
 	}

@@ -19,7 +19,7 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 			empty( $meta_key ) ||
 			( ! is_string( $meta_key ) && ! is_int( $post_id ) )
 		) {
-			return false;// TODO: return null?
+			return false;
 		}
 
 		$post_id = '' === $post_id ? get_the_ID() : $post_id;
@@ -47,7 +47,7 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 				break;
 
 			default:
-				$value = false;// TODO: return null?
+				$value = false;
 				break;
 		}
 
@@ -120,7 +120,12 @@ if ( ! function_exists( 'pmc_get_checkbox_multiple' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_color' ) ) {
-	function pmc_get_color( $meta_key = '', $post_id = '', $default_value = false ) {
+	function pmc_get_color(
+		$meta_key = '',
+		$post_id = '',
+		$return_string = true,
+		$default_value = false
+	) {
 
 		$meta = pmc_get_meta( 'color', $meta_key, $post_id );
 
@@ -129,6 +134,37 @@ if ( ! function_exists( 'pmc_get_color' ) ) {
 		}
 
 		$meta = sanitize_color( $meta );
+
+		if ( false === $return_string ) {
+
+			$color = $meta;
+			$alpha = 100;
+
+			// https://stackoverflow.com/a/31245990 | CC BY-SA 3.0
+			$regex_rgb_rgba = '/rgba?\(((25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,\s*?){2}(25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,?\s*([01]\.?\d*?)?\)/';
+
+			// https://stackoverflow.com/a/9586150 | CC BY-SA 3.0
+			$regex_rgb = '/rgb\(\s*?(\d{1,3}),\s*?(\d{1,3}),\s*?(\d{1,3})\s*?\)/';
+
+			if (
+				false == preg_match( $regex_rgb, $color ) &&
+				true == preg_match( $regex_rgb_rgba, $color )
+			) {
+
+				$alpha = preg_replace( '/(.*?,\s?)(\d+(\.?\d+)?)(\s*?\))/', '$2', $color );
+				$color = preg_replace( '/(rgb)(a)(.*?)(,\s?\d+(\.?\d+)?)(\s*?\))/', '$1$3$6', $color );
+				$alpha = sanitize_float( $alpha );
+				$alpha = min( 1, $alpha );
+				$alpha = 100 * $alpha;
+				$alpha = sanitize_integer( $alpha );
+
+			}
+
+			$meta = array(
+				'color' => $color,
+				'alpha' => $alpha,
+			);
+		}
 
 		return $meta;
 	}
@@ -147,7 +183,11 @@ if ( ! function_exists( 'pmc_get_date_range' ) ) {
 		$meta_clean = array();
 
 		foreach ( $meta as $key => $value ) {
-			$meta_clean[] = sanitize_text( $value );
+			$value = sanitize_text( $value );
+
+			if ( '' !== $value ) {
+				$meta_clean[] = $value;
+			}
 		}
 
 		return $meta_clean;

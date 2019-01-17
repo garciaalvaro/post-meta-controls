@@ -30,9 +30,10 @@ if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
 	define( __NAMESPACE__ . '\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
-// Testing.
+// DEV_start
 require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
+// DEV_end
 
 // Utils shared.
 require_once INC_DIR . 'utils/utils-cast_array.php';
@@ -80,6 +81,6 @@ require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-global-utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';
 
-if ( file_exists( PLUGIN_DIR . 'pro/post-settings-pro.php' ) ) {
-	require_once PLUGIN_DIR . 'pro/post-settings-pro.php';
-}
+// PRO_start
+require_once PLUGIN_DIR . 'pro/post-settings-pro.php';
+// PRO_end

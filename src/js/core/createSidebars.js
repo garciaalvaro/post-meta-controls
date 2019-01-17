@@ -29,9 +29,7 @@ const initInstance = (element, name) => {
 		ids.push(id);
 	}
 
-	// We are allowing settings to share the same data_key.
-	// To prevent it, uncomment the code below.
-	/*
+	// Prevent settings from having the same data_key.
 	if (name === "setting" && instance.getDataType() !== "none") {
 		const data_key = instance.getDataKey();
 		if (data_keys.includes(data_key)) {
@@ -41,7 +39,6 @@ const initInstance = (element, name) => {
 			data_keys.push(data_key);
 		}
 	}
-	*/
 
 	instance.dispatch();
 

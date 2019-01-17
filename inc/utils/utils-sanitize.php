@@ -94,7 +94,7 @@ function sanitize_string_integer( $value ) {
 function sanitize_id( $value ) {
 	$value = sanitize_string_integer( $value );
 
-	return \sanitize_title( $value );
+	return \sanitize_key( $value );
 }
 
 /**

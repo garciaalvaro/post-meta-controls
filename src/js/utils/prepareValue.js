@@ -29,8 +29,12 @@ const prepareValue = (setting, getPersistedProp, getEditedPostAttribute) => {
 		value = default_value;
 	}
 
-	// Remove empty string '' which is saved whene there is no value.
-	if (type === "image_multiple" || type === "checkbox_multiple") {
+	// Remove empty string '' which is saved when there is no value.
+	if (
+		type === "image_multiple" ||
+		type === "checkbox_multiple" ||
+		type === "date_range"
+	) {
 		value = compact(value);
 	}
 
