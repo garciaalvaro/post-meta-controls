@@ -85,13 +85,13 @@ const reducer = (state = initial_state, action) => {
 				sidebars: next_sidebars
 			};
 		}
-		case "UPDATE_METADATA_EXISTS": {
+		case "UPDATE_META_KEY_EXISTS": {
 			const next_settings = produce(
 				next_state.settings,
 				draft_settings => {
 					forEach(draft_settings, setting => {
 						if (setting.data_key_with_prefix === action.data_key) {
-							setting.metadata_exists = true;
+							setting.meta_key_exists = true;
 						}
 					});
 				}

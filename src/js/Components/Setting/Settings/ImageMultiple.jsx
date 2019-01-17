@@ -134,7 +134,14 @@ class ImageContainer extends Component {
 	updateImages = images_data_raw => {
 		const { updateValue, setState } = this.props;
 		const images_data = prepareImageData(castArray(images_data_raw));
-		const images_id = images_data.map(({ id }) => id);
+		let images_id = images_data.map(({ id }) => id);
+
+		// If there is no value selected we save an empty string.
+		// This is needed because meta_key_exists would turn false otherwise,
+		// which makes it impossible to differentiate between a post that has
+		// no values selected and one which hasnt save any value, and this permits us
+		// to use the default_value correctly.
+		images_id = isEmpty(images_id) ? [0] : images_id;
 
 		updateValue(images_id);
 		setState({ images_data });
@@ -161,6 +168,8 @@ class ImageContainer extends Component {
 
 			images_data_clean.push(image_data);
 		});
+
+		images_id = isEmpty(images_id) ? [0] : images_id;
 
 		updateValue(images_id);
 		setState({ images_data: images_data_clean });

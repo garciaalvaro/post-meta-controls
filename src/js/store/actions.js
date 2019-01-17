@@ -38,9 +38,9 @@ const actions = {
 			tab_id
 		};
 	},
-	updateMetadataExists(data_key) {
+	updateMetaKeyExists(data_key) {
 		return {
-			type: "UPDATE_METADATA_EXISTS",
+			type: "UPDATE_META_KEY_EXISTS",
 			data_key
 		};
 	},

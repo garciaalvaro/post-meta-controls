@@ -78,7 +78,7 @@ class Setting extends Base {
 			type: "",
 			help: "",
 			data_type: "none",
-			metadata_exists: false,
+			meta_key_exists: false,
 			data_key_with_prefix: "",
 			ui_border_top: true
 		};
@@ -114,7 +114,7 @@ class Setting extends Base {
 			data_type: {
 				type: "id"
 			},
-			metadata_exists: {
+			meta_key_exists: {
 				type: "boolean"
 			},
 			data_key_with_prefix: {

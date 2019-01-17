@@ -81,7 +81,7 @@ function qregister_sidebar( $sidebars ) {
 
 function my_function( $sidebars ) {
 
-	update_post_meta( 2918, 'qqq', 'bbb' );
+	update_post_meta( 2918, 'checkbox_multiple_id', 'bbb' );
 
 }
 

@@ -69,7 +69,13 @@ function get_meta_sanitize( $props = array() ) {
 
 		case 'image':
 		case 'image_multiple':
-			return '\absint';
+			return function ( $value ) {
+				if ( '0' === $value ) {
+					return '';
+				}
+
+				return \absint( $value );
+			};
 			break;
 
 		case 'range':

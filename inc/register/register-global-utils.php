@@ -9,14 +9,14 @@ use function POSTMETACONTROLS\sanitize_float;
 use function POSTMETACONTROLS\sanitize_text;
 use function POSTMETACONTROLS\sanitize_array;
 use function POSTMETACONTROLS\sanitize_color;
+use function POSTMETACONTROLS\meta_key_exists;
 
 if ( ! function_exists( 'pmc_get_meta' ) ) {
 	function pmc_get_meta( $type = '', $meta_key = '', $post_id = '' ) {
 
 		if (
 			empty( $meta_key ) ||
-			! is_string( $meta_key ) ||
-			! is_int( $post_id )
+			( ! is_string( $meta_key ) && ! is_int( $post_id ) )
 		) {
 			return false;// TODO: return null?
 		}
@@ -53,7 +53,7 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 		// If the value is the same as the one returned by a non-existent meta key
 		// we make sure it exists, and if it doesn't we return false.
 		if ( '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
-			$exists = metadata_exists( 'post', $post_id, $meta_key );
+			$exists = meta_key_exists( $post_id, $meta_key );
 
 			if ( false === $exists ) {
 				return false;
@@ -65,12 +65,12 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_buttons' ) ) {
-	function pmc_get_buttons( $meta_key = '', $post_id = '' ) {
+	function pmc_get_buttons( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'buttons', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_id( $meta );
@@ -80,12 +80,12 @@ if ( ! function_exists( 'pmc_get_buttons' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_checkbox' ) ) {
-	function pmc_get_checkbox( $meta_key = '', $post_id = '' ) {
+	function pmc_get_checkbox( $meta_key = '', $post_id = '', $default_value = '' ) {
 
 		$meta = pmc_get_meta( 'checkbox', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return '';// What should return, null?
+			return $default_value;
 		}
 
 		$meta = '1' === $meta ? true : false;
@@ -95,12 +95,12 @@ if ( ! function_exists( 'pmc_get_checkbox' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_checkbox_multiple' ) ) {
-	function pmc_get_checkbox_multiple( $meta_key = '', $post_id = '' ) {
+	function pmc_get_checkbox_multiple( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'checkbox_multiple', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta       = sanitize_array( $meta );
@@ -119,12 +119,12 @@ if ( ! function_exists( 'pmc_get_checkbox_multiple' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_color' ) ) {
-	function pmc_get_color( $meta_key = '', $post_id = '' ) {
+	function pmc_get_color( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'color', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_color( $meta );
@@ -134,12 +134,12 @@ if ( ! function_exists( 'pmc_get_color' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_custom_text' ) ) {
-	function pmc_get_custom_text( $meta_key = '', $post_id = '' ) {
+	function pmc_get_custom_text( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'custom_text', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_text( $meta );
@@ -149,12 +149,12 @@ if ( ! function_exists( 'pmc_get_custom_text' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_date_range' ) ) {
-	function pmc_get_date_range( $meta_key = '', $post_id = '' ) {
+	function pmc_get_date_range( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'date_range', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta       = sanitize_array( $meta );
@@ -169,12 +169,12 @@ if ( ! function_exists( 'pmc_get_date_range' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_date_single' ) ) {
-	function pmc_get_date_single( $meta_key = '', $post_id = '' ) {
+	function pmc_get_date_single( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'date_single', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_text( $meta );
@@ -184,12 +184,12 @@ if ( ! function_exists( 'pmc_get_date_single' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_image' ) ) {
-	function pmc_get_image( $meta_key = '', $post_id = '', $size = 'large' ) {
+	function pmc_get_image( $meta_key = '', $post_id = '', $size = 'large', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'image', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_integer( $meta );
@@ -210,12 +210,12 @@ if ( ! function_exists( 'pmc_get_image' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
-	function pmc_get_image_multiple( $meta_key = '', $post_id = '', $size = 'large' ) {
+	function pmc_get_image_multiple( $meta_key = '', $post_id = '', $size = 'large', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'image_multiple', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta       = sanitize_array( $meta );
@@ -242,12 +242,12 @@ if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_radio' ) ) {
-	function pmc_get_radio( $meta_key = '', $post_id = '' ) {
+	function pmc_get_radio( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'radio', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_id( $meta );
@@ -257,12 +257,12 @@ if ( ! function_exists( 'pmc_get_radio' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_range' ) ) {
-	function pmc_get_range( $meta_key = '', $post_id = '' ) {
+	function pmc_get_range( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'range', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_integer( $meta );
@@ -272,12 +272,12 @@ if ( ! function_exists( 'pmc_get_range' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_range_float' ) ) {
-	function pmc_get_range_float( $meta_key = '', $post_id = '' ) {
+	function pmc_get_range_float( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'range_float', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_float( $meta );
@@ -287,12 +287,12 @@ if ( ! function_exists( 'pmc_get_range_float' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_select' ) ) {
-	function pmc_get_select( $meta_key = '', $post_id = '' ) {
+	function pmc_get_select( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'select', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_id( $meta );
@@ -302,12 +302,12 @@ if ( ! function_exists( 'pmc_get_select' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_text' ) ) {
-	function pmc_get_text( $meta_key = '', $post_id = '' ) {
+	function pmc_get_text( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'text', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_text( $meta );
@@ -317,12 +317,12 @@ if ( ! function_exists( 'pmc_get_text' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_textarea' ) ) {
-	function pmc_get_textarea( $meta_key = '', $post_id = '' ) {
+	function pmc_get_textarea( $meta_key = '', $post_id = '', $default_value = false ) {
 
 		$meta = pmc_get_meta( 'textarea', $meta_key, $post_id );
 
 		if ( false === $meta ) {
-			return false;
+			return $default_value;
 		}
 
 		$meta = sanitize_textarea( $meta );

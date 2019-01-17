@@ -45,9 +45,9 @@ class Image extends Component {
 	};
 
 	updateImage = image_data_raw => {
-		const { id, updateValue, setState } = this.props;
+		const { updateValue, setState } = this.props;
 		const image_data = prepareImageData(castArray(image_data_raw))[0];
-		const { url, alt } = image_data;
+		const { id, url, alt } = image_data;
 
 		updateValue(id);
 		setState({ url, alt, image_id_not_found: false });

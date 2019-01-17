@@ -50,7 +50,7 @@ function create_sidebar() {
 		function() use ( $instances ) {
 
 			// Set this property here, as the post id wasn't available before.
-			set_metadata_exists( $instances['settings'] );
+			set_meta_key_exists( $instances['settings'] );
 
 			$post_type = get_post_type();
 

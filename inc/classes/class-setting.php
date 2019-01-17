@@ -41,7 +41,7 @@ abstract class Setting extends Base {
 		$this->props['data_key_with_prefix'] = $prefix . $this->props['data_key'];
 	}
 
-	public function set_metadata_exists() {
+	public function set_meta_key_exists() {
 
 		if (
 			true !== $this->props['valid'] ||
@@ -50,9 +50,8 @@ abstract class Setting extends Base {
 			return;
 		}
 
-		$this->props['metadata_exists'] =
-			metadata_exists(
-				'post',
+		$this->props['meta_key_exists'] =
+			meta_key_exists(
 				get_the_ID(),
 				$this->props['data_key_with_prefix']
 			);
@@ -145,7 +144,7 @@ abstract class Setting extends Base {
 	protected function set_privates() {
 		$this->props_privates = array(
 			'data_key_with_prefix',
-			'metadata_exists',
+			'meta_key_exists',
 		);
 	}
 
@@ -159,7 +158,7 @@ abstract class Setting extends Base {
 			'type'                         => '',
 			'help'                         => '',
 			'data_type'                    => 'none',
-			'metadata_exists'              => false,
+			'meta_key_exists'              => false,
 			'data_key'                     => '',
 			'data_key_prefix'              => false,
 			'data_key_with_prefix'         => '',
@@ -206,7 +205,7 @@ abstract class Setting extends Base {
 				'type'   => 'id',
 				'for_js' => true,
 			),
-			'metadata_exists' => array(
+			'meta_key_exists' => array(
 				'type'   => 'boolean',
 				'for_js' => true,
 			),

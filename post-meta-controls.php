@@ -40,6 +40,7 @@ require_once INC_DIR . 'utils/utils-sanitize.php';
 
 // Utils from classes.
 require_once INC_DIR . 'classes/utils/utils-cast_schema.php';
+require_once INC_DIR . 'classes/utils/utils-meta_key_exists.php';
 require_once INC_DIR . 'classes/utils/utils-validate_conditions.php';
 require_once INC_DIR . 'classes/utils/utils-get_date_locale.php';
 require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
