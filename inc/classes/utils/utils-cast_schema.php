@@ -53,6 +53,10 @@ function cast_schema( $elements = array(), $schema = array() ) {
 				$elements[ $key ] = sanitize_text( $value );
 				break;
 
+			case 'textarea':
+				$elements[ $key ] = sanitize_textarea( $value );
+				break;
+
 			case 'float':
 				$elements[ $key ] = sanitize_float( $value );
 				break;

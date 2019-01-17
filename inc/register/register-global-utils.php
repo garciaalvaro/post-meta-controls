@@ -7,6 +7,7 @@ use function POSTMETACONTROLS\sanitize_id;
 use function POSTMETACONTROLS\sanitize_integer;
 use function POSTMETACONTROLS\sanitize_float;
 use function POSTMETACONTROLS\sanitize_text;
+use function POSTMETACONTROLS\sanitize_textarea;
 use function POSTMETACONTROLS\sanitize_array;
 use function POSTMETACONTROLS\sanitize_color;
 use function POSTMETACONTROLS\meta_key_exists;
@@ -128,21 +129,6 @@ if ( ! function_exists( 'pmc_get_color' ) ) {
 		}
 
 		$meta = sanitize_color( $meta );
-
-		return $meta;
-	}
-}
-
-if ( ! function_exists( 'pmc_get_custom_text' ) ) {
-	function pmc_get_custom_text( $meta_key = '', $post_id = '', $default_value = false ) {
-
-		$meta = pmc_get_meta( 'custom_text', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = sanitize_text( $meta );
 
 		return $meta;
 	}

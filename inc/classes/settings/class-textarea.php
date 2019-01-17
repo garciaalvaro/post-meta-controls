@@ -26,11 +26,11 @@ class Textarea extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'text',
+				'type'   => 'textarea',
 				'for_js' => true,
 			),
 			'placeholder' => array(
-				'type'   => 'text',
+				'type'   => 'textarea',
 				'for_js' => true,
 			),
 		);
