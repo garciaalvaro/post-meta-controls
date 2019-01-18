@@ -54,7 +54,7 @@ class Image extends Component {
 	};
 
 	removeImage = () => {
-		let { updateValue, setState } = this.props;
+		const { updateValue, setState } = this.props;
 
 		updateValue(0);
 		setState({ url: "", alt: "", image_id_not_found: false });

@@ -117,18 +117,15 @@ class ImageContainer extends Component {
 	};
 
 	onSortEnd = ({ oldIndex, newIndex }) => {
-		let {
-			value: images_id,
-			images_data,
-			updateValue,
-			setState
-		} = this.props;
+		const { value, images_data, updateValue, setState } = this.props;
 
-		images_id = arrayMove(images_id, oldIndex, newIndex);
-		images_data = arrayMove(images_data, oldIndex, newIndex);
+		let images_id_new = [...value];
+		let images_data_new = [...images_data];
+		images_id_new = arrayMove(images_id_new, oldIndex, newIndex);
+		images_data_new = arrayMove(images_data_new, oldIndex, newIndex);
 
-		updateValue(images_id);
-		setState({ images_data });
+		updateValue(images_id_new);
+		setState({ images_data: images_data_new });
 	};
 
 	updateImages = images_data_raw => {
@@ -148,7 +145,7 @@ class ImageContainer extends Component {
 	};
 
 	removeImage = image_id => {
-		let {
+		const {
 			value: images_id,
 			images_data,
 			updateValue,
@@ -156,7 +153,7 @@ class ImageContainer extends Component {
 		} = this.props;
 		const images_data_clean = [];
 
-		images_id = pull(images_id, image_id);
+		let images_id_new = without(images_id, image_id);
 
 		forEach(images_data, image_data => {
 			if (
@@ -169,9 +166,9 @@ class ImageContainer extends Component {
 			images_data_clean.push(image_data);
 		});
 
-		images_id = isEmpty(images_id) ? [0] : images_id;
+		images_id_new = isEmpty(images_id_new) ? [0] : images_id_new;
 
-		updateValue(images_id);
+		updateValue(images_id_new);
 		setState({ images_data: images_data_clean });
 	};
 
@@ -179,10 +176,10 @@ class ImageContainer extends Component {
 		const { removeImage, onSortEnd, props } = this;
 		let { value: images_id, images_data, setting_id } = props;
 
-		images_id = castArray(images_id);
-		images_data = castArray(images_data);
+		const images_id_prepared = castArray(images_id);
+		const images_data_prepared = castArray(images_data);
 
-		if (isEmpty(images_id)) {
+		if (isEmpty(images_id_prepared)) {
 			return null;
 		}
 
@@ -190,7 +187,7 @@ class ImageContainer extends Component {
 			<SortableList
 				distance={3} // Needed, so clicks can be triggered
 				helperClass={`${plugin_slug}-dragging_image`}
-				items={images_data}
+				items={images_data_prepared}
 				onSortEnd={onSortEnd}
 				custom={{ removeImage, setting_id }}
 			/>
