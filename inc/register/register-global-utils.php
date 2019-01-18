@@ -13,7 +13,7 @@ use function POSTMETACONTROLS\sanitize_color;
 use function POSTMETACONTROLS\meta_key_exists;
 
 if ( ! function_exists( 'pmc_get_meta' ) ) {
-	function pmc_get_meta( $type = '', $meta_key = '', $post_id = '' ) {
+	function pmc_get_meta( $type = '', $meta_key = '', $post_id = '', $is_single = true ) {
 
 		if (
 			empty( $meta_key ) ||
@@ -23,33 +23,29 @@ if ( ! function_exists( 'pmc_get_meta' ) ) {
 		}
 
 		$post_id = '' === $post_id ? get_the_ID() : $post_id;
+		$types   = array(
+			'buttons',
+			'checkbox',
+			'checkbox_multiple',
+			'color',
+			'custom_text',
+			'date_range',
+			'date_single',
+			'image',
+			'image_multiple',
+			'radio',
+			'range',
+			'range_float',
+			'select',
+			'text',
+			'textarea',
+		);
 
-		switch ( $type ) {
-			case 'buttons':
-			case 'checkbox':
-			case 'color':
-			case 'custom_text':
-			case 'date_single':
-			case 'image':
-			case 'radio':
-			case 'range':
-			case 'range_float':
-			case 'select':
-			case 'text':
-			case 'textarea':
-				$value = get_post_meta( $post_id, $meta_key, true );
-				break;
-
-			case 'date_range':
-			case 'checkbox_multiple':
-			case 'image_multiple':
-				$value = get_post_meta( $post_id, $meta_key, false );
-				break;
-
-			default:
-				$value = false;
-				break;
+		if ( ! in_array( $type, $types ) ) {
+			return false;
 		}
+
+		$value = get_post_meta( $post_id, $meta_key, $is_single );
 
 		// If the value is the same as the one returned by a non-existent meta key
 		// we make sure it exists, and if it doesn't we return false.
@@ -98,7 +94,7 @@ if ( ! function_exists( 'pmc_get_checkbox' ) ) {
 if ( ! function_exists( 'pmc_get_checkbox_multiple' ) ) {
 	function pmc_get_checkbox_multiple( $meta_key = '', $post_id = '', $default_value = false ) {
 
-		$meta = pmc_get_meta( 'checkbox_multiple', $meta_key, $post_id );
+		$meta = pmc_get_meta( 'checkbox_multiple', $meta_key, $post_id, false );
 
 		if ( false === $meta ) {
 			return $default_value;
@@ -173,7 +169,7 @@ if ( ! function_exists( 'pmc_get_color' ) ) {
 if ( ! function_exists( 'pmc_get_date_range' ) ) {
 	function pmc_get_date_range( $meta_key = '', $post_id = '', $default_value = false ) {
 
-		$meta = pmc_get_meta( 'date_range', $meta_key, $post_id );
+		$meta = pmc_get_meta( 'date_range', $meta_key, $post_id, false );
 
 		if ( false === $meta ) {
 			return $default_value;
@@ -255,7 +251,7 @@ if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
 		$return_id = false
 	) {
 
-		$meta = pmc_get_meta( 'image_multiple', $meta_key, $post_id );
+		$meta = pmc_get_meta( 'image_multiple', $meta_key, $post_id, false );
 
 		if ( false === $meta ) {
 			return $default_value;
