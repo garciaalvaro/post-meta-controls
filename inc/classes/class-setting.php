@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 abstract class Setting extends Base {
 
+	use Meta, CastArray;
+
 	abstract protected function set_defaults();
 	abstract protected function set_schema();
 
@@ -51,7 +53,7 @@ abstract class Setting extends Base {
 		}
 
 		$this->props['meta_key_exists'] =
-			meta_key_exists(
+			$this->meta_key_exists(
 				get_the_ID(),
 				$this->props['data_key_with_prefix']
 			);
@@ -68,10 +70,10 @@ abstract class Setting extends Base {
 		}
 
 		$props         = $this->props;
-		$meta_type     = get_meta_type( $props['type'] );
-		$meta_single   = get_meta_single( $props['type'] );
-		$meta_sanitize = get_meta_sanitize( $props );
-		$post_types    = cast_array( $props['post_type'] );
+		$meta_type     = $this->get_meta_type( $props );
+		$meta_single   = $this->get_meta_single( $props['type'] );
+		$meta_sanitize = $this->get_meta_sanitize( $props );
+		$post_types    = $this->cast_array( $props['post_type'] );
 
 		foreach ( $post_types as $post_type) {
 
@@ -102,6 +104,7 @@ abstract class Setting extends Base {
 			'date_single',
 			'image',
 			'image_multiple',
+			'repeatable',
 			'radio',
 			'range',
 			'range_float',
@@ -125,6 +128,7 @@ abstract class Setting extends Base {
 			'date_single',
 			'image',
 			'image_multiple',
+			'repeatable',
 			'radio',
 			'range',
 			'range_float',

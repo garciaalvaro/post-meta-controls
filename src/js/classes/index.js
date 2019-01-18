@@ -1,5 +1,6 @@
 import l from "../utils";
 import Panel from "./Panel";
+import Setting from "./Setting";
 import Sidebar from "./Sidebar";
 import Tab from "./Tab";
 // Settings:
@@ -46,7 +47,7 @@ classes = {
 	Textarea
 };
 
-const classes_pro = applyFilters("pmcAddClasses", {});
+const classes_pro = applyFilters("pmcAddClasses", {}, Setting);
 
 if (!isEmpty(classes_pro)) {
 	classes = { ...classes, ...classes_pro };

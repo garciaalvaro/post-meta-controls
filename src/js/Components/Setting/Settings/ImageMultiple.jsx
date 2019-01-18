@@ -15,7 +15,7 @@ const {
 	find,
 	forEach,
 	castArray,
-	pull,
+	without,
 	compact
 } = lodash;
 const { __ } = wp.i18n;

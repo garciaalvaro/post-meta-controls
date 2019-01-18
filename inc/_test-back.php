@@ -18,7 +18,7 @@ function qregister_sidebar( $sidebars ) {
 				'icon_dashicon' => 'sos',
 				'settings'      => array(
 					array(
-						'type'          => 'range',
+						'type'          => 'repeatable',
 						'data_type'     => 'meta',
 						'data_key'      => 'qqq',
 						'default_value' => 50,

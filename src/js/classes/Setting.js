@@ -1,10 +1,48 @@
-import l from "../utils";
+import l, { sanitize } from "../utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
+
+const { isUndefined, forEach, isString, isObject } = lodash;
 
 class Setting extends Base {
 	beforeSetSchema() {
 		this.prepareDataType();
+	}
+
+	preparePalette() {
+		if (isUndefined(this.props.palette)) {
+			return;
+		}
+
+		const palette = sanitize.array(this.props.palette);
+		const palette_clean = [];
+
+		forEach(palette, (value, key) => {
+			// If the option is already prepared
+			if (
+				isObject(value) &&
+				isString(value.name) &&
+				isString(value.color)
+			) {
+				palette_clean.push({
+					name: value.name,
+					color: value.color
+				});
+
+				return;
+			}
+
+			if (!isString(value)) {
+				return;
+			}
+
+			palette_clean.push({
+				name: key,
+				color: value
+			});
+		});
+
+		this.props.palette = palette_clean;
 	}
 
 	prepareDataType() {
@@ -18,6 +56,7 @@ class Setting extends Base {
 			"date_single",
 			"image",
 			"image_multiple",
+			"repeatable",
 			"radio",
 			"range",
 			"range_float",
@@ -39,6 +78,7 @@ class Setting extends Base {
 			"date_single",
 			"image",
 			"image_multiple",
+			"repeatable",
 			"radio",
 			"range",
 			"range_float",

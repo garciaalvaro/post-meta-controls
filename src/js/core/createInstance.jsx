@@ -15,6 +15,7 @@ const {
 	DateSingle,
 	Image,
 	ImageMultiple,
+	Repeatable,
 	Radio,
 	Range,
 	RangeFloat,
@@ -77,6 +78,10 @@ const createInstance = (props_raw, class_name) => {
 
 			case "radio":
 				instance = new Radio(props_raw);
+				break;
+
+			case "repeatable":
+				instance = new Repeatable(props_raw);
 				break;
 
 			case "range":

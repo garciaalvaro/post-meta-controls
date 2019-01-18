@@ -10,9 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 class CheckboxMultiple extends Setting {
 
+	use PrepareOptions;
+
 	protected function before_set_schema() {
 		Setting::before_set_schema();
-		$this->props['options'] = prepare_options( $this->props['options'] );
+		$this->props['options'] = $this->prepare_options( $this->props['options'] );
 	}
 
 	protected function set_defaults() {

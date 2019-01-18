@@ -161,6 +161,12 @@ function create_instances(
 					}
 					break;
 
+				case 'repeatable':
+					if ( class_exists( __NAMESPACE__ . '\Repeatable' ) ) {
+						$instance = new Repeatable( $prop_raw );
+					}
+					break;
+
 				default:
 					break;
 			}

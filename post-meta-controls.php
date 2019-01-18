@@ -35,18 +35,27 @@ require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
 // DEV_end
 
-// Utils shared.
-require_once INC_DIR . 'utils/utils-cast_array.php';
-require_once INC_DIR . 'utils/utils-sanitize.php';
+// // Utils shared.
+// require_once INC_DIR . 'utils/utils-cast_array.php';
+// require_once INC_DIR . 'utils/utils-sanitize.php';
 
-// Utils from classes.
-require_once INC_DIR . 'classes/utils/utils-cast_schema.php';
-require_once INC_DIR . 'classes/utils/utils-meta_key_exists.php';
-require_once INC_DIR . 'classes/utils/utils-validate_conditions.php';
-require_once INC_DIR . 'classes/utils/utils-get_date_locale.php';
-require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
-require_once INC_DIR . 'classes/utils/utils-meta.php';
-require_once INC_DIR . 'classes/utils/utils-methods.php';
+// // Utils from classes.
+// require_once INC_DIR . 'classes/utils/utils-cast_schema.php';
+// require_once INC_DIR . 'classes/utils/utils-meta_key_exists.php';
+// require_once INC_DIR . 'classes/utils/utils-validate_conditions.php';
+// require_once INC_DIR . 'classes/utils/utils-get_date_locales.php';
+// require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
+// require_once INC_DIR . 'classes/utils/utils-meta.php';
+require_once INC_DIR . 'classes/utils/utils-methods_call.php';
+
+require_once INC_DIR . 'traits/trait-sanitize.php';
+require_once INC_DIR . 'traits/trait-cast_array.php';
+require_once INC_DIR . 'traits/trait-cast_schema.php';
+require_once INC_DIR . 'traits/trait-date_locales.php';
+require_once INC_DIR . 'traits/trait-meta.php';
+require_once INC_DIR . 'traits/trait-prepare_options.php';
+require_once INC_DIR . 'traits/trait-prepare_palette.php';
+require_once INC_DIR . 'traits/trait-validate_conditions.php';
 
 // Classes.
 require_once INC_DIR . 'classes/class-base.php';

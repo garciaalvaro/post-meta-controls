@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 class DateRange extends Setting {
 
+	use DateLocales;
+
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'          => 'date_range',
@@ -48,10 +50,10 @@ class DateRange extends Setting {
 
 	public function enqueue_locale() {
 
-		$locale       = $this->props['locale'];
-		$locale_array = get_date_locale();
+		$locale  = $this->props['locale'];
+		$locales = $this->get_date_locales();
 
-		if ( false === in_array( $locale, $locale_array ) ) {
+		if ( false === in_array( $locale, $locales ) ) {
 			return;
 		}
 

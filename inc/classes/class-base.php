@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 abstract class Base {
 
+	use CastSchema, ValidateConditions;
+
 	protected $props;
 	protected $props_privates;
 	protected $props_defaults;
@@ -34,7 +36,7 @@ abstract class Base {
 
 		// Schema.
 		$this->set_schema();
-		$this->cast_schema();
+		$this->cast_props();
 
 		$this->set_id_with_prefix();
 
@@ -69,15 +71,15 @@ abstract class Base {
 	/**
 	 * Cast the given properties to the required schema.
 	 */
-	private function cast_schema() {
-		$this->props = cast_schema( $this->props, $this->props_schema );
+	private function cast_props() {
+		$this->props = $this->cast_schema( $this->props, $this->props_schema );
 	}
 
 	/**
 	 * Set the validity of the class checking if each prop fits the given conditions.
 	 */
 	private function validate_props() {
-		$is_valid = validate_conditions( $this->props, $this->props_schema );
+		$is_valid = $this->validate_conditions( $this->props, $this->props_schema );
 
 		$this->props['valid'] = $is_valid;
 	}

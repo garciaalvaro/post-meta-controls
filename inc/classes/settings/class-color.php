@@ -10,29 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 class Color extends Setting {
 
+	use PreparePalette;
+
 	protected function before_set_schema() {
 		Setting::before_set_schema();
-		$this->prepare_palette();
-	}
-
-	private function prepare_palette() {
-
-		$palette = sanitize_array( $this->props['palette'] );
-
-		$palette_clean = array();
-
-		foreach ( $palette as $key => $value ) {
-			if ( ! is_string( $key ) || ! is_string( $value ) ) {
-				continue;
-			}
-
-			$palette_clean[] = array(
-				'name'  => $key,
-				'color' => $value,
-			);
-		}
-
-		$this->props['palette'] = $palette_clean;
+		$this->props['palette'] = $this->prepare_palette( $this->props['palette'] );
 	}
 
 	protected function set_defaults() {

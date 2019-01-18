@@ -38,7 +38,7 @@ settings = {
 	Textarea
 };
 
-const settings_pro = applyFilters("pmcAddSettings", {});
+const settings_pro = applyFilters("pmcAddSettingComponents", {}, settings);
 
 if (!isEmpty(settings_pro)) {
 	settings = { ...settings, ...settings_pro };

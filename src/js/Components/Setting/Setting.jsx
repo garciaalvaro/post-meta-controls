@@ -11,6 +11,7 @@ const {
 	DateSingle,
 	Image,
 	ImageMultiple,
+	Repeatable,
 	Radio,
 	Range,
 	RangeFloat,
@@ -94,6 +95,11 @@ class Setting extends Component {
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
 					return <CustomHTML {...props} />;
+				}
+
+			case "repeatable":
+				if (!isUndefined(Repeatable)) {
+					return <Repeatable {...props} />;
 				}
 
 			default:

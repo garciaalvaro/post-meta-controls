@@ -3,14 +3,8 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-use function POSTMETACONTROLS\sanitize_id;
-use function POSTMETACONTROLS\sanitize_integer;
-use function POSTMETACONTROLS\sanitize_float;
-use function POSTMETACONTROLS\sanitize_text;
-use function POSTMETACONTROLS\sanitize_textarea;
-use function POSTMETACONTROLS\sanitize_array;
-use function POSTMETACONTROLS\sanitize_color;
-use function POSTMETACONTROLS\meta_key_exists;
+use function POSTMETACONTROLS\Meta;
+use function POSTMETACONTROLS\Sanitize;
 
 if ( ! function_exists( 'pmc_get_meta' ) ) {
 	function pmc_get_meta( $type = '', $meta_key = '', $post_id = '', $is_single = true ) {
