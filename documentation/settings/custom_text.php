@@ -2,10 +2,10 @@
 
 
 $custom_text = array(
-	// Setting properties:
 	'type'            => 'custom_text', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'custom_text_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'custom_text_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,7 +17,7 @@ $custom_text = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// custom_text setting properties:
+	// Setting custom_text specific options:
 	'content'         => array(
 		array(
 			'type'    => 'title', // Required.

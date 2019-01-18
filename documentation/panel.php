@@ -24,7 +24,7 @@ $panel = array(
 	// check: https://developer.wordpress.org/resource/dashicons
 	'icon_dashicon' => 'carrot',
 	'settings'      => array( // Required. Array of settings to include in this panel.
-		$my_checkbox,
-		$my_radio,
+		$my_setting_checkbox,
+		$my_setting_radio,
 	),
 );

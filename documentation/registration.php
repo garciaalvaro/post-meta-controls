@@ -4,9 +4,11 @@ function myplugin_create_sidebar( $sidebars ) {
 
 	// First we define the sidebar with it's tabs, panels and settings.
 	$sidebar = array(
+		'id'              => 'mysidebar',
+		'id_prefix'       => 'myidprefix_',
 		'label'           => __( 'Sidebar label', 'my_plugin' ),
-		'post_type'       => array( 'post' ),
-		'data_key_prefix' => 'myprefix_',
+		'post_type'       => array( 'post', 'my_custom_post_type' ),
+		'data_key_prefix' => 'mydataprefix_',
 		'icon_dashicon'   => 'carrot',
 		'tabs'            => array(
 			array(
@@ -32,14 +34,14 @@ function myplugin_create_sidebar( $sidebars ) {
 									array(
 										'title'         => __( 'Option title bbb', 'my_plugin' ),
 										'value'         => 'bbb',
-										'icon_dashicon' => 'carrot',
+										'icon_dashicon' => 'sos',
 									),
 								),
 							),
 							// Checkbox setting.
 							array(
 								'type'          => 'checkbox',
-								'data_type'     => 'none',
+								'data_type'     => 'meta',
 								'data_key'      => 'checkbox_key',
 								'label'         => __( 'Setting label', 'my_plugin' ),
 								'help'          => __( 'Setting description', 'my_plugin' ),
@@ -54,10 +56,11 @@ function myplugin_create_sidebar( $sidebars ) {
 		),
 	);
 
-	// We push the $sidebar to the array of $sidebars from the function argument.
+	// Push the $sidebar we just assigned to the variable
+	// to the array of $sidebars that comes in the function argument.
 	$sidebars[] = $sidebar;
 
-	// We return the $sidebars array with our sidebar now included.
+	// Return the $sidebars array with our sidebar now included.
 	return $sidebars;
 
 }

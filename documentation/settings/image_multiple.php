@@ -2,10 +2,10 @@
 
 
 $image_multiple = array(
-	// Setting properties:
 	'type'            => 'image_multiple', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'image_multiple_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'image_multiple_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,6 +17,6 @@ $image_multiple = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// image_multiple setting properties:
+	// Setting image_multiple specific options:
 	'default_value'   => array( 123, 456 ), // Array of integer which match media library images id.
 );

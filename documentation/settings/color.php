@@ -2,10 +2,10 @@
 
 
 $color = array(
-	// Setting properties:
 	'type'            => 'color', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'color_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'color_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,7 +17,7 @@ $color = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// color setting properties:
+	// Setting color specific options:
 	'default_value'   => '', // A string with a HEX, rgb or rgba color format.
 	'alpha_control'   => false, // Include alpha control to set color transparency.
 	'palette'         => array(

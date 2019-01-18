@@ -123,8 +123,8 @@ if ( ! function_exists( 'pmc_get_color' ) ) {
 	function pmc_get_color(
 		$meta_key = '',
 		$post_id = '',
-		$return_string = true,
-		$default_value = false
+		$default_value = false,
+		$return_string = true
 	) {
 
 		$meta = pmc_get_meta( 'color', $meta_key, $post_id );
@@ -210,7 +210,13 @@ if ( ! function_exists( 'pmc_get_date_single' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_image' ) ) {
-	function pmc_get_image( $meta_key = '', $post_id = '', $size = 'large', $default_value = false ) {
+	function pmc_get_image(
+		$meta_key = '',
+		$post_id = '',
+		$default_value = false,
+		$size = 'large',
+		$return_id = false
+	) {
 
 		$meta = pmc_get_meta( 'image', $meta_key, $post_id );
 
@@ -219,6 +225,11 @@ if ( ! function_exists( 'pmc_get_image' ) ) {
 		}
 
 		$meta = sanitize_integer( $meta );
+
+		if ( true === $return_id ) {
+			return $meta;
+		}
+
 		$meta = wp_get_attachment_image_src( $meta, $size );// If not found returns false.
 
 		if ( false === $meta ) {
@@ -236,7 +247,13 @@ if ( ! function_exists( 'pmc_get_image' ) ) {
 }
 
 if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
-	function pmc_get_image_multiple( $meta_key = '', $post_id = '', $size = 'large', $default_value = false ) {
+	function pmc_get_image_multiple(
+		$meta_key = '',
+		$post_id = '',
+		$default_value = false,
+		$size = 'large',
+		$return_id = false
+	) {
 
 		$meta = pmc_get_meta( 'image_multiple', $meta_key, $post_id );
 
@@ -251,14 +268,22 @@ if ( ! function_exists( 'pmc_get_image_multiple' ) ) {
 			$id = sanitize_integer( $id );
 
 			if ( 0 !== $id ) {
-				$image = wp_get_attachment_image_src( $id, $size );
 
-				if ( false !== $image ) {
-					$meta_clean[ $id ] = array(
-						'url'    => $image[0],
-						'width'  => $image[1],
-						'height' => $image[2],
-					);
+				if ( true === $return_id ) {
+
+					$meta_clean[] = $id;
+
+				} else {
+
+					$image = wp_get_attachment_image_src( $id, $size );
+
+					if ( false !== $image ) {
+						$meta_clean[ $id ] = array(
+							'url'    => $image[0],
+							'width'  => $image[1],
+							'height' => $image[2],
+						);
+					}
 				}
 			}
 		}

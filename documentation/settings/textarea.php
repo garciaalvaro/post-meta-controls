@@ -2,10 +2,10 @@
 
 
 $textarea = array(
-	// Setting properties:
 	'type'            => 'textarea', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'textarea_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'textarea_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,7 +17,7 @@ $textarea = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// textarea setting properties:
+	// Setting textarea specific options:
 	'default_value'   => '',
 	'placeholder'     => __( 'Enter text', 'my_plugin' ),
 );

@@ -2,10 +2,10 @@
 
 
 $checkbox_multiple = array(
-	// Setting properties:
 	'type'            => 'checkbox_multiple', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'checkbox_multiple_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'checkbox_multiple_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,7 +17,7 @@ $checkbox_multiple = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// checkbox_multiple setting properties:
+	// Setting checkbox_multiple specific options:
 	'default_value'   => array( 'aaa', 'ccc' ), // Value/s from the 'options'.
 	'use_toggle'      => false, // Use toggle control instead of checkbox.
 	'options'         => array( // Required.

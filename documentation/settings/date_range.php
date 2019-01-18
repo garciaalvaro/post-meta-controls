@@ -2,10 +2,10 @@
 
 
 $date_range = array(
-	// Setting properties:
 	'type'            => 'date_range', // Required.
 	// Optionally, an id may be specified. It will be used by the plugin to
 	// identify the setting and will be applied to the control html.
+	// The prefix set in the sidebar option 'id_prefix' will be applied.
 	'id'              => 'date_range_id',
 	'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
 	'data_key'        => 'date_range_key', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -17,7 +17,7 @@ $date_range = array(
 	'help'            => __( 'Setting description', 'my_plugin' ),
 	'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 	'ui_border_top'   => true, // Display CSS border-top in the editor control.
-	// date_range setting properties:
+	// Setting date_range specific options:
 	'default_value'   => '', // A string with a date that matches 'format'.
 	// To see the available formats
 	// check: http://momentjs.com/docs/#/parsing/string-format/

@@ -1,7 +1,7 @@
 {
 	"name": "post-meta-controls",
 	"name_title": "Post Meta Controls",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"homepage": "#",
 	"main": "index.js",
 	"scripts": {

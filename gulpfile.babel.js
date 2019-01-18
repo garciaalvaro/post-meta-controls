@@ -80,13 +80,13 @@ gulp.task("zip", () => {
 				"!_extras/**",
 				"!gulp*",
 				"!yarn*",
-				"!src/**",
+				// "!src/**",
 				"!src/**/#header",
 				"!package*",
 				"!build/*",
 				"!src/index.*",
 				"!inc/_test-back.php",
-				"!inc/_test-back.php",
+				"!inc/_test-front.php",
 				`${pkg.name}.php`
 			],
 			{ base: "../" }

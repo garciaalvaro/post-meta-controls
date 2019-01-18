@@ -9,7 +9,13 @@ const { RawHTML } = wp.element;
 
 class Sidebar extends Base {
 	registerPlugin() {
-		const { id, icon_dashicon, icon_svg, id_already_exists } = this.props;
+		const {
+			id,
+			icon_dashicon,
+			icon_svg,
+			id_already_exists,
+			label
+		} = this.props;
 		let plugin_id;
 
 		if (id_already_exists) {
@@ -34,7 +40,11 @@ class Sidebar extends Base {
 		registerPlugin(plugin_id, {
 			icon: icon ? icon : "carrot",
 			render: () => (
-				<SidebarRegister plugin_id={plugin_id} sidebar_id={id} />
+				<SidebarRegister
+					plugin_id={plugin_id}
+					sidebar_id={id}
+					label={label}
+				/>
 			)
 		});
 	}
