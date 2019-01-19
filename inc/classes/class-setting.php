@@ -10,10 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 abstract class Setting extends Base {
 
-	use Meta, CastArray;
-
-	abstract protected function set_defaults();
-	abstract protected function set_schema();
+	use Meta;
 
 	public function get_setting_type() {
 		return $this->props['type'];

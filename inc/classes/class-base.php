@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 abstract class Base {
 
-	use CastSchema, ValidateConditions;
+	use CastArray, Sanitize, CastSchema, ValidateConditions;
 
 	protected $props;
 	protected $props_privates;

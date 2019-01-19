@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 trait PrepareOptions {
 
-	use Sanitize;
-
 	/**
 	 * Prepare the array of options.
 	 */

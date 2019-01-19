@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 trait CastSchema {
 
-	use CastArray, Sanitize;
-
 	/**
 	 * Cast an array of properties and values given a schema array.
 	 */

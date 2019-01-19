@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 trait Meta {
 
-	use Sanitize;
-
 	/**
 	 * Check if meta key exists.
 	 */

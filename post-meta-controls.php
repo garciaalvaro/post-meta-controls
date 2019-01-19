@@ -63,6 +63,7 @@ require_once INC_DIR . 'classes/class-panel.php';
 require_once INC_DIR . 'classes/class-setting.php';
 require_once INC_DIR . 'classes/class-sidebar.php';
 require_once INC_DIR . 'classes/class-tab.php';
+require_once INC_DIR . 'classes/class-global_utils.php';
 
 // Classes Settings.
 require_once INC_DIR . 'classes/settings/class-buttons.php';

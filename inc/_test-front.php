@@ -19,24 +19,6 @@ function ttest() {
 	unset( $meta['_pingme'] );
 	unset( $meta['_encloseme'] );
 
-	print_r( \sanitize_key( 'qt - 123 Qa_-!!y' ).'<br>' );
-	print_r( \sanitize_title( 'qt -1 23 Qa_-!!y' ).'<br>' );
-	print_r( \sanitize_title( 'qt_' ).'<br>' );
-
-	// var_dump( $meta );
-	var_dump( meta_key_exists( $post_id, 'image_multiple_key' ) );
-	var_dump( get_post_meta( $post_id, 'buttons_key' ) );
-	var_dump( get_post_meta( $post_id, 'checkbox_multiple_key' ) );
-
-	// var_dump( 1 == true );
-	// var_dump( '1' == true );
-	// var_dump( 'true' == true );
-	// var_dump( 0 == true );
-	// var_dump( '0' == true );
-	// var_dump( 'false' == true );
-
-	// var_dump( get_post_meta( $post_id, 'range_float_key' ) );
-
 	// print_r('<br>buttons_key: '); var_dump( pmc_get_buttons( 'buttons_key', $post_id, 'pepe' ) );
 	// print_r('<br>checkbox_key: '); var_dump( pmc_get_checkbox( 'checkbox_key', $post_id, 'pepe' ) );
 	// print_r('<br>checkbox_multiple_key: '); var_dump( pmc_get_checkbox_multiple( 'checkbox_multiple_key1', $post_id, 'pepe' ) );
