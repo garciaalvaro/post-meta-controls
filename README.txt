@@ -673,8 +673,8 @@ The following are all the available options for a Setting - Text.
 		// identify the setting and will be applied to the control html.
 		// The prefix set in the sidebar option 'id_prefix' will be applied.
 		'id'              => 'text_id',
-		'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
-		'data_key'        => 'text_key', // Required if 'data_type' is 'meta' or 'localstorage'.
+		'data_type'       => 'none', // Available: 'meta', 'none'.
+		'data_key'        => 'text_key', // Required if 'data_type' is 'meta'.
 		// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
 		// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 		// where this setting is nested will be used.
@@ -698,8 +698,8 @@ The following are all the available options for a Setting - Textarea.
 		// identify the setting and will be applied to the control html.
 		// The prefix set in the sidebar option 'id_prefix' will be applied.
 		'id'              => 'textarea_id',
-		'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
-		'data_key'        => 'textarea_key', // Required if 'data_type' is 'meta' or 'localstorage'.
+		'data_type'       => 'none', // Available: 'meta', 'none'.
+		'data_key'        => 'textarea_key', // Required if 'data_type' is 'meta'.
 		// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
 		// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 		// where this setting is nested will be used.
@@ -754,13 +754,13 @@ This is the list of arguments the differnet functions use:
 	// Setting - Image. Returns an integer which is the image id or an array with the image properties:
 	// array( 'url' => '#', 'width' => 123, 'height' => 456 );
 	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_id );
+	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_array );
 
 	// Setting - Image Multiple. Returns an array of integers which are the images id
 	// or an array of arrays with the images properties:
 	// array( '123' => array( 'url' => '#', 'width' => 123, 'height' => 456 ) );
 	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_id );
+	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_array );
 
 	// Setting - Radio. Returns a string with the selected option;
 	// or the $default_value passed (false) if the meta key doesn't exist.
@@ -789,5 +789,5 @@ This is the list of arguments the differnet functions use:
 Every setting has these available data_type values:
 
  * 'meta': This value will register and save the setting 'data_key' in the post meta. If 'register_meta' is true (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
- * 'localstorage': This value is saved only in the current browser. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
+ * 'localstorage': This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
  * 'none': This is the default value. Setting susing this value will not save the data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.

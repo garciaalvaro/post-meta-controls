@@ -28,13 +28,13 @@
 	// Setting - Image. Returns an integer which is the image id or an array with the image properties:
 	// array( 'url' => '#', 'width' => 123, 'height' => 456 );
 	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_id );
+	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_array );
 
 	// Setting - Image Multiple. Returns an array of integers which are the images id
 	// or an array of arrays with the images properties:
 	// array( '123' => array( 'url' => '#', 'width' => 123, 'height' => 456 ) );
 	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_id );
+	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_array );
 
 	// Setting - Radio. Returns a string with the selected option;
 	// or the $default_value passed (false) if the meta key doesn't exist.
