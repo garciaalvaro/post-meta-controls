@@ -34,7 +34,7 @@ The plugin comes with different options to customize the Sidebar, Tabs, Panels a
 Once the plugin is installed, you will need to include the plugin filter inside your plugin or theme to create a sidebar with it's settings.
 The new sidebar/s can be accesed in any post type where it was registered to.
 Modify the setting values with the controls inside the sidebar.
-Use the function helpers to get the meta data in the front end, or use the default WordPress get_post_meta() function.
+Use the function helpers to get the meta data in the front end, or use the default WordPress *get_post_meta()* function.
 
 == Installation ==
 
@@ -53,8 +53,13 @@ Installation from the WordPress admin.
 
 **Notes**
 This is an example of how to create a sidebar inside the editor.
-In this case it will display a sidebar that will appear in every 'post' and 'my_custom_post_type' with one tab, one panel and two settings inside it: buttons and checkbox.
-These two settings are of 'data_type' 'meta' so their value will be saved to the post meta.
+In this case it will display a sidebar that will appear in every:
+
+* **post**
+* **my_custom_post_type**
+
+with one tab, one panel and two settings inside it: **buttons** and **checkbox**.
+These two settings are of **data_type** *meta* so their value will be saved to the post meta.
 In the other sections of this read-me you can check all the available options for each element.
 
 **Steps**
@@ -129,7 +134,7 @@ Inside a php file in your plugin or the functions.php file of your theme call th
 
 = Sidebar =
 
-The following are all the available options for a Sidebar. Sidebars contain Tabs.
+The following are all the available options for a **Sidebar**. Sidebars contain Tabs.
 
 	$sidebar = array(
 		'id'              => 'sidebar_id', // Required. It has to be unique.
@@ -165,7 +170,7 @@ The following are all the available options for a Sidebar. Sidebars contain Tabs
 
 = Tab =
 
-The following are all the available options for a Tab. Tabs contain Panels.
+The following are all the available options for a **Tab**. Tabs contain Panels.
 
 	$tab = array(
 		'label'         => __( 'Tab label', 'my_plugin' ), // Required.
@@ -195,7 +200,7 @@ The following are all the available options for a Tab. Tabs contain Panels.
 
 = Panel =
 
-The following are all the available options for a Panel. Panels contain Settings.
+The following are all the available options for a **Panel**. Panels contain Settings.
 
 	$panel = array(
 		'label'         => __( 'Panel label', 'my_plugin' ), // Required if 'collapsible' is true.
@@ -227,7 +232,7 @@ The following are all the available options for a Panel. Panels contain Settings
 
 = Setting - Buttons =
 
-The following are all the available options for a Setting - Buttons.
+The following are all the available options for a **Setting - Buttons**.
 
 	$buttons = array(
 		'type'            => 'buttons', // Required.
@@ -278,33 +283,7 @@ The following are all the available options for a Setting - Buttons.
 
 = Setting - Checkbox =
 
-The following are all the available options for a Setting - Checkbox.
-
-	$checkbox = array(
-		'type'            => 'checkbox', // Required.
-		// Optionally, an id may be specified. It will be used by the plugin to
-		// identify the setting and will be applied to the control html.
-		// The prefix set in the sidebar option 'id_prefix' will be applied.
-		'id'              => 'checkbox_id',
-		'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
-		'data_key'        => 'checkbox_key', // Required if 'data_type' is 'meta' or 'localstorage'.
-		// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-		// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-		// where this setting is nested will be used.
-		'data_key_prefix' => 'pmc_',
-		'label'           => __( 'Setting label', 'my_plugin' ),
-		'help'            => __( 'Setting description', 'my_plugin' ),
-		'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-		'ui_border_top'   => true, // Display CSS border-top in the editor control.
-		// Setting checkbox specific options:
-		'default_value'   => false,
-		'use_toggle'      => false, // Use toggle control instead of checkbox.
-		'input_label'     => __( 'Input label', 'my_plugin' ), // Required.
-	);
-
-= Setting - Checkbox =
-
-The following are all the available options for a Setting - Checkbox.
+The following are all the available options for a **Setting - Checkbox**.
 
 	$checkbox = array(
 		'type'            => 'checkbox', // Required.
@@ -330,7 +309,7 @@ The following are all the available options for a Setting - Checkbox.
 
 = Setting - Checkbox Multiple =
 
-The following are all the available options for a Setting - Checkbox Multiple.
+The following are all the available options for a **Setting - Checkbox Multiple**.
 
 	$checkbox_multiple = array(
 		'type'            => 'checkbox_multiple', // Required.
@@ -360,7 +339,7 @@ The following are all the available options for a Setting - Checkbox Multiple.
 
 = Setting - Color =
 
-The following are all the available options for a Setting - Color.
+The following are all the available options for a **Setting - Color**.
 
 	$color = array(
 		'type'            => 'color', // Required.
@@ -389,26 +368,20 @@ The following are all the available options for a Setting - Color.
 
 = Setting - Custom Text =
 
-The following are all the available options for a Setting - Custom Text.
+The following are all the available options for a **Setting - Custom Text**.
+This control doesn't save data. Use it to show text in the sidebar, like a description or instructions.
 
 	$custom_text = array(
-		'type'            => 'custom_text', // Required.
+		'type'          => 'custom_text', // Required.
 		// Optionally, an id may be specified. It will be used by the plugin to
 		// identify the setting and will be applied to the control html.
 		// The prefix set in the sidebar option 'id_prefix' will be applied.
-		'id'              => 'custom_text_id',
-		'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
-		'data_key'        => 'custom_text_key', // Required if 'data_type' is 'meta' or 'localstorage'.
-		// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-		// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-		// where this setting is nested will be used.
-		'data_key_prefix' => 'pmc_',
-		'label'           => __( 'Setting label', 'my_plugin' ),
-		'help'            => __( 'Setting description', 'my_plugin' ),
-		'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-		'ui_border_top'   => true, // Display CSS border-top in the editor control.
+		'id'            => 'custom_text_id',
+		'label'         => __( 'Setting label', 'my_plugin' ),
+		'help'          => __( 'Setting description', 'my_plugin' ),
+		'ui_border_top' => true, // Display CSS border-top in the editor control.
 		// Setting custom_text specific options:
-		'content'         => array(
+		'content'       => array(
 			array(
 				'type'    => 'title', // Required.
 				'content' => 'This is a title tag', // Required.
@@ -443,7 +416,7 @@ The following are all the available options for a Setting - Custom Text.
 
 = Setting - Date Range =
 
-The following are all the available options for a Setting - Date Range.
+The following are all the available options for a **Setting - Date Range**.
 
 	$date_range = array(
 		'type'            => 'date_range', // Required.
@@ -474,7 +447,7 @@ The following are all the available options for a Setting - Date Range.
 
 = Setting - Date Single =
 
-The following are all the available options for a Setting - Date Single.
+The following are all the available options for a **Setting - Date Single**.
 
 	$date_single = array(
 		'type'            => 'date_single', // Required.
@@ -505,7 +478,7 @@ The following are all the available options for a Setting - Date Single.
 
 = Setting - Image =
 
-The following are all the available options for a Setting - Image.
+The following are all the available options for a **Setting - Image**.
 
 	$image = array(
 		'type'            => 'image', // Required.
@@ -529,7 +502,7 @@ The following are all the available options for a Setting - Image.
 
 = Setting - Image Multiple =
 
-The following are all the available options for a Setting - Image Multiple.
+The following are all the available options for a **Setting - Image Multiple**.
 
 	$image_multiple = array(
 		'type'            => 'image_multiple', // Required.
@@ -553,7 +526,7 @@ The following are all the available options for a Setting - Image Multiple.
 
 = Setting - Radio =
 
-The following are all the available options for a Setting - Radio.
+The following are all the available options for a **Setting - Radio**.
 
 	$radio = array(
 		'type'            => 'radio', // Required.
@@ -582,7 +555,7 @@ The following are all the available options for a Setting - Radio.
 
 = Setting - Range =
 
-The following are all the available options for a Setting - Range.
+The following are all the available options for a **Setting - Range**.
 
 	$range = array(
 		'type'            => 'range', // Required.
@@ -609,7 +582,7 @@ The following are all the available options for a Setting - Range.
 
 = Setting - Range =
 
-The following are all the available options for a Setting - Range.
+The following are all the available options for a **Setting - Range**.
 
 	$range_float = array(
 		'type'            => 'range_float', // Required.
@@ -636,7 +609,7 @@ The following are all the available options for a Setting - Range.
 
 = Setting - Select =
 
-The following are all the available options for a Setting - Select.
+The following are all the available options for a **Setting - Select**.
 
 	$select = array(
 		'type'            => 'select', // Required.
@@ -665,7 +638,7 @@ The following are all the available options for a Setting - Select.
 
 = Setting - Text =
 
-The following are all the available options for a Setting - Text.
+The following are all the available options for a **Setting - Text**.
 
 	$text = array(
 		'type'            => 'text', // Required.
@@ -690,7 +663,7 @@ The following are all the available options for a Setting - Text.
 
 = Setting - Textarea =
 
-The following are all the available options for a Setting - Textarea.
+The following are all the available options for a **Setting - Textarea**.
 
 	$textarea = array(
 		'type'            => 'textarea', // Required.
@@ -717,14 +690,16 @@ The following are all the available options for a Setting - Textarea.
 
 The following are function helpers to get the meta values in the front end.
 
-This is the list of arguments the differnet functions use:
+This is the list of arguments the different functions use:
 
- * `$meta_key` (string) Required. Name of the key the setting was registered with.
- * `$post_id` (integer) Post id to get the value from. If an empty string '' is passed `get_the_ID()` will be used.
- * `$default_value` (string|integer|float|boolean|array) Custom value to return in case the meta key doesn't exist yet.
- * `$size` (string) Used in the image settings to return this image sizes. Any registered size, default ones are 'thumbnail', 'medium', 'large', 'full'.
- * `$return_id` (boolean) Used in the image settings to return the image id/s instead of its properties.
- * `$return_string` (boolean) Used in the color setting to return a color string or an array of color and alpha.
+ * **$meta_key** *(string)* Required. Name of the key the setting was registered with. Remember to include the prefix: *myprefix_mymetakey*
+ * **$post_id** *(integer)* Post id to get the value from. If an empty string *''* is passed **get_the_ID()** will be used.
+ * **$default_value** *(string|integer|float|boolean|array)* Custom value to return in case the meta key doesn't exist yet.
+ * **$size** *(string)* Used in the image settings to return this image sizes. Any registered size, default ones are *thumbnail*, *medium*, *large*, *full*.
+ * **$return_array** *(boolean)* Used in the image settings. Pass false to return the image id/s instead of its properties.
+ * **$return_string** *(boolean)* Used in the color setting to return a color string or an array of color and alpha.
+
+List of functions:
 
 	// Setting - Buttons. Returns a string with the selected option;
 	// or the $default_value passed (false) if the meta key doesn't exist.
@@ -788,9 +763,9 @@ This is the list of arguments the differnet functions use:
 
 Every setting has these available data_type values:
 
- * 'meta': This value will register and save the setting 'data_key' in the post meta. If 'register_meta' is true (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
- * 'localstorage': This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
- * 'none': This is the default value. Setting susing this value will not save the data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.
+ * **meta**: This value will register and save the setting **data_key** in the post meta. If **register_meta** is *true* (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
+ * **localstorage**: This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
+ * **none**: This is the default value. This value will not save the setting data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.
 
 == Screenshots ==
 
