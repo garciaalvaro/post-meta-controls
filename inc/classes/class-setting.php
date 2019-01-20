@@ -12,6 +12,10 @@ abstract class Setting extends Base {
 
 	use Meta;
 
+	protected function after_cast_props() {
+		$this->set_id_with_prefix();
+	}
+
 	public function get_setting_type() {
 		return $this->props['type'];
 	}

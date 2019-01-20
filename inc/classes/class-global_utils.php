@@ -8,26 +8,160 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Class GlobalUtils
  */
-class GlobalUtils {
+class GlobalUtils extends Base {
 
-	use Meta, Sanitize;
+	use Meta;
 
-	private function get_meta(
-		$type = '',
-		$meta_key = '',
-		$post_id = '',
-		$is_single = true
-	) {
+	private $default_value;
+	private $meta;
+	private $value;
+
+	protected function before_set_defaults() {
+		$this->set_default_value();
+	}
+
+	protected function after_validate_props() {
+		$this->set_meta();
+		$this->prepare_value();
+	}
+
+	private function set_default_value() {
+		$this->default_value = isset( $this->props['default_value'] )
+			? $this->props['default_value']
+			: false;
+	}
+
+	protected function set_defaults() {
+		$this->props_defaults = array(
+			'type'          => '',
+			'meta_key'      => '',
+			'post_id'       => get_the_ID(),
+			'is_single'     => true,
+			'return_string' => true,
+			'size'          => 'large',
+			'return_array'  => true,
+		);
 
 		if (
-			empty( $meta_key ) ||
-			( ! is_string( $meta_key ) && ! is_int( $post_id ) )
+			'checkbox_multiple' === $this->props['type'] ||
+			'date_range' === $this->props['type'] ||
+			'image_multiple' === $this->props['type']
 		) {
-			return false;
+			$this->props_defaults['is_single'] = false;
+		}
+	}
+
+	protected function set_schema() {
+		$this->props_schema = array(
+			'type' => array(
+				'type'       => 'id',
+				'conditions' => 'not_empty',
+			),
+			'meta_key' => array(
+				'type'       => 'id',
+				'conditions' => 'not_empty',
+			),
+			'post_id' => array(
+				'type'       => 'integer',
+				'conditions' => 'not_empty',
+			),
+			'is_single' => array(
+				'type' => 'boolean',
+			),
+			'return_string' => array(
+				'type' => 'boolean',
+			),
+			'size' => array(
+				'type' => 'id',
+			),
+			'return_array' => array(
+				'type' => 'boolean',
+			),
+		);
+	}
+
+	public function get_value() {
+		return $this->value;
+	}
+
+	private function prepare_value() {
+
+		if ( false === $this->meta ) {
+			$this->value = $this->default_value;
+			return;
 		}
 
-		$post_id = '' === $post_id ? get_the_ID() : $post_id;
-		$types   = array(
+		switch ( $this->props['type'] ) {
+			case 'buttons':
+				return $this->prepare_buttons();
+				break;
+
+			case 'checkbox':
+				return $this->prepare_checkbox();
+				break;
+
+			case 'checkbox_multiple':
+				return $this->prepare_checkbox_multiple();
+				break;
+
+			case 'color':
+				return $this->prepare_color();
+				break;
+
+			case 'custom_text':
+				return $this->prepare_custom_text();
+				break;
+
+			case 'date_range':
+				return $this->prepare_date_range();
+				break;
+
+			case 'date_single':
+				return $this->prepare_date_single();
+				break;
+
+			case 'image':
+				return $this->prepare_image();
+				break;
+
+			case 'image_multiple':
+				return $this->prepare_image_multiple();
+				break;
+
+			case 'radio':
+				return $this->prepare_radio();
+				break;
+
+			case 'range':
+				return $this->prepare_range();
+				break;
+
+			case 'range_float':
+				return $this->prepare_range_float();
+				break;
+
+			case 'select':
+				return $this->prepare_select();
+				break;
+
+			case 'text':
+				return $this->prepare_text();
+				break;
+
+			case 'textarea':
+				return $this->prepare_textarea();
+				break;
+		}
+	}
+
+	private function set_meta() {
+
+		if ( false === $this->props['valid'] ) {
+			$this->meta = false;
+			return;
+		}
+
+		$types = array(
 			'buttons',
 			'checkbox',
 			'checkbox_multiple',
@@ -45,103 +179,65 @@ class GlobalUtils {
 			'textarea',
 		);
 
-		if ( ! in_array( $type, $types ) ) {
-			return false;
+		if ( ! in_array( $this->props['type'], $types ) ) {
+			$this->meta = false;
+			return;
 		}
 
-		$value = get_post_meta( $post_id, $meta_key, $is_single );
+		$meta = get_post_meta(
+			$this->props['post_id'],
+			$this->props['meta_key'],
+			$this->props['is_single']
+		);
 
 		// If the value is the same as the one returned by a non-existent meta key
 		// we make sure it exists, and if it doesn't we return false.
-		if ( '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
-			$exists = $this->meta_key_exists( $post_id, $meta_key );
+		if ( '' === $meta || ( is_array( $meta ) && empty( $meta ) ) ) {
+			$exists = $this->meta_key_exists(
+				$this->props['post_id'],
+				$this->props['meta_key']
+			);
 
 			if ( false === $exists ) {
-				return false;
+				$this->meta = false;
+				return;
 			}
 		}
 
-		return $value;
+		$this->meta = $meta;
 	}
 
-	public function get_buttons(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'buttons', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_id( $meta );
-
-		return $meta;
+	private function prepare_buttons() {
+		$this->value = $this->sanitize_id( $this->meta );
 	}
 
-	public function get_checkbox(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = ''
-	) {
-
-		$meta = $this->get_meta( 'checkbox', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = '1' === $meta ? true : false;
-
-		return $meta;
+	private function prepare_checkbox() {
+		$this->value = '1' === $this->meta ? true : false;
 	}
 
-	public function get_checkbox_multiple(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
+	private function prepare_checkbox_multiple() {
 
-		$meta = $this->get_meta( 'checkbox_multiple', $meta_key, $post_id, false );
+		$value       = $this->sanitize_array( $this->meta );
+		$value_clean = array();
 
-		if ( false === $meta ) {
-			return $default_value;
-		}
+		foreach ( $value as $option_key => $option_value ) {
+			$option_value = $this->sanitize_id( $option_value );
 
-		$meta       = $this->sanitize_array( $meta );
-		$meta_clean = array();
-
-		foreach ( $meta as $key => $value ) {
-			$value = $this->sanitize_id( $value );
-
-			if ( '' !== $value ) {
-				$meta_clean[] = $value;
+			if ( '' !== $option_value ) {
+				$value_clean[] = $option_value;
 			}
 		}
 
-		return $meta_clean;
+		$this->value = $value_clean;
 	}
 
-	public function get_color(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false,
-		$return_string = true
-	) {
+	private function prepare_color() {
 
-		$meta = $this->get_meta( 'color', $meta_key, $post_id );
+		$value = $this->sanitize_color( $this->meta );
 
-		if ( false === $meta ) {
-			return $default_value;
-		}
+		if ( false === $this->props['return_string'] ) {
 
-		$meta = $this->sanitize_color( $meta );
-
-		if ( false === $return_string ) {
-
-			$color = $meta;
+			$color = $value;
 			$alpha = 100;
 
 			// https://stackoverflow.com/a/31245990 | CC BY-SA 3.0
@@ -164,125 +260,81 @@ class GlobalUtils {
 
 			}
 
-			$meta = array(
+			$value = array(
 				'color' => $color,
 				'alpha' => $alpha,
 			);
 		}
 
-		return $meta;
+		$this->value = $value;
 	}
 
-	public function get_date_range(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
+	private function prepare_date_range() {
 
-		$meta = $this->get_meta( 'date_range', $meta_key, $post_id, false );
+		$value       = $this->sanitize_array( $this->meta );
+		$value_clean = array();
 
-		if ( false === $meta ) {
-			return $default_value;
-		}
+		foreach ( $value as $date_key => $date_value ) {
+			$date_value = $this->sanitize_text( $date_value );
 
-		$meta       = $this->sanitize_array( $meta );
-		$meta_clean = array();
-
-		foreach ( $meta as $key => $value ) {
-			$value = $this->sanitize_text( $value );
-
-			if ( '' !== $value ) {
-				$meta_clean[] = $value;
+			if ( '' !== $date_value ) {
+				$value_clean[] = $date_value;
 			}
 		}
 
-		return $meta_clean;
+		$this->value = $value_clean;
 	}
 
-	public function get_date_single(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'date_single', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_text( $meta );
-
-		return $meta;
+	private function prepare_date_single() {
+		$this->value = $this->sanitize_text( $this->meta );
 	}
 
-	public function get_image(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false,
-		$size = 'large',
-		$return_array = true
-	) {
+	private function prepare_image() {
 
-		$meta = $this->get_meta( 'image', $meta_key, $post_id );
+		$value = $this->sanitize_integer( $this->meta );
 
-		if ( false === $meta ) {
-			return $default_value;
+		if ( false === $this->props['return_array'] ) {
+			$this->value = $value;
+			return;
 		}
 
-		$meta = $this->sanitize_integer( $meta );
+		// If not found returns false.
+		$image = wp_get_attachment_image_src( $value, $this->props['size'] );
 
-		if ( false === $return_array ) {
-			return $meta;
-		}
-
-		$meta = wp_get_attachment_image_src( $meta, $size );// If not found returns false.
-
-		if ( false === $meta ) {
-			return false;
+		if ( false === $image ) {
+			$this->value = false;
+			return;
 		}
 
 		$image = array(
-			'url'    => $meta[0],
-			'width'  => $meta[1],
-			'height' => $meta[2],
+			'url'    => $image[0],
+			'width'  => $image[1],
+			'height' => $image[2],
 		);
 
-		return $image;
+		$this->value = $image;
 	}
 
-	public function get_image_multiple(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false,
-		$size = 'large',
-		$return_array = true
-	) {
+	private function prepare_image_multiple() {
 
-		$meta = $this->get_meta( 'image_multiple', $meta_key, $post_id, false );
+		$value       = $this->sanitize_array( $this->meta );
+		$value_clean = array();
 
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta       = $this->sanitize_array( $meta );
-		$meta_clean = array();
-
-		foreach ( $meta as $key => $id ) {
+		foreach ( $value as $key => $id ) {
 			$id = $this->sanitize_integer( $id );
 
 			if ( 0 !== $id ) {
 
-				if ( false === $return_array ) {
+				if ( false === $this->props['return_array'] ) {
 
-					$meta_clean[] = $id;
+					$value_clean[] = $id;
 
 				} else {
 
-					$image = wp_get_attachment_image_src( $id, $size );
+					$image = wp_get_attachment_image_src( $id, $this->props['size'] );
 
 					if ( false !== $image ) {
-						$meta_clean[ $id ] = array(
+						$value_clean[ $id ] = array(
 							'url'    => $image[0],
 							'width'  => $image[1],
 							'height' => $image[2],
@@ -292,108 +344,30 @@ class GlobalUtils {
 			}
 		}
 
-		return $meta_clean;
+		$this->value = $value_clean;
 	}
 
-	public function get_radio(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'radio', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_id( $meta );
-
-		return $meta;
+	private function prepare_radio() {
+		$this->value = $this->sanitize_id( $this->meta );
 	}
 
-	public function get_range(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'range', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_integer( $meta );
-
-		return $meta;
+	private function prepare_range() {
+		$this->value = $this->sanitize_integer( $this->meta );
 	}
 
-	public function get_range_float(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'range_float', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_float( $meta );
-
-		return $meta;
+	private function prepare_range_float() {
+		$this->value = $this->sanitize_float( $this->meta );
 	}
 
-	public function get_select(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'select', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_id( $meta );
-
-		return $meta;
+	private function prepare_select() {
+		$this->value = $this->sanitize_id( $this->meta );
 	}
 
-	public function get_text(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'text', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_text( $meta );
-
-		return $meta;
+	private function prepare_text() {
+		$this->value = $this->sanitize_text( $this->meta );
 	}
 
-	public function get_textarea(
-		$meta_key = '',
-		$post_id = '',
-		$default_value = false
-	) {
-
-		$meta = $this->get_meta( 'textarea', $meta_key, $post_id );
-
-		if ( false === $meta ) {
-			return $default_value;
-		}
-
-		$meta = $this->sanitize_textarea( $meta );
-
-		return $meta;
+	private function prepare_textarea() {
+		$this->value = $this->sanitize_textarea( $this->meta );
 	}
 }

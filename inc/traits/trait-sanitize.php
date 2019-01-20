@@ -207,7 +207,7 @@ trait Sanitize {
 	 */
 	public function sanitize_color( $value ) {
 
-		$color          = $this->sanitize_text_field( $value );
+		$color          = \sanitize_text_field( $value );
 		$regex_rgb_rgba = '/rgba?\(((25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,\s*?){2}(25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,?\s*([01]\.?\d*?)?\)/';
 		$regex_hex      = '/#([a-fA-F0-9]{3}){1,2}\b/';
 

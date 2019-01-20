@@ -11,15 +11,15 @@ const {
 	DateSingle,
 	Image,
 	ImageMultiple,
-	Repeatable,
 	Radio,
 	Range,
 	RangeFloat,
 	Select,
 	Text,
 	Textarea,
-	// Pro
-	CustomHTML
+	// Pro:
+	CustomHTML,
+	Repeatable
 } = settings;
 const { isUndefined, compact } = lodash;
 const { Component } = wp.element;

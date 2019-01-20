@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 class Sidebar extends Base {
 
+	protected function after_cast_props() {
+		$this->set_id_with_prefix();
+	}
+
 	public function get_data_key_prefix() {
 		return $this->props['data_key_prefix'];
 	}

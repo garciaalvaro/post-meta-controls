@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Post Meta Controls
- * Plugin URI: #
+ * Plugin Name: Post Meta Controls for Gutenberg
+ * Plugin URI: https://wordpress.org/plugins/post-meta-controls/
  * Description: Controls to manage post meta data in the Gutenberg editor.
  * Author: melonpan
  * Version: 1.0.0
@@ -35,19 +35,8 @@ require_once INC_DIR . '_test-back.php';
 require_once INC_DIR . '_test-front.php';
 // DEV_end
 
-// // Utils shared.
-// require_once INC_DIR . 'utils/utils-cast_array.php';
-// require_once INC_DIR . 'utils/utils-sanitize.php';
-
-// // Utils from classes.
-// require_once INC_DIR . 'classes/utils/utils-cast_schema.php';
-// require_once INC_DIR . 'classes/utils/utils-meta_key_exists.php';
-// require_once INC_DIR . 'classes/utils/utils-validate_conditions.php';
-// require_once INC_DIR . 'classes/utils/utils-get_date_locales.php';
-// require_once INC_DIR . 'classes/utils/utils-prepare_options.php';
-// require_once INC_DIR . 'classes/utils/utils-meta.php';
+// Utils and Traits.
 require_once INC_DIR . 'classes/utils/utils-methods_call.php';
-
 require_once INC_DIR . 'traits/trait-sanitize.php';
 require_once INC_DIR . 'traits/trait-cast_array.php';
 require_once INC_DIR . 'traits/trait-cast_schema.php';

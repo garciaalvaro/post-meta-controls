@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class Tab extends Base {
 
+	protected function after_cast_props() {
+		$this->set_id_with_prefix();
+	}
+
 	protected function set_defaults() {
 		$this->props_defaults = array(
 			'id'            => wp_generate_uuid4(),

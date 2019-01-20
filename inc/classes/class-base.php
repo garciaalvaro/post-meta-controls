@@ -25,11 +25,16 @@ abstract class Base {
 		$this->set_privates();
 		$this->unset_private_keys();
 
+		// Run functions before set defaults.
+		if ( method_exists( $this, 'before_set_defaults' ) ) {
+			$this->before_set_defaults();
+		}
+
 		// Defaults.
 		$this->set_defaults();
 		$this->merge_defaults();
 
-		// Run functions before cast schema.
+		// Run functions before set schema.
 		if ( method_exists( $this, 'before_set_schema' ) ) {
 			$this->before_set_schema();
 		}
@@ -38,9 +43,17 @@ abstract class Base {
 		$this->set_schema();
 		$this->cast_props();
 
-		$this->set_id_with_prefix();
+		// Run functions before cast props.
+		if ( method_exists( $this, 'after_cast_props' ) ) {
+			$this->after_cast_props();
+		}
 
 		$this->validate_props();
+
+		// Run functions after validate props.
+		if ( method_exists( $this, 'after_validate_props' ) ) {
+			$this->after_validate_props();
+		}
 	}
 
 	abstract protected function set_defaults();
@@ -84,9 +97,9 @@ abstract class Base {
 		$this->props['valid'] = $is_valid;
 	}
 
-	private function set_id_with_prefix() {
+	protected function set_id_with_prefix() {
 
-		if ( empty( $this->props['id'] ) ) {
+		if ( empty( $this->props['id'] ) || empty( $this->props['id_prefix'] ) ) {
 			return;
 		}
 

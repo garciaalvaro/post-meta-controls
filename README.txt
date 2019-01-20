@@ -1,8 +1,8 @@
-=== Post Meta Controls ===
+=== Post Meta Controls for Gutenberg ===
 Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
-Requires at least: 4.9.8
-Tested up to: 4.9.8
+Requires at least: 5.0
+Tested up to: 5.0
 Stable tag: 1.0.0
 Requires PHP: 5.6
 License: GPLv3
@@ -791,3 +791,7 @@ Every setting has these available data_type values:
  * 'meta': This value will register and save the setting 'data_key' in the post meta. If 'register_meta' is true (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
  * 'localstorage': This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
  * 'none': This is the default value. Setting susing this value will not save the data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.
+
+== Screenshots ==
+
+1. A sidebar with different tabs, panels and controls.

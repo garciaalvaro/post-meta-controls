@@ -23,8 +23,8 @@ function ttest() {
 	// print_r('<br>checkbox_key: '); var_dump( pmc_get_checkbox( 'checkbox_key', $post_id, 'pepe' ) );
 	// print_r('<br>checkbox_multiple_key: '); var_dump( pmc_get_checkbox_multiple( 'checkbox_multiple_key1', $post_id, 'pepe' ) );
 	// print_r('<br>color_key: '); var_dump( pmc_get_color( 'color_key', $post_id,true, 'pepe' ) );
-	print_r('<br>date_range_key: '); var_dump( pmc_get_date_range( 'date_range_key', $post_id, 'pepe' ) );
-	print_r('<br>date_single_key: '); var_dump( pmc_get_date_single( 'date_single_key', $post_id, 'pepe' ) );
+	// print_r('<br>date_range_key: '); var_dump( pmc_get_date_range( 'date_range_key', $post_id, 'pepe' ) );
+	// print_r('<br>date_single_key: '); var_dump( pmc_get_date_single( 'date_single_key', $post_id, 'pepe' ) );
 	// print_r('<br>image_key: '); var_dump( pmc_get_image( 'image_key', $post_id, 'large', 'pepe' ) );
 	// print_r('<br>image_multiple_key: '); var_dump( pmc_get_image_multiple( 'image_multiple_key1', $post_id, 'large', 'pepe' ) );
 	// print_r('<br>radio_key: '); var_dump( pmc_get_radio( 'radio_key', $post_id, 'pepe' ) );

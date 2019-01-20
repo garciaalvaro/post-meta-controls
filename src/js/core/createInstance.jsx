@@ -15,7 +15,6 @@ const {
 	DateSingle,
 	Image,
 	ImageMultiple,
-	Repeatable,
 	Radio,
 	Range,
 	RangeFloat,
@@ -23,7 +22,8 @@ const {
 	Text,
 	Textarea,
 	// Pro:
-	CustomHTML
+	CustomHTML,
+	Repeatable
 } = classes;
 const { isUndefined } = lodash;
 
