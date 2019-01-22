@@ -1,4 +1,4 @@
-const { isUndefined, compact } = lodash;
+const { isUndefined, compact, castArray } = lodash;
 
 const prepareValue = (setting, getPersistedProp, getEditedPostAttribute) => {
 	let {
@@ -27,6 +27,10 @@ const prepareValue = (setting, getPersistedProp, getEditedPostAttribute) => {
 	// If there is no value yet set the default.
 	if (isUndefined(value)) {
 		value = default_value;
+	}
+
+	if (type === "repeatable") {
+		value = castArray(value);
 	}
 
 	// Remove empty string '' or 0 which is saved when there is no value.
