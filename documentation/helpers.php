@@ -54,7 +54,7 @@
 	// or the $default_value passed (false) if the meta key doesn't exist.
 	pmc_get_text( $meta_key, $post_id, $default_value );
 
-	// Setting - Text. Returns a string;
+	// Setting - Textarea. Returns a string;
 	// or the $default_value passed (false) if the meta key doesn't exist.
 	pmc_get_textarea( $meta_key, $post_id, $default_value );
 

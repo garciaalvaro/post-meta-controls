@@ -134,7 +134,7 @@ Inside a php file in your plugin or the functions.php file of your theme call th
 
 = Sidebar =
 
-The following are all the available options for a **Sidebar**. Sidebars contain Tabs.
+The following are all available options for a **Sidebar**. Sidebars contain Tabs.
 
 	$sidebar = array(
 		'id'              => 'sidebar_id', // Required. It has to be unique.
@@ -170,7 +170,7 @@ The following are all the available options for a **Sidebar**. Sidebars contain 
 
 = Tab =
 
-The following are all the available options for a **Tab**. Tabs contain Panels.
+The following are all available options for a **Tab**. Tabs contain Panels.
 
 	$tab = array(
 		'label'         => __( 'Tab label', 'my_plugin' ), // Required.
@@ -200,7 +200,7 @@ The following are all the available options for a **Tab**. Tabs contain Panels.
 
 = Panel =
 
-The following are all the available options for a **Panel**. Panels contain Settings.
+The following are all available options for a **Panel**. Panels contain Settings.
 
 	$panel = array(
 		'label'         => __( 'Panel label', 'my_plugin' ), // Required if 'collapsible' is true.
@@ -232,7 +232,7 @@ The following are all the available options for a **Panel**. Panels contain Sett
 
 = Setting - Buttons =
 
-The following are all the available options for a **Setting - Buttons**.
+The following are all available options for a **Setting - Buttons**.
 
 	$buttons = array(
 		'type'            => 'buttons', // Required.
@@ -283,7 +283,7 @@ The following are all the available options for a **Setting - Buttons**.
 
 = Setting - Checkbox =
 
-The following are all the available options for a **Setting - Checkbox**.
+The following are all available options for a **Setting - Checkbox**.
 
 	$checkbox = array(
 		'type'            => 'checkbox', // Required.
@@ -309,7 +309,7 @@ The following are all the available options for a **Setting - Checkbox**.
 
 = Setting - Checkbox Multiple =
 
-The following are all the available options for a **Setting - Checkbox Multiple**.
+The following are all available options for a **Setting - Checkbox Multiple**.
 
 	$checkbox_multiple = array(
 		'type'            => 'checkbox_multiple', // Required.
@@ -339,7 +339,7 @@ The following are all the available options for a **Setting - Checkbox Multiple*
 
 = Setting - Color =
 
-The following are all the available options for a **Setting - Color**.
+The following are all available options for a **Setting - Color**.
 
 	$color = array(
 		'type'            => 'color', // Required.
@@ -368,7 +368,7 @@ The following are all the available options for a **Setting - Color**.
 
 = Setting - Custom Text =
 
-The following are all the available options for a **Setting - Custom Text**.
+The following are all available options for a **Setting - Custom Text**.
 This control doesn't save data. Use it to show text in the sidebar, like a description or instructions.
 
 	$custom_text = array(
@@ -416,7 +416,7 @@ This control doesn't save data. Use it to show text in the sidebar, like a descr
 
 = Setting - Date Range =
 
-The following are all the available options for a **Setting - Date Range**.
+The following are all available options for a **Setting - Date Range**.
 
 	$date_range = array(
 		'type'            => 'date_range', // Required.
@@ -447,7 +447,7 @@ The following are all the available options for a **Setting - Date Range**.
 
 = Setting - Date Single =
 
-The following are all the available options for a **Setting - Date Single**.
+The following are all available options for a **Setting - Date Single**.
 
 	$date_single = array(
 		'type'            => 'date_single', // Required.
@@ -478,7 +478,7 @@ The following are all the available options for a **Setting - Date Single**.
 
 = Setting - Image =
 
-The following are all the available options for a **Setting - Image**.
+The following are all available options for a **Setting - Image**.
 
 	$image = array(
 		'type'            => 'image', // Required.
@@ -502,7 +502,7 @@ The following are all the available options for a **Setting - Image**.
 
 = Setting - Image Multiple =
 
-The following are all the available options for a **Setting - Image Multiple**.
+The following are all available options for a **Setting - Image Multiple**.
 
 	$image_multiple = array(
 		'type'            => 'image_multiple', // Required.
@@ -526,7 +526,7 @@ The following are all the available options for a **Setting - Image Multiple**.
 
 = Setting - Radio =
 
-The following are all the available options for a **Setting - Radio**.
+The following are all available options for a **Setting - Radio**.
 
 	$radio = array(
 		'type'            => 'radio', // Required.
@@ -555,7 +555,7 @@ The following are all the available options for a **Setting - Radio**.
 
 = Setting - Range =
 
-The following are all the available options for a **Setting - Range**.
+The following are all available options for a **Setting - Range**.
 
 	$range = array(
 		'type'            => 'range', // Required.
@@ -582,7 +582,7 @@ The following are all the available options for a **Setting - Range**.
 
 = Setting - Range =
 
-The following are all the available options for a **Setting - Range**.
+The following are all available options for a **Setting - Range**.
 
 	$range_float = array(
 		'type'            => 'range_float', // Required.
@@ -609,7 +609,7 @@ The following are all the available options for a **Setting - Range**.
 
 = Setting - Select =
 
-The following are all the available options for a **Setting - Select**.
+The following are all available options for a **Setting - Select**.
 
 	$select = array(
 		'type'            => 'select', // Required.
@@ -638,7 +638,7 @@ The following are all the available options for a **Setting - Select**.
 
 = Setting - Text =
 
-The following are all the available options for a **Setting - Text**.
+The following are all available options for a **Setting - Text**.
 
 	$text = array(
 		'type'            => 'text', // Required.
@@ -663,7 +663,7 @@ The following are all the available options for a **Setting - Text**.
 
 = Setting - Textarea =
 
-The following are all the available options for a **Setting - Textarea**.
+The following are all available options for a **Setting - Textarea**.
 
 	$textarea = array(
 		'type'            => 'textarea', // Required.
@@ -755,7 +755,7 @@ List of functions:
 	// or the $default_value passed (false) if the meta key doesn't exist.
 	pmc_get_text( $meta_key, $post_id, $default_value );
 
-	// Setting - Text. Returns a string;
+	// Setting - Textarea. Returns a string;
 	// or the $default_value passed (false) if the meta key doesn't exist.
 	pmc_get_textarea( $meta_key, $post_id, $default_value );
 
