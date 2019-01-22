@@ -22,6 +22,7 @@ const {
 	Text,
 	Textarea,
 	// Pro:
+	CustomComponent,
 	CustomHTML,
 	Repeatable
 } = classes;
@@ -80,10 +81,6 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Radio(props_raw);
 				break;
 
-			case "repeatable":
-				instance = new Repeatable(props_raw);
-				break;
-
 			case "range":
 				instance = new Range(props_raw);
 				break;
@@ -104,10 +101,21 @@ const createInstance = (props_raw, class_name) => {
 				instance = new Textarea(props_raw);
 				break;
 
+			// Pro:
+			case "custom_component":
+				if (typeof CustomComponent === "function") {
+					instance = new CustomComponent(props_raw);
+				}
+				break;
+
 			case "custom_html":
 				if (typeof CustomHTML === "function") {
 					instance = new CustomHTML(props_raw);
 				}
+				break;
+
+			case "repeatable":
+				instance = new Repeatable(props_raw);
 				break;
 
 			default:

@@ -155,6 +155,12 @@ function create_instances(
 					break;
 
 				// Pro:
+				case 'custom_component':
+					if ( class_exists( __NAMESPACE__ . '\CustomComponent' ) ) {
+						$instance = new CustomComponent( $prop_raw );
+					}
+					break;
+
 				case 'custom_html':
 					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
 						$instance = new CustomHTML( $prop_raw );

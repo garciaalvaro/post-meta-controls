@@ -18,6 +18,7 @@ const {
 	Text,
 	Textarea,
 	// Pro:
+	CustomComponent,
 	CustomHTML,
 	Repeatable
 } = settings;
@@ -92,6 +93,11 @@ class Setting extends Component {
 				return <Textarea {...props} />;
 
 			// Pro:
+			case "custom_component":
+				if (!isUndefined(CustomComponent)) {
+					return <CustomComponent {...props} />;
+				}
+
 			case "custom_html":
 				if (!isUndefined(CustomHTML)) {
 					return <CustomHTML {...props} />;
