@@ -693,7 +693,7 @@ The following are function helpers to get the meta values in the front end.
 This is the list of arguments the different functions use:
 
  * **$meta_key** *(string)* Required. Name of the key the setting was registered with. Remember to include the prefix: *myprefix_mymetakey*
- * **$post_id** *(integer)* Post id to get the value from. If an empty string *''* is passed **get_the_ID()** will be used.
+ * **$post_id** *(integer)* Post id to get the value from. If an empty string is passed **get_the_ID()** will be used.
  * **$default_value** *(string|integer|float|boolean|array)* Custom value to return in case the meta key doesn't exist yet.
  * **$size** *(string)* Used in the image settings to return this image sizes. Any registered size, default ones are *thumbnail*, *medium*, *large*, *full*.
  * **$return_array** *(boolean)* Used in the image settings. Pass false to return the image id/s instead of its properties.
