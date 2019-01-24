@@ -12,29 +12,29 @@ Use post meta data inside the Gutenberg editor.
 
 == Description ==
 
-Register, modify and get meta data inside the Gutenberg editor.
-Use this plugin to add meta data controls inside the editor of posts, pages or custom post types.
+Register, Save, Modify and Get meta data in the Gutenberg editor.
+Use this plugin to add meta data controls inside a sidebar in the editor of posts, pages or custom post types.
 This is the list of controls available:
 
 * Buttons
 * Checkbox, Checkbox Multiple
-* Color, Color & Alpha
+* Color, Color with Alpha
 * Custom text
-* Date Range, Date Singular
+* Date Range, Date Single
 * Image, Image Multiple
 * Radio
-* Range, Range Float
+* Range, Range with Float number
 * Select
 * Text, Textarea
 
-The plugin comes with different options to customize the Sidebar, Tabs, Panels and Setting controls.
+The plugin comes with different options to customize the Sidebars, Tabs, Panels and Setting controls.
 
 == Usage ==
 
 Once the plugin is installed, you will need to include the plugin filter inside your plugin or theme to create a sidebar with it's settings.
 The new sidebar/s can be accesed in any post type where it was registered to.
 Modify the setting values with the controls inside the sidebar.
-Use the function helpers to get the meta data in the front end, or use the default WordPress *get_post_meta()* function.
+Use the plugin helpers (see *Helpers to get the meta values* section) to get the meta data in the front end.
 
 == Installation ==
 
@@ -52,15 +52,15 @@ Installation from the WordPress admin.
 = How can I register my sidebar with post meta controls? =
 
 **Notes**
-This is an example of how to create a sidebar inside the editor.
-In this case it will display a sidebar that will appear in every:
+This is an example of how to add a sidebar inside the editor.
+In this case it will display a sidebar with one tab, one panel and two settings inside it: **buttons** and **checkbox**.
+The sidebar will appear in every:
 
 * **post**
 * **my_custom_post_type**
 
-with one tab, one panel and two settings inside it: **buttons** and **checkbox**.
 These two settings are of **data_type** *meta* so their value will be saved to the post meta.
-In the other sections of this read-me you can check all the available options for each element.
+In the other sections of this readme you can check all the available options for each element.
 
 **Steps**
 Inside a php file in your plugin or the functions.php file of your theme call the filter in the following way (make sure *Post Meta Controls* plugin is active):
@@ -132,9 +132,91 @@ Inside a php file in your plugin or the functions.php file of your theme call th
 
 	add_filter( 'pmc_create_sidebar', 'myplugin_create_sidebar' );
 
+= Helpers to get the meta values =
+
+The following are functions to get the meta values in the front end. These are simple helpers to get the data in a clean way using the WordPress function *get_post_meta()*.
+
+This is the list of arguments the different functions use:
+
+ * **$meta_key** *(string)* Required. Name of the key the setting was registered with. Remember to include the prefix: *myprefix_mymetakey*
+ * **$post_id** *(integer)* Post id to get the value from. If an empty string is passed **get_the_ID()** will be used.
+ * **$default_value** *(string|integer|float|boolean|array)* Custom value to return in case the meta key doesn't exist yet.
+ * **$size** *(string)* Used in the image settings to return this image sizes. Any registered size, default ones are *thumbnail*, *medium*, *large*, *full*.
+ * **$return_array** *(boolean)* Used in the image settings. Pass false to return the image id/s instead of its properties.
+ * **$return_string** *(boolean)* Used in the color setting to return a color string or an array of color and alpha.
+
+List of functions:
+
+	// Setting - Buttons. Returns a string with the selected option;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_buttons( $meta_key, $post_id, $default_value );
+
+	// Setting - Checkbox. Returns true or false;
+	// or the $default_value passed (an empty string '') if the meta key doesn't exist.
+	pmc_get_checkbox( $meta_key, $post_id, $default_value );
+
+	// Setting - Checkbox Multiple. Returns an array of strings with the selected options;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_checkbox_multiple( $meta_key, $post_id, $default_value );
+
+	// Setting - Color. Returns a color string or an array:
+	// array( 'color' => 'rgb(0,0,0)', 'alpha' => 50 );
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_color( $meta_key, $post_id, $default_value, $return_string );
+
+	// Setting - Date Range. Returns an array of two strings: start date and end date;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_date_range( $meta_key, $post_id, $default_value );
+
+	// Setting - Date Single. Returns a string;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_date_single( $meta_key, $post_id, $default_value );
+
+	// Setting - Image. Returns an integer which is the image id or an array with the image properties:
+	// array( 'url' => '#', 'width' => 123, 'height' => 456 );
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_array );
+
+	// Setting - Image Multiple. Returns an array of integers which are the images id
+	// or an array of arrays with the images properties:
+	// array( '123' => array( 'url' => '#', 'width' => 123, 'height' => 456 ) );
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_array );
+
+	// Setting - Radio. Returns a string with the selected option;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_radio( $meta_key, $post_id, $default_value );
+
+	// Setting - Range. Returns an integer; or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_range( $meta_key, $post_id, $default_value );
+
+	// Setting - Range Float. Returns a float; or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_range_float( $meta_key, $post_id, $default_value );
+
+	// Setting - Select. Returns a string with the selected option;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_select( $meta_key, $post_id, $default_value );
+
+	// Setting - Text. Returns a string;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_text( $meta_key, $post_id, $default_value );
+
+	// Setting - Textarea. Returns a string;
+	// or the $default_value passed (false) if the meta key doesn't exist.
+	pmc_get_textarea( $meta_key, $post_id, $default_value );
+
+= What are the different data_type available? =
+
+Every setting has these available data_type values:
+
+ * **meta**: This value will register and save the setting **data_key** in the post meta. If **register_meta** is *true* (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
+ * **localstorage**: This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
+ * **none**: This is the default value. This value will not save the setting data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.
+
 = Sidebar =
 
 The following are all available options for a **Sidebar**. Sidebars contain Tabs.
+Several sidebars can be added, just make sure each has a unique id.
 
 	$sidebar = array(
 		'id'              => 'sidebar_id', // Required. It has to be unique.
@@ -685,87 +767,6 @@ The following are all available options for a **Setting - Textarea**.
 		'default_value'   => '',
 		'placeholder'     => __( 'Enter text', 'my_plugin' ),
 	);
-
-= Function helpers to get the meta values =
-
-The following are function helpers to get the meta values in the front end.
-
-This is the list of arguments the different functions use:
-
- * **$meta_key** *(string)* Required. Name of the key the setting was registered with. Remember to include the prefix: *myprefix_mymetakey*
- * **$post_id** *(integer)* Post id to get the value from. If an empty string is passed **get_the_ID()** will be used.
- * **$default_value** *(string|integer|float|boolean|array)* Custom value to return in case the meta key doesn't exist yet.
- * **$size** *(string)* Used in the image settings to return this image sizes. Any registered size, default ones are *thumbnail*, *medium*, *large*, *full*.
- * **$return_array** *(boolean)* Used in the image settings. Pass false to return the image id/s instead of its properties.
- * **$return_string** *(boolean)* Used in the color setting to return a color string or an array of color and alpha.
-
-List of functions:
-
-	// Setting - Buttons. Returns a string with the selected option;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_buttons( $meta_key, $post_id, $default_value );
-
-	// Setting - Checkbox. Returns true or false;
-	// or the $default_value passed (an empty string '') if the meta key doesn't exist.
-	pmc_get_checkbox( $meta_key, $post_id, $default_value );
-
-	// Setting - Checkbox Multiple. Returns an array of strings with the selected options;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_checkbox_multiple( $meta_key, $post_id, $default_value );
-
-	// Setting - Color. Returns a color string or an array:
-	// array( 'color' => 'rgb(0,0,0)', 'alpha' => 50 );
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_color( $meta_key, $post_id, $default_value, $return_string );
-
-	// Setting - Date Range. Returns an array of two strings: start date and end date;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_date_range( $meta_key, $post_id, $default_value );
-
-	// Setting - Date Single. Returns a string;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_date_single( $meta_key, $post_id, $default_value );
-
-	// Setting - Image. Returns an integer which is the image id or an array with the image properties:
-	// array( 'url' => '#', 'width' => 123, 'height' => 456 );
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image( $meta_key, $post_id, $default_value, $size, $return_array );
-
-	// Setting - Image Multiple. Returns an array of integers which are the images id
-	// or an array of arrays with the images properties:
-	// array( '123' => array( 'url' => '#', 'width' => 123, 'height' => 456 ) );
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_image_multiple( $meta_key, $post_id, $default_value, $size, $return_array );
-
-	// Setting - Radio. Returns a string with the selected option;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_radio( $meta_key, $post_id, $default_value );
-
-	// Setting - Range. Returns an integer; or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_range( $meta_key, $post_id, $default_value );
-
-	// Setting - Range Float. Returns a float; or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_range_float( $meta_key, $post_id, $default_value );
-
-	// Setting - Select. Returns a string with the selected option;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_select( $meta_key, $post_id, $default_value );
-
-	// Setting - Text. Returns a string;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_text( $meta_key, $post_id, $default_value );
-
-	// Setting - Textarea. Returns a string;
-	// or the $default_value passed (false) if the meta key doesn't exist.
-	pmc_get_textarea( $meta_key, $post_id, $default_value );
-
-= What are the different data_type available? =
-
-Every setting has these available data_type values:
-
- * **meta**: This value will register and save the setting **data_key** in the post meta. If **register_meta** is *true* (which is by default) the plugin will register the meta. Modifying the value in the editor using the setting control and saving the post will update it's meta key value.
- * **localstorage**: This value is saved only in the current browser but shared among all the domain. It can be used to set some setting regarding the actual users browser that doesnt save any data in the database.
- * **none**: This is the default value. This value will not save the setting data. The value is saved in the editor, in the plugin redux store. But modified values will be lost when the page reloads.
 
 == Screenshots ==
 
