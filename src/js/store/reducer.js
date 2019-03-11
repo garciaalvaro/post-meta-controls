@@ -24,19 +24,13 @@ const reducer = (state = initial_state, action) => {
 		}
 		case "ADD_SETTING": {
 			const sidebar_id = action.setting.path[0];
-			const next_sidebars = produce(
-				next_state.sidebars,
-				draft_sidebars => {
-					const sidebar = find(draft_sidebars, { id: sidebar_id });
+			const next_sidebars = produce(next_state.sidebars, draft_sidebars => {
+				const sidebar = find(draft_sidebars, { id: sidebar_id });
 
-					if (!isUndefined(sidebar)) {
-						sidebar.settings_id = [
-							...sidebar.settings_id,
-							action.setting.id
-						];
-					}
+				if (!isUndefined(sidebar)) {
+					sidebar.settings_id = [...sidebar.settings_id, action.setting.id];
 				}
-			);
+			});
 
 			return {
 				...next_state,
@@ -69,16 +63,13 @@ const reducer = (state = initial_state, action) => {
 			};
 		}
 		case "UPDATE_ACTIVE_TAB": {
-			const next_sidebars = produce(
-				next_state.sidebars,
-				draft_sidebars => {
-					const sidebar = find(draft_sidebars, {
-						id: action.sidebar_id
-					});
+			const next_sidebars = produce(next_state.sidebars, draft_sidebars => {
+				const sidebar = find(draft_sidebars, {
+					id: action.sidebar_id
+				});
 
-					sidebar.active_tab = action.tab_id;
-				}
-			);
+				sidebar.active_tab = action.tab_id;
+			});
 
 			return {
 				...next_state,
@@ -86,16 +77,13 @@ const reducer = (state = initial_state, action) => {
 			};
 		}
 		case "UPDATE_META_KEY_EXISTS": {
-			const next_settings = produce(
-				next_state.settings,
-				draft_settings => {
-					forEach(draft_settings, setting => {
-						if (setting.data_key_with_prefix === action.data_key) {
-							setting.meta_key_exists = true;
-						}
-					});
-				}
-			);
+			const next_settings = produce(next_state.settings, draft_settings => {
+				forEach(draft_settings, setting => {
+					if (setting.data_key_with_prefix === action.data_key) {
+						setting.meta_key_exists = true;
+					}
+				});
+			});
 
 			return {
 				...next_state,
@@ -110,13 +98,9 @@ const reducer = (state = initial_state, action) => {
 
 				setting[action.prop] = action.value;
 
-				if (
-					action.prop === "value" &&
-					setting.data_type === "localstorage"
-				) {
-					draft_state.settings_persisted[
-						setting.data_key_with_prefix
-					] = action.value;
+				if (action.prop === "value" && setting.data_type === "localstorage") {
+					draft_state.settings_persisted[setting.data_key_with_prefix] =
+						action.value;
 				}
 			});
 

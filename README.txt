@@ -3,7 +3,7 @@ Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.0
 Tested up to: 5.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -49,7 +49,17 @@ Installation from the WordPress admin.
 
 == Frequently Asked Questions ==
 
-= How can I register my sidebar with post meta controls? =
+= Notes about using Meta data and the Blocks editor in your CPT =
+
+To make use of meta in your Custom Post Type remember that **custom-fields** needs to be set in the **includes** property of the [register_post_type function](https://codex.wordpress.org/Function_Reference/register_post_type).
+Also, to activate the Gutenberg/Block editor in the post editor **editor** needs to be set in the same property (*includes*).
+
+**Notes**
+This is an example of how to add a sidebar inside the editor.
+In this case it will display a sidebar with one tab, one panel and two settings inside it: **buttons** and **checkbox**.
+The sidebar will appear in every:
+
+= Registering a sidebar with post meta controls =
 
 **Notes**
 This is an example of how to add a sidebar inside the editor.

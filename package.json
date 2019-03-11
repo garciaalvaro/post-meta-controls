@@ -1,7 +1,7 @@
 {
 	"name": "post-meta-controls",
 	"name_title": "Post Meta Controls",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"homepage": "https://wordpress.org/plugins/post-meta-controls/",
 	"main": "index.js",
 	"scripts": {
