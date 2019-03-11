@@ -2,7 +2,7 @@
 Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.0
-Tested up to: 5.0
+Tested up to: 5.1
 Stable tag: 1.0.0
 Requires PHP: 5.6
 License: GPLv3
@@ -771,3 +771,11 @@ The following are all available options for a **Setting - Textarea**.
 == Screenshots ==
 
 1. A sidebar with different tabs, panels and controls.
+
+== Changelog ==
+
+= 1.0.1 =
+* Checkbox Multiple fix: If there were old values saved that no longer belong to the options, we display them as selected. If they are deselected we remove them from the options.
+
+= 1.0.0 =
+* Initial release.

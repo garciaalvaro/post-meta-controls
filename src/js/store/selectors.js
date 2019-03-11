@@ -48,9 +48,7 @@ const selectors = {
 		}
 
 		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);
-		const panels = state.panels.filter(
-			({ path }) => path[0] === sidebar_id
-		);
+		const panels = state.panels.filter(({ path }) => path[0] === sidebar_id);
 		const settings = state.settings.filter(
 			({ path }) => path[0] === sidebar_id
 		);
