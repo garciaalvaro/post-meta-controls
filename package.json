@@ -23,14 +23,14 @@
 		"gulp-run-command": "0.0.9",
 		"gulp-zip": "^4.2.0",
 		"merge2": "^1.2.3",
-		"stylus": "^0.54.5"
+		"stylus": "^0.54.5",
+		"npm-check-updates": "^3.0.4"
 	},
 	"dependencies": {
 		"array-move": "^1.0.0",
 		"dompurify": "^1.0.10",
 		"immer": "^2.1.1",
 		"moment": "^2.24.0",
-		"npm-check-updates": "^3.0.4",
 		"react": "^16.8.4",
 		"react-dates": "^20.0.0",
 		"react-dom": "^16.8.4",
