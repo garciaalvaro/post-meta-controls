@@ -6,3 +6,4 @@ node_modules
 .cache
 yarn.lock
 yarn-error.log
+.DS_Store
