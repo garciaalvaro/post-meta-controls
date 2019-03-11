@@ -786,6 +786,7 @@ The following are all available options for a **Setting - Textarea**.
 
 = 1.0.1 =
 * Checkbox Multiple fix: If there were old values saved that no longer belong to the options, we display them as selected. If they are deselected we remove them from the options.
+* Updated dependencies.
 
 = 1.0.0 =
 * Initial release.
