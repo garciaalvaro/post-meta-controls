@@ -6,7 +6,7 @@ function test_meta_get_image() {
 	return array(
 		'type'            => 'image', // Required.
 		// 'id'              => 'image_id',
-		'data_type'       => 'none', // Available: 'meta', 'localstorage', 'none'.
+		'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
 		'data_key'        => 'image_key', // Required if 'data_type' is 'meta' or 'localstorage'.
 		// 'data_key_prefix' => 'pmc_',
 		'label'           => __( 'Setting label', 'my_plugin' ),

@@ -14,7 +14,7 @@ function test_meta_get_color() {
 		'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 		'ui_border_top'   => true, // Display CSS border-top in the editor control.
 		'default_value'   => '', // A string with a HEX, rgb or rgba color format.
-		'alpha_control'   => false, // Include alpha control to set color transparency.
+		'alpha_control'   => true, // Include alpha control to set color transparency.
 		'palette'         => array(
 			'red'   => '#ff0000',
 			'green' => '#00ff00',
