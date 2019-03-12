@@ -54,11 +54,6 @@ Installation from the WordPress admin.
 To make use of meta in your Custom Post Type remember that **custom-fields** needs to be set in the **includes** property of the [register_post_type function](https://codex.wordpress.org/Function_Reference/register_post_type).
 Also, to activate the Gutenberg/Block editor in the post editor **editor** needs to be set in the same property (*includes*).
 
-**Notes**
-This is an example of how to add a sidebar inside the editor.
-In this case it will display a sidebar with one tab, one panel and two settings inside it: **buttons** and **checkbox**.
-The sidebar will appear in every:
-
 = Registering a sidebar with post meta controls =
 
 **Notes**
