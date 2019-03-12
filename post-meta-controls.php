@@ -31,8 +31,29 @@ if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
 }
 
 // DEV_start
-require_once INC_DIR . '_test-back.php';
-require_once INC_DIR . '_test-front.php';
+require_once INC_DIR . 'test/test.php';
+
+require_once INC_DIR . 'test/meta/buttons.php';
+require_once INC_DIR . 'test/meta/checkbox_multiple.php';
+require_once INC_DIR . 'test/meta/checkbox.php';
+require_once INC_DIR . 'test/meta/color.php';
+require_once INC_DIR . 'test/meta/custom_text.php';
+require_once INC_DIR . 'test/meta/date_range.php';
+require_once INC_DIR . 'test/meta/date_single.php';
+require_once INC_DIR . 'test/meta/image_multiple.php';
+require_once INC_DIR . 'test/meta/image.php';
+require_once INC_DIR . 'test/meta/radio.php';
+require_once INC_DIR . 'test/meta/range_float.php';
+require_once INC_DIR . 'test/meta/range.php';
+require_once INC_DIR . 'test/meta/select.php';
+require_once INC_DIR . 'test/meta/text.php';
+require_once INC_DIR . 'test/meta/textarea.php';
+require_once INC_DIR . 'test/meta/_panel_1.php';
+require_once INC_DIR . 'test/meta/_panel_2.php';
+require_once INC_DIR . 'test/meta/_tab_1.php';
+require_once INC_DIR . 'test/meta/_tab_2.php';
+require_once INC_DIR . 'test/meta/_sidebar.php';
+require_once INC_DIR . 'test/meta/_register.php';
 // DEV_end
 
 // Utils and Traits.
