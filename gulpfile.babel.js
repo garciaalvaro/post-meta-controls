@@ -13,9 +13,7 @@ const main_plugin_file = `${pkg.name}.php`;
 gulp.task(
 	"parcel",
 	run([
-		`parcel build src/index.js -o ${
-			pkg.name
-		}.min.js -d build --no-source-maps`
+		`parcel build src/index.js -o ${pkg.name}.min.js -d build --no-source-maps`
 	])
 );
 
@@ -24,10 +22,7 @@ gulp.task("version", () => {
 		.src(main_plugin_file)
 		.pipe(replace(/( \* Version: )\d+\.\d+\.\d+/g, "$1" + pkg.version))
 		.pipe(
-			replace(
-				/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+/g,
-				"$1" + pkg.version
-			)
+			replace(/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+/g, "$1" + pkg.version)
 		)
 		.pipe(gulp.dest("."));
 
@@ -85,8 +80,7 @@ gulp.task("zip", () => {
 				// "!src/index.*",
 				"!package*",
 				"!build/*",
-				"!inc/_test-back.php",
-				"!inc/_test-front.php",
+				"!inc/test/**",
 				`${pkg.name}.php`
 			],
 			{ base: "../" }
