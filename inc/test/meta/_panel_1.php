@@ -20,6 +20,8 @@ function test_meta_get_panel_1() {
 			</svg>',
 		// 'icon_dashicon' => 'carrot',
 		'settings'      => array(
+			test_meta_get_repeatable(),
+
 			test_meta_get_buttons(),
 			test_meta_get_checkbox_multiple(),
 			test_meta_get_checkbox(),

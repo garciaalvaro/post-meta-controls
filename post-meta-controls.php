@@ -45,6 +45,7 @@ require_once INC_DIR . 'test/meta/image.php';
 require_once INC_DIR . 'test/meta/radio.php';
 require_once INC_DIR . 'test/meta/range_float.php';
 require_once INC_DIR . 'test/meta/range.php';
+require_once INC_DIR . 'test/meta/repeatable.php';
 require_once INC_DIR . 'test/meta/select.php';
 require_once INC_DIR . 'test/meta/text.php';
 require_once INC_DIR . 'test/meta/textarea.php';
