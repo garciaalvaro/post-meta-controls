@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Create sidebar properties array
  *
  * @since 1.0.0
+ * @version 1.1.0
  */
 function create_sidebar() {
 
@@ -20,16 +21,10 @@ function create_sidebar() {
 	}
 
 	// Create the class instances for each item: sidebars, tabs, panels and settings.
-	$instances =
-		create_instances(
-			array(
-				'current'  => 'sidebars',
-				'children' => 'tabs',
-			),
-			$props_raw
-		);
+	$instances = create_instances( $props_raw );
 
 	if (
+		empty( $instances ) ||
 		empty( $instances['sidebars'] ) ||
 		empty( $instances['tabs'] ) ||
 		empty( $instances['panels'] ) ||

@@ -6,204 +6,202 @@ namespace POSTMETACONTROLS;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Create instances of the classes.
+ * Create instances of the classes
  *
  * @since 1.0.0
+ * @version 1.1.0
  */
-function create_instances(
-	$class_name = array(),
-	$props_raw = array(),
-	$path = array(),
-	$data_key_prefix_from_sidebar = '',
-	$id_prefix = '',
-	$post_type = '',
-	$instances = array()
-) {
+function create_instances( $sidebars_props = array() ) {
 
-	if ( ! is_array( $props_raw ) ) {
-		return array();
+	if ( ! is_array( $sidebars_props ) || empty( $sidebars_props ) ) {
+		return null;
 	}
 
-	$props = array();
+	$instances = array(
+		'sidebars' => array(),
+		'tabs'     => array(),
+		'panels'   => array(),
+		'settings' => array(),
+	);
 
-	foreach ( $props_raw as $key => $prop_raw ) {
+	foreach ( $sidebars_props as $sidebar_props ) {
 
-		if ( ! is_array( $prop_raw ) ) {
+		if ( empty( $sidebar_props['tabs'] ) ) {
 			continue;
 		}
 
-		$children_props_raw =
-			empty( $class_name['children'] ) ||
-			empty( $prop_raw[ $class_name['children'] ] )
-				? false
-				: $prop_raw[ $class_name['children'] ];
+		$sidebar = new Sidebar( $sidebar_props );
 
-		$instance = false;
+		$instances['sidebars'][] = $sidebar;
 
-		$prop_raw['path'] = $path;
+		$sidebar_path = $sidebar->get_id();
 
-		if ( 'sidebars' === $class_name['current'] ) {
+		$root_props = array(
+			'data_key_prefix_from_sidebar' => $sidebar->get_data_key_prefix(),
+			'id_prefix'                    => $sidebar->get_id_prefix(),
+			'post_type'                    => $sidebar->get_post_type(),
+		);
 
-			$instance            = new Sidebar( $prop_raw );
-			$class_name_children = array(
-				'parent'   => 'sidebars',
-				'current'  => 'tabs',
-				'children' => 'panels',
-			);
-			$data_key_prefix_from_sidebar = $instance->get_data_key_prefix();
-			$id_prefix                    = $instance->get_id_prefix();
-			$post_type                    = $instance->get_post_type();
+		foreach ( $sidebar_props['tabs'] as $tab_props ) {
 
-		} elseif ( 'tabs' === $class_name['current'] ) {
-
-			$prop_raw['id_prefix'] = $id_prefix;
-
-			$prop_raw['post_type'] = $post_type;
-			$instance              = new Tab( $prop_raw );
-			$class_name_children   = array(
-				'parent'   => 'tabs',
-				'current'  => 'panels',
-				'children' => 'settings',
-			);
-
-		} elseif ( 'panels' === $class_name['current'] ) {
-
-			$prop_raw['id_prefix'] = $id_prefix;
-
-			$prop_raw['post_type'] = $post_type;
-			$instance              = new Panel( $prop_raw );
-			$class_name_children   = array(
-				'parent'   => 'panels',
-				'current'  => 'settings',
-				'children' => '',
-			);
-
-		} elseif ( 'settings' === $class_name['current'] && ! empty( $prop_raw['type'] ) ) {
-
-			$class_name_children = array(
-				'parent'   => 'settings',
-				'current'  => '',
-				'children' => '',
-			);
-
-			$prop_raw['data_key_prefix_from_sidebar'] =
-				$data_key_prefix_from_sidebar;
-
-			$prop_raw['id_prefix'] = $id_prefix;
-
-			$prop_raw['post_type'] = $post_type;
-
-			switch ( $prop_raw['type'] ) {
-				case 'buttons':
-					$instance = new Buttons( $prop_raw );
-					break;
-
-				case 'checkbox':
-					$instance = new Checkbox( $prop_raw );
-					break;
-
-				case 'checkbox_multiple':
-					$instance = new CheckboxMultiple( $prop_raw );
-					break;
-
-				case 'color':
-					$instance = new Color( $prop_raw );
-					break;
-
-				case 'custom_text':
-					$instance = new CustomText( $prop_raw );
-					break;
-
-				case 'date_range':
-					$instance = new DateRange( $prop_raw );
-					break;
-
-				case 'date_single':
-					$instance = new DateSingle( $prop_raw );
-					break;
-
-				case 'image':
-					$instance = new Image( $prop_raw );
-					break;
-
-				case 'image_multiple':
-					$instance = new ImageMultiple( $prop_raw );
-					break;
-
-				case 'radio':
-					$instance = new Radio( $prop_raw );
-					break;
-
-				case 'range':
-					$instance = new Range( $prop_raw );
-					break;
-
-				case 'range_float':
-					$instance = new RangeFloat( $prop_raw );
-					break;
-
-				case 'select':
-					$instance = new Select( $prop_raw );
-					break;
-
-				case 'text':
-					$instance = new Text( $prop_raw );
-					break;
-
-				case 'textarea':
-					$instance = new Textarea( $prop_raw );
-					break;
-
-				// Pro:
-				case 'custom_component':
-					if ( class_exists( __NAMESPACE__ . '\CustomComponent' ) ) {
-						$instance = new CustomComponent( $prop_raw );
-					}
-					break;
-
-				case 'custom_html':
-					if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
-						$instance = new CustomHTML( $prop_raw );
-					}
-					break;
-
-				case 'repeatable':
-					if ( class_exists( __NAMESPACE__ . '\Repeatable' ) ) {
-						$instance = new Repeatable( $prop_raw );
-					}
-					break;
-
-				default:
-					break;
+			if ( empty( $tab_props['panels'] ) ) {
+				continue;
 			}
-		}
 
-		if ( false !== $instance ) {
+			$tab_props = add_root_props( $tab_props, $sidebar_path, $root_props );
 
-			$instances[ $class_name['current'] ] =
-				! isset( $instances[ $class_name['current'] ] )
-					? array()
-					: $instances[ $class_name['current'] ];
+			$tab = new Tab( $tab_props );
 
-			$instances[ $class_name['current'] ][] = $instance;
+			$instances['tabs'][] = $tab;
 
-		}
+			$tab_path = wp_parse_args( array( $tab->get_id() ), $sidebar_path );
 
-		if ( ! empty( $children_props_raw ) ) {
+			foreach ( $tab_props['panels'] as $panel_props ) {
 
-			$children_path = wp_parse_args( array( $instance->get_id() ), $path );
+				if ( empty( $panel_props['settings'] ) ) {
+					continue;
+				}
 
-			$instances = create_instances(
-				$class_name_children,
-				$children_props_raw,
-				$children_path,
-				$data_key_prefix_from_sidebar,
-				$id_prefix,
-				$post_type,
-				$instances
-			);
+				$panel_props = add_root_props( $panel_props, $tab_path, $root_props );
+
+				$panel = new Panel( $panel_props );
+
+				$instances['panels'][] = $panel;
+
+				$panel_path = wp_parse_args( array( $panel->get_id() ), $tab_path );
+
+				foreach ( $panel_props['settings'] as $setting_props ) {
+
+					$setting_props = add_root_props( $setting_props, $panel_path, $root_props );
+
+					$setting = create_setting_instance( $setting_props );
+
+					if ( ! empty( $setting ) ) {
+						$instances['settings'][] = $setting;
+					}
+				}
+			}
 		}
 	}
 
 	return $instances;
+}
+
+/**
+ * Add sidebar props to a children element props
+ *
+ * @since 1.1.0
+ */
+function add_root_props(
+	$prop_raw = array(),
+	$path = '',
+	$root_props = array(),
+	$add_data_key_prefix_from_sidebar = false
+) {
+	$prop_raw['path']      = $path;
+	$prop_raw['id_prefix'] = $root_props['id_prefix'];
+	$prop_raw['post_type'] = $root_props['post_type'];
+
+	if ( true === $add_data_key_prefix_from_sidebar ) {
+		$prop_raw['data_key_prefix_from_sidebar'] =
+			$root_props['data_key_prefix_from_sidebar'];
+	}
+
+	return $prop_raw;
+}
+
+/**
+ * Create setting class instance
+ *
+ * @since 1.1.0
+ */
+function create_setting_instance( $setting_props ) {
+
+	$setting = null;
+
+	switch ( $setting_props['type'] ) {
+		case 'buttons':
+			$setting = new Buttons( $setting_props );
+			break;
+
+		case 'checkbox':
+			$setting = new Checkbox( $setting_props );
+			break;
+
+		case 'checkbox_multiple':
+			$setting = new CheckboxMultiple( $setting_props );
+			break;
+
+		case 'color':
+			$setting = new Color( $setting_props );
+			break;
+
+		case 'custom_text':
+			$setting = new CustomText( $setting_props );
+			break;
+
+		case 'date_range':
+			$setting = new DateRange( $setting_props );
+			break;
+
+		case 'date_single':
+			$setting = new DateSingle( $setting_props );
+			break;
+
+		case 'image':
+			$setting = new Image( $setting_props );
+			break;
+
+		case 'image_multiple':
+			$setting = new ImageMultiple( $setting_props );
+			break;
+
+		case 'radio':
+			$setting = new Radio( $setting_props );
+			break;
+
+		case 'range':
+			$setting = new Range( $setting_props );
+			break;
+
+		case 'range_float':
+			$setting = new RangeFloat( $setting_props );
+			break;
+
+		case 'select':
+			$setting = new Select( $setting_props );
+			break;
+
+		case 'text':
+			$setting = new Text( $setting_props );
+			break;
+
+		case 'textarea':
+			$setting = new Textarea( $setting_props );
+			break;
+
+		// Pro:
+		case 'custom_component':
+			if ( class_exists( __NAMESPACE__ . '\CustomComponent' ) ) {
+				$setting = new CustomComponent( $setting_props );
+			}
+			break;
+
+		case 'custom_html':
+			if ( class_exists( __NAMESPACE__ . '\CustomHTML' ) ) {
+				$setting = new CustomHTML( $setting_props );
+			}
+			break;
+
+		case 'repeatable':
+			if ( class_exists( __NAMESPACE__ . '\Repeatable' ) ) {
+				$setting = new Repeatable( $setting_props );
+			}
+			break;
+
+		default:
+			break;
+	}
+
+	return $setting;
 }
