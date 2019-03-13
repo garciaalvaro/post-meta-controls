@@ -76,7 +76,15 @@ function create_instances( $sidebars_props = array() ) {
 
 					$setting = create_setting_instance( $setting_props );
 
-					if ( ! empty( $setting ) ) {
+					if ( is_array( $setting ) ) {
+
+						foreach ( $setting as $setting_ind ) {
+							if ( ! empty( $setting_ind ) ) {
+								$instances['settings'][] = $setting_ind;
+							}
+						}
+
+					} elseif ( ! empty( $setting ) ) {
 						$instances['settings'][] = $setting;
 					}
 				}
