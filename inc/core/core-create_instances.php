@@ -72,7 +72,7 @@ function create_instances( $sidebars_props = array() ) {
 
 				foreach ( $panel_props['settings'] as $setting_props ) {
 
-					$setting_props = add_root_props( $setting_props, $panel_path, $root_props );
+					$setting_props = add_root_props( $setting_props, $panel_path, $root_props, true );
 
 					$setting = create_setting_instance( $setting_props );
 
