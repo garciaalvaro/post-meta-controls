@@ -1,10 +1,10 @@
 /*! <%= pkg.name_title %> - <%= pkg.version %> | <%= pkg.homepage %> */
-/*! TinyColor v1.4.1 | https://github.com/bgrins/TinyColor | 2016-07-07, Brian Grinstead | MIT License */
-/*! array-move v1.0.0 | https://github.com/sindresorhus/array-move | Sindre Sorhus | MIT License */
-/*! DOMPurify v1.0.9 | https://github.com/cure53/DOMPurify | Mario Heiderich | MPL-2.0 OR Apache-2.0 */
-/*! immer v1.10.5 | https://github.com/mweststrate/immer | Michel Weststrate | MIT License */
-/*! moment v2.23.0 | http://momentjs.com | Iskren Ivov Chernev | MIT License */
-/*! react-dates v18.4.0 | https://github.com/airbnb/react-dates#readme | Maja Wichrowska | MIT License */
-/*! react-sortable-hoc v1.4.0 | https://github.com/clauderic/react-sortable-hoc | Clauderic Demers | MIT License */
-/*! uuid v3.3.2 | https://github.com/kelektiv/node-uuid | MIT License */
+/*! TinyColor | https://github.com/bgrins/TinyColor | 2016-07-07, Brian Grinstead | MIT License */
+/*! array-move | https://github.com/sindresorhus/array-move | Sindre Sorhus | MIT License */
+/*! DOMPurify | https://github.com/cure53/DOMPurify | Mario Heiderich | MPL-2.0 OR Apache-2.0 */
+/*! immer | https://github.com/mweststrate/immer | Michel Weststrate | MIT License */
+/*! moment | http://momentjs.com | Iskren Ivov Chernev | MIT License */
+/*! react-dates | https://github.com/airbnb/react-dates#readme | Maja Wichrowska | MIT License */
+/*! react-sortable-hoc | https://github.com/clauderic/react-sortable-hoc | Clauderic Demers | MIT License */
+/*! uuid | https://github.com/kelektiv/node-uuid | MIT License */
 /*! react | https://github.com/facebook/react | Facebook, Inc. and its affiliates | MIT License */
