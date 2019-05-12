@@ -32,7 +32,7 @@ The plugin comes with different options to customize the Sidebars, Tabs, Panels 
 == Usage ==
 
 Once the plugin is installed, you will need to include the plugin filter inside your plugin or theme to create a sidebar with it's settings.
-The new sidebar/s can be accesed in any post type where it was registered to.
+The new sidebar/s can be accessed in any post type where it was registered.
 Modify the setting values with the controls inside the sidebar.
 Use the plugin helpers (see *Helpers to get the meta values* section) to get the meta data in the front end.
 
@@ -52,7 +52,7 @@ Installation from the WordPress admin.
 = Notes about using Meta data and the Blocks editor in your CPT =
 
 To make use of meta in your Custom Post Type remember that **custom-fields** needs to be set in the **includes** property of the [register_post_type function](https://codex.wordpress.org/Function_Reference/register_post_type).
-Also, to activate the Gutenberg/Block editor in the post editor **editor** needs to be set in the same property (*includes*).
+Also, to activate the Gutenberg/Block editor in the post, **editor** needs to be set in the same property (*includes*).
 
 = Registering a sidebar with post meta controls =
 
