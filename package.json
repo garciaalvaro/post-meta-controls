@@ -4,6 +4,9 @@
 	"version": "1.1.0",
 	"homepage": "https://wordpress.org/plugins/post-meta-controls/",
 	"main": "index.js",
+	"alias": {
+		"utils": "./src/js/utils"
+	},
 	"scripts": {
 		"dev": "parcel watch src/index.js -o post-meta-controls.js -d build & parcel watch pro/src/index.js -o post-meta-controls-pro.js -d pro/build",
 		"release": "gulp release",
