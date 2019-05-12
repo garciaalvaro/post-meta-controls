@@ -1,4 +1,4 @@
-import l, { prepareIcon, store_slug } from "../../utils";
+import l, { prepareIcon, store_slug } from "utils";
 
 import PanelCollapsible from "./PanelCollapsible";
 import PanelNotCollapsible from "./PanelNotCollapsible";

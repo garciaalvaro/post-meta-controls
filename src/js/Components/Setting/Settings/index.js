@@ -1,4 +1,4 @@
-import l from "../../../utils";
+import l from "utils";
 import Buttons from "./Buttons";
 import Checkbox from "./Checkbox";
 import CheckboxMultiple from "./CheckboxMultiple";

@@ -1,4 +1,4 @@
-import l, { sanitize } from "../utils";
+import l, { sanitize } from "utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
 
@@ -19,11 +19,7 @@ class Setting extends Base {
 
 		forEach(palette, (value, key) => {
 			// If the option is already prepared
-			if (
-				isObject(value) &&
-				isString(value.name) &&
-				isString(value.color)
-			) {
+			if (isObject(value) && isString(value.name) && isString(value.color)) {
 				palette_clean.push({
 					name: value.name,
 					color: value.color
@@ -159,8 +155,7 @@ class Setting extends Base {
 			},
 			data_key_with_prefix: {
 				type: "id",
-				conditions:
-					this.props.data_type !== "none" ? "not_empty" : false
+				conditions: this.props.data_type !== "none" ? "not_empty" : false
 			},
 			ui_border_top: {
 				type: "boolean"

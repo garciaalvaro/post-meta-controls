@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "../../../utils";
+import l, { plugin_slug } from "utils";
 import moment from "moment";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";

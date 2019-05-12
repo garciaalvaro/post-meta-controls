@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
 
@@ -40,8 +40,7 @@ class Panel extends Base {
 			},
 			label: {
 				type: "text",
-				conditions:
-					this.props.collapsible === true ? "not_empty" : false
+				conditions: this.props.collapsible === true ? "not_empty" : false
 			},
 			initial_open: {
 				type: "boolean"

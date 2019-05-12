@@ -1,4 +1,4 @@
-import l from "../../../utils";
+import l from "utils";
 import DOMPurify from "dompurify";
 
 const { Component, RawHTML } = wp.element;

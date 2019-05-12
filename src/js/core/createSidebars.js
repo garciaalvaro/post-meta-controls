@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import createInstance from "./createInstance.jsx";
 
 const { __, sprintf } = wp.i18n;

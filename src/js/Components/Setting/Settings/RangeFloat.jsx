@@ -1,4 +1,4 @@
-import l from "../../../utils";
+import l from "utils";
 import withLocalValue from "./_withLocalValue";
 
 const { toString, compact } = lodash;

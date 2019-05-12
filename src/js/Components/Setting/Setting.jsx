@@ -1,4 +1,4 @@
-import l, { Div, store_slug, plugin_slug, prepareValue } from "../../utils";
+import l, { Div, store_slug, plugin_slug, prepareValue } from "utils";
 import settings from "./Settings";
 
 const {

@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import Panel from "./Panel";
 import Setting from "./Setting";
 import Sidebar from "./Sidebar";

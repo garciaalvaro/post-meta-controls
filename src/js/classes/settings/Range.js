@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l from "utils";
 import Setting from "../Setting";
 
 const { __, sprintf } = wp.i18n;
@@ -31,13 +31,10 @@ class Range extends Setting {
 						message: __("This value has to be greater than 0.")
 					},
 					{
-						value:
-							this.props.max - this.props.min > this.props.step,
+						value: this.props.max - this.props.min > this.props.step,
 						/* translators: %s: max property, %s: min property. */
 						message: sprintf(
-							__(
-								"This value has to be greater than '%s' minus '%s' values."
-							),
+							__("This value has to be greater than '%s' minus '%s' values."),
 							"max",
 							"min"
 						)

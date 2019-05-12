@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import uuid from "uuid/v4";
 import Base from "./Base";
 

@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "../../../utils";
+import l, { plugin_slug } from "utils";
 import moment from "moment";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -82,17 +82,11 @@ class DateRange extends Component {
 					startDateId={`${id}-start_date`}
 					endDate={end_date}
 					endDateId={`${id}-end_date`}
-					onDatesChange={({
-						startDate: start_date,
-						endDate: end_date
-					}) => {
+					onDatesChange={({ startDate: start_date, endDate: end_date }) => {
 						setState({ start_date, end_date });
 
 						if (!isNil(start_date) && !isNil(end_date)) {
-							updateValue([
-								start_date.format(format),
-								end_date.format(format)
-							]);
+							updateValue([start_date.format(format), end_date.format(format)]);
 						}
 					}}
 					focusedInput={focused_input}

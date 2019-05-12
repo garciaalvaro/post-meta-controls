@@ -1,4 +1,4 @@
-import l, { castSchema, store_slug } from "../utils";
+import l, { castSchema, store_slug } from "utils";
 
 const {
 	isUndefined,

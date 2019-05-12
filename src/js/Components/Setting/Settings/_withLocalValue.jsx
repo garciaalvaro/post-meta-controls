@@ -1,4 +1,4 @@
-import l from "../../../utils";
+import l from "utils";
 
 const { throttle, isUndefined } = lodash;
 const { compose, withState } = wp.compose;

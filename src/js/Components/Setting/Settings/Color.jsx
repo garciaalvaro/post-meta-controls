@@ -1,4 +1,4 @@
-import l, { Span } from "../../../utils";
+import l, { Span } from "utils";
 import withLocalValue from "./_withLocalValue";
 import tinycolor from "tinycolor2";
 
@@ -86,11 +86,7 @@ class Color extends Component {
 				}
 				help={help}
 			>
-				<ColorPalette
-					colors={palette}
-					value={color}
-					onChange={updateColor}
-				/>
+				<ColorPalette colors={palette} value={color} onChange={updateColor} />
 				{alpha_control && (
 					<RangeControl
 						label={__("Color opacity")}

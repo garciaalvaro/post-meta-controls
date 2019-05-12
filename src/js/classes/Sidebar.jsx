@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "../utils";
+import l, { plugin_slug } from "utils";
 import DOMPurify from "dompurify";
 import uuid from "uuid/v4";
 import SidebarRegister from "../Components/Sidebar/SidebarRegister";
@@ -40,11 +40,7 @@ class Sidebar extends Base {
 		registerPlugin(plugin_id, {
 			icon: icon ? icon : "carrot",
 			render: () => (
-				<SidebarRegister
-					plugin_id={plugin_id}
-					sidebar_id={id}
-					label={label}
-				/>
+				<SidebarRegister plugin_id={plugin_id} sidebar_id={id} label={label} />
 			)
 		});
 	}

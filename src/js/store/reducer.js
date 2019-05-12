@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import initial_state from "./initial_state";
 import produce from "immer";
 

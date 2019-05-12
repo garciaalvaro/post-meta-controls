@@ -1,4 +1,4 @@
-import l, { store_slug, prepareValue } from "../../../utils";
+import l, { store_slug, prepareValue } from "utils";
 
 const { without, isEmpty, forEach } = lodash;
 const { Component } = wp.element;
@@ -90,9 +90,7 @@ class CheckboxMultiple extends Component {
 								key={index}
 								label={option.label}
 								checked={value.includes(option.value)}
-								onChange={selected =>
-									onChangeHandler(selected, option.value)
-								}
+								onChange={selected => onChangeHandler(selected, option.value)}
 							/>
 						);
 					}
@@ -102,9 +100,7 @@ class CheckboxMultiple extends Component {
 							key={index}
 							label={option.label}
 							checked={value.includes(option.value)}
-							onChange={selected =>
-								onChangeHandler(selected, option.value)
-							}
+							onChange={selected => onChangeHandler(selected, option.value)}
 						/>
 					);
 				})}

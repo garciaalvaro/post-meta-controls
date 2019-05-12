@@ -1,4 +1,4 @@
-import l, { Div, Span, plugin_slug, store_slug } from "../../utils";
+import l, { Div, Span, plugin_slug, store_slug } from "utils";
 import Setting from "../Setting/Setting";
 
 const { withDispatch } = wp.data;
@@ -21,9 +21,7 @@ class PanelCollapsible extends Component {
 				title={
 					<Fragment>
 						{icon}
-						<Span className={`${plugin_slug}-panel-label`}>
-							{label}
-						</Span>
+						<Span className={`${plugin_slug}-panel-label`}>{label}</Span>
 					</Fragment>
 				}
 				id={id}

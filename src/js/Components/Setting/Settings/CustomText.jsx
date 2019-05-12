@@ -1,4 +1,4 @@
-import l, { A, P, H3, Ol, Ul, Li } from "../../../utils";
+import l, { A, P, H3, Ol, Ul, Li } from "utils";
 
 const { isUndefined, map } = lodash;
 const { Component, Fragment } = wp.element;
@@ -23,9 +23,7 @@ class CustomText extends Component {
 
 						case "link":
 						case "a":
-							const url = !isUndefined(element.href)
-								? element.href
-								: "#";
+							const url = !isUndefined(element.href) ? element.href : "#";
 
 							return (
 								<A key={root_index} href={url}>

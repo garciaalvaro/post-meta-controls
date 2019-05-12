@@ -1,4 +1,4 @@
-import l, { prepareOptions } from "../../utils";
+import l, { prepareOptions } from "utils";
 import Setting from "../Setting";
 
 class CheckboxMultiple extends Setting {

@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l from "utils";
 import Setting from "../Setting";
 
 class Image extends Setting {

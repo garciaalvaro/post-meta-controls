@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l from "utils";
 import Sidebar from "./Sidebar";
 
 const { Fragment, Component } = wp.element;

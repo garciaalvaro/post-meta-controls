@@ -1,4 +1,4 @@
-import l from "../../../utils";
+import l from "utils";
 
 const { Component } = wp.element;
 const { TextControl } = wp.components;

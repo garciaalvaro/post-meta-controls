@@ -1,4 +1,4 @@
-import l, { Span, Div, plugin_slug } from "../../utils";
+import l, { Span, Div, plugin_slug } from "utils";
 import Setting from "../Setting/Setting";
 
 const { Component } = wp.element;
@@ -16,9 +16,7 @@ class PanelNotCollapsible extends Component {
 				{label && (
 					<Div className={`${plugin_slug}-panel-label-container`}>
 						{icon}
-						<Span className={`${plugin_slug}-panel-label`}>
-							{label}
-						</Span>
+						<Span className={`${plugin_slug}-panel-label`}>{label}</Span>
 					</Div>
 				)}
 				<PanelRow>

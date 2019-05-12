@@ -1,4 +1,4 @@
-import l, { store_slug } from "../utils";
+import l, { store_slug } from "utils";
 import reducer from "./reducer";
 import actions from "./actions";
 import selectors from "./selectors";

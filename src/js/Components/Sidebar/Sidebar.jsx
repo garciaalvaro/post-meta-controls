@@ -1,4 +1,4 @@
-import l, { Div, plugin_slug, store_slug } from "../../utils";
+import l, { Div, plugin_slug, store_slug } from "utils";
 import Invalids from "../Invalid/Invalids";
 import Tabs from "../Tab/Tabs";
 
