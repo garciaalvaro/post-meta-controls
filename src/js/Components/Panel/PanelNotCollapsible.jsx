@@ -1,4 +1,4 @@
-import l, { Span, Div, plugin_slug } from "utils";
+import l, { Span, Div, addPrefix } from "utils";
 import Setting from "../Setting/Setting";
 
 const { Component } = wp.element;
@@ -9,10 +9,7 @@ class PanelNotCollapsible extends Component {
 		const { label, settings_id, icon, id } = this.props;
 
 		return (
-			<Div
-				id={id}
-				className={`${plugin_slug}-panel ${plugin_slug}-panel-no-collapsible`}
-			>
+			<Div id={id} className={addPrefix(["panel", "panel-no-collapsible"])}>
 				{label && (
 					<Div classes="panel-label-container">
 						{icon}

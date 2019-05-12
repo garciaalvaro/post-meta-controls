@@ -1,4 +1,4 @@
-import l, { plugin_slug, store_slug, Div } from "utils";
+import l, { store_slug, Div } from "utils";
 import Panel from "../Panel/Panel";
 
 const { compose } = wp.compose;

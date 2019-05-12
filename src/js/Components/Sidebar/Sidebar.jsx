@@ -1,8 +1,8 @@
-import l, { Div, plugin_slug, store_slug } from "utils";
+import l, { Div, store_slug } from "utils";
 import Invalids from "../Invalid/Invalids";
 import Tabs from "../Tab/Tabs";
 
-const { isEmpty, compact } = lodash;
+const { isEmpty } = lodash;
 const { withSelect } = wp.data;
 const { Component } = wp.element;
 
@@ -103,36 +103,26 @@ class Sidebar extends Component {
 		}
 	};
 
-	getClasses = () => {
-		const color_scheme = this.getColorScheme();
-		let classes;
-		classes = [
-			`${plugin_slug}-sidebar`,
-			`${plugin_slug}-color_scheme-type-${color_scheme.type}`,
-			color_scheme.id === false
-				? ""
-				: `${plugin_slug}-color_scheme-name-${color_scheme.id}`
-		];
-		classes = compact(classes);
-		classes = classes.join(" ");
-
-		return classes;
-	};
-
 	render() {
 		const { getClasses, props } = this;
 		const { sidebar_id, warnings } = props;
+		const color_scheme = this.getColorScheme();
+		const classes = [
+			"sidebar",
+			`color_scheme-type-${color_scheme.type}`,
+			color_scheme.id === false ? null : `color_scheme-name-${color_scheme.id}`
+		];
 
 		if (isEmpty(warnings)) {
 			return (
-				<Div id={sidebar_id} className={getClasses()}>
+				<Div id={sidebar_id} classes={classes}>
 					<Tabs sidebar_id={sidebar_id} />
 				</Div>
 			);
 		}
 
 		return (
-			<Div id={sidebar_id} className={getClasses()}>
+			<Div id={sidebar_id} className={classes}>
 				<Invalids sidebar_id={sidebar_id} warnings={warnings} />
 			</Div>
 		);

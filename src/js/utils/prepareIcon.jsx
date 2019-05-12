@@ -1,5 +1,5 @@
 import { Div } from "./Components";
-import { plugin_slug } from "./info-plugin";
+import addPrefix from "./addPrefix";
 import DOMPurify from "dompurify";
 
 const { RawHTML } = wp.element;
@@ -12,14 +12,14 @@ const prepareIcon = (icon_svg, icon_dashicon, type) => {
 
 	if (icon_svg !== "") {
 		return (
-			<RawHTML className={`${plugin_slug}-${type}-icon`}>
+			<RawHTML className={addPrefix(`${type}-icon`)}>
 				{DOMPurify.sanitize(icon_svg)}
 			</RawHTML>
 		);
 	}
 
 	return (
-		<Div classes="${type}-icon">
+		<Div classes={`${type}-icon`}>
 			<Dashicon icon={icon_dashicon} />
 		</Div>
 	);

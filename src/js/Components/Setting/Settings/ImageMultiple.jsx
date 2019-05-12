@@ -1,10 +1,4 @@
-import l, {
-	Div,
-	Img,
-	plugin_slug,
-	prepareImageData,
-	icons
-} from "utils";
+import l, { Div, Img, addPrefix, prepareImageData, icons } from "utils";
 import arrayMove from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
@@ -33,11 +27,9 @@ const SortableItem = SortableElement(({ value, custom }) => {
 	if (isFinite(value)) {
 		return (
 			<Div classes="image-container">
-				<Div
-					className={`${plugin_slug}-image-not_found `}
-				>{`Image with id ${value} was not found.`}</Div>
+				<Div classes="image-not_found">{`Image with id ${value} was not found.`}</Div>
 				<Button
-					className={`${plugin_slug}-image-remove`}
+					className={addPrefix("image-remove")}
 					onClick={() => removeImage(value)}
 				>
 					{icons.remove}
@@ -52,7 +44,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 		<Div classes="image-container">
 			<Img classes="image" src={url} alt={alt} />
 			<Button
-				className={`${plugin_slug}-image-remove`}
+				className={addPrefix("image-remove")}
 				onClick={() => removeImage(id)}
 			>
 				{icons.remove}
@@ -181,7 +173,7 @@ class ImageContainer extends Component {
 		return (
 			<SortableList
 				distance={3} // Needed, so clicks can be triggered
-				helperClass={`${plugin_slug}-dragging_image`}
+				helperClass={addPrefix("dragging_image")}
 				items={images_data_prepared}
 				onSortEnd={onSortEnd}
 				custom={{ removeImage, setting_id }}
@@ -201,7 +193,7 @@ class ImageContainer extends Component {
 					value={images_id}
 					multiple={true}
 					render={({ open }) => (
-						<Button onClick={open} className={`${plugin_slug}-image-button`}>
+						<Button onClick={open} className={addPrefix("image-button")}>
 							{__("Open Media Library")}
 						</Button>
 					)}

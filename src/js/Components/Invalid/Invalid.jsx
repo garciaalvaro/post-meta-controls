@@ -1,4 +1,4 @@
-import l, { Div, Span, plugin_slug } from "utils";
+import l, { Div, Span } from "utils";
 
 const { __, sprintf } = wp.i18n;
 const { Component } = wp.element;
@@ -9,9 +9,7 @@ class Invalid extends Component {
 
 		return (
 			<Div classes="invalid">
-				<Span classes="invalid-title">
-					{sprintf(__("%s:"), title)}
-				</Span>
+				<Span classes="invalid-title">{sprintf(__("%s:"), title)}</Span>
 				<Span classes="invalid-message">{message}</Span>
 			</Div>
 		);

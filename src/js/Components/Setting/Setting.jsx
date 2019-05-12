@@ -1,4 +1,4 @@
-import l, { Div, store_slug, plugin_slug, prepareValue } from "utils";
+import l, { Div, store_slug, prepareValue } from "utils";
 import settings from "./Settings";
 
 const {
@@ -22,27 +22,12 @@ const {
 	CustomHTML,
 	Repeatable
 } = settings;
-const { isUndefined, compact } = lodash;
+const { isUndefined } = lodash;
 const { Component } = wp.element;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 
 class Setting extends Component {
-	getClasses = () => {
-		const { type, ui_border_top } = this.props;
-
-		let classes;
-		classes = [
-			`${plugin_slug}-setting`,
-			`${plugin_slug}-setting-${type}`,
-			!ui_border_top ? `${plugin_slug}-no_border_top` : ""
-		];
-		classes = compact(classes);
-		classes = classes.join(" ");
-
-		return classes;
-	};
-
 	getControl = () => {
 		const { props } = this;
 
@@ -114,8 +99,8 @@ class Setting extends Component {
 	};
 
 	render() {
-		const { getClasses, getControl, props } = this;
-		const { id } = props;
+		const { getControl, props } = this;
+		const { id, type, ui_border_top } = props;
 		const control = getControl();
 
 		if (control === null) {
@@ -123,7 +108,14 @@ class Setting extends Component {
 		}
 
 		return (
-			<Div id={id} className={getClasses()}>
+			<Div
+				id={id}
+				classes={[
+					"setting",
+					`setting-${type}`,
+					!ui_border_top ? "no_border_top" : null
+				]}
+			>
 				{control}
 			</Div>
 		);

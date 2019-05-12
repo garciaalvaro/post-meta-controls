@@ -1,4 +1,4 @@
-import l, { Div, Img, plugin_slug, prepareImageData, icons } from "utils";
+import l, { Div, Img, addPrefix, prepareImageData, icons } from "utils";
 
 const { isFinite, castArray } = lodash;
 const { __ } = wp.i18n;
@@ -69,29 +69,24 @@ class Image extends Component {
 					allowedTypes={["image"]}
 					value={image_id}
 					render={({ open }) => (
-						<Button onClick={open} className={`${plugin_slug}-image-button`}>
+						<Button onClick={open} className={addPrefix("image-button")}>
 							{__("Open Media Library")}
 						</Button>
 					)}
 				/>
 				{isFinite(image_id_not_found) ? (
 					<Div classes="image-container">
-						<Div
-							className={`${plugin_slug}-image-not_found `}
-						>{`Image with id ${image_id_not_found} was not found.`}</Div>
-						<Button
-							className={`${plugin_slug}-image-remove`}
-							onClick={removeImage}
-						>
+						<Div classes="image-not_found">{`Image with id ${image_id_not_found} was not found.`}</Div>
+						<Button className={addPrefix("image-remove")} onClick={removeImage}>
 							{icons.remove}
 						</Button>
 					</Div>
 				) : (
 					url !== "" && (
 						<Div classes="image-container">
-							<Img className={`${plugin_slug}-image`} src={url} alt={alt} />
+							<Img classes="image" src={url} alt={alt} />
 							<Button
-								className={`${plugin_slug}-image-remove`}
+								className={addPrefix("image-remove")}
 								onClick={removeImage}
 							>
 								{icons.remove}

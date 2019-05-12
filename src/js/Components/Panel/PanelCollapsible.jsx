@@ -1,4 +1,4 @@
-import l, { Div, Span, plugin_slug, store_slug } from "utils";
+import l, { Div, Span, addPrefix, store_slug } from "utils";
 import Setting from "../Setting/Setting";
 
 const { withDispatch } = wp.data;
@@ -26,7 +26,7 @@ class PanelCollapsible extends Component {
 				}
 				id={id}
 				initialOpen={initial_open}
-				className={`${plugin_slug}-panel ${plugin_slug}-panel-collapsible`}
+				className={addPrefix(["panel", "panel-collapsible"])}
 				onToggle={togglePanelInitialOpen}
 			>
 				<Div id={id} classes="panel-content">

@@ -1,4 +1,4 @@
-import l, { plugin_slug, store_slug, prepareIcon, Span } from "utils";
+import l, { addPrefix, store_slug, prepareIcon, Span } from "utils";
 import Tab from "./Tab";
 
 const { compose } = wp.compose;
@@ -22,7 +22,7 @@ class Tabs extends Component {
 					<Span classes="tab-label">{tab.label}</Span>
 				</Fragment>
 			),
-			className: `${plugin_slug}-tab-button`
+			className: addPrefix("tab-button")
 		}));
 
 		return (

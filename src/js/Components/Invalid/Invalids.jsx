@@ -1,4 +1,4 @@
-import l, { Div, Span, plugin_slug } from "utils";
+import l, { Div, Span } from "utils";
 import Invalid from "./Invalid";
 
 const { __ } = wp.i18n;

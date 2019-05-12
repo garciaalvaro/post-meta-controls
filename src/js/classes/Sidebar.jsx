@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "utils";
+import l, { addPrefix } from "utils";
 import DOMPurify from "dompurify";
 import uuid from "uuid/v4";
 import SidebarRegister from "../Components/Sidebar/SidebarRegister";
@@ -21,16 +21,16 @@ class Sidebar extends Base {
 		if (id_already_exists) {
 			// If it is not valid we register still register the plugin sidebar
 			// with a different id. This way we can still include the warnings.
-			plugin_id = `${plugin_slug}-${uuid()}`;
+			plugin_id = addPrefix(uuid());
 		} else {
-			plugin_id = `${plugin_slug}-${id}`;
+			plugin_id = addPrefix(id);
 			plugin_id = plugin_id.replace(/_/g, "-");
 			plugin_id = plugin_id.replace(/[^a-zA-Z0-9-]/g, "");
 		}
 
 		const icon =
 			icon_svg !== "" ? (
-				<RawHTML className={`${plugin_slug}-icon`}>
+				<RawHTML className={addPrefix("icon")}>
 					{DOMPurify.sanitize(icon_svg)}
 				</RawHTML>
 			) : (

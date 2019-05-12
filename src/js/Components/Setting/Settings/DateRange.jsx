@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "utils";
+import l, { addPrefix } from "utils";
 import moment from "moment";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -94,7 +94,7 @@ class DateRange extends Component {
 				/>
 				<Button
 					onClick={clearDate}
-					className={`${plugin_slug}-date-clear`}
+					className={addPrefix("date-clear")}
 					isDefault
 					isSmall
 				>

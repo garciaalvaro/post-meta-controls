@@ -6,12 +6,14 @@ import prepareImageData from "./prepareImageData";
 import prepareOptions from "./prepareOptions";
 import prepareIcon from "./prepareIcon";
 import prepareValue from "./prepareValue";
-import { plugin_namespace, plugin_slug } from "./info-plugin";
+import addPrefix from "./addPrefix";
+import { plugin_namespace, pr } from "./info-plugin";
 import store_slug from "./info-store";
 import { Div, Span, Img, A, P, H3, Ol, Ul, Li } from "./Components";
 
 export default l;
 export {
+	addPrefix,
 	icons,
 	sanitize,
 	castSchema,
@@ -20,7 +22,7 @@ export {
 	prepareIcon,
 	prepareValue,
 	plugin_namespace,
-	plugin_slug,
+	pr,
 	store_slug,
 	Div,
 	Span,
