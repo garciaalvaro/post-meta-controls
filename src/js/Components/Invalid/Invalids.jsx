@@ -10,7 +10,7 @@ class Invalids extends Component {
 
 		return (
 			<Div id={sidebar_id} className={classes}>
-				<Div id={`${plugin_slug}-invalid-header`}>
+				<Div classes="invalid-header">
 					<Span>{__("This sidebar has some invalid properties:")}</Span>
 				</Div>
 				{warnings.map(({ message, title }, index) => (

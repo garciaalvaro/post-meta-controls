@@ -87,7 +87,7 @@ class Image extends Component {
 					)}
 				/>
 				{isFinite(image_id_not_found) ? (
-					<Div className={`${plugin_slug}-image-container`}>
+					<Div classes="image-container">
 						<Div
 							className={`${plugin_slug}-image-not_found `}
 						>{`Image with id ${image_id_not_found} was not found.`}</Div>
@@ -100,7 +100,7 @@ class Image extends Component {
 					</Div>
 				) : (
 					url !== "" && (
-						<Div className={`${plugin_slug}-image-container`}>
+						<Div classes="image-container">
 							<Img
 								className={`${plugin_slug}-image`}
 								src={url}

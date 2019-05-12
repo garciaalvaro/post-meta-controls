@@ -21,7 +21,7 @@ class PanelCollapsible extends Component {
 				title={
 					<Fragment>
 						{icon}
-						<Span className={`${plugin_slug}-panel-label`}>{label}</Span>
+						<Span classes="panel-label">{label}</Span>
 					</Fragment>
 				}
 				id={id}
@@ -29,7 +29,7 @@ class PanelCollapsible extends Component {
 				className={`${plugin_slug}-panel ${plugin_slug}-panel-collapsible`}
 				onToggle={togglePanelInitialOpen}
 			>
-				<Div id={id} className={`${plugin_slug}-panel-content`}>
+				<Div id={id} classes="panel-content">
 					{settings_id.map(setting_id => (
 						<Setting key={setting_id} setting_id={setting_id} />
 					))}

@@ -32,7 +32,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 	// inside a div with the option to remove it.
 	if (isFinite(value)) {
 		return (
-			<Div className={`${plugin_slug}-image-container`}>
+			<Div classes="image-container">
 				<Div
 					className={`${plugin_slug}-image-not_found `}
 				>{`Image with id ${value} was not found.`}</Div>
@@ -49,8 +49,8 @@ const SortableItem = SortableElement(({ value, custom }) => {
 	const { id, url, alt } = value;
 
 	return (
-		<Div className={`${plugin_slug}-image-container`}>
-			<Img className={`${plugin_slug}-image`} src={url} alt={alt} />
+		<Div classes="image-container">
+			<Img classes="image" src={url} alt={alt} />
 			<Button
 				className={`${plugin_slug}-image-remove`}
 				onClick={() => removeImage(id)}
@@ -63,7 +63,7 @@ const SortableItem = SortableElement(({ value, custom }) => {
 
 const SortableList = SortableContainer(({ items, custom }) => {
 	return (
-		<Div className={`${plugin_slug}-images-container`}>
+		<Div classes="images-container">
 			{items.map((value, index) => (
 				<SortableItem
 					key={`item-${index}`}

@@ -14,9 +14,9 @@ class PanelNotCollapsible extends Component {
 				className={`${plugin_slug}-panel ${plugin_slug}-panel-no-collapsible`}
 			>
 				{label && (
-					<Div className={`${plugin_slug}-panel-label-container`}>
+					<Div classes="panel-label-container">
 						{icon}
-						<Span className={`${plugin_slug}-panel-label`}>{label}</Span>
+						<Span classes="panel-label">{label}</Span>
 					</Div>
 				)}
 				<PanelRow>

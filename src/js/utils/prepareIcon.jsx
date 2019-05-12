@@ -19,7 +19,7 @@ const prepareIcon = (icon_svg, icon_dashicon, type) => {
 	}
 
 	return (
-		<Div className={`${plugin_slug}-${type}-icon`}>
+		<Div classes="${type}-icon">
 			<Dashicon icon={icon_dashicon} />
 		</Div>
 	);

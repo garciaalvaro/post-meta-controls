@@ -8,11 +8,11 @@ class Invalid extends Component {
 		const { title, message } = this.props;
 
 		return (
-			<Div className={`${plugin_slug}-invalid`}>
-				<Span className={`${plugin_slug}-invalid-title`}>
+			<Div classes="invalid">
+				<Span classes="invalid-title">
 					{sprintf(__("%s:"), title)}
 				</Span>
-				<Span className={`${plugin_slug}-invalid-message`}>{message}</Span>
+				<Span classes="invalid-message">{message}</Span>
 			</Div>
 		);
 	}

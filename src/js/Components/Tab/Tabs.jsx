@@ -19,7 +19,7 @@ class Tabs extends Component {
 			title: (
 				<Fragment>
 					{prepareIcon(tab.icon_svg, tab.icon_dashicon, "tab")}
-					<Span className={`${plugin_slug}-tab-label`}>{tab.label}</Span>
+					<Span classes="tab-label">{tab.label}</Span>
 				</Fragment>
 			),
 			className: `${plugin_slug}-tab-button`
