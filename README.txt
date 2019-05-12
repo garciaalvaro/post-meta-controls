@@ -782,7 +782,7 @@ The following are all available options for a **Setting - Textarea**.
 = 1.1.0 =
 * Simplified some of the core functions.
 * Styling fixes.
-* Minor bugs fixes.
+* Minor bug fixes.
 * Updated dependencies.
 
 = 1.0.1 =
