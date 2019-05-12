@@ -1,10 +1,4 @@
-import l, {
-	Div,
-	Img,
-	plugin_slug,
-	prepareImageData,
-	icons
-} from "../../../utils";
+import l, { Div, Img, plugin_slug, prepareImageData, icons } from "utils";
 
 const { isFinite, castArray } = lodash;
 const { __ } = wp.i18n;
@@ -21,10 +15,7 @@ class Image extends Component {
 
 		apiFetch({ path }).then(
 			image_data_raw => {
-				const image_data = prepareImageData(
-					castArray(image_data_raw),
-					true
-				);
+				const image_data = prepareImageData(castArray(image_data_raw), true);
 				// The sorting of the elements from image_data_raw is not
 				// the same as the one from the so we need to order it.
 				const { url, alt } = image_data[0];
@@ -78,10 +69,7 @@ class Image extends Component {
 					allowedTypes={["image"]}
 					value={image_id}
 					render={({ open }) => (
-						<Button
-							onClick={open}
-							className={`${plugin_slug}-image-button`}
-						>
+						<Button onClick={open} className={`${plugin_slug}-image-button`}>
 							{__("Open Media Library")}
 						</Button>
 					)}
@@ -101,11 +89,7 @@ class Image extends Component {
 				) : (
 					url !== "" && (
 						<Div classes="image-container">
-							<Img
-								className={`${plugin_slug}-image`}
-								src={url}
-								alt={alt}
-							/>
+							<Img className={`${plugin_slug}-image`} src={url} alt={alt} />
 							<Button
 								className={`${plugin_slug}-image-remove`}
 								onClick={removeImage}

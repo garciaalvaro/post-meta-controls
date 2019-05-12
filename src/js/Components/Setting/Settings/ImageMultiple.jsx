@@ -4,7 +4,7 @@ import l, {
 	plugin_slug,
 	prepareImageData,
 	icons
-} from "../../../utils";
+} from "utils";
 import arrayMove from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
@@ -145,12 +145,7 @@ class ImageContainer extends Component {
 	};
 
 	removeImage = image_id => {
-		const {
-			value: images_id,
-			images_data,
-			updateValue,
-			setState
-		} = this.props;
+		const { value: images_id, images_data, updateValue, setState } = this.props;
 		const images_data_clean = [];
 
 		let images_id_new = without(images_id, image_id);
@@ -206,10 +201,7 @@ class ImageContainer extends Component {
 					value={images_id}
 					multiple={true}
 					render={({ open }) => (
-						<Button
-							onClick={open}
-							className={`${plugin_slug}-image-button`}
-						>
+						<Button onClick={open} className={`${plugin_slug}-image-button`}>
 							{__("Open Media Library")}
 						</Button>
 					)}
