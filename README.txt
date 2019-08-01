@@ -2,9 +2,9 @@
 Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.0
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: 1.1.0
-Requires PHP: 5.6
+Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

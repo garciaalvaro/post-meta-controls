@@ -1,2 +1,4 @@
-src/plugins/*
-*.min.*
+_extras/*
+build/*
+node_modules/*
+src/js/prism-languages/*
