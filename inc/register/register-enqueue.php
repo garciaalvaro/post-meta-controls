@@ -26,16 +26,20 @@ function enqueue() {
 		BUILD_DIR . PLUGIN_NAME . '.js',
 		array(
 			'lodash',
-			'wp-i18n',
-			'wp-compose',
-			'wp-element',
+			// If wp-block-editor is registered (from WP 5.2)
+			// enqueue it. Otherwise enqueue wp-editor.
+			isset( $wp_scripts->registered['wp-block-editor'] )
+				? 'wp-block-editor'
+				: 'wp-editor',
 			'wp-components',
-			'wp-editor',
-			'wp-edit-post',
-			'wp-plugins',
+			'wp-compose',
 			'wp-data',
-			'wp-rich-text',
+			'wp-edit-post',
+			'wp-element',
+			'wp-plugins',
 			'wp-hooks',
+			'wp-i18n',
+			'wp-rich-text',
 		),
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.

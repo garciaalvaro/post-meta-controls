@@ -13,7 +13,8 @@ const {
 	compact
 } = lodash;
 const { __ } = wp.i18n;
-const { MediaUpload } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { MediaUpload } = editor;
 const { Component } = wp.element;
 const { Button, BaseControl } = wp.components;
 const { withState } = wp.compose;
