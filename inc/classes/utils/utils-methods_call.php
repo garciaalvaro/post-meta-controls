@@ -19,7 +19,7 @@ function register_meta( $setting_instances = array() ) {
 		$data_key = $setting_instance->get_data_key_with_prefix();
 
 		// We only register the first setting with a certain meta_key,
-		// though we let it be modified with other setting controls inside js.
+		// although we let it be modified with other setting controls inside js.
 		if ( ! in_array( $data_key, $data_key_array ) ) {
 
 			$setting_instance->register_meta();

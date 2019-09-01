@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * @since 1.0.0
  */
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );
 function enqueue() {
 
 	do_action( 'pmc_before_enqueue' );
@@ -26,26 +27,25 @@ function enqueue() {
 		BUILD_DIR . PLUGIN_NAME . '.js',
 		array(
 			'lodash',
+			'moment',
 			// If wp-block-editor is registered (from WP 5.2)
 			// enqueue it. Otherwise enqueue wp-editor.
 			isset( $wp_scripts->registered['wp-block-editor'] )
 				? 'wp-block-editor'
 				: 'wp-editor',
+			'wp-api-fetch',
 			'wp-components',
 			'wp-compose',
 			'wp-data',
 			'wp-edit-post',
 			'wp-element',
-			'wp-plugins',
 			'wp-hooks',
 			'wp-i18n',
-			'wp-rich-text',
+			'wp-plugins',
 		),
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
 
-	do_action( 'pmc_after_enqueue' );
+	do_action( 'pmc_after_enqueue' ); // TODO
 }
-
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue' );

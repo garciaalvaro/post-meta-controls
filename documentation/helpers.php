@@ -40,10 +40,12 @@
 	// or the $default_value passed (false) if the meta key doesn't exist.
 	pmc_get_radio( $meta_key, $post_id, $default_value );
 
-	// Setting - Range. Returns an integer; or the $default_value passed (false) if the meta key doesn't exist.
+	// Setting - Range. Returns an integer; or the $default_value passed (false)
+	// if the meta key doesn't exist.
 	pmc_get_range( $meta_key, $post_id, $default_value );
 
-	// Setting - Range Float. Returns a float; or the $default_value passed (false) if the meta key doesn't exist.
+	// Setting - Range Float. Returns a float; or the $default_value passed (false)
+	// if the meta key doesn't exist.
 	pmc_get_range_float( $meta_key, $post_id, $default_value );
 
 	// Setting - Select. Returns a string with the selected option;

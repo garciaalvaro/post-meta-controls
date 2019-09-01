@@ -61,6 +61,9 @@ abstract class Base {
 
 	protected function set_privates() {}
 
+	/**
+	 * Unset prop keys which are meant to be private.
+	 */
 	private function unset_private_keys() {
 		if ( is_null( $this->props_privates ) ) {
 			return;
@@ -97,6 +100,9 @@ abstract class Base {
 		$this->props['valid'] = $is_valid;
 	}
 
+	/**
+	 * Set the prefix in the id prop.
+	 */
 	protected function set_id_with_prefix() {
 
 		if ( empty( $this->props['id'] ) || empty( $this->props['id_prefix'] ) ) {
@@ -114,6 +120,9 @@ abstract class Base {
 		return $this->props['post_type'];
 	}
 
+	/**
+	 * Get props which are meant to be localized through JSON.
+	 */
 	public function get_props_for_js() {
 
 		$props_for_js = array();

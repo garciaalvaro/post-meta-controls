@@ -20,7 +20,7 @@ class Select extends Setting {
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'          => 'select',
-			'default_value' => '', // It will be passed through cast_array().
+			'default_value' => '',
 			'options'       => array(),
 		);
 

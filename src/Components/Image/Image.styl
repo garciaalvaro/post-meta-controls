@@ -1,0 +1,91 @@
+/**
+ * Image
+ */
+
++prefix-classes('pmc-')
+
+	img.image
+		width 100%
+		height 100%
+		object-fit contain
+
+	.image-not_found
+		background var(--border_color)
+		padding 50px
+		box-shadow 0 0 2px var(--border_color_softer)
+
+	.images-container
+		width calc(100% + 2.4em)
+		margin-left -1.2em
+		margin-top 2.4em
+
+	.image-container
+		border 1px dotted var(--border_color)
+		margin -1px
+		background-color var(--background_color)
+		padding 30px 50px
+		width 100%
+		height 200px
+		position relative
+		text-align center
+
+		&:hover
+			button.image-remove
+				fill var(--text_color)
+				background-color var(--background_color_softer)
+
+	.dragging_image
+	.setting-image_multiple .image
+		// https://stackoverflow.com/a/18294634 | CC BY-SA 3.0
+		cursor move // fallback if grab cursor is unsupported
+		cursor grab
+		cursor -moz-grab
+		cursor -webkit-grab
+
+	button.image-remove
+		padding 5px
+		width 30px
+		height 30px
+		position absolute
+		top 0
+		right 0
+		z-index 1
+		transition fill .3s .1s $e_standard, background-color .3s .1s $e_standard
+		background-color transparent
+		margin 2px
+		fill var(--text_color_softer)
+		border-radius 50%
+
+		svg
+			height 20px
+
+	.dragging_image
+		z-index 999
+
+		img
+			max-width 100%
+
+.pmc-sidebar
+
+	.pmc-image-button
+		display block
+		height 36px
+		line-height 33px
+		padding 0 10px
+
+	.pmc-image-button
+	.pmc-image-button:focus:enabled
+	.components-color-palette__clear
+	.components-color-palette__clear:focus:enabled
+	.pmc-date-clear
+	.pmc-date-clear:focus:enabled
+		background var(--border_color_softer)
+		color var(--text_color_softer)
+		border 1px solid var(--border_color)
+		box-shadow inset 0 -1px 0 var(--border_color)
+		border-radius 3px
+		transition background-color 0.15s cubic-bezier(0, 0, 0.2, 1)
+
+		&:hover
+			background var(--border_color)
+			color var(--text_color_softer)

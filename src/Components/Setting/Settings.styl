@@ -1,0 +1,34 @@
+/**
+ * Settings
+ */
+
++prefix-classes('pmc-')
+
+	.setting
+		position relative
+		padding 2em 1.2em
+		width 100%
+		margin 0
+
+		+ .setting
+			border-top 1px solid var(--border_color)
+		+ .warning
+			border-top 4px solid transparent
+
+		&:first-child
+			border-top 1px dotted var(--border_color)
+
+		&.no_border_top
+			border-top none
+			padding-top .5em
+
+.pmc-sidebar
+
+	.components-base-control__help
+		font-style normal
+		margin-top 15px
+		opacity .8
+
+	.components-base-control__label
+		font-weight 600
+		margin-bottom 1.5em

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Post Meta Controls for Gutenberg
+ * Plugin Name: Post Meta Controls
  * Plugin URI: https://wordpress.org/plugins/post-meta-controls/
  * Description: Controls to manage post meta data in the Gutenberg editor.
  * Author: melonpan
@@ -30,68 +30,41 @@ if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
 	define( __NAMESPACE__ . '\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
-// DEV_start
-require_once INC_DIR . 'test/test.php';
-
-require_once INC_DIR . 'test/meta/buttons.php';
-require_once INC_DIR . 'test/meta/checkbox_multiple.php';
-require_once INC_DIR . 'test/meta/checkbox.php';
-require_once INC_DIR . 'test/meta/color.php';
-require_once INC_DIR . 'test/meta/custom_text.php';
-require_once INC_DIR . 'test/meta/date_range.php';
-require_once INC_DIR . 'test/meta/date_single.php';
-require_once INC_DIR . 'test/meta/image_multiple.php';
-require_once INC_DIR . 'test/meta/image.php';
-require_once INC_DIR . 'test/meta/radio.php';
-require_once INC_DIR . 'test/meta/range_float.php';
-require_once INC_DIR . 'test/meta/range.php';
-require_once INC_DIR . 'test/meta/repeatable.php';
-require_once INC_DIR . 'test/meta/select.php';
-require_once INC_DIR . 'test/meta/text.php';
-require_once INC_DIR . 'test/meta/textarea.php';
-require_once INC_DIR . 'test/meta/_panel_1.php';
-require_once INC_DIR . 'test/meta/_panel_2.php';
-require_once INC_DIR . 'test/meta/_tab_1.php';
-require_once INC_DIR . 'test/meta/_tab_2.php';
-require_once INC_DIR . 'test/meta/_sidebar.php';
-require_once INC_DIR . 'test/meta/_register.php';
-// DEV_end
-
 // Utils and Traits.
 require_once INC_DIR . 'classes/utils/utils-methods_call.php';
-require_once INC_DIR . 'traits/trait-sanitize.php';
-require_once INC_DIR . 'traits/trait-cast_array.php';
-require_once INC_DIR . 'traits/trait-cast_schema.php';
-require_once INC_DIR . 'traits/trait-date_locales.php';
-require_once INC_DIR . 'traits/trait-meta.php';
-require_once INC_DIR . 'traits/trait-prepare_options.php';
-require_once INC_DIR . 'traits/trait-prepare_palette.php';
-require_once INC_DIR . 'traits/trait-validate_conditions.php';
+require_once INC_DIR . 'traits/trait-Sanitize.php';
+require_once INC_DIR . 'traits/trait-CastArray.php';
+require_once INC_DIR . 'traits/trait-CastSchema.php';
+require_once INC_DIR . 'traits/trait-DateLocales.php';
+require_once INC_DIR . 'traits/trait-Meta.php';
+require_once INC_DIR . 'traits/trait-PrepareOptions.php';
+require_once INC_DIR . 'traits/trait-PreparePalette.php';
+require_once INC_DIR . 'traits/trait-ValidateConditions.php';
 
 // Classes.
-require_once INC_DIR . 'classes/class-base.php';
-require_once INC_DIR . 'classes/class-panel.php';
-require_once INC_DIR . 'classes/class-setting.php';
-require_once INC_DIR . 'classes/class-sidebar.php';
-require_once INC_DIR . 'classes/class-tab.php';
-require_once INC_DIR . 'classes/class-global_utils.php';
+require_once INC_DIR . 'classes/class-Base.php';
+require_once INC_DIR . 'classes/class-Panel.php';
+require_once INC_DIR . 'classes/class-Setting.php';
+require_once INC_DIR . 'classes/class-Sidebar.php';
+require_once INC_DIR . 'classes/class-Tab.php';
+require_once INC_DIR . 'classes/class-GlobalUtils.php';
 
 // Classes Settings.
-require_once INC_DIR . 'classes/settings/class-buttons.php';
-require_once INC_DIR . 'classes/settings/class-checkbox.php';
-require_once INC_DIR . 'classes/settings/class-checkbox_multiple.php';
-require_once INC_DIR . 'classes/settings/class-color.php';
-require_once INC_DIR . 'classes/settings/class-custom_text.php';
-require_once INC_DIR . 'classes/settings/class-date_range.php';
-require_once INC_DIR . 'classes/settings/class-date_single.php';
-require_once INC_DIR . 'classes/settings/class-image.php';
-require_once INC_DIR . 'classes/settings/class-image_multiple.php';
-require_once INC_DIR . 'classes/settings/class-radio.php';
-require_once INC_DIR . 'classes/settings/class-range.php';
-require_once INC_DIR . 'classes/settings/class-range_float.php';
-require_once INC_DIR . 'classes/settings/class-select.php';
-require_once INC_DIR . 'classes/settings/class-text.php';
-require_once INC_DIR . 'classes/settings/class-textarea.php';
+require_once INC_DIR . 'classes/settings/class-Buttons.php';
+require_once INC_DIR . 'classes/settings/class-Checkbox.php';
+require_once INC_DIR . 'classes/settings/class-CheckboxMultiple.php';
+require_once INC_DIR . 'classes/settings/class-Color.php';
+require_once INC_DIR . 'classes/settings/class-CustomText.php';
+require_once INC_DIR . 'classes/settings/class-DateRange.php';
+require_once INC_DIR . 'classes/settings/class-DateSingle.php';
+require_once INC_DIR . 'classes/settings/class-Image.php';
+require_once INC_DIR . 'classes/settings/class-ImageMultiple.php';
+require_once INC_DIR . 'classes/settings/class-Radio.php';
+require_once INC_DIR . 'classes/settings/class-Range.php';
+require_once INC_DIR . 'classes/settings/class-RangeFloat.php';
+require_once INC_DIR . 'classes/settings/class-Select.php';
+require_once INC_DIR . 'classes/settings/class-Text.php';
+require_once INC_DIR . 'classes/settings/class-Textarea.php';
 
 // Core.
 require_once INC_DIR . 'core/core-create_sidebar.php';
@@ -102,6 +75,6 @@ require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-global-utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';
 
-// PRO_start
-require_once PLUGIN_DIR . 'pro/post-settings-pro.php';
-// PRO_end
+if ( file_exists( plugin_dir_path( __FILE__ ) . 'pro/post-settings-pro.php' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . 'pro/post-settings-pro.php';
+}

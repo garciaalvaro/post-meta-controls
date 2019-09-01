@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function create_sidebar() {
 
-	// This is the filter used to add custom sidebars inside other plugins/themes.
+	// Filter used to add custom sidebars inside other plugins/themes.
 	$props_raw = apply_filters( 'pmc_create_sidebar', array() );
 
 	if ( ! is_array( $props_raw ) || empty( $props_raw ) ) {
@@ -39,7 +39,7 @@ function create_sidebar() {
 	// Enqueue the locale moment.js scripts.
 	enqueue_locale( $instances['settings'] );
 
-	// Add the action to localize the data into the editor.
+	// Add the action to localize the data in the editor.
 	add_action(
 		'pmc_after_enqueue',
 		function() use ( $instances ) {
@@ -49,7 +49,7 @@ function create_sidebar() {
 
 			$post_type = get_post_type();
 
-			// Create an array of properties to localize into the main script.
+			// Create an array of properties to localize in the main script.
 			// It checks that the instance is assigned to the current post type.
 			$props = array(
 				'sidebars' => get_props( $instances['sidebars'], $post_type ),

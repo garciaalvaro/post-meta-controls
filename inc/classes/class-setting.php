@@ -134,6 +134,8 @@ abstract class Setting extends Base {
 			'range',
 			'range_float',
 			'select',
+			'text',
+			'textarea',
 		);
 		if (
 			'localstorage' === $data_type &&

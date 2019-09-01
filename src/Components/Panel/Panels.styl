@@ -1,0 +1,52 @@
+/**
+ * Panel
+ */
+
++prefix-classes('pmc-')
+
+	.panel + .panel
+		border-top 1.5px solid var(--border_color)
+
+	.panel-label-container
+		font-weight 600
+		padding 15px
+		position relative
+		text-align left
+		width 100%
+		display flex
+
+	.panel-icon svg
+		max-height 18px
+		display block
+		margin-right 8px
+
+	.panel-content
+		display flex
+		flex-direction column
+
+.pmc-tab
+
+	.components-panel__body
+		border-bottom none
+
+		&:first-child
+			border-top none
+
+	.components-panel__row
+		margin 0
+		padding 0
+		display flex
+		flex-direction column
+
+	.pmc-panel
+		padding 0
+
+		> h2.components-panel__body-title
+			margin 0
+
+		button:focus
+			background transparent
+
+		&:last-child
+			.components-panel__row
+				padding-bottom 100px

@@ -1,1 +1,2 @@
-import "./js/core";
+import "./init/register-store";
+import "./init/register-registerSidebars";

@@ -1,4 +1,4 @@
-=== Post Meta Controls for Gutenberg ===
+=== Post Meta Controls ===
 Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.0

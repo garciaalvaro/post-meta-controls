@@ -13,10 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function create_instances( $sidebars_props = array() ) {
 
-	if ( ! is_array( $sidebars_props ) || empty( $sidebars_props ) ) {
-		return null;
-	}
-
 	$instances = array(
 		'sidebars' => array(),
 		'tabs'     => array(),
@@ -54,7 +50,7 @@ function create_instances( $sidebars_props = array() ) {
 
 			$instances['tabs'][] = $tab;
 
-			$tab_path = wp_parse_args( array( $tab->get_id() ), $sidebar_path );
+			$tab_path = array( $sidebar_path, $tab->get_id() );
 
 			foreach ( $tab_props['panels'] as $panel_props ) {
 
@@ -68,7 +64,7 @@ function create_instances( $sidebars_props = array() ) {
 
 				$instances['panels'][] = $panel;
 
-				$panel_path = wp_parse_args( array( $panel->get_id() ), $tab_path );
+				$panel_path = array_merge( $tab_path, array( $panel->get_id() ) );
 
 				foreach ( $panel_props['settings'] as $setting_props ) {
 
@@ -96,7 +92,7 @@ function create_instances( $sidebars_props = array() ) {
 }
 
 /**
- * Add sidebar props to a children element props
+ * Add sidebar props to the props of a children element
  *
  * @since 1.1.0
  */
