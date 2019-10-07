@@ -67,11 +67,9 @@ require_once INC_DIR . 'classes/settings/class-Text.php';
 require_once INC_DIR . 'classes/settings/class-Textarea.php';
 
 // Core.
-require_once INC_DIR . 'core/core-create_sidebar.php';
 require_once INC_DIR . 'core/core-create_instances.php';
 
 // Register.
-require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-global-utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';
 require_once INC_DIR . 'register/register-rest.php';

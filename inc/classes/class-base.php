@@ -121,7 +121,7 @@ abstract class Base {
 	}
 
 	/**
-	 * Get props which are meant to be localized through JSON.
+	 * Get props which are meant to be sent to the editor.
 	 */
 	public function get_props_for_js() {
 
