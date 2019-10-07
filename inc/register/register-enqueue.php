@@ -33,15 +33,18 @@ function enqueue() {
 			isset( $wp_scripts->registered['wp-block-editor'] )
 				? 'wp-block-editor'
 				: 'wp-editor',
+			'wp-editor',
 			'wp-api-fetch',
 			'wp-components',
 			'wp-compose',
 			'wp-data',
+			'wp-dom-ready',
 			'wp-edit-post',
 			'wp-element',
 			'wp-hooks',
 			'wp-i18n',
 			'wp-plugins',
+			'wp-url',
 		),
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.

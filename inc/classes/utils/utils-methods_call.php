@@ -78,11 +78,13 @@ function get_props( $instances = array(), $post_type_current = '' ) {
  *
  * @since 1.0.0
  */
-function set_meta_key_exists( $setting_instances = array() ) {
+function set_meta_key_exists( $setting_instances = array(), $post_id = 0 ) {
+
+	$post_id = ! empty( $post_id ) ? $post_id : get_the_ID();
 
 	foreach ( $setting_instances as $setting_instance ) {
 
-		$setting_instance->set_meta_key_exists();
+		$setting_instance->set_meta_key_exists( $post_id );
 
 	}
 }

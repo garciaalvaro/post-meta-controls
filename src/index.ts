@@ -1,2 +1,2 @@
 import "./init/register-store";
-import "./init/register-registerSidebars";
+import "./init/register-items";

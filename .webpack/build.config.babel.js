@@ -30,11 +30,13 @@ export default {
 		"@wordpress/components": "wp.components",
 		"@wordpress/compose": "wp.compose",
 		"@wordpress/data": "wp.data",
+		"@wordpress/dom-ready": "wp.domReady",
 		"@wordpress/edit-post": "wp.editPost",
 		"@wordpress/element": "wp.element",
 		"@wordpress/hooks": "wp.hooks",
 		"@wordpress/i18n": "wp.i18n",
-		"@wordpress/plugins": "wp.plugins"
+		"@wordpress/plugins": "wp.plugins",
+		"@wordpress/url": "wp.url"
 	},
 	module: {
 		rules: [

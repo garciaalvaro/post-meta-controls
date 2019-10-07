@@ -74,6 +74,7 @@ require_once INC_DIR . 'core/core-create_instances.php';
 require_once INC_DIR . 'register/register-create_sidebar.php';
 require_once INC_DIR . 'register/register-global-utils.php';
 require_once INC_DIR . 'register/register-enqueue.php';
+require_once INC_DIR . 'register/register-rest.php';
 
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'pro/post-settings-pro.php' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'pro/post-settings-pro.php';

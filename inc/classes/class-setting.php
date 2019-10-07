@@ -44,7 +44,7 @@ abstract class Setting extends Base {
 		$this->props['data_key_with_prefix'] = $prefix . $this->props['data_key'];
 	}
 
-	public function set_meta_key_exists() {
+	public function set_meta_key_exists( $post_id = 0 ) {
 
 		if (
 			true !== $this->props['valid'] ||
@@ -55,7 +55,7 @@ abstract class Setting extends Base {
 
 		$this->props['meta_key_exists'] =
 			$this->meta_key_exists(
-				get_the_ID(),
+				$post_id,
 				$this->props['data_key_with_prefix']
 			);
 	}
