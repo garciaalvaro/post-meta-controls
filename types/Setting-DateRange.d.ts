@@ -1,6 +1,6 @@
 interface DateRangeProps {
 	type: "date_range";
-	default_value: string[];
+	default_value: [string, string] | [];
 	format: string;
 	locale: string;
 }
