@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Create instances of the classes
  *
  * @since 1.0.0
- * @version 1.1.0
  */
 function create_instances( $sidebars_props = array() ) {
 
