@@ -47,13 +47,13 @@ export class Base<T extends BaseReceivedProps> {
 			this.mergeDefaults,
 
 			// Run functions before casting the schema.
-			this.beforeSetSchema, // TODO confirm it rund=s if set and nothing happens if not set
+			this.beforeSetSchema,
 
 			// Schema.
 			this.castSchema,
 
 			// Run functions after casting the schema.
-			this.afterCastSchema // TODO confirm it rund=s if set and nothing happens if not set
+			this.afterCastSchema
 		])(props_raw);
 
 		this.validateProps();
@@ -79,7 +79,7 @@ export class Base<T extends BaseReceivedProps> {
 				icon_dashicon,
 				icon_svg,
 				...sidebar_filtered_props
-				// TODO: filtered_props is not recognized as being from SidebarProperties
+				// TODO: TS: filtered_props is not recognized as being from SidebarProperties
 			} = filtered_props as Pick<
 				SidebarProps["props"],
 				Exclude<keyof SidebarProps["props"], "class_name">
@@ -99,9 +99,9 @@ export class Base<T extends BaseReceivedProps> {
 		reduce<T["props_raw"], Partial<T["props_raw"]>>(
 			props_raw,
 			(acc, prop_value, prop_key) => {
-				// @ts-ignore TODO
+				// @ts-ignore TODO: TS
 				if (!this.props_privates.includes(prop_key)) {
-					// @ts-ignore TODO
+					// @ts-ignore TODO: TS
 					acc[prop_key] = prop_value;
 				}
 
@@ -122,14 +122,14 @@ export class Base<T extends BaseReceivedProps> {
 		const { props, props_schema: schemas, validateCondition } = this;
 
 		forOwn<T["props_schema"]>(schemas, (schema, key) => {
-			// @ts-ignore TODO
+			// @ts-ignore TODO: TS
 			const { conditions } = schema;
 
 			if (!conditions) {
 				return;
 			}
 
-			// @ts-ignore TODO
+			// @ts-ignore TODO: TS
 			validateCondition(conditions, props[key], key);
 		});
 	};

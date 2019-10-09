@@ -9,7 +9,7 @@ import {
 
 import { sanitize } from "utils/tools/sanitize.ts";
 
-// TODO: TypeScript
+// TODO: TS
 
 export const castSchema = (elements, schema) => {
 	forEach(elements, (value, key) => {
