@@ -96,10 +96,6 @@ trait Meta {
 			case 'image':
 			case 'image_multiple':
 				return function ( $value ) {
-					if ( '0' === $value ) {
-						return '';
-					}
-
 					return \absint( $value );
 				};
 				break;
