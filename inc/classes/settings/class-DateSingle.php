@@ -14,10 +14,11 @@ class DateSingle extends Setting {
 
 	protected function set_defaults() {
 		$this_defaults = array(
-			'type'          => 'date_single',
-			'default_value' => '',
-			'format'        => 'DD/MM/YYYY',
-			'locale'        => 'en',
+			'type'              => 'date_single',
+			'default_value'     => '',
+			'format'            => 'DD/MM/YYYY',
+			'locale'            => 'en',
+			'unavailable_dates' => [],
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -38,6 +39,10 @@ class DateSingle extends Setting {
 			),
 			'locale' => array(
 				'type'   => 'id',
+				'for_js' => true,
+			),
+			'unavailable_dates' => array(
+				'type'   => array( '_all' =>  array( '_all' => 'text' ) ),
 				'for_js' => true,
 			),
 		);

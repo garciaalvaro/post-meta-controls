@@ -3,6 +3,7 @@ interface DateSingleProps {
 	default_value: string;
 	format: string;
 	locale: string;
+	unavailable_dates: [string, string][];
 }
 
 interface DateSinglePropsRaw extends Partial<Omit<DateSingleProps, "type">> {}

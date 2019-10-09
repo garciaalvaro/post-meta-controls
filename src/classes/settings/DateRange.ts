@@ -16,7 +16,8 @@ export class DateRange extends Setting<Props> {
 				type: "date_range",
 				default_value: [],
 				format: "DD/MM/YYYY",
-				locale: "en"
+				locale: "en",
+				unavailable_dates: []
 			},
 
 			props_schema: {
@@ -28,6 +29,9 @@ export class DateRange extends Setting<Props> {
 				},
 				locale: {
 					type: "id"
+				},
+				unavailable_dates: {
+					type: { _all: { _all: "text" } }
 				}
 			}
 		});

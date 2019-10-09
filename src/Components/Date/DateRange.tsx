@@ -74,7 +74,8 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 				setState,
 				updateValue,
 				label,
-				help
+				help,
+				unavailable_dates
 			} = this.props;
 
 			return (
@@ -101,6 +102,34 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 						}}
 						focusedInput={focused_input}
 						onFocusChange={focused_input => setState({ focused_input })}
+						isOutsideRange={day => {
+							// To keep backwards compatibility.
+							// This sets unavailable any day before today.
+							if (!unavailable_dates.length) {
+								return day.isBefore(moment(), "day");
+							}
+
+							return unavailable_dates.reduce((acc, day_raw) => {
+								if (acc) {
+									return true;
+								}
+
+								const [start, end] = day_raw;
+
+								if (start === "before") {
+									return day.isSameOrBefore(moment(end, format).add(1, "day"));
+								}
+
+								if (end === "after") {
+									return day.isSameOrAfter(moment(start, format));
+								}
+
+								return day.isBetween(
+									moment(day_raw[0], format),
+									moment(day_raw[1], format).add(1, "day")
+								);
+							}, false);
+						}}
 					/>
 					<Button
 						onClick={() => {

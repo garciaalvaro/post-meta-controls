@@ -3,6 +3,7 @@ interface DateRangeProps {
 	default_value: [string, string] | [];
 	format: string;
 	locale: string;
+	unavailable_dates: [string, string][];
 }
 
 interface DateRangePropsRaw extends Partial<Omit<DateRangeProps, "type">> {}
