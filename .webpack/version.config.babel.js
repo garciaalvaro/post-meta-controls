@@ -28,11 +28,12 @@ export default {
 						}
 					},
 					getReplace(
-						/^( \* Version: )\d+\.\d+\.\d+(-beta)?/.source,
+						/^( \* Version: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/.source,
 						`$1${version}`
 					),
 					getReplace(
-						/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+(-beta)?/.source,
+						/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/
+							.source,
 						`$1${version}`
 					)
 				]
@@ -47,7 +48,7 @@ export default {
 						}
 					},
 					getReplace(
-						/^(Stable tag: )\d+\.\d+\.\d+(-beta)?/.source,
+						/^(Stable tag: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/.source,
 						`$1${version}`
 					)
 				]
