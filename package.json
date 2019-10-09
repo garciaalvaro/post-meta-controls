@@ -1,7 +1,7 @@
 {
 	"name": "post-meta-controls",
 	"description": "Post Meta Controls WordPress Plugin",
-	"version": "1.1.0",
+	"version": "1.2.0-beta",
 	"homepage": "https://wordpress.org/plugins/post-meta-controls/",
 	"author": "Alvaro Garcia",
 	"private": true,
