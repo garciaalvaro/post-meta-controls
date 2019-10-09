@@ -779,6 +779,12 @@ The following are all available options for a **Setting - Textarea**.
 
 == Changelog ==
 
+= 1.2.0 =
+* Use a rest route to get the sidebars data instead of printing the data inline.
+* Fixed date_range defaults not showing.
+* Fixed bug when saving empty value in image and image_multiple.
+* Code refactor. Migrated JavaScript to TypeScript.
+
 = 1.1.0 =
 * Simplified some of the core functions.
 * Styling fixes.
