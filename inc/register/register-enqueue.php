@@ -49,6 +49,4 @@ function enqueue() {
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
-
-	do_action( 'pmc_after_enqueue' ); // TODO
 }
