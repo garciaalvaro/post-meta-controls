@@ -17,7 +17,7 @@ export class DateSingle extends Setting<Props> {
 				default_value: "",
 				format: "DD/MM/YYYY",
 				locale: "en",
-				unavailable_dates: []
+				unavailable_dates: [["before", "today"]]
 			},
 
 			props_schema: {

@@ -79,10 +79,8 @@ export const DateSingle = withState({
 						onFocusChange={({ focused }) => setState({ focused })}
 						id={`${id}-date_single`}
 						isOutsideRange={day => {
-							// To keep backwards compatibility.
-							// This sets unavailable any day before today.
 							if (!unavailable_dates.length) {
-								return day.isBefore(moment(), "day");
+								return false;
 							}
 
 							return unavailable_dates.reduce((acc, day_raw) => {
@@ -90,20 +88,23 @@ export const DateSingle = withState({
 									return true;
 								}
 
-								const [start, end] = day_raw;
+								const [start_raw, end_raw] = day_raw;
 
-								if (start === "before") {
-									return day.isSameOrBefore(moment(end, format).add(1, "day"));
+								let start =
+									start_raw === "today" ? moment() : moment(start_raw, format);
+
+								let end =
+									end_raw === "today" ? moment() : moment(end_raw, format);
+
+								if (start_raw === "before") {
+									return day.isBefore(end);
 								}
 
-								if (end === "after") {
-									return day.isSameOrAfter(moment(start, format));
+								if (end_raw === "after") {
+									return day.isSameOrAfter(start);
 								}
 
-								return day.isBetween(
-									moment(day_raw[0], format),
-									moment(day_raw[1], format).add(1, "day")
-								);
+								return day.isBetween(start, end.add(1, "day"));
 							}, false);
 						}}
 					/>
