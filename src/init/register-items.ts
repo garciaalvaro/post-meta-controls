@@ -47,6 +47,10 @@ domReady(() => {
 	apiFetch<Items>({
 		path: addQueryArgs("/post-meta-controls/v1/items", { post_id, post_type })
 	}).then(items => {
+		if (!items) {
+			return;
+		}
+
 		const { sidebars, tabs, panels, settings } = items;
 
 		if (
