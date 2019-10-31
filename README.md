@@ -30,7 +30,7 @@ This is the list of controls available:
 
 ## Screenshots
 
-<img src="assets-repo/screenshot-1.png" width="700px" alt="A sidebar with different tabs, panels and controls" />
+<img src="assets-repo/screenshot-1.jpg" width="700px" alt="A sidebar with different tabs, panels and controls" />
 
 <br />
 
