@@ -1,6 +1,7 @@
 import { last, flatten } from "lodash";
 
 export const selectors: Selectors = {
+	getSettingsAll: state => state.settings,
 	getActiveTab: (state, sidebar_id) => {
 		const sidebar = state.sidebars.find(({ id }) => id === sidebar_id);
 
@@ -10,7 +11,8 @@ export const selectors: Selectors = {
 
 		return sidebar.active_tab;
 	},
-	getSidebar: (state, id) => state.sidebars.find(sidebar => sidebar.id === id),
+	getSidebar: (state, id) =>
+		state.sidebars.find(sidebar => sidebar.id === id),
 	getSettings: (state, panel_id) =>
 		state.settings.filter(setting => last(setting.path) === panel_id),
 	getPanels: (state, tab_id) =>
@@ -30,7 +32,9 @@ export const selectors: Selectors = {
 		}
 
 		const tabs = state.tabs.filter(({ path }) => path[0] === sidebar_id);
-		const panels = state.panels.filter(({ path }) => path[0] === sidebar_id);
+		const panels = state.panels.filter(
+			({ path }) => path[0] === sidebar_id
+		);
 		const settings = state.settings.filter(
 			({ path }) => path[0] === sidebar_id
 		);
