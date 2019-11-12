@@ -3,7 +3,7 @@ import apiFetch from "@wordpress/api-fetch";
 import domReady from "@wordpress/dom-ready";
 import { sprintf, __ } from "@wordpress/i18n";
 import { addQueryArgs } from "@wordpress/url";
-import { select, dispatch } from "@wordpress/data";
+import { select, dispatch, useSelect } from "@wordpress/data";
 
 import { store_slug } from "utils/data";
 import {
@@ -231,6 +231,13 @@ domReady(() => {
 		// in the first post save. Otherwise, the first post save would set
 		// empty values to those non existent meta keys.
 		// See https://github.com/WordPress/gutenberg/issues/17864
+
+		// Only continue if WordPress version is 5.3 or higher.
+		// TODO: find a more reliable way.
+		if (!useSelect) {
+			return;
+		}
+
 		const meta = select("core/editor").getEditedPostAttribute("meta") as
 			| Object
 			| undefined;
