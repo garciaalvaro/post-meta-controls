@@ -63,6 +63,7 @@ Installation from the WordPress admin.
 = 1.2.0 =
 * Added unavailable_dates option in date_single and date_range.
 * Use a rest route to get the sidebars data instead of printing the data inline.
+* Fixed WP 5.3 meta key from saving an empty value if the key doesnt exist.
 * Fixed momentjs locales file not loading correctly.
 * Fixed date_range defaults not showing.
 * Fixed bug when saving empty value in image and image_multiple.
