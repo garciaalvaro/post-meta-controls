@@ -1,6 +1,7 @@
 type Selector<T, P = null> = (state: State, parameter: P) => T;
 
 interface Selectors {
+	getSettingsAll: Selector<State["settings"]>;
 	getActiveTab: Selector<TabProps["id"], SidebarProps["id"]>;
 	getSidebar: Selector<SidebarProps | undefined, SidebarProps["id"]>;
 	getSettings: Selector<SettingProps[], PanelProps["id"]>;

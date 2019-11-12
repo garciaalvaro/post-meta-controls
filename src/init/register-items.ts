@@ -1,10 +1,11 @@
-import { isArray, isUndefined } from "lodash";
+import { isArray, isUndefined, reduce, isEqual } from "lodash";
 import apiFetch from "@wordpress/api-fetch";
 import domReady from "@wordpress/dom-ready";
 import { sprintf, __ } from "@wordpress/i18n";
 import { addQueryArgs } from "@wordpress/url";
-import { select } from "@wordpress/data";
+import { select, dispatch, useSelect } from "@wordpress/data";
 
+import { store_slug } from "utils/data";
 import {
 	Sidebar,
 	Tab,
@@ -45,7 +46,10 @@ domReady(() => {
 	).getCurrentPost();
 
 	apiFetch<Items>({
-		path: addQueryArgs("/post-meta-controls/v1/items", { post_id, post_type })
+		path: addQueryArgs("/post-meta-controls/v1/items", {
+			post_id,
+			post_type
+		})
 	}).then(items => {
 		if (!items) {
 			return;
@@ -217,5 +221,60 @@ domReady(() => {
 
 			setting.dispatch();
 		});
+
+		// Before, if a meta key did not exist it would not appear in the meta
+		// attribute of the post. The meta key was only saved when the user
+		// changed it through a control, and the plugin triggered editPost.
+		// Since Gutenberg 6.6.0 (maybe previous) and WordPress 5.3,
+		// the editor will return empty values for meta keys that do not exist.
+		// For this reason we are forced to save the setting default_value
+		// in the first post save. Otherwise, the first post save would set
+		// empty values to those non existent meta keys.
+		// See https://github.com/WordPress/gutenberg/issues/17864
+
+		// Only continue if WordPress version is 5.3 or higher.
+		// TODO: find a more reliable way.
+		if (!useSelect) {
+			return;
+		}
+
+		const meta = select("core/editor").getEditedPostAttribute("meta") as
+			| Object
+			| undefined;
+		const settings_prepared = select(store_slug).getSettingsAll() as
+			| State["settings"]
+			| undefined;
+
+		if (!meta || !settings_prepared) {
+			return;
+		}
+
+		const meta_with_defaults = reduce(
+			meta,
+			(acc, value, key) => {
+				const setting = settings_prepared.find(
+					({ data_key_with_prefix }) => data_key_with_prefix === key
+				);
+
+				if (
+					!setting ||
+					setting.meta_key_exists ||
+					// @ts-ignore TODO: default_value does not exist in custom_text setting.
+					isUndefined(setting.default_value)
+				) {
+					return { ...acc, [key]: value };
+				}
+
+				// @ts-ignore TODO: default_value does not exist in custom_text setting.
+				return { ...acc, [key]: setting.default_value };
+			},
+			{}
+		);
+
+		if (!isEqual(meta, meta_with_defaults)) {
+			dispatch("core/editor").editPost({
+				meta: meta_with_defaults
+			});
+		}
 	});
 });

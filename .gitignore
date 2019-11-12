@@ -1,5 +1,6 @@
 .DS_Store
 .todo
+.prettierrc
 _extras
 _release
 build

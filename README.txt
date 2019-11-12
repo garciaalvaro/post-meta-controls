@@ -2,8 +2,8 @@
 Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.1
-Tested up to: 5.2
-Stable tag: 1.2.0-rc1
+Tested up to: 5.3
+Stable tag: 1.2.0
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -63,6 +63,7 @@ Installation from the WordPress admin.
 = 1.2.0 =
 * Added unavailable_dates option in date_single and date_range.
 * Use a rest route to get the sidebars data instead of printing the data inline.
+* Fixed WP 5.3 meta key from saving an empty value if the key doesnt exist.
 * Fixed momentjs locales file not loading correctly.
 * Fixed date_range defaults not showing.
 * Fixed bug when saving empty value in image and image_multiple.
