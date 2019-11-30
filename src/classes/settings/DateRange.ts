@@ -18,7 +18,8 @@ export class DateRange extends Setting<Props> {
 				format: "DD/MM/YYYY",
 				locale: "en",
 				unavailable_dates: [["before", "today"]],
-				minimum_days: 1
+				minimum_days: 1,
+				maximum_days: 0
 			},
 
 			props_schema: {
@@ -35,6 +36,9 @@ export class DateRange extends Setting<Props> {
 					type: { _all: { _all: "text" } }
 				},
 				minimum_days: {
+					type: "integer"
+				},
+				maximum_days: {
 					type: "integer"
 				}
 			}
