@@ -4,6 +4,7 @@ interface DateRangeProps {
 	format: string;
 	locale: string;
 	unavailable_dates: [string, string][];
+	minimum_days: number;
 }
 
 interface DateRangePropsRaw extends Partial<Omit<DateRangeProps, "type">> {}

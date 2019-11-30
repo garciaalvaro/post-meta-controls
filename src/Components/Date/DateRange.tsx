@@ -50,7 +50,10 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 
 			const [start_date_raw, end_date_raw] = value;
 
-			let start_date: moment.Moment | null = moment(start_date_raw, format);
+			let start_date: moment.Moment | null = moment(
+				start_date_raw,
+				format
+			);
 			let end_date: moment.Moment | null = moment(end_date_raw, format);
 
 			if (!start_date.isValid()) {
@@ -68,6 +71,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			const {
 				id,
 				focused_input,
+				minimum_days,
 				start_date,
 				end_date,
 				format,
@@ -81,6 +85,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			return (
 				<BaseControl id={id} label={label} help={help}>
 					<DateRangePicker
+						minimumNights={minimum_days}
 						displayFormat={format}
 						small={true}
 						noBorder={true}
@@ -90,7 +95,10 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 						startDateId={`${id}-start_date`}
 						endDate={end_date}
 						endDateId={`${id}-end_date`}
-						onDatesChange={({ startDate: start_date, endDate: end_date }) => {
+						onDatesChange={({
+							startDate: start_date,
+							endDate: end_date
+						}) => {
 							setState({ start_date, end_date });
 
 							if (start_date && end_date) {
@@ -101,7 +109,9 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 							}
 						}}
 						focusedInput={focused_input}
-						onFocusChange={focused_input => setState({ focused_input })}
+						onFocusChange={focused_input =>
+							setState({ focused_input })
+						}
 						isOutsideRange={day => {
 							if (!unavailable_dates.length) {
 								return false;
@@ -115,10 +125,14 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 								const [start_raw, end_raw] = day_raw;
 
 								let start =
-									start_raw === "today" ? moment() : moment(start_raw, format);
+									start_raw === "today"
+										? moment()
+										: moment(start_raw, format);
 
 								let end =
-									end_raw === "today" ? moment() : moment(end_raw, format);
+									end_raw === "today"
+										? moment()
+										: moment(end_raw, format);
 
 								if (start_raw === "before") {
 									return day.isBefore(end);
