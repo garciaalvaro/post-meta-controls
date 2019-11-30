@@ -19,6 +19,7 @@ class DateRange extends Setting {
 			'format'            => 'DD/MM/YYYY',
 			'locale'            => 'en',
 			'unavailable_dates' => array( array( 'before', 'today' ) ),
+			'minimum_days'      => 1,
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -43,6 +44,10 @@ class DateRange extends Setting {
 			),
 			'unavailable_dates' => array(
 				'type'   => array( '_all' =>  array( '_all' => 'text' ) ),
+				'for_js' => true,
+			),
+			'minimum_days' => array(
+				'type'   => 'integer',
 				'for_js' => true,
 			),
 		);
