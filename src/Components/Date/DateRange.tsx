@@ -72,6 +72,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 				id,
 				focused_input,
 				minimum_days,
+				maximum_days,
 				start_date,
 				end_date,
 				format,
@@ -113,37 +114,61 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 							setState({ focused_input })
 						}
 						isOutsideRange={day => {
-							if (!unavailable_dates.length) {
-								return false;
-							}
+							if (
+								focused_input === "endDate" &&
+								maximum_days &&
+								start_date
+							) {
+								const is_outside = day.isAfter(
+									start_date.clone().add(maximum_days, "days")
+								);
 
-							return unavailable_dates.reduce((acc, day_raw) => {
-								if (acc) {
+								if (is_outside) {
 									return true;
 								}
+							}
 
-								const [start_raw, end_raw] = day_raw;
+							if (unavailable_dates.length) {
+								const is_outside = unavailable_dates.reduce(
+									(acc, day_raw) => {
+										if (acc) {
+											return true;
+										}
 
-								let start =
-									start_raw === "today"
-										? moment()
-										: moment(start_raw, format);
+										const [start_raw, end_raw] = day_raw;
 
-								let end =
-									end_raw === "today"
-										? moment()
-										: moment(end_raw, format);
+										let start =
+											start_raw === "today"
+												? moment()
+												: moment(start_raw, format);
 
-								if (start_raw === "before") {
-									return day.isBefore(end);
+										let end =
+											end_raw === "today"
+												? moment()
+												: moment(end_raw, format);
+
+										if (start_raw === "before") {
+											return day.isBefore(end);
+										}
+
+										if (end_raw === "after") {
+											return day.isSameOrAfter(start);
+										}
+
+										return day.isBetween(
+											start,
+											end.add(1, "day")
+										);
+									},
+									false
+								);
+
+								if (is_outside) {
+									return true;
 								}
+							}
 
-								if (end_raw === "after") {
-									return day.isSameOrAfter(start);
-								}
-
-								return day.isBetween(start, end.add(1, "day"));
-							}, false);
+							return false;
 						}}
 					/>
 					<Button

@@ -20,6 +20,7 @@ class DateRange extends Setting {
 			'locale'            => 'en',
 			'unavailable_dates' => array( array( 'before', 'today' ) ),
 			'minimum_days'      => 1,
+			'maximum_days'      => 0,
 		);
 
 		$parent_defaults = Setting::get_defaults();
@@ -47,6 +48,10 @@ class DateRange extends Setting {
 				'for_js' => true,
 			),
 			'minimum_days' => array(
+				'type'   => 'integer',
+				'for_js' => true,
+			),
+			'maximum_days' => array(
 				'type'   => 'integer',
 				'for_js' => true,
 			),
