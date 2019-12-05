@@ -50,7 +50,10 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 
 			const [start_date_raw, end_date_raw] = value;
 
-			let start_date: moment.Moment | null = moment(start_date_raw, format);
+			let start_date: moment.Moment | null = moment(
+				start_date_raw,
+				format
+			);
 			let end_date: moment.Moment | null = moment(end_date_raw, format);
 
 			if (!start_date.isValid()) {
@@ -68,6 +71,8 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			const {
 				id,
 				focused_input,
+				minimum_days,
+				maximum_days,
 				start_date,
 				end_date,
 				format,
@@ -81,6 +86,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			return (
 				<BaseControl id={id} label={label} help={help}>
 					<DateRangePicker
+						minimumNights={minimum_days}
 						displayFormat={format}
 						small={true}
 						noBorder={true}
@@ -90,7 +96,10 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 						startDateId={`${id}-start_date`}
 						endDate={end_date}
 						endDateId={`${id}-end_date`}
-						onDatesChange={({ startDate: start_date, endDate: end_date }) => {
+						onDatesChange={({
+							startDate: start_date,
+							endDate: end_date
+						}) => {
 							setState({ start_date, end_date });
 
 							if (start_date && end_date) {
@@ -101,35 +110,65 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 							}
 						}}
 						focusedInput={focused_input}
-						onFocusChange={focused_input => setState({ focused_input })}
+						onFocusChange={focused_input =>
+							setState({ focused_input })
+						}
 						isOutsideRange={day => {
-							if (!unavailable_dates.length) {
-								return false;
-							}
+							if (
+								focused_input === "endDate" &&
+								maximum_days &&
+								start_date
+							) {
+								const is_outside = day.isAfter(
+									start_date.clone().add(maximum_days, "days")
+								);
 
-							return unavailable_dates.reduce((acc, day_raw) => {
-								if (acc) {
+								if (is_outside) {
 									return true;
 								}
+							}
 
-								const [start_raw, end_raw] = day_raw;
+							if (unavailable_dates.length) {
+								const is_outside = unavailable_dates.reduce(
+									(acc, day_raw) => {
+										if (acc) {
+											return true;
+										}
 
-								let start =
-									start_raw === "today" ? moment() : moment(start_raw, format);
+										const [start_raw, end_raw] = day_raw;
 
-								let end =
-									end_raw === "today" ? moment() : moment(end_raw, format);
+										let start =
+											start_raw === "today"
+												? moment()
+												: moment(start_raw, format);
 
-								if (start_raw === "before") {
-									return day.isBefore(end);
+										let end =
+											end_raw === "today"
+												? moment()
+												: moment(end_raw, format);
+
+										if (start_raw === "before") {
+											return day.isBefore(end);
+										}
+
+										if (end_raw === "after") {
+											return day.isSameOrAfter(start);
+										}
+
+										return day.isBetween(
+											start,
+											end.add(1, "day")
+										);
+									},
+									false
+								);
+
+								if (is_outside) {
+									return true;
 								}
+							}
 
-								if (end_raw === "after") {
-									return day.isSameOrAfter(start);
-								}
-
-								return day.isBetween(start, end.add(1, "day"));
-							}, false);
+							return false;
 						}}
 					/>
 					<Button
