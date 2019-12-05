@@ -60,6 +60,10 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.0 =
+* Added minimum_days option in date_single and date_range.
+* Added maximum_days option in date_single and date_range.
+
 = 1.2.0 =
 * Added unavailable_dates option in date_single and date_range.
 * Use a rest route to get the sidebars data instead of printing the data inline.
