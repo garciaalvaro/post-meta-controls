@@ -5,9 +5,11 @@
 +prefix-classes('pmc-')
 
 	img.image
-		width 100%
-		height 100%
 		object-fit contain
+		width auto
+		max-width 100%
+		height auto
+		max-height 100%
 
 	.image-not_found
 		background var(--border_color)
@@ -27,7 +29,9 @@
 		width 100%
 		height 200px
 		position relative
-		text-align center
+		display flex
+		align-items center
+		justify-content center
 
 		&:hover
 			button.image-remove
