@@ -29,7 +29,8 @@ export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
 			sizes.medium ||
 			sizes.large ||
 			sizes.thumbnail ||
-			sizes.full;
+			sizes.full ||
+			image_raw;
 
 		return data.concat({
 			id,

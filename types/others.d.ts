@@ -66,6 +66,7 @@ interface ImageFromRest {
 	media_details: {
 		sizes: ImageSizes;
 	};
+	source_url: string;
 }
 
 interface Image {
