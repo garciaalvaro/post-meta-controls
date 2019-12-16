@@ -60,6 +60,10 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.1 =
+* Fixed bug that didn't load correctly small images in the editor.
+* Minor bug fixes.
+
 = 1.3.0 =
 * Added minimum_days option in date_range.
 * Added maximum_days option in date_range.
