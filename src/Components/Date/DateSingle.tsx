@@ -38,13 +38,13 @@ export const DateSingle = withState({
 			moment.locale(props.locale);
 		}
 
-		componentDidMount = () => {
+		componentDidMount() {
 			const { value, setState, format } = this.props;
 
 			const date = moment(value, format);
 
 			setState({ date: date.isValid() ? date : null });
-		};
+		}
 
 		render() {
 			const {
@@ -91,10 +91,14 @@ export const DateSingle = withState({
 								const [start_raw, end_raw] = day_raw;
 
 								let start =
-									start_raw === "today" ? moment() : moment(start_raw, format);
+									start_raw === "today"
+										? moment()
+										: moment(start_raw, format);
 
 								let end =
-									end_raw === "today" ? moment() : moment(end_raw, format);
+									end_raw === "today"
+										? moment()
+										: moment(end_raw, format);
 
 								if (start_raw === "before") {
 									return day.isBefore(end);

@@ -37,7 +37,7 @@ export const Image: React.ComponentType<OwnProps> = withState({
 	image_id_not_found: 0
 })(
 	class extends Component<Props> {
-		componentDidMount = () => {
+		componentDidMount() {
 			const { value: image_id, setState } = this.props;
 
 			if (image_id === 0) {
@@ -57,7 +57,7 @@ export const Image: React.ComponentType<OwnProps> = withState({
 					setState({ url, alt });
 				})
 				.catch(() => setState({ image_id_not_found: image_id }));
-		};
+		}
 
 		render() {
 			const {
@@ -92,7 +92,10 @@ export const Image: React.ComponentType<OwnProps> = withState({
 						allowedTypes={["image"]}
 						value={image_id}
 						render={({ open }) => (
-							<Button onClick={open} className={addPrefix("image-button")}>
+							<Button
+								onClick={open}
+								className={addPrefix("image-button")}
+							>
 								{__("Open Media Library")}
 							</Button>
 						)}
