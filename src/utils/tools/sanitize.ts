@@ -3,7 +3,6 @@ import {
 	isString,
 	isArray,
 	isBoolean,
-	escape,
 	toSafeInteger,
 	toNumber,
 	deburr
@@ -49,9 +48,13 @@ const sanitizeText = (value: any) => {
 	if (!isString(value)) {
 		return "";
 	}
-	value = escape(value);
 
-	return value;
+	const text = document.createTextNode(value);
+	const paragraph = document.createElement("p");
+
+	paragraph.appendChild(text);
+
+	return paragraph.innerHTML;
 };
 
 const sanitizeBoolean = (value: any) => {
