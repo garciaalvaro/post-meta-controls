@@ -24,13 +24,27 @@ type Props = SettingProps & {
 	updateValue: (value: any) => void;
 };
 
-interface SharedProps extends SettingPropsShared {
-	value: any;
-	updateValue: (value: any) => void;
-}
+const controls: Record<SettingProps["type"], any> = {
+	buttons: Buttons,
+	checkbox: Checkbox,
+	checkbox_multiple: CheckboxMultiple,
+	color: Color,
+	custom_text: CustomText,
+	date_range: DateRange,
+	date_single: DateSingle,
+	image: Image,
+	image_multiple: ImageMultiple,
+	radio: Radio,
+	range: Range,
+	range_float: RangeFloat,
+	select: Select,
+	text: Text,
+	textarea: Textarea
+};
 
 export const Setting: React.ComponentType<Props> = (props: Props) => {
 	const { type, ui_border_top, id } = props;
+	const Control = controls[type];
 
 	return (
 		<Div
@@ -41,63 +55,7 @@ export const Setting: React.ComponentType<Props> = (props: Props) => {
 				!ui_border_top ? "no_border_top" : null
 			]}
 		>
-			{(() => {
-				switch (type) {
-					case "buttons":
-						return <Buttons {...(props as ButtonsProps & SharedProps)} />;
-
-					case "checkbox":
-						return <Checkbox {...(props as CheckboxProps & SharedProps)} />;
-
-					case "checkbox_multiple":
-						return (
-							<CheckboxMultiple
-								{...(props as CheckboxMultipleProps & SharedProps)}
-							/>
-						);
-
-					case "color":
-						return <Color {...(props as ColorProps & SharedProps)} />;
-
-					case "custom_text":
-						return <CustomText {...(props as CustomTextProps & SharedProps)} />;
-
-					case "date_range":
-						return <DateRange {...(props as DateRangeProps & SharedProps)} />;
-
-					case "date_single":
-						return <DateSingle {...(props as DateSingleProps & SharedProps)} />;
-
-					case "image":
-						return <Image {...(props as ImageProps & SharedProps)} />;
-
-					case "image_multiple":
-						return (
-							<ImageMultiple {...(props as ImageMultipleProps & SharedProps)} />
-						);
-
-					case "radio":
-						return <Radio {...(props as RadioProps & SharedProps)} />;
-
-					case "range":
-						return <Range {...(props as RangeProps & SharedProps)} />;
-
-					case "range_float":
-						return <RangeFloat {...(props as RangeFloatProps & SharedProps)} />;
-
-					case "select":
-						return <Select {...(props as SelectProps & SharedProps)} />;
-
-					case "text":
-						return <Text {...(props as TextProps & SharedProps)} />;
-
-					case "textarea":
-						return <Textarea {...(props as TextareaProps & SharedProps)} />;
-
-					default:
-						return null;
-				}
-			})()}
+			{Control && <Control {...props} />}
 		</Div>
 	);
 };

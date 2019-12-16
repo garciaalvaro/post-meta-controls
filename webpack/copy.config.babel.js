@@ -28,7 +28,8 @@ export default {
 					"README.md",
 					"src/**",
 					"tsconfig.json",
-					"types/**"
+					"types/**",
+					"webpack/**"
 				]
 			}
 		])

@@ -14,10 +14,7 @@ export const Text: React.ComponentType<Props> = props => {
 			help={help}
 			placeholder={placeholder}
 			value={value}
-			onChange={a => {
-				l(11, a);
-				updateValue(a);
-			}}
+			onChange={updateValue}
 		/>
 	);
 };

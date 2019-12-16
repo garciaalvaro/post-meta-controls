@@ -87,7 +87,7 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 	images: []
 })(
 	class extends Component<Props> {
-		componentDidMount = () => {
+		componentDidMount() {
 			const { value, setState } = this.props;
 
 			if (!value.length) {
@@ -118,9 +118,11 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 				// When fetching an array of media the fetch doesnt return an error
 				// if the images were not found, we will handle that scenario in the resolve
 				.catch(() =>
-					setState({ images: value.map(id => ({ id, alt: "", url: "" })) })
+					setState({
+						images: value.map(id => ({ id, alt: "", url: "" }))
+					})
 				);
-		};
+		}
 
 		render() {
 			const {
@@ -140,7 +142,10 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 						value={value}
 						multiple={true}
 						render={({ open }) => (
-							<Button onClick={open} className={addPrefix("image-button")}>
+							<Button
+								onClick={open}
+								className={addPrefix("image-button")}
+							>
 								{__("Open Media Library")}
 							</Button>
 						)}
@@ -154,7 +159,9 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 							// which makes it impossible to differentiate between a post that has
 							// no values selected and one which hasnt saved any value, and this permits us
 							// to use the default_value correctly.
-							updateValue(data.length ? data.map(({ id }) => id) : [0]);
+							updateValue(
+								data.length ? data.map(({ id }) => id) : [0]
+							);
 						}}
 					/>
 					<SortableList
@@ -163,15 +170,23 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 						items={images}
 						onSortEnd={({ oldIndex, newIndex }) => {
 							updateValue(arrayMove(value, oldIndex, newIndex));
-							setState({ images: arrayMove(images, oldIndex, newIndex) });
+							setState({
+								images: arrayMove(images, oldIndex, newIndex)
+							});
 						}}
 						custom={{
 							removeImage: (image_id: Image["id"]) => {
-								const value_updated = value.filter(id => id !== image_id);
+								const value_updated = value.filter(
+									id => id !== image_id
+								);
 
-								updateValue(value_updated.length ? value_updated : [0]);
+								updateValue(
+									value_updated.length ? value_updated : [0]
+								);
 								setState({
-									images: images.filter(({ id }) => id !== image_id)
+									images: images.filter(
+										({ id }) => id !== image_id
+									)
 								});
 							}
 						}}

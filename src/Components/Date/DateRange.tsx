@@ -41,7 +41,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			moment.locale(props.locale);
 		}
 
-		componentDidMount = () => {
+		componentDidMount() {
 			const { value, setState, format } = this.props;
 
 			if (value.length !== 2) {
@@ -65,7 +65,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 			}
 
 			setState({ start_date, end_date });
-		};
+		}
 
 		render() {
 			const {

@@ -18,6 +18,7 @@ export const App: React.ComponentType<Props> = props => {
 			<PluginSidebar name={plugin_id} title={label}>
 				<Sidebar id={sidebar_id} />
 			</PluginSidebar>
+
 			<PluginSidebarMoreMenuItem target={plugin_id}>
 				{label}
 			</PluginSidebarMoreMenuItem>

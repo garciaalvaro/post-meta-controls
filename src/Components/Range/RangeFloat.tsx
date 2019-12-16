@@ -18,11 +18,11 @@ export const RangeFloat: React.ComponentType<OwnProps> = withState({
 	digits_length: ""
 })(
 	class extends Component<Props> {
-		componentDidMount = () => {
+		componentDidMount() {
 			const { max, setState } = this.props;
 
 			setState({ digits_length: Math.round(max).toString().length + 2 });
-		};
+		}
 
 		render() {
 			const {
