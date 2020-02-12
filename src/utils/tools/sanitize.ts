@@ -8,15 +8,18 @@ import {
 	deburr
 } from "lodash";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeHtml = (value: any) => {
 	if (!isString(value)) {
 		return "";
 	}
+
 	value = DOMPurify.sanitize(value);
 
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeUrl = (value: any) => {
 	if (!isString(value)) {
 		return "#";
@@ -34,16 +37,19 @@ const sanitizeUrl = (value: any) => {
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeId = (value: any) => {
 	if (!isString(value)) {
 		return "";
 	}
+
 	value = deburr(value);
 	value = value.replace(/[^\w-]/g, "");
 
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeText = (value: any) => {
 	if (!isString(value)) {
 		return "";
@@ -57,10 +63,12 @@ const sanitizeText = (value: any) => {
 	return paragraph.innerHTML;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeBoolean = (value: any) => {
 	return isBoolean(value) && value === true ? true : false;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeFloat = (value: any) => {
 	value = toNumber(value);
 	value = Math.abs(value);
@@ -69,6 +77,7 @@ const sanitizeFloat = (value: any) => {
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeInteger = (value: any) => {
 	value = toSafeInteger(value);
 	value = Math.abs(value);
@@ -76,6 +85,7 @@ const sanitizeInteger = (value: any) => {
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeArray = <T>(value: any): T[] => {
 	if (!isArray(value)) {
 		return [];

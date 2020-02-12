@@ -1,16 +1,17 @@
-interface Action<T, P> {
+type Action<T, P> = {
 	type: T;
 	payload: P;
-}
+};
 
-interface ActionCreator<A extends Actions> {
+type ActionCreator<A extends Actions> = {
 	(payload: A["payload"]): A;
-}
+};
 
 type ActionUpdatePropLocal = Action<
 	"UPDATE_PROP_LOCAL",
 	{
 		setting_id: SettingProps["id"];
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		value: any;
 	}
 >;
@@ -18,6 +19,7 @@ type ActionUpdatePropNone = Action<
 	"UPDATE_PROP_NONE",
 	{
 		setting_id: SettingProps["id"];
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		value: any;
 	}
 >;
@@ -31,7 +33,7 @@ type ActionAddTab = Action<"ADD_TAB", TabProps>;
 type ActionAddPanel = Action<"ADD_PANEL", PanelProps>;
 type ActionAddSetting = Action<"ADD_SETTING", SettingProps>;
 
-interface ActionCreators {
+type ActionCreators = {
 	updatePropLocal: ActionCreator<ActionUpdatePropLocal>;
 	updatePropNone: ActionCreator<ActionUpdatePropNone>;
 	setMetaKeyExists: ActionCreator<ActionSetMetaKeyExists>;
@@ -40,7 +42,7 @@ interface ActionCreators {
 	addTab: ActionCreator<ActionAddTab>;
 	addPanel: ActionCreator<ActionAddPanel>;
 	addSetting: ActionCreator<ActionAddSetting>;
-}
+};
 
 type Actions =
 	| ActionUpdatePropLocal

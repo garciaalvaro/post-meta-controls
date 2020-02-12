@@ -1,7 +1,7 @@
 import { TextareaControl } from "@wordpress/components";
 
 interface Props extends TextareaProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: TextareaProps["default_value"];
 }
 

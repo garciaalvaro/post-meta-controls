@@ -20,7 +20,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends ColorProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: ColorProps["default_value"];
 }
 
@@ -83,7 +83,9 @@ export const Color = withState({ color: "", alpha: 100 })(
 
 								updateValue(
 									color_tiny.isValid()
-										? color_tiny.setAlpha(alpha / 100).toRgbString()
+										? color_tiny
+												.setAlpha(alpha / 100)
+												.toRgbString()
 										: ""
 								);
 							} else {
@@ -108,7 +110,9 @@ export const Color = withState({ color: "", alpha: 100 })(
 
 								updateValue(
 									color_tiny.isValid()
-										? color_tiny.setAlpha(alpha / 100).toRgbString()
+										? color_tiny
+												.setAlpha(alpha / 100)
+												.toRgbString()
 										: ""
 								);
 							}}

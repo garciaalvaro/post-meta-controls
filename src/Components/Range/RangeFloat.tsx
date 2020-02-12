@@ -8,7 +8,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends RangeFloatProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: number) => void;
 	value: RangeFloatProps["default_value"];
 }
 

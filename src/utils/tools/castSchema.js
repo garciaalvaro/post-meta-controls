@@ -27,7 +27,8 @@ export const castSchema = (elements, schema) => {
 		}
 
 		if (isObject(schema_type)) {
-			value = !isObject(value) && !isArray(value) ? castArray(value) : value;
+			value =
+				!isObject(value) && !isArray(value) ? castArray(value) : value;
 
 			elements[key] = castSchema(value, schema_type);
 			return;

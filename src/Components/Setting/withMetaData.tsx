@@ -6,14 +6,17 @@ import { isUndefined } from "lodash";
 import { store_slug } from "utils/data";
 
 interface WithSelectProps {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any;
 }
 
 interface WithDispatchProps {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	updateValue: (value: any) => void;
 }
 
 interface OwnProps extends SettingPropsShared {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	default_value: any;
 }
 
@@ -22,7 +25,7 @@ interface Props extends OwnProps, WithSelectProps, WithDispatchProps {}
 export const withMetaData = compose(
 	withDispatch<WithDispatchProps, OwnProps>(
 		(dispatch, { meta_key_exists, data_key_with_prefix }) => ({
-			updateValue: (value: any) => {
+			updateValue: value => {
 				// Save the value to the "core/editor" store.
 				dispatch("core/editor").editPost({
 					meta: { [data_key_with_prefix]: value }
@@ -43,7 +46,9 @@ export const withMetaData = compose(
 
 			return {
 				value:
-					meta && meta_key_exists ? meta[data_key_with_prefix] : default_value
+					meta && meta_key_exists
+						? meta[data_key_with_prefix]
+						: default_value
 			};
 		}
 	),

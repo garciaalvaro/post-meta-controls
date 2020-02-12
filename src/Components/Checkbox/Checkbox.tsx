@@ -5,7 +5,7 @@ import {
 } from "@wordpress/components";
 
 interface Props extends CheckboxProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: boolean) => void;
 	value: CheckboxProps["default_value"];
 }
 

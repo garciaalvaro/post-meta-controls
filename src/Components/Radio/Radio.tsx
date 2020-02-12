@@ -1,7 +1,7 @@
 import { RadioControl } from "@wordpress/components";
 
 interface Props extends RadioProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: RadioProps["default_value"];
 }
 

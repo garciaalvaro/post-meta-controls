@@ -15,7 +15,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends CheckboxMultipleProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string[]) => void;
 	value: CheckboxMultipleProps["default_value"];
 }
 
@@ -55,7 +55,10 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 			// in the options array, we display them.
 			const default_options = default_value.reduce<Option[]>(
 				(default_options, value) => {
-					if (options_key.includes(value) || old_options_key.includes(value)) {
+					if (
+						options_key.includes(value) ||
+						old_options_key.includes(value)
+					) {
 						return default_options;
 					}
 
@@ -65,7 +68,11 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 			);
 
 			setState({
-				options_prepared: [...options, ...old_options, ...default_options]
+				options_prepared: [
+					...options,
+					...old_options,
+					...default_options
+				]
 			});
 		}
 
@@ -88,7 +95,9 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 						? value
 						: value.concat(option_value);
 				} else {
-					value_updated = value.filter(value => value !== option_value);
+					value_updated = value.filter(
+						value => value !== option_value
+					);
 				}
 
 				// If there is no value selected we save an empty string.
@@ -104,22 +113,30 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 			return (
 				<BaseControl id={id} label={label} help={help}>
 					{use_toggle
-						? options_prepared.map(({ label, value: option_value }, index) => (
-								<ToggleControl
-									key={index}
-									label={label}
-									checked={value.includes(option_value)}
-									onChange={selected => onChange(selected, option_value)}
-								/>
-						  ))
-						: options_prepared.map(({ label, value: option_value }, index) => (
-								<CheckboxControl
-									key={index}
-									label={label}
-									checked={value.includes(option_value)}
-									onChange={selected => onChange(selected, option_value)}
-								/>
-						  ))}
+						? options_prepared.map(
+								({ label, value: option_value }, index) => (
+									<ToggleControl
+										key={index}
+										label={label}
+										checked={value.includes(option_value)}
+										onChange={selected =>
+											onChange(selected, option_value)
+										}
+									/>
+								)
+						  )
+						: options_prepared.map(
+								({ label, value: option_value }, index) => (
+									<CheckboxControl
+										key={index}
+										label={label}
+										checked={value.includes(option_value)}
+										onChange={selected =>
+											onChange(selected, option_value)
+										}
+									/>
+								)
+						  )}
 				</BaseControl>
 			);
 		}

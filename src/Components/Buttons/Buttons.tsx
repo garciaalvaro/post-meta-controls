@@ -11,7 +11,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends ButtonsProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: ButtonsProps["default_value"];
 }
 
@@ -56,18 +56,20 @@ export const Buttons: React.ComponentType<OwnProps> = withState({
 					<Toolbar
 						// @ts-ignore. Toolbar icon admits passing a component
 						// although the definition file indicates only string
-						controls={options.map(({ title, value: option_value }, index) => ({
-							icon: icons[index],
-							title: title,
-							isActive: option_value === value,
-							onClick: () => {
-								if (allow_empty && option_value === value) {
-									updateValue("");
-								} else {
-									updateValue(option_value);
+						controls={options.map(
+							({ title, value: option_value }, index) => ({
+								icon: icons[index],
+								title: title,
+								isActive: option_value === value,
+								onClick: () => {
+									if (allow_empty && option_value === value) {
+										updateValue("");
+									} else {
+										updateValue(option_value);
+									}
 								}
-							}
-						}))}
+							})
+						)}
 					/>
 				</BaseControl>
 			);

@@ -2,7 +2,7 @@ import { castArray } from "lodash";
 import { __ } from "@wordpress/i18n";
 import * as blockEditor from "@wordpress/block-editor";
 import * as editor from "@wordpress/editor";
-import { Component, Fragment } from "@wordpress/element";
+import { Component } from "@wordpress/element";
 import { Button, BaseControl } from "@wordpress/components";
 import { withState } from "@wordpress/compose";
 import apiFetch from "@wordpress/api-fetch";
@@ -25,7 +25,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends ImageProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: number) => void;
 	value: ImageProps["default_value"];
 }
 

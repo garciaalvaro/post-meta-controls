@@ -3,7 +3,7 @@ import { RangeControl } from "@wordpress/components";
 import "./Range.styl";
 
 interface Props extends RangeProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: number) => void;
 	value: RangeProps["default_value"];
 }
 

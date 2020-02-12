@@ -1,7 +1,8 @@
 import { Setting } from "../Setting";
 
 interface Props {
-	props_raw: TextPropsRaw & Omit<SettingPropsShared, "class_name" | "warnings">;
+	props_raw: TextPropsRaw &
+		Omit<SettingPropsShared, "class_name" | "warnings">;
 	props_defaults: TextProps;
 	props_schema: TextPropsSchema;
 }

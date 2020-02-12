@@ -47,7 +47,9 @@ export const Sidebar = compose([
 					className={[
 						"sidebar",
 						`color_scheme-type-${color_scheme.type}`,
-						color_scheme.id ? `color_scheme-name-${color_scheme.id}` : null
+						color_scheme.id
+							? `color_scheme-name-${color_scheme.id}`
+							: null
 					]}
 				>
 					{!!warnings.length ? (

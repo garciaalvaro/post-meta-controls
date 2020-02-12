@@ -1,22 +1,21 @@
-interface ColorPaletteRaw {
+type ColorPaletteRaw = {
 	[color_name: string]: string;
-}
+};
 
-interface ColorPalette {
+type ColorPalette = {
 	name: string;
 	color: string;
-}
+};
 
-interface ColorProps {
+type ColorProps = {
 	type: "color";
 	default_value: string;
 	alpha_control: boolean;
 	palette: ColorPalette[];
-}
+};
 
-interface ColorPropsRaw extends Partial<Omit<ColorProps, "type" | "palette">> {
+type ColorPropsRaw = Partial<Omit<ColorProps, "type" | "palette">> & {
 	palette?: ColorPalette[] | ColorPaletteRaw;
-}
+};
 
-interface ColorPropsSchema
-	extends Record<keyof Omit<ColorProps, "type">, SchemaElement> {}
+type ColorPropsSchema = Record<keyof Omit<ColorProps, "type">, SchemaElement>;

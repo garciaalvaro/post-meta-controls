@@ -21,7 +21,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends ImageMultipleProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: number[]) => void;
 	value: ImageMultipleProps["default_value"];
 }
 

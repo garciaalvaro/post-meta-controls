@@ -42,7 +42,9 @@ export class Range extends Setting<Props> {
 								props_raw.max - props_raw.min > props_raw.step,
 							/* translators: %s: max property, %s: min property. */
 							message: sprintf(
-								__("This value has to be greater than '%s' minus '%s' values."),
+								__(
+									"This value has to be greater than '%s' minus '%s' values."
+								),
 								"max",
 								"min"
 							)

@@ -17,7 +17,8 @@ module.exports = {
 		"@typescript-eslint/no-var-requires": "off",
 		"@typescript-eslint/ban-ts-ignore": "off",
 		"react/react-in-jsx-scope": "off",
-		"react/prop-types": "off"
+		"react/prop-types": "off",
+		"react/display-name": "off"
 	},
 	settings: {
 		react: {

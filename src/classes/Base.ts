@@ -76,7 +76,9 @@ export class Base<T extends BaseReceivedProps> {
 
 		if (class_name === "sidebar") {
 			const {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				icon_dashicon,
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				icon_svg,
 				...sidebar_filtered_props
 				// TODO: TS: filtered_props is not recognized as being from SidebarProperties
@@ -113,7 +115,10 @@ export class Base<T extends BaseReceivedProps> {
 	// Assign default props if not present in array and
 	// remove keys which are not present in defaults.
 	mergeDefaults = (props_raw: T["props_raw"]) =>
-		defaults(pick(props_raw, keys(this.props_defaults)), this.props_defaults);
+		defaults(
+			pick(props_raw, keys(this.props_defaults)),
+			this.props_defaults
+		);
 
 	castSchema = (props_raw: T["props_raw"]) =>
 		castSchema(props_raw, this.props_schema);
@@ -134,7 +139,12 @@ export class Base<T extends BaseReceivedProps> {
 		});
 	};
 
-	validateCondition = (condition: SchemaCondition, value: any, key: string) => {
+	validateCondition = (
+		condition: SchemaCondition,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		value: any,
+		key: string
+	) => {
 		const { addWarning, validateCondition } = this;
 
 		if (condition === "not_empty") {
@@ -149,7 +159,9 @@ export class Base<T extends BaseReceivedProps> {
 		}
 
 		if (isArray(condition)) {
-			condition.forEach(condition => validateCondition(condition, value, key));
+			condition.forEach(condition =>
+				validateCondition(condition, value, key)
+			);
 
 			return;
 		}

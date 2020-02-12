@@ -72,7 +72,8 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 				},
 				data_key_with_prefix: {
 					type: "id",
-					conditions: props_raw.data_type !== "none" ? "not_empty" : false
+					conditions:
+						props_raw.data_type !== "none" ? "not_empty" : false
 				},
 				ui_border_top: {
 					type: "boolean"

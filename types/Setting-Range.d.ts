@@ -1,12 +1,11 @@
-interface RangeProps {
+type RangeProps = {
 	type: "range";
 	default_value: number;
 	step: number;
 	min: number;
 	max: number;
-}
+};
 
-interface RangePropsRaw extends Partial<Omit<RangeProps, "type">> {}
+type RangePropsRaw = Partial<Omit<RangeProps, "type">>;
 
-interface RangePropsSchema
-	extends Record<keyof Omit<RangeProps, "type">, SchemaElement> {}
+type RangePropsSchema = Record<keyof Omit<RangeProps, "type">, SchemaElement>;

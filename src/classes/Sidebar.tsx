@@ -106,7 +106,9 @@ export class Sidebar extends Base<Props> {
 		registerPlugin(plugin_id, {
 			// @ts-ignore TODO: TS
 			icon: icon || "carrot",
-			render: () => <App plugin_id={plugin_id} sidebar_id={id} label={label} />
+			render: () => (
+				<App plugin_id={plugin_id} sidebar_id={id} label={label} />
+			)
 		});
 	};
 

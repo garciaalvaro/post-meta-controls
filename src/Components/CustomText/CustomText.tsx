@@ -3,9 +3,7 @@ import { Fragment } from "@wordpress/element";
 import "./CustomText.styl";
 import { A, P, H3, Ol, Ul, Li } from "utils/Components";
 
-interface Props extends CustomTextProps, SettingPropsShared {
-	updateValue: (value: any) => void;
-}
+interface Props extends CustomTextProps, SettingPropsShared {}
 
 export const CustomText: React.ComponentType<Props> = props => {
 	const { content } = props;
@@ -26,7 +24,11 @@ export const CustomText: React.ComponentType<Props> = props => {
 
 							case "link":
 							case "a":
-								return <A href={element.href || "#"}>{element.content}</A>;
+								return (
+									<A href={element.href || "#"}>
+										{element.content}
+									</A>
+								);
 
 							case "ordered_list":
 							case "ol":

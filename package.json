@@ -12,8 +12,8 @@
 		"copy": "webpack --mode production --config ./webpack/copy.config.babel.js && rm _release/_temp.js",
 		"version": "webpack --mode production --config ./webpack/version.config.babel.js && rm _temp.js",
 		"pragma": "webpack --mode production --config ./webpack/pragma.config.babel.js && rm _release/_temp.js",
-		"release": "rm -rf build _release && npm run type && npm run version && npm run prod && npm run moment && npm run copy && npm run pragma",
-		"type": "tsc",
+		"release": "rm -rf build _release && npm run type-check && npm run version && npm run prod && npm run moment && npm run copy && npm run pragma",
+		"type-check": "tsc",
 		"lint": "eslint 'src/**/*.{ts,tsx}'",
 		"prettier": "prettier --check 'src/**/*.{ts,tsx}'"
 	},

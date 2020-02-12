@@ -47,7 +47,8 @@ export class Panel extends Base<Props> {
 				},
 				label: {
 					type: "text",
-					conditions: props_raw.collapsible === true ? "not_empty" : false
+					conditions:
+						props_raw.collapsible === true ? "not_empty" : false
 				},
 				initial_open: {
 					type: "boolean"

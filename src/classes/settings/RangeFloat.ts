@@ -31,7 +31,9 @@ export class RangeFloat extends Setting<Props> {
 					type: "float",
 					conditions: [
 						{
-							value: !isUndefined(props_raw.step) && props_raw.step > 0,
+							value:
+								!isUndefined(props_raw.step) &&
+								props_raw.step > 0,
 							message: __("This value has to be greater than 0.")
 						},
 						{
@@ -42,7 +44,9 @@ export class RangeFloat extends Setting<Props> {
 								props_raw.max - props_raw.min > props_raw.step,
 							/* translators: %s: max property, %s: min property. */
 							message: sprintf(
-								__("This value has to be greater than '%s' minus '%s' values."),
+								__(
+									"This value has to be greater than '%s' minus '%s' values."
+								),
 								"max",
 								"min"
 							)

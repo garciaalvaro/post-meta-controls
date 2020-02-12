@@ -3,7 +3,7 @@ import { SelectControl } from "@wordpress/components";
 import "./Select.styl";
 
 interface Props extends SelectProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: SelectProps["default_value"];
 }
 

@@ -1,4 +1,4 @@
-interface PanelProps {
+type PanelProps = {
 	class_name: "panel";
 	warnings: Warning[];
 	id: string;
@@ -8,11 +8,10 @@ interface PanelProps {
 	collapsible: boolean;
 	icon_dashicon: string;
 	icon_svg: string;
-}
+};
 
-interface PanelPropsRaw
-	extends Partial<Omit<PanelProps, "class_name" | "warnings">> {}
+type PanelPropsRaw = Partial<Omit<PanelProps, "class_name" | "warnings">>;
 
-interface PanelPropsSchema extends Record<keyof PanelProps, SchemaElement> {}
+type PanelPropsSchema = Record<keyof PanelProps, SchemaElement>;
 
 type PanelPropsPrivates = ("class_name" | "warnings")[];

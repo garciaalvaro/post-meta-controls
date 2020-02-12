@@ -28,12 +28,29 @@ import {
 	Textarea
 } from "../classes";
 
-interface Items {
-	sidebars?: any[];
-	tabs?: any[];
-	panels?: any[];
-	settings?: any[];
-}
+type Setting =
+	| Buttons
+	| Checkbox
+	| CheckboxMultiple
+	| Color
+	| CustomText
+	| DateRange
+	| DateSingle
+	| Image
+	| ImageMultiple
+	| Radio
+	| Range
+	| RangeFloat
+	| Select
+	| Text
+	| Textarea;
+
+type Items = {
+	sidebars?: SidebarProps[];
+	tabs?: TabProps[];
+	panels?: PanelProps[];
+	settings?: SettingProps[];
+};
 
 /* translators: %s: property name. */
 const already_exists_message = __(
@@ -67,7 +84,7 @@ domReady(() => {
 		}
 
 		const ids: string[] = [];
-		const checkId = (instance: any, is_sidebar = false) => {
+		const checkId = (instance: Sidebar | Tab | Panel | Setting) => {
 			const id = instance.getId();
 
 			if (ids.includes(id)) {
@@ -75,7 +92,7 @@ domReady(() => {
 
 				instance.addWarning("id", message);
 
-				if (is_sidebar) {
+				if ("setIdAlreadyExists" in instance) {
 					instance.setIdAlreadyExists();
 				}
 
@@ -87,7 +104,7 @@ domReady(() => {
 
 		// Prevent settings from having the same data_key.
 		const data_keys: string[] = [];
-		const checkDataKey = (setting: any) => {
+		const checkDataKey = (setting: Setting) => {
 			if (setting.getDataType() === "none") {
 				return;
 			}
@@ -103,20 +120,20 @@ domReady(() => {
 			}
 		};
 
-		sidebars.forEach((props_raw: any) => {
+		sidebars.forEach((props_raw: SidebarPropsRaw) => {
 			const sidebar = new Sidebar(props_raw);
 
 			if (!sidebar.is_valid) {
 				return;
 			}
 
-			checkId(sidebar, true);
+			checkId(sidebar);
 
 			sidebar.dispatch();
 			sidebar.registerPlugin();
 		});
 
-		tabs.forEach((props_raw: any) => {
+		tabs.forEach((props_raw: TabPropsRaw) => {
 			const tab = new Tab(props_raw);
 
 			if (!tab.is_valid) {
@@ -128,7 +145,7 @@ domReady(() => {
 			tab.dispatch();
 		});
 
-		panels.forEach((props_raw: any) => {
+		panels.forEach((props_raw: PanelPropsRaw) => {
 			const panel = new Panel(props_raw);
 
 			if (!panel.is_valid) {
@@ -140,7 +157,7 @@ domReady(() => {
 			panel.dispatch();
 		});
 
-		settings.forEach((props_raw: any) => {
+		settings.forEach((props_raw: SettingPropsRaw) => {
 			const { type } = props_raw;
 
 			if (isUndefined(type)) {
@@ -239,7 +256,7 @@ domReady(() => {
 		}
 
 		const meta = select("core/editor").getEditedPostAttribute("meta") as
-			| Object
+			| Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 			| undefined;
 		const settings_prepared = select(store_slug).getSettingsAll() as
 			| State["settings"]

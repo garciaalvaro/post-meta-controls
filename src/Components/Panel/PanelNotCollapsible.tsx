@@ -4,9 +4,7 @@ import { Span, Div } from "utils/Components";
 import { Settings } from "../Setting/Settings";
 import { PanelPrepared } from "./Panels";
 
-export const PanelNotCollapsible: React.ComponentType<
-	PanelPrepared
-> = props => {
+export const PanelNotCollapsible: React.ComponentType<PanelPrepared> = props => {
 	const { label, icon, id } = props;
 
 	return (

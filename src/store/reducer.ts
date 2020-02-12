@@ -36,7 +36,10 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 					const sidebar = draft.find(({ id }) => id === sidebar_id);
 
 					if (sidebar) {
-						sidebar.settings_id = [...sidebar.settings_id, action.payload.id];
+						sidebar.settings_id = [
+							...sidebar.settings_id,
+							action.payload.id
+						];
 					}
 				})
 			};
@@ -105,7 +108,9 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 					return;
 				}
 
-				draft_state.settings_persisted[setting.data_key_with_prefix] = value;
+				draft_state.settings_persisted[
+					setting.data_key_with_prefix
+				] = value;
 			});
 		}
 

@@ -20,11 +20,15 @@ import { Text } from "../Text/Text";
 import { Textarea } from "../Textarea/Textarea";
 
 type Props = SettingProps & {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	updateValue: (value: any) => void;
 };
 
-const controls: Record<SettingProps["type"], any> = {
+type Controls = Record<SettingProps["type"], React.ReactType>;
+
+const controls: Controls = {
 	buttons: Buttons,
 	checkbox: Checkbox,
 	checkbox_multiple: CheckboxMultiple,
@@ -42,7 +46,7 @@ const controls: Record<SettingProps["type"], any> = {
 	textarea: Textarea
 };
 
-export const Setting: React.ComponentType<Props> = (props: Props) => {
+export const Setting: React.ComponentType<Props> = props => {
 	const { type, ui_border_top, id } = props;
 	const Control = controls[type];
 

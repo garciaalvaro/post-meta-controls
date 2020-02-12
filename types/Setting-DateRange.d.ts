@@ -1,4 +1,4 @@
-interface DateRangeProps {
+type DateRangeProps = {
 	type: "date_range";
 	default_value: [string, string] | [];
 	format: string;
@@ -6,9 +6,11 @@ interface DateRangeProps {
 	unavailable_dates: [string, string][];
 	minimum_days: number;
 	maximum_days: number;
-}
+};
 
-interface DateRangePropsRaw extends Partial<Omit<DateRangeProps, "type">> {}
+type DateRangePropsRaw = Partial<Omit<DateRangeProps, "type">>;
 
-interface DateRangePropsSchema
-	extends Record<keyof Omit<DateRangeProps, "type">, SchemaElement> {}
+type DateRangePropsSchema = Record<
+	keyof Omit<DateRangeProps, "type">,
+	SchemaElement
+>;

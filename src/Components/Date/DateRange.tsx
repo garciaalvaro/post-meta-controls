@@ -18,7 +18,7 @@ interface WithStateProps {
 }
 
 interface OwnProps extends DateRangeProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: [string, string] | [string]) => void;
 	value: DateRangeProps["default_value"];
 }
 
@@ -137,12 +137,12 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 
 										const [start_raw, end_raw] = day_raw;
 
-										let start =
+										const start =
 											start_raw === "today"
 												? moment()
 												: moment(start_raw, format);
 
-										let end =
+										const end =
 											end_raw === "today"
 												? moment()
 												: moment(end_raw, format);

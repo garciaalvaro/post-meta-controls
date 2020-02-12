@@ -1,7 +1,7 @@
 import { TextControl } from "@wordpress/components";
 
 interface Props extends TextProps, SettingPropsShared {
-	updateValue: (value: any) => void;
+	updateValue: (value: string) => void;
 	value: TextProps["default_value"];
 }
 

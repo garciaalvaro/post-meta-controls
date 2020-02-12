@@ -27,7 +27,7 @@ interface WithSelectProps {
 	active_tab: TabProps["id"];
 }
 
-interface WithDispatchProps extends Pick<ActionCreators, "openTab"> {}
+type WithDispatchProps = Pick<ActionCreators, "openTab">;
 
 interface Props
 	extends WithStateProps,
@@ -50,16 +50,18 @@ export const Tabs = compose([
 			const { tabs, setState } = this.props;
 
 			setState({
-				tabs_prepared: tabs.map(({ label, icon_dashicon, icon_svg, id }) => ({
-					name: id,
-					className: addPrefix("tab-button"),
-					title: (
-						<Fragment key={id}>
-							{prepareIcon(icon_svg, icon_dashicon, "tab")}
-							<Span className="tab-label">{label}</Span>
-						</Fragment>
-					)
-				}))
+				tabs_prepared: tabs.map(
+					({ label, icon_dashicon, icon_svg, id }) => ({
+						name: id,
+						className: addPrefix("tab-button"),
+						title: (
+							<Fragment key={id}>
+								{prepareIcon(icon_svg, icon_dashicon, "tab")}
+								<Span className="tab-label">{label}</Span>
+							</Fragment>
+						)
+					})
+				)
 			});
 		}
 
@@ -83,7 +85,9 @@ export const Tabs = compose([
 			return (
 				<TabPanel
 					activeClass="is-active"
-					onSelect={tab_name => openTab({ sidebar_id, tab_id: tab_name })}
+					onSelect={tab_name =>
+						openTab({ sidebar_id, tab_id: tab_name })
+					}
 					// @ts-ignore. Tab title admits passing a component although
 					// the definition file indicates only string
 					tabs={tabs_prepared}
