@@ -60,6 +60,10 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.2 =
+* Fixed incompatibilities with WordPress 5.5
+* Updated packages
+
 = 1.3.1 =
 * Fixed bug that didn't load correctly small images in the editor.
 * Minor bug fixes.
