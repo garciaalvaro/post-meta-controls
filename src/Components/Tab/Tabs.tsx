@@ -27,13 +27,13 @@ interface WithSelectProps {
 	active_tab: TabProps["id"];
 }
 
-interface WithDispatchProps extends Pick<ActionCreators, "openTab"> {}
+interface WithDispatchProps extends Pick<ActionCreators, "openTab"> { }
 
 interface Props
 	extends WithStateProps,
-		WithSelectProps,
-		OwnProps,
-		WithDispatchProps {}
+	WithSelectProps,
+	OwnProps,
+	WithDispatchProps { }
 
 export const Tabs = compose([
 	withState({ tabs_prepared: [] }),
@@ -46,21 +46,33 @@ export const Tabs = compose([
 	}))
 ])(
 	class Tabs extends Component<Props> {
-		componentDidMount() {
+		prepareTabs() {
 			const { tabs, setState } = this.props;
 
 			setState({
-				tabs_prepared: tabs.map(({ label, icon_dashicon, icon_svg, id }) => ({
-					name: id,
-					className: addPrefix("tab-button"),
-					title: (
-						<Fragment key={id}>
-							{prepareIcon(icon_svg, icon_dashicon, "tab")}
-							<Span className="tab-label">{label}</Span>
-						</Fragment>
-					)
-				}))
+				tabs_prepared: tabs.map(
+					({ label, icon_dashicon, icon_svg, id }) => ({
+						name: id,
+						className: addPrefix("tab-button"),
+						title: (
+							<Fragment key={id}>
+								{prepareIcon(icon_svg, icon_dashicon, "tab")}
+								<Span className="tab-label">{label}</Span>
+							</Fragment>
+						)
+					})
+				)
 			});
+		}
+
+		componentDidMount() {
+			this.prepareTabs()
+		}
+
+		componentDidUpdate(prev_props: WithSelectProps) {
+			if (this.props.tabs.length > prev_props.tabs.length) {
+				this.prepareTabs()
+			}
 		}
 
 		render() {
