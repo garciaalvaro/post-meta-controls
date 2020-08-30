@@ -16,23 +16,28 @@
 	display block
 	margin-right 8px
 
-button.pmc-tab-button
-	padding 5px
-	height 100%
-	box-shadow none
-	width 50%
-	background transparent
-	transition background-color 0.15s cubic-bezier(0, 0, 0.2, 1)
-	display flex
-	align-items center
-	justify-content center
-	outline-color currentColor
-	outline-width 1px
-	cursor pointer
-	border none
-	transition background-color .15s $e_deceleration
-	outline none
-	border-bottom 1px solid var(--border_color)
+#editor button.pmc-tab-button
+
+	&
+	&:hover
+	&:focus
+		color inherit
+		padding 5px
+		height 100%
+		box-shadow none
+		width 50%
+		background transparent
+		transition background-color 0.15s cubic-bezier(0, 0, 0.2, 1)
+		display flex
+		align-items center
+		justify-content center
+		outline-color currentColor
+		outline-width 1px
+		cursor pointer
+		border none
+		transition background-color .15s $e_deceleration
+		outline none
+		border-bottom 1px solid var(--border_color)
 
 	&:hover
 		background-color var(--border_color_softer)

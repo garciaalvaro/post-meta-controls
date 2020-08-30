@@ -26,7 +26,7 @@ export interface PanelPrepared
 	icon: React.ReactNode;
 }
 
-interface Props extends WithSelectProps, WithStateProps, OwnProps {}
+interface Props extends WithSelectProps, WithStateProps, OwnProps { }
 
 export const Panels: React.ComponentType<OwnProps> = compose([
 	withState({ panels_prepared: [] }),
@@ -55,9 +55,9 @@ export const Panels: React.ComponentType<OwnProps> = compose([
 		}
 
 		componentDidUpdate(prev_props: Props) {
-			const { tab_id } = this.props;
+			const { tab_id, panels } = this.props;
 
-			if (tab_id !== prev_props.tab_id) {
+			if (tab_id !== prev_props.tab_id || panels.length > prev_props.panels.length) {
 				this.preparePanels();
 			}
 		}

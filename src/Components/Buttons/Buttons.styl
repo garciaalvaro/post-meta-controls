@@ -4,27 +4,45 @@
 
 .pmc-setting-buttons
 
-    .components-toolbar__control.components-button:not(:disabled).is-active svg
-        outline none
-        box-shadow none
+	.components-base-control__field
+		flex-direction column
+		display flex
 
-    .components-toolbar__control.components-button svg
-        padding 5px
-        border-radius 2px
-        height 30px
-        width 30px
+	.components-toolbar
+		min-height 0
 
-    .components-toolbar__control.components-button
-        display inline-flex
-        align-items flex-end
-        margin 0
-        padding 3px
-        outline none
-        cursor pointer
-        position relative
-        width 36px
-        height 36px
-        box-shadow none
+	.components-toolbar__control.components-button:not(:disabled).is-active svg
+	.components-toolbar__control.components-button:not(:disabled).is-pressed svg
+		outline none
+		box-shadow none
 
-    .components-icon-button:not(:disabled):not([aria-disabled=true]):not(.is-default):hover
-        box-shadow none
+	.components-toolbar__control.components-button svg
+		padding 5px
+		border-radius 2px
+		height 30px
+		width 30px
+
+	.components-toolbar__control.components-button
+		display inline-flex
+		align-items flex-end
+		margin 0
+		outline none
+		cursor pointer
+		position relative
+		width 36px
+		height 36px
+		box-shadow none
+
+		&:before
+			content normal
+
+		#editor &
+			padding 3px
+			min-width 0
+			min-height 0
+
+		> div
+			display flex
+
+	.components-icon-button:not(:disabled):not([aria-disabled=true]):not(.is-default):hover
+		box-shadow none

@@ -19,7 +19,7 @@ interface OwnProps extends CheckboxMultipleProps, SettingPropsShared {
 	value: CheckboxMultipleProps["default_value"];
 }
 
-interface Props extends WithStateProps, OwnProps {}
+interface Props extends WithStateProps, OwnProps { }
 
 interface Option {
 	value: string;
@@ -28,7 +28,7 @@ interface Option {
 
 export const CheckboxMultiple = withState({ options_prepared: [] })(
 	class extends Component<Props> {
-		componentDidMount() {
+		prepareOptions() {
 			const { value, options, default_value, setState } = this.props;
 			const options_key = options.map(({ value }) => value);
 
@@ -69,6 +69,16 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 			});
 		}
 
+		componentDidMount() {
+			this.prepareOptions()
+		}
+
+		componentDidUpdate(prev_props: OwnProps) {
+			if (this.props.options.length > prev_props.options.length) {
+				this.prepareOptions()
+			}
+		}
+
 		render() {
 			const {
 				id,
@@ -105,21 +115,21 @@ export const CheckboxMultiple = withState({ options_prepared: [] })(
 				<BaseControl id={id} label={label} help={help}>
 					{use_toggle
 						? options_prepared.map(({ label, value: option_value }, index) => (
-								<ToggleControl
-									key={index}
-									label={label}
-									checked={value.includes(option_value)}
-									onChange={selected => onChange(selected, option_value)}
-								/>
-						  ))
+							<ToggleControl
+								key={index}
+								label={label}
+								checked={value.includes(option_value)}
+								onChange={selected => onChange(selected, option_value)}
+							/>
+						))
 						: options_prepared.map(({ label, value: option_value }, index) => (
-								<CheckboxControl
-									key={index}
-									label={label}
-									checked={value.includes(option_value)}
-									onChange={selected => onChange(selected, option_value)}
-								/>
-						  ))}
+							<CheckboxControl
+								key={index}
+								label={label}
+								checked={value.includes(option_value)}
+								onChange={selected => onChange(selected, option_value)}
+							/>
+						))}
 				</BaseControl>
 			);
 		}
