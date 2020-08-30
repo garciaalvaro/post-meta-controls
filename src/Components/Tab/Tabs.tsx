@@ -31,9 +31,9 @@ type WithDispatchProps = Pick<ActionCreators, "openTab">;
 
 interface Props
 	extends WithStateProps,
-		WithSelectProps,
-		OwnProps,
-		WithDispatchProps {}
+	WithSelectProps,
+	OwnProps,
+	WithDispatchProps { }
 
 export const Tabs = compose([
 	withState({ tabs_prepared: [] }),
@@ -46,7 +46,7 @@ export const Tabs = compose([
 	}))
 ])(
 	class Tabs extends Component<Props> {
-		componentDidMount() {
+		prepareTabs() {
 			const { tabs, setState } = this.props;
 
 			setState({
@@ -63,6 +63,16 @@ export const Tabs = compose([
 					})
 				)
 			});
+		}
+
+		componentDidMount() {
+			this.prepareTabs()
+		}
+
+		componentDidUpdate(prev_props: WithSelectProps) {
+			if (this.props.tabs.length > prev_props.tabs.length) {
+				this.prepareTabs()
+			}
 		}
 
 		render() {
