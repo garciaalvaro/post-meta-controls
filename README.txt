@@ -60,6 +60,9 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.3 =
+* Fixed bug with case sensitive file name mismatch
+
 = 1.3.2 =
 * Fixed incompatibilities with WordPress 5.5
 * Updated packages
