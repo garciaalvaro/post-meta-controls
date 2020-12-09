@@ -1,9 +1,8 @@
 import { isArray, isUndefined, reduce, isEqual } from "lodash";
 import apiFetch from "@wordpress/api-fetch";
-import domReady from "@wordpress/dom-ready";
 import { sprintf, __ } from "@wordpress/i18n";
 import { addQueryArgs } from "@wordpress/url";
-import { select, dispatch, useSelect } from "@wordpress/data";
+import { select, dispatch, useSelect, subscribe } from "@wordpress/data";
 
 import { store_slug } from "utils/data";
 import {
@@ -25,7 +24,7 @@ import {
 	RangeFloat,
 	Select,
 	Text,
-	Textarea
+	Textarea,
 } from "../classes";
 
 interface Items {
@@ -40,16 +39,9 @@ const already_exists_message = __(
 	"The value '%s' has already been assigned to an element."
 );
 
-domReady(() => {
-	const { id: post_id, type: post_type } = select(
-		"core/editor"
-	).getCurrentPost();
-
+const registerItems = (props: { post_id: number; post_type: string }) => {
 	apiFetch<Items>({
-		path: addQueryArgs("/post-meta-controls/v1/items", {
-			post_id,
-			post_type
-		})
+		path: addQueryArgs("/post-meta-controls/v1/items", props),
 	}).then(items => {
 		if (!items) {
 			return;
@@ -273,8 +265,20 @@ domReady(() => {
 
 		if (!isEqual(meta, meta_with_defaults)) {
 			dispatch("core/editor").editPost({
-				meta: meta_with_defaults
+				meta: meta_with_defaults,
 			});
 		}
 	});
+};
+
+const unsubscribe = subscribe(() => {
+	const { id: post_id, type: post_type } = select(
+		"core/editor"
+	).getCurrentPost();
+
+	if (!post_id || !post_type) return;
+
+	registerItems({ post_id, post_type });
+
+	unsubscribe();
 });
