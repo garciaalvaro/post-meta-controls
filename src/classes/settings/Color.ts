@@ -22,7 +22,7 @@ export class Color extends Setting<Props> {
 			},
 
 			props_schema: {
-				default_value: { type: "id" },
+				default_value: { type: "text" },
 				alpha_control: { type: "boolean" },
 				palette: { type: { _all: { name: "id", color: "text" } } }
 			}

@@ -34,7 +34,7 @@ class Color extends Setting {
 	protected function set_schema() {
 		$this_schema = array(
 			'default_value' => array(
-				'type'   => 'id',
+				'type'   => 'text',
 				'for_js' => true,
 			),
 			'alpha_control' => array(
