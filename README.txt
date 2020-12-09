@@ -60,6 +60,11 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.4 =
+* Fixed bug with color default value not saving
+* Fixed initial data fetch
+* Minor style fixes for WP 5.6
+
 = 1.3.3 =
 * Fixed bug with case sensitive file name mismatch
 
