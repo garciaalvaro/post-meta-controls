@@ -10,14 +10,14 @@ export default {
 	entry: path.join(__dirname, "../src/index.ts"),
 	output: {
 		path: path.join(__dirname, "../build"),
-		filename: `${name}.js`
+		filename: `${name}.js`,
 	},
 	resolve: {
 		alias: {
 			Components: path.join(__dirname, "../src/components"),
 			store: path.join(__dirname, "../src/store"),
-			utils: path.join(__dirname, "../src/utils")
-		}
+			utils: path.join(__dirname, "../src/utils"),
+		},
 	},
 	externals: {
 		lodash: "lodash",
@@ -36,7 +36,7 @@ export default {
 		"@wordpress/hooks": "wp.hooks",
 		"@wordpress/i18n": "wp.i18n",
 		"@wordpress/plugins": "wp.plugins",
-		"@wordpress/url": "wp.url"
+		"@wordpress/url": "wp.url",
 	},
 	module: {
 		rules: [
@@ -45,8 +45,8 @@ export default {
 				exclude: /node_modules/,
 				loader: "babel-loader",
 				resolve: {
-					extensions: [".tsx", ".ts", ".js", ".jsx"]
-				}
+					extensions: [".tsx", ".ts", ".js", ".jsx"],
+				},
 			},
 			{
 				test: /\.(css|styl)$/,
@@ -59,20 +59,23 @@ export default {
 							use: [nib()],
 							import: [
 								"~nib/index.styl",
-								path.join(__dirname, "../src/utils/data/stylus_variables.styl")
-							]
-						}
-					}
-				]
-			}
-		]
+								path.join(
+									__dirname,
+									"../src/utils/data/stylus_variables.styl"
+								),
+							],
+						},
+					},
+				],
+			},
+		],
 	},
 	plugins: [
 		new DefinePlugin({
-			l: (...args) => console.log(...args)
+			l: (...args) => console.log(...args),
 		}),
 		new MiniCssExtractPlugin({
-			filename: `${name}.css`
+			filename: `${name}.css`,
 		}),
 		new BannerPlugin({
 			banner: [
@@ -84,17 +87,17 @@ export default {
 				"/*! moment | http://momentjs.com | Iskren Ivov Chernev | MIT License */",
 				"/*! react-dates | https://github.com/airbnb/react-dates#readme | Maja Wichrowska | MIT License */",
 				"/*! react-sortable-hoc | https://github.com/clauderic/react-sortable-hoc | Clauderic Demers | MIT License */",
-				"/*! uuid | https://github.com/kelektiv/node-uuid | MIT License */"
+				"/*! uuid | https://github.com/kelektiv/node-uuid | MIT License */",
 			].join(""),
 			raw: true,
-			include: new RegExp(/.*?\.js/)
+			include: new RegExp(/.*?\.js/),
 		}),
 		new BannerPlugin({
 			banner: `${description} | ${version} | ${homepage}`,
-			include: new RegExp(/.*?\.css/)
-		})
+			include: new RegExp(/.*?\.css/),
+		}),
 	],
 	optimization: {
-		minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
-	}
+		minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+	},
 };

@@ -24,36 +24,36 @@ export class Tab extends Base<Props> {
 				path: [],
 				label: "",
 				icon_dashicon: "",
-				icon_svg: ""
+				icon_svg: "",
 			},
 
 			props_schema: {
 				class_name: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				warnings: {
-					type: { _all: { title: "text", message: "text" } }
+					type: { _all: { title: "text", message: "text" } },
 				},
 				id: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				path: {
 					type: { _all: "id" },
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				label: {
 					type: "text",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				icon_dashicon: {
-					type: "id"
+					type: "id",
 				},
 				icon_svg: {
-					type: "html"
-				}
-			}
+					type: "html",
+				},
+			},
 		});
 	}
 }

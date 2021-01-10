@@ -29,8 +29,8 @@ export const withNoneData = compose(
 			updateValue: value =>
 				dispatch(store_slug).updatePropNone({
 					setting_id,
-					value
-				})
+					value,
+				}),
 		})
 	),
 
@@ -38,7 +38,7 @@ export const withNoneData = compose(
 		const data: Obj = select(store_slug).getSettingsNone();
 
 		return {
-			value: !isUndefined(data[id]) ? data[id] : default_value
+			value: !isUndefined(data[id]) ? data[id] : default_value,
 		};
 	}),
 

@@ -7,7 +7,7 @@ import { store_slug } from "utils/data";
 import {
 	SettingWithMetaData,
 	SettingWithLocalData,
-	SettingWithNoneData
+	SettingWithNoneData,
 } from "./Setting";
 
 interface WithSelectProps {
@@ -22,7 +22,7 @@ export const Settings: React.ComponentType<OwnProps> = withSelect<
 	WithSelectProps,
 	OwnProps
 >((select, { panel_id }) => ({
-	settings: select(store_slug).getSettings(panel_id)
+	settings: select(store_slug).getSettings(panel_id),
 }))(props => {
 	const { settings } = props;
 

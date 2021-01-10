@@ -29,8 +29,8 @@ export const Sidebar = compose([
 	withState({ color_scheme: { id: "", type: "" } }),
 	withSelect<WithSelectProps, OwnProps>((select, { id }) => ({
 		sidebar: select(store_slug).getSidebar(id),
-		warnings: select(store_slug).getWarnings(id)
-	}))
+		warnings: select(store_slug).getWarnings(id),
+	})),
 ])(
 	class extends Component<Props> {
 		componentDidMount() {
@@ -50,10 +50,10 @@ export const Sidebar = compose([
 						`color_scheme-type-${color_scheme.type}`,
 						color_scheme.id
 							? `color_scheme-name-${color_scheme.id}`
-							: null
+							: null,
 					]}
 				>
-					{!!warnings.length ? (
+					{warnings.length ? (
 						<Warnings warnings={warnings} />
 					) : (
 						<Tabs sidebar_id={id} />

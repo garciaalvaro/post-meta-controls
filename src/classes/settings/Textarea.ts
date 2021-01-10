@@ -15,17 +15,17 @@ export class Textarea extends Setting<Props> {
 			props_defaults: {
 				type: "textarea",
 				default_value: "",
-				placeholder: ""
+				placeholder: "",
 			},
 
 			props_schema: {
 				default_value: {
-					type: "text"
+					type: "text",
 				},
 				placeholder: {
-					type: "text"
-				}
-			}
+					type: "text",
+				},
+			},
 		});
 	}
 }

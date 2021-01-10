@@ -2,7 +2,7 @@ import React from "react";
 import {
 	BaseControl,
 	CheckboxControl,
-	ToggleControl
+	ToggleControl,
 } from "@wordpress/components";
 
 interface Props extends CheckboxProps, SettingPropsShared {
@@ -18,7 +18,7 @@ export const Checkbox: React.ComponentType<Props> = props => {
 		help,
 		value,
 		use_toggle,
-		updateValue
+		updateValue,
 	} = props;
 
 	const toggleValue = () => updateValue(!value);

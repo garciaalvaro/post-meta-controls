@@ -6,15 +6,15 @@ const getReplace = (search, replace) => ({
 	options: {
 		search: search,
 		replace: replace,
-		flags: "gm"
-	}
+		flags: "gm",
+	},
 });
 
 export default {
 	entry: path.join(__dirname, "version.entry.js"),
 	output: {
 		path: path.join(__dirname, ".."),
-		filename: "_temp.js"
+		filename: "_temp.js",
 	},
 	module: {
 		rules: [
@@ -24,19 +24,20 @@ export default {
 					{
 						loader: "file-loader",
 						options: {
-							name: "[name].[ext]"
-						}
+							name: "[name].[ext]",
+						},
 					},
 					getReplace(
-						/^( \* Version: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/.source,
+						/^( \* Version: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/
+							.source,
 						`$1${version}`
 					),
 					getReplace(
 						/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/
 							.source,
 						`$1${version}`
-					)
-				]
+					),
+				],
 			},
 			{
 				test: /README\.txt$/,
@@ -44,15 +45,16 @@ export default {
 					{
 						loader: "file-loader",
 						options: {
-							name: "[name].[ext]"
-						}
+							name: "[name].[ext]",
+						},
 					},
 					getReplace(
-						/^(Stable tag: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/.source,
+						/^(Stable tag: )\d+\.\d+\.\d+(-(beta|rc)(\d+)?)?/
+							.source,
 						`$1${version}`
-					)
-				]
-			}
-		]
-	}
+					),
+				],
+			},
+		],
+	},
 };

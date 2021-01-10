@@ -5,7 +5,7 @@ export default {
 	entry: path.join(__dirname, "pragma.entry.js"),
 	output: {
 		path: path.join(__dirname, "../_release"),
-		filename: "_temp.js"
+		filename: "_temp.js",
 	},
 	module: {
 		rules: [
@@ -15,8 +15,8 @@ export default {
 					{
 						loader: "file-loader",
 						options: {
-							name: "[name].[ext]"
-						}
+							name: "[name].[ext]",
+						},
 					},
 					{
 						loader: "webpack-loader-clean-pragma",
@@ -24,17 +24,17 @@ export default {
 							pragmas: [
 								{
 									start: "/** @dev_start */",
-									end: "/** @dev_end */"
+									end: "/** @dev_end */",
 								},
 								{
 									start: "/** @pro_start */",
-									end: "/** @pro_end */"
-								}
-							]
-						}
-					}
-				]
-			}
-		]
-	}
+									end: "/** @pro_end */",
+								},
+							],
+						},
+					},
+				],
+			},
+		],
+	},
 };

@@ -19,7 +19,7 @@ interface OwnProps extends ButtonsProps, SettingPropsShared {
 interface Props extends OwnProps, WithStateProps {}
 
 export const Buttons: React.ComponentType<OwnProps> = withState({
-	icons: null
+	icons: null,
 })(
 	class extends Component<Props> {
 		componentDidMount() {
@@ -32,7 +32,7 @@ export const Buttons: React.ComponentType<OwnProps> = withState({
 					) : (
 						icon_dashicon
 					)
-				)
+				),
 			});
 		}
 
@@ -45,7 +45,7 @@ export const Buttons: React.ComponentType<OwnProps> = withState({
 				value,
 				allow_empty,
 				updateValue,
-				icons
+				icons,
 			} = this.props;
 
 			if (!icons) {
@@ -68,7 +68,7 @@ export const Buttons: React.ComponentType<OwnProps> = withState({
 									} else {
 										updateValue(option_value);
 									}
-								}
+								},
 							})
 						)}
 					/>

@@ -29,13 +29,13 @@ export const withMetaData = compose(
 			updateValue: value => {
 				// Save the value to the "core/editor" store.
 				dispatch("core/editor").editPost({
-					meta: { [data_key_with_prefix]: value }
+					meta: { [data_key_with_prefix]: value },
 				});
 
 				if (!meta_key_exists) {
 					dispatch(store_slug).setMetaKeyExists(data_key_with_prefix);
 				}
-			}
+			},
 		})
 	),
 
@@ -49,7 +49,7 @@ export const withMetaData = compose(
 				value:
 					meta && meta_key_exists
 						? meta[data_key_with_prefix]
-						: default_value
+						: default_value,
 			};
 		}
 	),

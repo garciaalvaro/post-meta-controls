@@ -32,7 +32,7 @@ doAction("postMetaControls.addMomentLocale", moment);
 export const DateRange: React.ComponentType<OwnProps> = withState({
 	start_date: null,
 	end_date: null,
-	focused_input: null
+	focused_input: null,
 })(
 	class extends Component<Props> {
 		constructor(props: Props) {
@@ -81,7 +81,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 				updateValue,
 				label,
 				help,
-				unavailable_dates
+				unavailable_dates,
 			} = this.props;
 
 			return (
@@ -99,14 +99,14 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 						endDateId={`${id}-end_date`}
 						onDatesChange={({
 							startDate: start_date,
-							endDate: end_date
+							endDate: end_date,
 						}) => {
 							setState({ start_date, end_date });
 
 							if (start_date && end_date) {
 								updateValue([
 									start_date.format(format),
-									end_date.format(format)
+									end_date.format(format),
 								]);
 							}
 						}}
@@ -177,7 +177,7 @@ export const DateRange: React.ComponentType<OwnProps> = withState({
 							setState({
 								start_date: null,
 								end_date: null,
-								focused_input: null
+								focused_input: null,
 							});
 
 							// If there is no value selected we save an empty string.

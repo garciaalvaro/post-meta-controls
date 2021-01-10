@@ -5,7 +5,7 @@ import {
 	isBoolean,
 	toSafeInteger,
 	toNumber,
-	deburr
+	deburr,
 } from "lodash";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -102,5 +102,5 @@ export const sanitize = {
 	boolean: sanitizeBoolean,
 	float: sanitizeFloat,
 	integer: sanitizeInteger,
-	array: sanitizeArray
+	array: sanitizeArray,
 };

@@ -16,18 +16,18 @@ export class Select extends Setting<Props> {
 			props_defaults: {
 				type: "select",
 				default_value: "",
-				options: []
+				options: [],
 			},
 
 			props_schema: {
 				default_value: {
-					type: "id"
+					type: "id",
 				},
 				options: {
 					type: { _all: { value: "id", label: "text" } },
-					conditions: "not_empty"
-				}
-			}
+					conditions: "not_empty",
+				},
+			},
 		});
 	}
 

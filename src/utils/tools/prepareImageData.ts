@@ -12,7 +12,7 @@ export const prepareImageDataFromMedia = (images_raw: ImageFromMedia[]) =>
 		return data.concat({
 			id,
 			alt,
-			url
+			url,
 		});
 	}, []);
 
@@ -21,7 +21,7 @@ export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
 		const {
 			id,
 			alt_text: alt,
-			media_details: { sizes }
+			media_details: { sizes },
 		} = image_raw;
 
 		const { source_url } =
@@ -35,6 +35,6 @@ export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
 		return data.concat({
 			id,
 			alt,
-			url: source_url
+			url: source_url,
 		});
 	}, []);

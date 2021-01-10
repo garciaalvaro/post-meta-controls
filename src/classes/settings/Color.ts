@@ -18,14 +18,14 @@ export class Color extends Setting<Props> {
 				type: "color",
 				default_value: "",
 				alpha_control: false,
-				palette: []
+				palette: [],
 			},
 
 			props_schema: {
 				default_value: { type: "text" },
 				alpha_control: { type: "boolean" },
-				palette: { type: { _all: { name: "id", color: "text" } } }
-			}
+				palette: { type: { _all: { name: "id", color: "text" } } },
+			},
 		});
 	}
 
@@ -48,7 +48,7 @@ export class Color extends Setting<Props> {
 			(acc, value, key) =>
 				acc.concat({
 					name: key,
-					color: value
+					color: value,
 				}),
 			[]
 		);

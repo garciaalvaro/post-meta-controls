@@ -45,5 +45,5 @@ export const selectors: Selectors = {
 					item.warnings
 			)
 		);
-	}
+	},
 };

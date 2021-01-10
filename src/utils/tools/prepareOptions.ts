@@ -23,7 +23,7 @@ export const prepareOptions = (options: Option[] | OptionsRaw | undefined) => {
 		(acc, value, key) =>
 			acc.concat({
 				value: key,
-				label: value
+				label: value,
 			}),
 		[]
 	);

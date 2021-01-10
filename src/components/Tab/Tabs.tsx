@@ -32,19 +32,19 @@ type WithDispatchProps = Pick<ActionCreators, "openTab">;
 
 interface Props
 	extends WithStateProps,
-	WithSelectProps,
-	OwnProps,
-	WithDispatchProps { }
+		WithSelectProps,
+		OwnProps,
+		WithDispatchProps {}
 
 export const Tabs = compose([
 	withState({ tabs_prepared: [] }),
 	withDispatch(dispatch => ({
-		openTab: dispatch(store_slug).openTab
+		openTab: dispatch(store_slug).openTab,
 	})),
 	withSelect<WithSelectProps, OwnProps>((select, { sidebar_id }) => ({
 		tabs: select(store_slug).getTabs(sidebar_id),
-		active_tab: select(store_slug).getActiveTab(sidebar_id)
-	}))
+		active_tab: select(store_slug).getActiveTab(sidebar_id),
+	})),
 ])(
 	class Tabs extends Component<Props> {
 		prepareTabs() {
@@ -60,19 +60,19 @@ export const Tabs = compose([
 								{prepareIcon(icon_svg, icon_dashicon, "tab")}
 								<Span className="tab-label">{label}</Span>
 							</Fragment>
-						)
+						),
 					})
-				)
+				),
 			});
 		}
 
 		componentDidMount() {
-			this.prepareTabs()
+			this.prepareTabs();
 		}
 
 		componentDidUpdate(prev_props: WithSelectProps) {
 			if (this.props.tabs.length > prev_props.tabs.length) {
-				this.prepareTabs()
+				this.prepareTabs();
 			}
 		}
 
@@ -82,7 +82,7 @@ export const Tabs = compose([
 				tabs_prepared,
 				active_tab,
 				openTab,
-				sidebar_id
+				sidebar_id,
 			} = this.props;
 
 			if (!tabs_prepared.length) {

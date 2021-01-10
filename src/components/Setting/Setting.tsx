@@ -44,7 +44,7 @@ const controls: Controls = {
 	range_float: RangeFloat,
 	select: Select,
 	text: Text,
-	textarea: Textarea
+	textarea: Textarea,
 };
 
 export const Setting: React.ComponentType<Props> = props => {
@@ -57,7 +57,7 @@ export const Setting: React.ComponentType<Props> = props => {
 			className={[
 				"setting",
 				`setting-${type}`,
-				!ui_border_top ? "no_border_top" : null
+				!ui_border_top ? "no_border_top" : null,
 			]}
 		>
 			{Control && <Control {...props} />}

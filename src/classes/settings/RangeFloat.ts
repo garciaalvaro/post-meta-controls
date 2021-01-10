@@ -20,12 +20,12 @@ export class RangeFloat extends Setting<Props> {
 				default_value: 0,
 				step: 1,
 				min: 0,
-				max: 100
+				max: 100,
 			},
 
 			props_schema: {
 				default_value: {
-					type: "float"
+					type: "float",
 				},
 				step: {
 					type: "float",
@@ -34,7 +34,7 @@ export class RangeFloat extends Setting<Props> {
 							value:
 								!isUndefined(props_raw.step) &&
 								props_raw.step > 0,
-							message: __("This value has to be greater than 0.")
+							message: __("This value has to be greater than 0."),
 						},
 						{
 							value:
@@ -49,12 +49,12 @@ export class RangeFloat extends Setting<Props> {
 								),
 								"max",
 								"min"
-							)
-						}
-					]
+							),
+						},
+					],
 				},
 				min: {
-					type: "float"
+					type: "float",
 				},
 				max: {
 					type: "float",
@@ -68,11 +68,11 @@ export class RangeFloat extends Setting<Props> {
 							message: sprintf(
 								__("This value has to be greater than '%s'."),
 								"min"
-							)
-						}
-					]
-				}
-			}
+							),
+						},
+					],
+				},
+			},
 		});
 	}
 }

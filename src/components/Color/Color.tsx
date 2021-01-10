@@ -7,7 +7,7 @@ import {
 	ColorPalette,
 	BaseControl,
 	ColorIndicator,
-	RangeControl
+	RangeControl,
 } from "@wordpress/components";
 import { withState } from "@wordpress/compose";
 
@@ -55,7 +55,7 @@ export const Color = withState({ color: "", alpha: 100 })(
 				label,
 				help,
 				value,
-				setState
+				setState,
 			} = this.props;
 
 			return (

@@ -17,23 +17,23 @@ export class DateSingle extends Setting<Props> {
 				default_value: "",
 				format: "DD/MM/YYYY",
 				locale: "en",
-				unavailable_dates: [["before", "today"]]
+				unavailable_dates: [["before", "today"]],
 			},
 
 			props_schema: {
 				default_value: {
-					type: "text"
+					type: "text",
 				},
 				format: {
-					type: "text"
+					type: "text",
 				},
 				locale: {
-					type: "id"
+					type: "id",
 				},
 				unavailable_dates: {
-					type: { _all: { _all: "text" } }
-				}
-			}
+					type: { _all: { _all: "text" } },
+				},
+			},
 		});
 	}
 }

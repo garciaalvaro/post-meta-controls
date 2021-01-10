@@ -14,14 +14,14 @@ export class Image extends Setting<Props> {
 
 			props_defaults: {
 				type: "image",
-				default_value: 0
+				default_value: 0,
 			},
 
 			props_schema: {
 				default_value: {
-					type: "integer"
-				}
-			}
+					type: "integer",
+				},
+			},
 		});
 	}
 }

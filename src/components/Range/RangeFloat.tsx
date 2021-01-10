@@ -16,7 +16,7 @@ interface OwnProps extends RangeFloatProps, SettingPropsShared {
 interface Props extends OwnProps, WithStateProps {}
 
 export const RangeFloat: React.ComponentType<OwnProps> = withState({
-	digits_length: ""
+	digits_length: "",
 })(
 	class extends Component<Props> {
 		componentDidMount() {
@@ -34,7 +34,7 @@ export const RangeFloat: React.ComponentType<OwnProps> = withState({
 				help,
 				digits_length,
 				value,
-				updateValue
+				updateValue,
 			} = this.props;
 
 			return (

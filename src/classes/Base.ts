@@ -8,7 +8,7 @@ import {
 	defaults,
 	pick,
 	reduce,
-	flow
+	flow,
 } from "lodash";
 import { __, sprintf } from "@wordpress/i18n";
 import { dispatch } from "@wordpress/data";
@@ -33,7 +33,7 @@ export class Base<T extends BaseReceivedProps> {
 		props_raw,
 		props_privates = [],
 		props_defaults,
-		props_schema
+		props_schema,
 	}: Omit<T, "props">) {
 		this.props_privates = props_privates;
 		this.props_defaults = props_defaults;
@@ -53,7 +53,7 @@ export class Base<T extends BaseReceivedProps> {
 			this.castSchema,
 
 			// Run functions after casting the schema.
-			this.afterCastSchema
+			this.afterCastSchema,
 		])(props_raw);
 
 		this.validateProps();
@@ -189,7 +189,7 @@ export class Base<T extends BaseReceivedProps> {
 
 		this.props.warnings = warnings.concat({
 			title,
-			message
+			message,
 		});
 	};
 

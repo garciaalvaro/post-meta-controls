@@ -19,29 +19,29 @@ export class DateRange extends Setting<Props> {
 				locale: "en",
 				unavailable_dates: [["before", "today"]],
 				minimum_days: 1,
-				maximum_days: 0
+				maximum_days: 0,
 			},
 
 			props_schema: {
 				default_value: {
-					type: { _all: "text" }
+					type: { _all: "text" },
 				},
 				format: {
-					type: "text"
+					type: "text",
 				},
 				locale: {
-					type: "id"
+					type: "id",
 				},
 				unavailable_dates: {
-					type: { _all: { _all: "text" } }
+					type: { _all: { _all: "text" } },
 				},
 				minimum_days: {
-					type: "integer"
+					type: "integer",
 				},
 				maximum_days: {
-					type: "integer"
-				}
-			}
+					type: "integer",
+				},
+			},
 		});
 	}
 }

@@ -7,7 +7,7 @@ export default {
 	entry: path.join(__dirname, "../node_modules/moment/min/locales.js"),
 	output: {
 		path: path.join(__dirname, "../build"),
-		filename: `${name}-moment-locales.js`
+		filename: `${name}-moment-locales.js`,
 	},
 	module: {
 		rules: [
@@ -17,32 +17,33 @@ export default {
 					{
 						loader: "string-replace-loader",
 						options: {
-							search: /^[\S\s]*?}\(this, \(([\S\s]*?)}\)\)\);/.source,
+							search: /^[\S\s]*?}\(this, \(([\S\s]*?)}\)\)\);/
+								.source,
 							replace: [
 								`wp.hooks.addAction( "postMetaControls.addMomentLocale", "addMomentLocale", `,
 								`$1`,
-								`});`
+								`});`,
 							].join(""),
-							flags: "g"
-						}
-					}
-				]
-			}
-		]
+							flags: "g",
+						},
+					},
+				],
+			},
+		],
 	},
 	plugins: [
 		new TerserJSPlugin({
 			terserOptions: {
-				output: { comments: false }
-			}
+				output: { comments: false },
+			},
 		}),
 		new BannerPlugin({
 			banner: [
 				`/*! ${description} | ${version} | ${homepage} */`,
-				`\n/*! Moment.js | https://github.com/moment/moment | Iskren Ivov Chernev | MIT License */`
+				`\n/*! Moment.js | https://github.com/moment/moment | Iskren Ivov Chernev | MIT License */`,
 			].join(""),
 			raw: true,
-			include: new RegExp(/.*?\.js/)
-		})
-	]
+			include: new RegExp(/.*?\.js/),
+		}),
+	],
 };

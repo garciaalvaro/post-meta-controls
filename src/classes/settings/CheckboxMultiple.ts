@@ -17,21 +17,21 @@ export class CheckboxMultiple extends Setting<Props> {
 				type: "checkbox_multiple",
 				default_value: [],
 				options: [],
-				use_toggle: false
+				use_toggle: false,
 			},
 
 			props_schema: {
 				default_value: {
-					type: { _all: "id" }
+					type: { _all: "id" },
 				},
 				options: {
 					type: { _all: { value: "id", label: "text" } },
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				use_toggle: {
-					type: "boolean"
-				}
-			}
+					type: "boolean",
+				},
+			},
 		});
 	}
 

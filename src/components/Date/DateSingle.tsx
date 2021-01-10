@@ -29,7 +29,7 @@ doAction("postMetaControls.addMomentLocale", moment);
 
 export const DateSingle = withState({
 	date: null,
-	focused: false
+	focused: false,
 })(
 	class extends Component<Props> {
 		constructor(props: Props) {
@@ -57,7 +57,7 @@ export const DateSingle = withState({
 				updateValue,
 				label,
 				help,
-				unavailable_dates
+				unavailable_dates,
 			} = this.props;
 
 			return (
@@ -119,7 +119,7 @@ export const DateSingle = withState({
 
 							setState({
 								date: null,
-								focused: null
+								focused: null,
 							});
 
 							// If there is no value selected we save an empty string.

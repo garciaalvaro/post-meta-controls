@@ -12,7 +12,7 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import {
 	addPrefix,
 	prepareImageDataFromMedia,
-	prepareImageDataFromRest
+	prepareImageDataFromRest,
 } from "utils/tools";
 import { Div, Img, Icon } from "utils/Components";
 
@@ -85,7 +85,7 @@ const SortableList = SortableContainer(
 );
 
 export const ImageMultiple: React.ComponentType<OwnProps> = withState({
-	images: []
+	images: [],
 })(
 	class extends Component<Props> {
 		componentDidMount() {
@@ -96,7 +96,7 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 			}
 
 			apiFetch<ImageFromRest[]>({
-				path: `wp/v2/media/?include=${value.join(",")}`
+				path: `wp/v2/media/?include=${value.join(",")}`,
 			})
 				.then(data_raw => {
 					const data = prepareImageDataFromRest(data_raw);
@@ -113,14 +113,14 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 							}
 
 							return image;
-						})
+						}),
 					});
 				})
 				// When fetching an array of media the fetch doesnt return an error
 				// if the images were not found, we will handle that scenario in the resolve
 				.catch(() =>
 					setState({
-						images: value.map(id => ({ id, alt: "", url: "" }))
+						images: value.map(id => ({ id, alt: "", url: "" })),
 					})
 				);
 		}
@@ -133,7 +133,7 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 				help,
 				images,
 				updateValue,
-				setState
+				setState,
 			} = this.props;
 
 			return (
@@ -172,7 +172,7 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 						onSortEnd={({ oldIndex, newIndex }) => {
 							updateValue(arrayMove(value, oldIndex, newIndex));
 							setState({
-								images: arrayMove(images, oldIndex, newIndex)
+								images: arrayMove(images, oldIndex, newIndex),
 							});
 						}}
 						custom={{
@@ -187,9 +187,9 @@ export const ImageMultiple: React.ComponentType<OwnProps> = withState({
 								setState({
 									images: images.filter(
 										({ id }) => id !== image_id
-									)
+									),
 								});
-							}
+							},
 						}}
 					/>
 				</BaseControl>

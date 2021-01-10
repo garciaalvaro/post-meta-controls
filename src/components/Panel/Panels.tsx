@@ -27,13 +27,13 @@ export interface PanelPrepared
 	icon: React.ReactNode;
 }
 
-interface Props extends WithSelectProps, WithStateProps, OwnProps { }
+interface Props extends WithSelectProps, WithStateProps, OwnProps {}
 
 export const Panels: React.ComponentType<OwnProps> = compose([
 	withState({ panels_prepared: [] }),
 	withSelect<WithSelectProps, OwnProps>((select, { tab_id }) => ({
-		panels: select(store_slug).getPanels(tab_id)
-	}))
+		panels: select(store_slug).getPanels(tab_id),
+	})),
 ])(
 	class extends Component<Props> {
 		preparePanels() {
@@ -45,9 +45,9 @@ export const Panels: React.ComponentType<OwnProps> = compose([
 
 					return {
 						...rest,
-						icon: prepareIcon(icon_svg, icon_dashicon, "panel")
+						icon: prepareIcon(icon_svg, icon_dashicon, "panel"),
 					};
-				})
+				}),
 			});
 		}
 
@@ -58,7 +58,10 @@ export const Panels: React.ComponentType<OwnProps> = compose([
 		componentDidUpdate(prev_props: Props) {
 			const { tab_id, panels } = this.props;
 
-			if (tab_id !== prev_props.tab_id || panels.length > prev_props.panels.length) {
+			if (
+				tab_id !== prev_props.tab_id ||
+				panels.length > prev_props.panels.length
+			) {
 				this.preparePanels();
 			}
 		}

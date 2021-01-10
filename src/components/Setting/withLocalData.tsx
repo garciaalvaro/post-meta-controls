@@ -29,8 +29,8 @@ export const withLocalData = compose(
 			updateValue: value =>
 				dispatch(store_slug).updatePropLocal({
 					setting_id,
-					value
-				})
+					value,
+				}),
 		})
 	),
 
@@ -41,7 +41,7 @@ export const withLocalData = compose(
 			return {
 				value: !isUndefined(persisted[data_key_with_prefix])
 					? persisted[data_key_with_prefix]
-					: default_value
+					: default_value,
 			};
 		}
 	),

@@ -6,6 +6,6 @@ export const prepareProps = (props: ComponentProps) => {
 	return {
 		id: addPrefix(id) || undefined,
 		className: addPrefix(className) || undefined,
-		...rest
+		...rest,
 	};
 };

@@ -4,7 +4,7 @@ import {
 	isArray,
 	castArray,
 	forEach,
-	get
+	get,
 } from "lodash";
 
 import { sanitize } from "utils/tools/sanitize.ts";

@@ -5,7 +5,7 @@ export default {
 	entry: path.join(__dirname, "copy.entry.js"),
 	output: {
 		path: path.join(__dirname, "../_release"),
-		filename: "_temp.js"
+		filename: "_temp.js",
 	},
 	plugins: [
 		new CopyPlugin([
@@ -29,9 +29,9 @@ export default {
 					"src/**",
 					"tsconfig.json",
 					"types/**",
-					"webpack/**"
-				]
-			}
-		])
-	]
+					"webpack/**",
+				],
+			},
+		]),
+	],
 };

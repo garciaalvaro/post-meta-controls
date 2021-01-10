@@ -33,44 +33,44 @@ export class Sidebar extends Base<Props> {
 				icon_dashicon: "carrot",
 				icon_svg: "",
 				id_already_exists: false,
-				ui_color_scheme: "light"
+				ui_color_scheme: "light",
 			},
 
 			props_schema: {
 				class_name: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				warnings: {
-					type: { _all: { title: "text", message: "text" } }
+					type: { _all: { title: "text", message: "text" } },
 				},
 				id: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				label: {
 					type: "text",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				icon_dashicon: {
-					type: "id"
+					type: "id",
 				},
 				icon_svg: {
-					type: "html"
+					type: "html",
 				},
 				active_tab: {
-					type: "id"
+					type: "id",
 				},
 				settings_id: {
-					type: { _all: "integer" }
+					type: { _all: "integer" },
 				},
 				id_already_exists: {
-					type: "boolean"
+					type: "boolean",
 				},
 				ui_color_scheme: {
-					type: "id"
-				}
-			}
+					type: "id",
+				},
+			},
 		});
 	}
 
@@ -80,7 +80,7 @@ export class Sidebar extends Base<Props> {
 			icon_dashicon,
 			icon_svg,
 			id_already_exists,
-			label
+			label,
 		} = this.props;
 
 		let plugin_id: string;
@@ -109,7 +109,7 @@ export class Sidebar extends Base<Props> {
 			icon: icon || "carrot",
 			render: () => (
 				<App plugin_id={plugin_id} sidebar_id={id} label={label} />
-			)
+			),
 		});
 	};
 

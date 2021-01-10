@@ -12,5 +12,5 @@ registerStore(store_slug, {
 	actions,
 	// @ts-ignore
 	selectors,
-	persist: ["settings_persisted"]
+	persist: ["settings_persisted"],
 });

@@ -12,7 +12,7 @@ import "./Image.styl";
 import {
 	addPrefix,
 	prepareImageDataFromMedia,
-	prepareImageDataFromRest
+	prepareImageDataFromRest,
 } from "utils/tools";
 import { Div, Img, Icon } from "utils/Components";
 
@@ -35,7 +35,7 @@ interface Props extends OwnProps, WithStateProps {}
 export const Image: React.ComponentType<OwnProps> = withState({
 	url: "",
 	alt: "",
-	image_id_not_found: 0
+	image_id_not_found: 0,
 })(
 	class extends Component<Props> {
 		componentDidMount() {
@@ -46,7 +46,7 @@ export const Image: React.ComponentType<OwnProps> = withState({
 			}
 
 			apiFetch<ImageFromRest>({
-				path: `wp/v2/media/${image_id}`
+				path: `wp/v2/media/${image_id}`,
 			})
 				.then(data_raw => {
 					const data = prepareImageDataFromRest(castArray(data_raw));
@@ -70,7 +70,7 @@ export const Image: React.ComponentType<OwnProps> = withState({
 				help,
 				url,
 				alt,
-				image_id_not_found
+				image_id_not_found,
 			} = this.props;
 
 			const updateImage = (data_raw: ImageFromMedia) => {
