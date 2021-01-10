@@ -28,17 +28,11 @@ function enqueue() {
 		array(
 			'lodash',
 			'moment',
-			// If wp-block-editor is registered (from WP 5.2)
-			// enqueue it. Otherwise enqueue wp-editor.
-			isset( $wp_scripts->registered['wp-block-editor'] )
-				? 'wp-block-editor'
-				: 'wp-editor',
-			'wp-editor',
 			'wp-api-fetch',
+			'wp-block-editor',
 			'wp-components',
 			'wp-compose',
 			'wp-data',
-			'wp-dom-ready',
 			'wp-edit-post',
 			'wp-element',
 			'wp-hooks',
