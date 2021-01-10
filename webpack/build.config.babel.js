@@ -14,7 +14,7 @@ export default {
 	},
 	resolve: {
 		alias: {
-			Components: path.join(__dirname, "../src/Components"),
+			Components: path.join(__dirname, "../src/components"),
 			store: path.join(__dirname, "../src/store"),
 			utils: path.join(__dirname, "../src/utils")
 		}
