@@ -12,12 +12,14 @@
 		"version": "webpack --mode production --config ./webpack/version.config.babel.js && rm _temp.js",
 		"pragma": "webpack --mode production --config ./webpack/pragma.config.babel.js && rm _release/_temp.js",
 		"clean": "rm -rf build _release",
-		"prebuild": "npm run type-check && npm run lint && npm run prettier && npm run clean && npm run version",
+		"prebuild": "npm run test && npm run clean && npm run version",
 		"build": "webpack --mode production --config ./webpack/build.config.babel.js",
 		"postbuild": "npm run moment && npm run copy && npm run pragma",
-		"type-check": "tsc",
-		"lint": "eslint 'src/**/*.{ts,tsx}'",
-		"prettier": "prettier --check 'src/**/*.{ts,tsx}'"
+		"test": "npm run test:types && npm run test:lint && npm run test:prettier",
+		"test:types": "tsc",
+		"test:lint": "eslint \"**/*.{js,ts,tsx}\"",
+		"test:prettier": "prettier --check \"**/*.{js,ts,tsx,php,json}\"",
+		"prettier": "prettier --write \"**/*.{js,ts,tsx,php,json}\""
 	},
 	"dependencies": {
 		"@babel/core": "^7.12.10",
