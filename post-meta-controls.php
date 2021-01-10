@@ -14,21 +14,11 @@ namespace POSTMETACONTROLS;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.4' );
-}
-if ( ! defined( __NAMESPACE__ . '\PLUGIN_NAME' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_NAME', 'post-meta-controls' );
-}
-if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
-	define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
-}
-if ( ! defined( __NAMESPACE__ . '\INC_DIR' ) ) {
-	define( __NAMESPACE__ . '\INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
-}
-if ( ! defined( __NAMESPACE__ . '\PLUGIN_DIR' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-}
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.4' );
+define( __NAMESPACE__ . '\PLUGIN_NAME', 'post-meta-controls' );
+define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
+define( __NAMESPACE__ . '\INC_DIR', plugin_dir_path( __FILE__ ) . 'inc/' );
+define( __NAMESPACE__ . '\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Utils and Traits.
 require_once INC_DIR . 'classes/utils/utils-methods_call.php';
