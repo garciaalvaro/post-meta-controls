@@ -1,3 +1,4 @@
+import React from "react";
 import DOMPurify from "dompurify";
 import { RawHTML, Component } from "@wordpress/element";
 import { Toolbar, BaseControl } from "@wordpress/components";

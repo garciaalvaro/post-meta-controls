@@ -1,3 +1,4 @@
+import React from "react";
 import { prepareProps } from "utils/tools/prepareProps";
 
 export const P: React.ComponentType<ComponentProps> = props => {

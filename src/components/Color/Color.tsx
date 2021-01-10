@@ -1,3 +1,4 @@
+import React from "react";
 import tinycolor from "tinycolor2";
 import { isUndefined } from "lodash";
 import { __ } from "@wordpress/i18n";

@@ -1,3 +1,4 @@
+import React from "react";
 import DOMPurify from "dompurify";
 import uuid from "uuid/v4";
 import { registerPlugin } from "@wordpress/plugins";

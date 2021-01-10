@@ -1,3 +1,4 @@
+import React from "react";
 import { TextareaControl } from "@wordpress/components";
 
 interface Props extends TextareaProps, SettingPropsShared {

@@ -1,3 +1,4 @@
+import React from "react";
 import DOMPurify from "dompurify";
 import { RawHTML } from "@wordpress/element";
 import { Dashicon } from "@wordpress/components";

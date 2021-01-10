@@ -1,3 +1,4 @@
+import React from "react";
 import { __, sprintf } from "@wordpress/i18n";
 
 import { Div, Span } from "utils/Components";

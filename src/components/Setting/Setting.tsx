@@ -1,3 +1,4 @@
+import React from "react";
 import { withMetaData } from "./withMetaData";
 import { withLocalData } from "./withLocalData";
 import { withNoneData } from "./withNoneData";

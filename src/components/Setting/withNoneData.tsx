@@ -1,3 +1,4 @@
+import React from "react";
 import { isUndefined } from "lodash";
 import { withSelect, withDispatch } from "@wordpress/data";
 import { compose } from "@wordpress/compose";

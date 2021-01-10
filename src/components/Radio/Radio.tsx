@@ -1,3 +1,4 @@
+import React from "react";
 import { RadioControl } from "@wordpress/components";
 
 interface Props extends RadioProps, SettingPropsShared {

@@ -1,3 +1,4 @@
+import React from "react";
 import { SelectControl } from "@wordpress/components";
 
 import "./Select.styl";

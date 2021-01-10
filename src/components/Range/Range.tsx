@@ -1,3 +1,4 @@
+import React from "react";
 import { RangeControl } from "@wordpress/components";
 
 import "./Range.styl";

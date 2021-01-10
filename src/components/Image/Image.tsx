@@ -1,3 +1,4 @@
+import React from "react";
 import { castArray } from "lodash";
 import { __ } from "@wordpress/i18n";
 import * as blockEditor from "@wordpress/block-editor";

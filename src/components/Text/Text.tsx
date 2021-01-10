@@ -1,3 +1,4 @@
+import React from "react";
 import { TextControl } from "@wordpress/components";
 
 interface Props extends TextProps, SettingPropsShared {

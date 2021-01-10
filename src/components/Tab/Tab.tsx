@@ -1,3 +1,4 @@
+import React from "react";
 import { Div } from "utils/Components";
 import { Panels } from "../Panel";
 

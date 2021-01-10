@@ -1,3 +1,4 @@
+import React from "react";
 import { Component } from "@wordpress/element";
 import { withSelect } from "@wordpress/data";
 import { compose, withState } from "@wordpress/compose";

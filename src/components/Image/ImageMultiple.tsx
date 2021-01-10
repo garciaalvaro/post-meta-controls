@@ -1,3 +1,4 @@
+import React from "react";
 import { __ } from "@wordpress/i18n";
 import * as blockEditor from "@wordpress/block-editor";
 import * as editor from "@wordpress/editor";
