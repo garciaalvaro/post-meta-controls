@@ -1,7 +1,7 @@
 import { PanelRow } from "@wordpress/components";
 
 import { Span, Div } from "utils/Components";
-import { Settings } from "../Setting/Settings";
+import { Settings } from "../Setting";
 import { PanelPrepared } from "./Panels";
 
 export const PanelNotCollapsible: React.ComponentType<PanelPrepared> = props => {

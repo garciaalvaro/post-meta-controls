@@ -3,7 +3,7 @@ import { PanelBody } from "@wordpress/components";
 
 import { Div, Span } from "utils/Components";
 import { addPrefix } from "utils/tools";
-import { Settings } from "../Setting/Settings";
+import { Settings } from "../Setting";
 import { PanelPrepared } from "./Panels";
 
 export const PanelCollapsible: React.ComponentType<PanelPrepared> = props => {

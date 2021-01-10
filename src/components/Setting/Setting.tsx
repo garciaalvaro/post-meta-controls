@@ -3,21 +3,21 @@ import { withLocalData } from "./withLocalData";
 import { withNoneData } from "./withNoneData";
 
 import { Div } from "utils/Components";
-import { Buttons } from "../Buttons/Buttons";
-import { Checkbox } from "../Checkbox/Checkbox";
-import { CheckboxMultiple } from "../Checkbox/CheckboxMultiple";
-import { Color } from "../Color/Color";
-import { CustomText } from "../CustomText/CustomText";
-import { DateRange } from "../Date/DateRange";
-import { DateSingle } from "../Date/DateSingle";
-import { Image } from "../Image/Image";
-import { ImageMultiple } from "../Image/ImageMultiple";
-import { Radio } from "../Radio/Radio";
-import { Range } from "../Range/Range";
-import { RangeFloat } from "../Range/RangeFloat";
-import { Select } from "../Select/Select";
-import { Text } from "../Text/Text";
-import { Textarea } from "../Textarea/Textarea";
+import { Buttons } from "../Buttons";
+import { Checkbox } from "../Checkbox";
+import { CheckboxMultiple } from "../Checkbox";
+import { Color } from "../Color";
+import { CustomText } from "../CustomText";
+import { DateRange } from "../Date";
+import { DateSingle } from "../Date";
+import { Image } from "../Image";
+import { ImageMultiple } from "../Image";
+import { Radio } from "../Radio";
+import { Range } from "../Range";
+import { RangeFloat } from "../Range";
+import { Select } from "../Select";
+import { Text } from "../Text";
+import { Textarea } from "../Textarea";
 
 type Props = SettingProps & {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

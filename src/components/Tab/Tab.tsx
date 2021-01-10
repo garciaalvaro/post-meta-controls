@@ -1,5 +1,5 @@
 import { Div } from "utils/Components";
-import { Panels } from "../Panel/Panels";
+import { Panels } from "../Panel";
 
 interface Props {
 	id: TabProps["id"];

@@ -5,8 +5,8 @@ import { compose, withState } from "@wordpress/compose";
 import { store_slug } from "utils/data";
 import { getColorScheme } from "utils/tools";
 import { Div } from "utils/Components";
-import { Warnings } from "../Warnings/Warnings";
-import { Tabs } from "../Tab/Tabs";
+import { Warnings } from "../Warnings";
+import { Tabs } from "../Tab";
 
 interface OwnProps {
 	id: SidebarProps["id"];
