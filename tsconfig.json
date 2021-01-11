@@ -5,6 +5,8 @@
 		"noEmit": true,
 		"strict": true,
 		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"allowJs": true,
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
@@ -13,5 +15,6 @@
 			"utils/*": ["src/utils/*"]
 		}
 	},
-	"include": ["src", "types"]
+	"include": ["src", "types"],
+	"exclude": ["_extras", "_release", "dist", "node_modules", "pro"]
 }

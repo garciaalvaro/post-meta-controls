@@ -1,7 +1,7 @@
 module.exports = {
 	parser: "@typescript-eslint/parser",
 
-	ignorePatterns: ["_extras", "_release", "dist", "node_modules"],
+	ignorePatterns: ["_extras", "_release", "dist", "node_modules", "pro"],
 
 	extends: [
 		"eslint:recommended",
