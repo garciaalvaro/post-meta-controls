@@ -1,8 +1,7 @@
 import React from "react";
 import { castArray } from "lodash";
 import { __ } from "@wordpress/i18n";
-import * as blockEditor from "@wordpress/block-editor";
-import * as editor from "@wordpress/editor";
+import { MediaUpload } from "@wordpress/block-editor";
 import { Component } from "@wordpress/element";
 import { Button, BaseControl } from "@wordpress/components";
 import { withState } from "@wordpress/compose";
@@ -15,8 +14,6 @@ import {
 	prepareImageDataFromRest,
 } from "utils/tools";
 import { Div, Img, Icon } from "utils/Components";
-
-const { MediaUpload } = blockEditor ? blockEditor : editor;
 
 interface WithStateProps {
 	setState: SetState<{

@@ -1,7 +1,6 @@
 import React from "react";
 import { __ } from "@wordpress/i18n";
-import * as blockEditor from "@wordpress/block-editor";
-import * as editor from "@wordpress/editor";
+import { MediaUpload } from "@wordpress/block-editor";
 import { Component } from "@wordpress/element";
 import { Button, BaseControl } from "@wordpress/components";
 import { withState } from "@wordpress/compose";
@@ -27,8 +26,6 @@ interface OwnProps extends ImageMultipleProps, SettingPropsShared {
 }
 
 interface Props extends OwnProps, WithStateProps {}
-
-const { MediaUpload } = blockEditor ? blockEditor : editor;
 
 const SortableItem = SortableElement(
 	(props: { image: Image; removeImage: (id: number) => void }) => {
