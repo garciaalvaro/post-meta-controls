@@ -9,7 +9,7 @@ const initial_state: State = {
 	tabs: [],
 };
 
-export const reducer = (state_prev = initial_state, action: Actions) => {
+export const reducer = (state_prev = initial_state, action: Actions): State => {
 	let state = state_prev;
 
 	// Previous to WordPress 5.2, "persistence" takes the saved properties as the initial_state.

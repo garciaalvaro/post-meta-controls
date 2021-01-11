@@ -19,7 +19,7 @@ export default {
 	module: {
 		rules: [
 			{
-				test: new RegExp(`${name}\.php$`),
+				test: new RegExp(`${name}.php$`),
 				use: [
 					{
 						loader: "file-loader",

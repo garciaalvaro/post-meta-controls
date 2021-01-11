@@ -150,6 +150,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 		});
 
 		settings.forEach((props_raw: SettingPropsRaw) => {
+			// @ts-expect-error TODO: Redefine types
 			const { type } = props_raw;
 
 			if (isUndefined(type)) {
@@ -160,62 +161,77 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 
 			switch (type) {
 				case "buttons":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Buttons(props_raw);
 					break;
 
 				case "checkbox":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Checkbox(props_raw);
 					break;
 
 				case "checkbox_multiple":
+					// @ts-expect-error TODO: Redefine types
 					setting = new CheckboxMultiple(props_raw);
 					break;
 
 				case "color":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Color(props_raw);
 					break;
 
 				case "custom_text":
+					// @ts-expect-error TODO: Redefine types
 					setting = new CustomText(props_raw);
 					break;
 
 				case "date_range":
+					// @ts-expect-error TODO: Redefine types
 					setting = new DateRange(props_raw);
 					break;
 
 				case "date_single":
+					// @ts-expect-error TODO: Redefine types
 					setting = new DateSingle(props_raw);
 					break;
 
 				case "image":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Image(props_raw);
 					break;
 
 				case "image_multiple":
+					// @ts-expect-error TODO: Redefine types
 					setting = new ImageMultiple(props_raw);
 					break;
 
 				case "radio":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Radio(props_raw);
 					break;
 
 				case "range":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Range(props_raw);
 					break;
 
 				case "range_float":
+					// @ts-expect-error TODO: Redefine types
 					setting = new RangeFloat(props_raw);
 					break;
 
 				case "select":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Select(props_raw);
 					break;
 
 				case "text":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Text(props_raw);
 					break;
 
 				case "textarea":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Textarea(props_raw);
 					break;
 			}
@@ -268,13 +284,15 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 				if (
 					!setting ||
 					setting.meta_key_exists ||
-					// @ts-ignore TODO: default_value does not exist in custom_text setting.
+					// @ts-expect-error TODO: default_value does not exist
+					// in custom_text setting.
 					isUndefined(setting.default_value)
 				) {
 					return { ...acc, [key]: value };
 				}
 
-				// @ts-ignore TODO: default_value does not exist in custom_text setting.
+				// @ts-expect-error TODO: default_value does not exist
+				// in custom_text setting.
 				return { ...acc, [key]: setting.default_value };
 			},
 			{}

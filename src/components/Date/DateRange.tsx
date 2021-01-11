@@ -12,7 +12,11 @@ import "./Date.styl";
 import { addPrefix } from "utils/tools";
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{
+		start_date: moment.Moment | null;
+		end_date: moment.Moment | null;
+		focused_input: "startDate" | "endDate" | null;
+	}>;
 	start_date: moment.Moment | null;
 	end_date: moment.Moment | null;
 	focused_input: "startDate" | "endDate" | null;

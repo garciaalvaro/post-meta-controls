@@ -1,4 +1,6 @@
-export const prepareImageDataFromMedia = (images_raw: ImageFromMedia[]) =>
+export const prepareImageDataFromMedia = (
+	images_raw: ImageFromMedia[]
+): Image[] =>
 	images_raw.reduce<Image[]>((data, image_raw) => {
 		const { id, alt, sizes } = image_raw;
 
@@ -16,7 +18,9 @@ export const prepareImageDataFromMedia = (images_raw: ImageFromMedia[]) =>
 		});
 	}, []);
 
-export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
+export const prepareImageDataFromRest = (
+	images_raw: ImageFromRest[]
+): Image[] =>
 	images_raw.reduce<Image[]>((data, image_raw) => {
 		const {
 			id,

@@ -32,13 +32,15 @@ export class Color extends Setting<Props> {
 	beforeSetSchema = (props_raw: SettingProps): SettingProps => {
 		props_raw = super.beforeSetSchema(props_raw);
 
-		// @ts-ignore
+		// @ts-expect-error TODO
 		props_raw.palette = this.preparePalette(props_raw.palette);
 
 		return props_raw;
 	};
 
-	preparePalette(palette: ColorPaletteRaw | ColorPalette[] | undefined) {
+	preparePalette(
+		palette: ColorPaletteRaw | ColorPalette[] | undefined
+	): ColorPalette[] | undefined {
 		if (isArray(palette) || isUndefined(palette)) {
 			return palette;
 		}

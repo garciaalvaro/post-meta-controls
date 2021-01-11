@@ -34,7 +34,7 @@ export class Select extends Setting<Props> {
 	beforeSetSchema = (props_raw: SettingProps): SettingProps => {
 		props_raw = super.beforeSetSchema(props_raw);
 
-		// @ts-ignore
+		// @ts-expect-error TODO
 		props_raw.options = prepareOptions(props_raw.options);
 
 		return props_raw;

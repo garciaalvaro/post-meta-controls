@@ -1,3 +1,4 @@
+import React from "react";
 export type Icons = Record<"remove" | "add", JSX.Element>;
 
 export const icons: Icons = {

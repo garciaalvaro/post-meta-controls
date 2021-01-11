@@ -4,7 +4,7 @@ import { withState } from "@wordpress/compose";
 import { Component } from "@wordpress/element";
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{ digits_length: number }>;
 	digits_length: string;
 }
 
@@ -16,7 +16,7 @@ interface OwnProps extends RangeFloatProps, SettingPropsShared {
 interface Props extends OwnProps, WithStateProps {}
 
 export const RangeFloat: React.ComponentType<OwnProps> = withState({
-	digits_length: "",
+	digits_length: 1,
 })(
 	class extends Component<Props> {
 		componentDidMount() {

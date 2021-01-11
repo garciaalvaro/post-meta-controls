@@ -17,7 +17,7 @@ import {
 import { Div, Img, Icon } from "utils/Components";
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{ images: Image[] }>;
 	images: { id: number; url: string; alt: string }[];
 }
 
@@ -31,7 +31,7 @@ interface Props extends OwnProps, WithStateProps {}
 const { MediaUpload } = blockEditor ? blockEditor : editor;
 
 const SortableItem = SortableElement(
-	(props: { image: Image; removeImage: Function }) => {
+	(props: { image: Image; removeImage: (id: number) => void }) => {
 		const { image, removeImage } = props;
 		const { id, url, alt } = image;
 
@@ -66,7 +66,10 @@ const SortableItem = SortableElement(
 );
 
 const SortableList = SortableContainer(
-	(props: { items: Image[]; custom: { removeImage: Function } }) => {
+	(props: {
+		items: Image[];
+		custom: { removeImage: (id: number) => void };
+	}) => {
 		const { items, custom } = props;
 
 		return (

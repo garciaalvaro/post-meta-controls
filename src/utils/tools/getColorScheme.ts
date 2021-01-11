@@ -1,4 +1,6 @@
-export const getColorScheme = (color_scheme: string) => {
+export const getColorScheme = (
+	color_scheme: string
+): { id: string; type: string } => {
 	switch (color_scheme) {
 		case "light":
 			return {

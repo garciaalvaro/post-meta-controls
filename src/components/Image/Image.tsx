@@ -19,7 +19,11 @@ import { Div, Img, Icon } from "utils/Components";
 const { MediaUpload } = blockEditor ? blockEditor : editor;
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{
+		url: string;
+		alt: string;
+		image_id_not_found: number;
+	}>;
 	url: string;
 	alt: string;
 	image_id_not_found: number;

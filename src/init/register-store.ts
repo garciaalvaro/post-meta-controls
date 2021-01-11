@@ -6,11 +6,9 @@ import { actions } from "store/actions";
 import { selectors } from "store/selectors";
 
 registerStore(store_slug, {
-	// @ts-ignore
+	// @ts-expect-error TODO
 	reducer,
-	// @ts-ignore
 	actions,
-	// @ts-ignore
 	selectors,
 	persist: ["settings_persisted"],
 });

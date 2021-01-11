@@ -1,5 +1,5 @@
 import { name, version, description, homepage } from "../package.json";
-import { BannerPlugin, DefinePlugin } from "webpack";
+import { BannerPlugin } from "webpack";
 import TerserJSPlugin from "terser-webpack-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -71,9 +71,6 @@ export default {
 		],
 	},
 	plugins: [
-		new DefinePlugin({
-			l: (...args) => console.log(...args),
-		}),
 		new MiniCssExtractPlugin({
 			filename: `${name}.css`,
 		}),

@@ -10,7 +10,7 @@ export const prepareIcon = (
 	icon_svg: string,
 	icon_dashicon: string,
 	type: "tab" | "panel"
-) => {
+): React.ReactNode => {
 	if (icon_svg === "" && icon_dashicon === "") {
 		return null;
 	}
@@ -25,10 +25,7 @@ export const prepareIcon = (
 
 	return (
 		<Div className={`${type}-icon`}>
-			<Dashicon
-				// @ts-ignore
-				icon={icon_dashicon}
-			/>
+			<Dashicon icon={icon_dashicon as Dashicon.Icon} />
 		</Div>
 	);
 };

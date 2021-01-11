@@ -63,11 +63,11 @@ export class Base<T extends BaseReceivedProps> {
 
 	// At this point the received props have the final keys and default values
 	// but they have not been casted
-	beforeSetSchema = (props_raw: T["props"]) => props_raw;
+	beforeSetSchema = (props_raw: T["props"]): T["props"] => props_raw;
 
-	afterCastSchema = (props_raw: T["props"]) => props_raw;
+	afterCastSchema = (props_raw: T["props"]): T["props"] => props_raw;
 
-	dispatch = () => {
+	dispatch = (): void => {
 		if (isUndefined(dispatch(store_slug))) {
 			return;
 		}
@@ -97,13 +97,13 @@ export class Base<T extends BaseReceivedProps> {
 		}
 	};
 
-	unsetPrivateKeys = (props_raw: T["props_raw"]) =>
+	unsetPrivateKeys = (props_raw: T["props_raw"]): T["props_raw"] =>
 		reduce<T["props_raw"], Partial<T["props_raw"]>>(
 			props_raw,
 			(acc, prop_value, prop_key) => {
-				// @ts-ignore TODO: TS
+				// @ts-expect-error TODO
 				if (!this.props_privates.includes(prop_key)) {
-					// @ts-ignore TODO: TS
+					// @ts-expect-error TODO
 					acc[prop_key] = prop_value;
 				}
 
@@ -114,37 +114,37 @@ export class Base<T extends BaseReceivedProps> {
 
 	// Assign default props if not present in array and
 	// remove keys which are not present in defaults.
-	mergeDefaults = (props_raw: T["props_raw"]) =>
+	mergeDefaults = (props_raw: T["props_raw"]): T["props_raw"] =>
 		defaults(
 			pick(props_raw, keys(this.props_defaults)),
 			this.props_defaults
 		);
 
-	castSchema = (props_raw: T["props_raw"]) =>
+	castSchema = (props_raw: T["props_raw"]): T["props_raw"] =>
 		castSchema(props_raw, this.props_schema);
 
-	validateProps = () => {
+	validateProps = (): void => {
 		const { props, props_schema: schemas, validateCondition } = this;
 
 		forOwn<T["props_schema"]>(schemas, (schema, key) => {
-			// @ts-ignore TODO: TS
+			// @ts-expect-error TODO
 			const { conditions } = schema;
 
 			if (!conditions) {
 				return;
 			}
 
-			// @ts-ignore TODO: TS
+			// @ts-expect-error TODO
 			validateCondition(conditions, props[key], key);
 		});
 	};
 
 	validateCondition = (
 		condition: SchemaCondition,
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 		value: any,
 		key: string
-	) => {
+	): void => {
 		const { addWarning, validateCondition } = this;
 
 		if (condition === "not_empty") {
@@ -173,7 +173,7 @@ export class Base<T extends BaseReceivedProps> {
 		}
 	};
 
-	addWarning = (prop_key: string, message: string) => {
+	addWarning = (prop_key: string, message: string): void => {
 		const { warnings, class_name } = this.props;
 		const type =
 			class_name === "setting"
@@ -193,7 +193,7 @@ export class Base<T extends BaseReceivedProps> {
 		});
 	};
 
-	getId = () => this.props.id;
+	getId = (): T["props"]["id"] => this.props.id;
 
-	getProps = () => this.props;
+	getProps = (): T["props"] => this.props;
 }

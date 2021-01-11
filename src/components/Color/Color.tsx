@@ -15,7 +15,7 @@ import "./Color.styl";
 import { Span } from "utils/Components";
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{ alpha: number; color: string }>;
 	color: string;
 	alpha: number;
 }
@@ -71,10 +71,10 @@ export const Color = withState({ color: "", alpha: 100 })(
 				>
 					<ColorPalette
 						colors={palette}
-						// @ts-ignore
+						// @ts-expect-error TODO: The type should be string? Confirm.
 						value={value}
-						// @ts-ignore
-						onChange={(color: string | undefined) => {
+						// @ts-expect-error TODO: The type should be string? Confirm.
+						onChange={(color?: string) => {
 							color = color || "";
 
 							setState({ color });

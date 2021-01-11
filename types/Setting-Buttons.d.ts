@@ -12,7 +12,7 @@ type ButtonsProps = {
 	options: ButtonsOption[];
 };
 
-type ButtonsPropsRaw = Partial<Omit<ButtonsProps, "options" | "type">> & {
+type ButtonsPropsRaw = Partial<Omit<ButtonsProps, "options">> & {
 	options?: Partial<ButtonsOption>[];
 };
 

@@ -31,7 +31,8 @@ type ActionOpenTab = Action<
 type ActionAddSidebar = Action<"ADD_SIDEBAR", SidebarProps>;
 type ActionAddTab = Action<"ADD_TAB", TabProps>;
 type ActionAddPanel = Action<"ADD_PANEL", PanelProps>;
-type ActionAddSetting = Action<"ADD_SETTING", SettingProps>;
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ActionAddSetting = Action<"ADD_SETTING", SettingProps & { value: any }>;
 
 type ActionCreators = {
 	updatePropLocal: ActionCreator<ActionUpdatePropLocal>;

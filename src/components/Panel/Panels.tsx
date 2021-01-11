@@ -18,7 +18,7 @@ interface WithSelectProps {
 }
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{ panels_prepared: PanelPrepared[] }>;
 	panels_prepared: PanelPrepared[];
 }
 

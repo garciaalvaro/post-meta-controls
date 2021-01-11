@@ -10,13 +10,15 @@ import { store_slug } from "utils/data";
 import { addPrefix, prepareIcon } from "utils/tools";
 import { Tab } from "./Tab";
 
+export interface TabsPrepared {
+	name: TabProps["id"];
+	title: React.ReactNode;
+	className: string;
+}
+
 interface WithStateProps {
-	setState: Function;
-	tabs_prepared: {
-		name: TabProps["id"];
-		title: React.ReactNode;
-		className: string;
-	}[];
+	setState: SetState<{ tabs_prepared: TabsPrepared[] }>;
+	tabs_prepared: TabsPrepared[];
 }
 
 interface OwnProps {
@@ -99,8 +101,9 @@ export const Tabs = compose([
 					onSelect={tab_name =>
 						openTab({ sidebar_id, tab_id: tab_name })
 					}
-					// @ts-ignore. Tab title admits passing a component although
-					// the definition file indicates only string
+					// @ts-expect-error TODO:
+					// Passing a title that includes an icon.
+					// Confirm this type is accepted.
 					tabs={tabs_prepared}
 					initialTabName={active_tab}
 				>

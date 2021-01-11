@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
 import { __ } from "@wordpress/i18n";
@@ -11,8 +11,11 @@ import { doAction } from "@wordpress/hooks";
 import { addPrefix } from "utils/tools";
 
 interface WithStateProps {
-	setState: Function;
-	date: moment.Moment | null;
+	setState: SetState<{
+		date: Moment | null;
+		focused: boolean;
+	}>;
+	date: Moment | null;
 	focused: boolean;
 }
 
@@ -84,33 +87,41 @@ export const DateSingle = withState({
 								return false;
 							}
 
-							return unavailable_dates.reduce((acc, day_raw) => {
-								if (acc) {
-									return true;
-								}
+							const is_outside_range = unavailable_dates.reduce(
+								(acc, day_raw) => {
+									if (acc) {
+										return true;
+									}
 
-								const [start_raw, end_raw] = day_raw;
+									const [start_raw, end_raw] = day_raw;
 
-								const start =
-									start_raw === "today"
-										? moment()
-										: moment(start_raw, format);
+									const start =
+										start_raw === "today"
+											? moment()
+											: moment(start_raw, format);
 
-								const end =
-									end_raw === "today"
-										? moment()
-										: moment(end_raw, format);
+									const end =
+										end_raw === "today"
+											? moment()
+											: moment(end_raw, format);
 
-								if (start_raw === "before") {
-									return day.isBefore(end);
-								}
+									if (start_raw === "before") {
+										return day.isBefore(end);
+									}
 
-								if (end_raw === "after") {
-									return day.isSameOrAfter(start);
-								}
+									if (end_raw === "after") {
+										return day.isSameOrAfter(start);
+									}
 
-								return day.isBetween(start, end.add(1, "day"));
-							}, false);
+									return day.isBetween(
+										start,
+										end.add(1, "day")
+									);
+								},
+								false
+							);
+
+							return is_outside_range;
 						}}
 					/>
 					<Button
@@ -119,7 +130,7 @@ export const DateSingle = withState({
 
 							setState({
 								date: null,
-								focused: null,
+								focused: false,
 							});
 
 							// If there is no value selected we save an empty string.

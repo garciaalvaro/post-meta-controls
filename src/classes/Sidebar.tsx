@@ -1,6 +1,6 @@
 import React from "react";
 import DOMPurify from "dompurify";
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import { registerPlugin } from "@wordpress/plugins";
 import { RawHTML } from "@wordpress/element";
 
@@ -74,7 +74,7 @@ export class Sidebar extends Base<Props> {
 		});
 	}
 
-	registerPlugin = () => {
+	registerPlugin = (): void => {
 		const {
 			id,
 			icon_dashicon,
@@ -105,7 +105,7 @@ export class Sidebar extends Base<Props> {
 			);
 
 		registerPlugin(plugin_id, {
-			// @ts-ignore TODO: TS
+			// @ts-expect-error TODO
 			icon: icon || "carrot",
 			render: () => (
 				<App plugin_id={plugin_id} sidebar_id={id} label={label} />
@@ -113,7 +113,7 @@ export class Sidebar extends Base<Props> {
 		});
 	};
 
-	setIdAlreadyExists = () => {
+	setIdAlreadyExists = (): void => {
 		this.props.id_already_exists = true;
 	};
 }

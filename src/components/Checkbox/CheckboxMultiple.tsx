@@ -11,7 +11,12 @@ import { compact } from "lodash";
 import "./CheckboxMultiple.styl";
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{
+		options_prepared: {
+			value: string;
+			label: string;
+		}[];
+	}>;
 	options_prepared: Option[];
 }
 

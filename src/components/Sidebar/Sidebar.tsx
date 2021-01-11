@@ -14,7 +14,7 @@ interface OwnProps {
 }
 
 interface WithStateProps {
-	setState: Function;
+	setState: SetState<{ color_scheme: { id: string; type: string } }>;
 	color_scheme: { id: string; type: string };
 }
 

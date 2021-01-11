@@ -1,4 +1,4 @@
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 
 import { Base } from "./Base";
 
@@ -139,7 +139,8 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 		};
 	};
 
-	getDataType = () => this.props.data_type;
+	getDataType = (): SettingProps["data_type"] => this.props.data_type;
 
-	getDataKey = () => this.props.data_key_with_prefix;
+	getDataKey = (): SettingProps["data_key_with_prefix"] =>
+		this.props.data_key_with_prefix;
 }

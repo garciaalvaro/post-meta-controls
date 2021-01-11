@@ -12,9 +12,7 @@ export const PanelCollapsible: React.ComponentType<PanelPrepared> = props => {
 
 	return (
 		<PanelBody
-			// @ts-ignore
-			// PanelBody title admits passing a component although
-			// the definition file indicates only string
+			// @ts-expect-error TODO
 			title={
 				<Fragment>
 					{icon}
