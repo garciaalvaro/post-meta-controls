@@ -36,6 +36,7 @@ function enqueue()
 			"wp-compose",
 			"wp-data",
 			"wp-edit-post",
+			"wp-editor",
 			"wp-element",
 			"wp-hooks",
 			"wp-i18n",
