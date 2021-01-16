@@ -69,7 +69,7 @@ class DateSingle extends Setting
 			// Enqueue the selected locale script.
 			wp_enqueue_script(
 				PLUGIN_NAME . "-moment_locales",
-				BUILD_DIR . PLUGIN_NAME . "-moment-locales.js",
+				DIST_DIR . PLUGIN_NAME . "-moment-locales.js",
 				[],
 				PLUGIN_VERSION,
 				true // Enqueue in the footer.

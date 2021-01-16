@@ -19,14 +19,14 @@ function enqueue()
 
 	wp_enqueue_style(
 		PLUGIN_NAME,
-		BUILD_DIR . PLUGIN_NAME . ".css",
+		DIST_DIR . PLUGIN_NAME . ".css",
 		[],
 		PLUGIN_VERSION
 	);
 
 	wp_enqueue_script(
 		PLUGIN_NAME,
-		BUILD_DIR . PLUGIN_NAME . ".js",
+		DIST_DIR . PLUGIN_NAME . ".js",
 		[
 			"lodash",
 			"moment",

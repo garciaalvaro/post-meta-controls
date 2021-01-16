@@ -16,9 +16,9 @@ if (!defined("ABSPATH")) {
 	exit();
 }
 
-define(__NAMESPACE__ . "\PLUGIN_VERSION", "1.3.4");
 define(__NAMESPACE__ . "\PLUGIN_NAME", "post-meta-controls");
-define(__NAMESPACE__ . "\BUILD_DIR", plugins_url("build/", __FILE__));
+define(__NAMESPACE__ . "\PLUGIN_VERSION", "1.3.4");
+define(__NAMESPACE__ . "\DIST_DIR", plugins_url("dist/", __FILE__));
 define(__NAMESPACE__ . "\INC_DIR", plugin_dir_path(__FILE__) . "inc/");
 define(__NAMESPACE__ . "\PLUGIN_DIR", plugin_dir_path(__FILE__));
 
