@@ -78,7 +78,7 @@ class DateRange extends Setting
 		add_action("pmc_before_enqueue", function () {
 			// Enqueue the selected locale script.
 			wp_enqueue_script(
-				PLUGIN_NAME . "-moment_locales",
+				PLUGIN_NAME . "-moment-locales",
 				DIST_DIR . PLUGIN_NAME . "-moment-locales.js",
 				[],
 				PLUGIN_VERSION,
