@@ -4,7 +4,7 @@ import { compose } from "@wordpress/compose";
 import { Component } from "@wordpress/element";
 import { isUndefined } from "lodash";
 
-import { store_slug } from "utils/data";
+import { store_slug } from "@/utils/data";
 
 interface WithSelectProps {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

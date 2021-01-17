@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid";
 import { registerPlugin } from "@wordpress/plugins";
 import { RawHTML } from "@wordpress/element";
 
-import { addPrefix } from "utils/tools";
-import { App } from "Components/App/App";
+import { addPrefix } from "@/utils/tools";
+import { App } from "@/components/App/App";
 import { Base } from "./Base";
 
 export interface Props {

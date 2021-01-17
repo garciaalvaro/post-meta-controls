@@ -3,9 +3,9 @@ import { Component } from "@wordpress/element";
 import { withSelect } from "@wordpress/data";
 import { compose, withState } from "@wordpress/compose";
 
-import { store_slug } from "utils/data";
-import { getColorScheme } from "utils/tools";
-import { Div } from "utils/Components";
+import { store_slug } from "@/utils/data";
+import { getColorScheme } from "@/utils/tools";
+import { Div } from "@/utils/components";
 import { Warnings } from "../Warnings";
 import { Tabs } from "../Tab";
 

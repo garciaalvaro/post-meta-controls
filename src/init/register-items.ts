@@ -4,7 +4,7 @@ import { sprintf, __ } from "@wordpress/i18n";
 import { addQueryArgs } from "@wordpress/url";
 import { select, dispatch, useSelect, subscribe } from "@wordpress/data";
 
-import { store_slug } from "utils/data";
+import { store_slug } from "@/utils/data";
 import {
 	Sidebar,
 	Tab,
@@ -25,7 +25,7 @@ import {
 	Select,
 	Text,
 	Textarea,
-} from "../classes";
+} from "@/classes";
 
 type Setting =
 	| Buttons

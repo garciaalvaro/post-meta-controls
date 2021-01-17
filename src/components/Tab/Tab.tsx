@@ -1,5 +1,5 @@
 import React from "react";
-import { Div } from "utils/Components";
+import { Div } from "@/utils/components";
 import { Panels } from "../Panel";
 
 interface Props {

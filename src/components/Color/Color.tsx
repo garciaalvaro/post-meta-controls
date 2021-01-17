@@ -12,7 +12,7 @@ import {
 import { withState } from "@wordpress/compose";
 
 import "./Color.styl";
-import { Span } from "utils/Components";
+import { Span } from "@/utils/components";
 
 interface WithStateProps {
 	setState: SetState<{ alpha: number; color: string }>;

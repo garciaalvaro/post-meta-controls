@@ -8,7 +8,7 @@ import { Component } from "@wordpress/element";
 import { BaseControl, Button } from "@wordpress/components";
 import { doAction } from "@wordpress/hooks";
 
-import { addPrefix } from "utils/tools";
+import { addPrefix } from "@/utils/tools";
 
 interface WithStateProps {
 	setState: SetState<{

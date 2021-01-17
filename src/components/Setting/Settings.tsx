@@ -3,7 +3,7 @@ import { withSelect } from "@wordpress/data";
 import { Fragment } from "@wordpress/element";
 
 import "./Settings.styl";
-import { store_slug } from "utils/data";
+import { store_slug } from "@/utils/data";
 import {
 	SettingWithMetaData,
 	SettingWithLocalData,

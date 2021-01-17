@@ -3,7 +3,7 @@ import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";
 
 import "./Warnings.styl";
-import { Div, Span } from "utils/Components";
+import { Div, Span } from "@/utils/components";
 import { Warning } from "./Warning";
 
 interface Props {

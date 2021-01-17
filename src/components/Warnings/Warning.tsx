@@ -1,7 +1,7 @@
 import React from "react";
 import { __, sprintf } from "@wordpress/i18n";
 
-import { Div, Span } from "utils/Components";
+import { Div, Span } from "@/utils/components";
 
 export const Warning: React.ComponentType<Warning> = props => {
 	const { title, message } = props;

@@ -9,7 +9,7 @@ import {
 	get,
 } from "lodash";
 
-import { sanitize } from "utils/tools/sanitize.ts";
+import { sanitize } from "@/utils/tools/sanitize.ts";
 
 export const castSchema = (elements, schema) => {
 	forEach(elements, (value, key) => {

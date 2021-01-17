@@ -5,9 +5,9 @@ import { Component, Fragment } from "@wordpress/element";
 import { TabPanel } from "@wordpress/components";
 
 import "./Tabs.styl";
-import { Span } from "utils/Components";
-import { store_slug } from "utils/data";
-import { addPrefix, prepareIcon } from "utils/tools";
+import { Span } from "@/utils/components";
+import { store_slug } from "@/utils/data";
+import { addPrefix, prepareIcon } from "@/utils/tools";
 import { Tab } from "./Tab";
 
 export interface TabsPrepared {

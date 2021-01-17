@@ -12,8 +12,8 @@ import {
 	addPrefix,
 	prepareImageDataFromMedia,
 	prepareImageDataFromRest,
-} from "utils/tools";
-import { Div, Img, Icon } from "utils/Components";
+} from "@/utils/tools";
+import { Div, Img, Icon } from "@/utils/components";
 
 interface WithStateProps {
 	setState: SetState<{ images: Image[] }>;

@@ -13,8 +13,8 @@ import {
 import { __, sprintf } from "@wordpress/i18n";
 import { dispatch } from "@wordpress/data";
 
-import { castSchema } from "utils/tools";
-import { store_slug } from "utils/data";
+import { castSchema } from "@/utils/tools";
+import { store_slug } from "@/utils/data";
 import { Props as SettingProps } from "./Setting";
 import { Props as PanelProps } from "./Panel";
 import { Props as TabProps } from "./Tab";

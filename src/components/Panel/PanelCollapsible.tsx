@@ -2,8 +2,8 @@ import React from "react";
 import { Fragment } from "@wordpress/element";
 import { PanelBody } from "@wordpress/components";
 
-import { Div, Span } from "utils/Components";
-import { addPrefix } from "utils/tools";
+import { Div, Span } from "@/utils/components";
+import { addPrefix } from "@/utils/tools";
 import { Settings } from "../Setting";
 import { PanelPrepared } from "./Panels";
 

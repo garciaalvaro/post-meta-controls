@@ -10,9 +10,7 @@
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
-			"Components/*": ["src/components/*"],
-			"store/*": ["src/store/*"],
-			"utils/*": ["src/utils/*"]
+			"@/*": ["src/*"]
 		}
 	},
 	"include": ["src", "types"],

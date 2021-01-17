@@ -6,8 +6,8 @@ import { compose, withState } from "@wordpress/compose";
 import "./Panels.styl";
 import { PanelCollapsible } from "./PanelCollapsible";
 import { PanelNotCollapsible } from "./PanelNotCollapsible";
-import { store_slug } from "utils/data";
-import { prepareIcon } from "utils/tools";
+import { store_slug } from "@/utils/data";
+import { prepareIcon } from "@/utils/tools";
 
 interface OwnProps {
 	tab_id: TabProps["id"];

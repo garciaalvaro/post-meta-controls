@@ -1,7 +1,7 @@
 import React from "react";
 import { PanelRow } from "@wordpress/components";
 
-import { Span, Div } from "utils/Components";
+import { Span, Div } from "@/utils/components";
 import { Settings } from "../Setting";
 import { PanelPrepared } from "./Panels";
 

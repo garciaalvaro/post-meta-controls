@@ -9,7 +9,7 @@ import { BaseControl, Button } from "@wordpress/components";
 import { doAction } from "@wordpress/hooks";
 
 import "./Date.styl";
-import { addPrefix } from "utils/tools";
+import { addPrefix } from "@/utils/tools";
 
 interface WithStateProps {
 	setState: SetState<{

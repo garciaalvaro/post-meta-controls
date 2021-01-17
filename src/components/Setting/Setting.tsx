@@ -3,7 +3,7 @@ import { withMetaData } from "./withMetaData";
 import { withLocalData } from "./withLocalData";
 import { withNoneData } from "./withNoneData";
 
-import { Div } from "utils/Components";
+import { Div } from "@/utils/components";
 import { Buttons } from "../Buttons";
 import { Checkbox } from "../Checkbox";
 import { CheckboxMultiple } from "../Checkbox";

@@ -3,8 +3,8 @@ import DOMPurify from "dompurify";
 import { RawHTML } from "@wordpress/element";
 import { Dashicon } from "@wordpress/components";
 
-import { Div } from "utils/Components";
-import { addPrefix } from "utils/tools/addPrefix";
+import { Div } from "@/utils/components";
+import { addPrefix } from "@/utils/tools/addPrefix";
 
 export const prepareIcon = (
 	icon_svg: string,

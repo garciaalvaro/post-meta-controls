@@ -3,7 +3,7 @@ import { isUndefined } from "lodash";
 import { withSelect, withDispatch } from "@wordpress/data";
 import { compose } from "@wordpress/compose";
 
-import { store_slug } from "utils/data";
+import { store_slug } from "@/utils/data";
 
 interface WithSelectProps {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -33,9 +33,7 @@ module.exports = (env, { mode }) => {
 
 		resolve: {
 			alias: {
-				Components: path.resolve(__dirname, "src/components"),
-				store: path.resolve(__dirname, "src/store"),
-				utils: path.resolve(__dirname, "src/utils"),
+				"@": path.resolve(__dirname, "src"),
 			},
 		},
 

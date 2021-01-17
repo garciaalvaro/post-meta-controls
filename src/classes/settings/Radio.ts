@@ -1,4 +1,4 @@
-import { prepareOptions } from "utils/tools";
+import { prepareOptions } from "@/utils/tools";
 import { Setting } from "../Setting";
 
 interface Props {

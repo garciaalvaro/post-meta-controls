@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { addPrefix } from "utils/tools/addPrefix";
+import { addPrefix } from "@/utils/tools/addPrefix";
 
 export const prepareProps = (
 	props: ComponentProps

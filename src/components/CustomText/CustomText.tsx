@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "@wordpress/element";
 
 import "./CustomText.styl";
-import { A, P, H3, Ol, Ul, Li } from "utils/Components";
+import { A, P, H3, Ol, Ul, Li } from "@/utils/components";
 
 interface Props extends CustomTextProps, SettingPropsShared {}
 
