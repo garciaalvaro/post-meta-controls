@@ -41,8 +41,9 @@ export const selectors: Selectors = {
 
 		return flatten(
 			[...sidebars, ...tabs, ...panels, ...settings].map(
-				(item: any) => item.warnings
+				(item: SidebarProps | TabProps | PanelProps | SettingProps) =>
+					item.warnings
 			)
 		);
-	}
+	},
 };

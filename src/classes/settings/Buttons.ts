@@ -16,15 +16,15 @@ export class Buttons extends Setting<Props> {
 				type: "buttons",
 				default_value: "",
 				allow_empty: false,
-				options: []
+				options: [],
 			},
 
 			props_schema: {
 				default_value: {
-					type: "id"
+					type: "id",
 				},
 				allow_empty: {
-					type: "boolean"
+					type: "boolean",
 				},
 				options: {
 					type: {
@@ -32,12 +32,12 @@ export class Buttons extends Setting<Props> {
 							value: "id",
 							title: "text",
 							icon_dashicon: "id",
-							icon_svg: "html"
-						}
+							icon_svg: "html",
+						},
 					},
-					conditions: "not_empty"
-				}
-			}
+					conditions: "not_empty",
+				},
+			},
 		});
 	}
 }

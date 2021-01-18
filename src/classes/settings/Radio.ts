@@ -1,4 +1,4 @@
-import { prepareOptions } from "utils/tools";
+import { prepareOptions } from "@/utils/tools";
 import { Setting } from "../Setting";
 
 interface Props {
@@ -16,25 +16,25 @@ export class Radio extends Setting<Props> {
 			props_defaults: {
 				type: "radio",
 				default_value: "",
-				options: []
+				options: [],
 			},
 
 			props_schema: {
 				default_value: {
-					type: "id"
+					type: "id",
 				},
 				options: {
 					type: { _all: { value: "id", label: "text" } },
-					conditions: "not_empty"
-				}
-			}
+					conditions: "not_empty",
+				},
+			},
 		});
 	}
 
 	beforeSetSchema = (props_raw: SettingProps): SettingProps => {
 		props_raw = super.beforeSetSchema(props_raw);
 
-		// @ts-ignore
+		// @ts-expect-error TODO
 		props_raw.options = prepareOptions(props_raw.options);
 
 		return props_raw;

@@ -20,19 +20,19 @@ export class Range extends Setting<Props> {
 				default_value: 0,
 				step: 1,
 				min: 0,
-				max: 100
+				max: 100,
 			},
 
 			props_schema: {
 				default_value: {
-					type: "integer"
+					type: "integer",
 				},
 				step: {
 					type: "integer",
 					conditions: [
 						{
 							value: !!props_raw.step && props_raw.step > 0,
-							message: __("This value has to be greater than 0.")
+							message: __("This value has to be greater than 0."),
 						},
 						{
 							value:
@@ -42,15 +42,17 @@ export class Range extends Setting<Props> {
 								props_raw.max - props_raw.min > props_raw.step,
 							/* translators: %s: max property, %s: min property. */
 							message: sprintf(
-								__("This value has to be greater than '%s' minus '%s' values."),
+								__(
+									"This value has to be greater than '%s' minus '%s' values."
+								),
 								"max",
 								"min"
-							)
-						}
-					]
+							),
+						},
+					],
 				},
 				min: {
-					type: "integer"
+					type: "integer",
 				},
 				max: {
 					type: "integer",
@@ -64,11 +66,11 @@ export class Range extends Setting<Props> {
 							message: sprintf(
 								__("This value has to be greater than '%s'."),
 								"min"
-							)
-						}
-					]
-				}
-			}
+							),
+						},
+					],
+				},
+			},
 		});
 	}
 }

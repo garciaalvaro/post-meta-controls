@@ -18,27 +18,29 @@ export class Color extends Setting<Props> {
 				type: "color",
 				default_value: "",
 				alpha_control: false,
-				palette: []
+				palette: [],
 			},
 
 			props_schema: {
 				default_value: { type: "text" },
 				alpha_control: { type: "boolean" },
-				palette: { type: { _all: { name: "id", color: "text" } } }
-			}
+				palette: { type: { _all: { name: "id", color: "text" } } },
+			},
 		});
 	}
 
 	beforeSetSchema = (props_raw: SettingProps): SettingProps => {
 		props_raw = super.beforeSetSchema(props_raw);
 
-		// @ts-ignore
+		// @ts-expect-error TODO
 		props_raw.palette = this.preparePalette(props_raw.palette);
 
 		return props_raw;
 	};
 
-	preparePalette(palette: ColorPaletteRaw | ColorPalette[] | undefined) {
+	preparePalette(
+		palette: ColorPaletteRaw | ColorPalette[] | undefined
+	): ColorPalette[] | undefined {
 		if (isArray(palette) || isUndefined(palette)) {
 			return palette;
 		}
@@ -48,7 +50,7 @@ export class Color extends Setting<Props> {
 			(acc, value, key) =>
 				acc.concat({
 					name: key,
-					color: value
+					color: value,
 				}),
 			[]
 		);

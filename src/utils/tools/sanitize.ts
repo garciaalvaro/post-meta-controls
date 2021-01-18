@@ -5,18 +5,21 @@ import {
 	isBoolean,
 	toSafeInteger,
 	toNumber,
-	deburr
+	deburr,
 } from "lodash";
 
-const sanitizeHtml = (value: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+const sanitizeHtml = (value: any): string => {
 	if (!isString(value)) {
 		return "";
 	}
+
 	value = DOMPurify.sanitize(value);
 
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 const sanitizeUrl = (value: any) => {
 	if (!isString(value)) {
 		return "#";
@@ -24,6 +27,7 @@ const sanitizeUrl = (value: any) => {
 
 	/* https://stackoverflow.com/a/3809435 | CC BY-SA 3.0 */
 	const url_regex = new RegExp(
+		// eslint-disable-next-line no-useless-escape
 		/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
 	);
 
@@ -34,16 +38,19 @@ const sanitizeUrl = (value: any) => {
 	return value;
 };
 
-const sanitizeId = (value: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+const sanitizeId = (value: any): string => {
 	if (!isString(value)) {
 		return "";
 	}
+
 	value = deburr(value);
 	value = value.replace(/[^\w-]/g, "");
 
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 const sanitizeText = (value: any) => {
 	if (!isString(value)) {
 		return "";
@@ -57,11 +64,13 @@ const sanitizeText = (value: any) => {
 	return paragraph.innerHTML;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 const sanitizeBoolean = (value: any) => {
 	return isBoolean(value) && value === true ? true : false;
 };
 
-const sanitizeFloat = (value: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+const sanitizeFloat = (value: any): number => {
 	value = toNumber(value);
 	value = Math.abs(value);
 	value = Math.round(100 * value) / 100;
@@ -69,13 +78,15 @@ const sanitizeFloat = (value: any) => {
 	return value;
 };
 
-const sanitizeInteger = (value: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+const sanitizeInteger = (value: any): number => {
 	value = toSafeInteger(value);
 	value = Math.abs(value);
 
 	return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 const sanitizeArray = <T>(value: any): T[] => {
 	if (!isArray(value)) {
 		return [];
@@ -92,5 +103,5 @@ export const sanitize = {
 	boolean: sanitizeBoolean,
 	float: sanitizeFloat,
 	integer: sanitizeInteger,
-	array: sanitizeArray
+	array: sanitizeArray,
 };

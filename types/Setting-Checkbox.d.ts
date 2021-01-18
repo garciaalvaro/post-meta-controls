@@ -1,11 +1,13 @@
-interface CheckboxProps {
+type CheckboxProps = {
 	type: "checkbox";
 	default_value: boolean;
 	input_label: string;
 	use_toggle: boolean;
-}
+};
 
-interface CheckboxPropsRaw extends Partial<Omit<CheckboxProps, "type">> {}
+type CheckboxPropsRaw = Partial<Omit<CheckboxProps, "type">>;
 
-interface CheckboxPropsSchema
-	extends Record<keyof Omit<CheckboxProps, "type">, SchemaElement> {}
+type CheckboxPropsSchema = Record<
+	keyof Omit<CheckboxProps, "type">,
+	SchemaElement
+>;

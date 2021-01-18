@@ -1,6 +1,6 @@
 import { compact, flow, isString } from "lodash";
 
-import { plugin_prefix } from "utils/data/plugin";
+import { plugin_prefix } from "@/utils/data/plugin";
 
 const resolvePrefix = (
 	element: string,
@@ -16,7 +16,7 @@ const resolvePrefix = (
 
 export const addPrefix = (
 	elements: string | null | (string | null)[] | undefined,
-	separator: string = "-",
+	separator = "-",
 	prefix = plugin_prefix
 ): string => {
 	if (!elements) {
@@ -31,6 +31,6 @@ export const addPrefix = (
 		compact,
 		(elements: string[]) =>
 			elements.map(el => resolvePrefix(el, separator, prefix)),
-		(elements: string[]) => elements.join(" ")
+		(elements: string[]) => elements.join(" "),
 	])(elements);
 };

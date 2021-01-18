@@ -1,10 +1,11 @@
+import React from "react";
 import DOMPurify from "dompurify";
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import { registerPlugin } from "@wordpress/plugins";
 import { RawHTML } from "@wordpress/element";
 
-import { addPrefix } from "utils/tools";
-import { App } from "Components/App/App";
+import { addPrefix } from "@/utils/tools";
+import { App } from "@/components/App/App";
 import { Base } from "./Base";
 
 export interface Props {
@@ -32,54 +33,54 @@ export class Sidebar extends Base<Props> {
 				icon_dashicon: "carrot",
 				icon_svg: "",
 				id_already_exists: false,
-				ui_color_scheme: "light"
+				ui_color_scheme: "light",
 			},
 
 			props_schema: {
 				class_name: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				warnings: {
-					type: { _all: { title: "text", message: "text" } }
+					type: { _all: { title: "text", message: "text" } },
 				},
 				id: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				label: {
 					type: "text",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				icon_dashicon: {
-					type: "id"
+					type: "id",
 				},
 				icon_svg: {
-					type: "html"
+					type: "html",
 				},
 				active_tab: {
-					type: "id"
+					type: "id",
 				},
 				settings_id: {
-					type: { _all: "integer" }
+					type: { _all: "integer" },
 				},
 				id_already_exists: {
-					type: "boolean"
+					type: "boolean",
 				},
 				ui_color_scheme: {
-					type: "id"
-				}
-			}
+					type: "id",
+				},
+			},
 		});
 	}
 
-	registerPlugin = () => {
+	registerPlugin = (): void => {
 		const {
 			id,
 			icon_dashicon,
 			icon_svg,
 			id_already_exists,
-			label
+			label,
 		} = this.props;
 
 		let plugin_id: string;
@@ -104,13 +105,15 @@ export class Sidebar extends Base<Props> {
 			);
 
 		registerPlugin(plugin_id, {
-			// @ts-ignore TODO: TS
+			// @ts-expect-error TODO
 			icon: icon || "carrot",
-			render: () => <App plugin_id={plugin_id} sidebar_id={id} label={label} />
+			render: () => (
+				<App plugin_id={plugin_id} sidebar_id={id} label={label} />
+			),
 		});
 	};
 
-	setIdAlreadyExists = () => {
+	setIdAlreadyExists = (): void => {
 		this.props.id_already_exists = true;
 	};
 }

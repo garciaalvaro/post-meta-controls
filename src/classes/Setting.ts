@@ -1,4 +1,4 @@
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 
 import { Base } from "./Base";
 
@@ -34,50 +34,51 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 				data_type: "none",
 				meta_key_exists: false,
 				data_key_with_prefix: "",
-				ui_border_top: true
+				ui_border_top: true,
 			},
 
 			props_schema: {
 				...props_schema,
 				class_name: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				warnings: {
-					type: { _all: { title: "text", message: "text" } }
+					type: { _all: { title: "text", message: "text" } },
 				},
 				id: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				path: {
 					type: { _all: "id" },
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				label: {
-					type: "text"
+					type: "text",
 				},
 				type: {
 					type: "id",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				help: {
-					type: "text"
+					type: "text",
 				},
 				data_type: {
-					type: "id"
+					type: "id",
 				},
 				meta_key_exists: {
-					type: "boolean"
+					type: "boolean",
 				},
 				data_key_with_prefix: {
 					type: "id",
-					conditions: props_raw.data_type !== "none" ? "not_empty" : false
+					conditions:
+						props_raw.data_type !== "none" ? "not_empty" : false,
 				},
 				ui_border_top: {
-					type: "boolean"
-				}
-			}
+					type: "boolean",
+				},
+			},
 		});
 	}
 
@@ -101,7 +102,7 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 			"range_float",
 			"select",
 			"text",
-			"textarea"
+			"textarea",
 		];
 
 		if (data_type === "meta" && types_can_have_meta.includes(type)) {
@@ -121,7 +122,7 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 			"radio",
 			"range",
 			"range_float",
-			"select"
+			"select",
 		];
 
 		if (
@@ -134,11 +135,12 @@ export class Setting<T extends PropsReceived> extends Base<Props> {
 		return {
 			...props_raw,
 			data_type: "none",
-			data_key_with_prefix: ""
+			data_key_with_prefix: "",
 		};
 	};
 
-	getDataType = () => this.props.data_type;
+	getDataType = (): SettingProps["data_type"] => this.props.data_type;
 
-	getDataKey = () => this.props.data_key_with_prefix;
+	getDataKey = (): SettingProps["data_key_with_prefix"] =>
+		this.props.data_key_with_prefix;
 }

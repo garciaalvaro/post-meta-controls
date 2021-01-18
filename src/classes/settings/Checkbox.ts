@@ -16,21 +16,21 @@ export class Checkbox extends Setting<Props> {
 				type: "checkbox",
 				default_value: false,
 				input_label: "",
-				use_toggle: false
+				use_toggle: false,
 			},
 
 			props_schema: {
 				default_value: {
-					type: "boolean"
+					type: "boolean",
 				},
 				input_label: {
 					type: "text",
-					conditions: "not_empty"
+					conditions: "not_empty",
 				},
 				use_toggle: {
-					type: "boolean"
-				}
-			}
+					type: "boolean",
+				},
+			},
 		});
 	}
 }

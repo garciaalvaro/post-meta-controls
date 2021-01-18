@@ -9,7 +9,9 @@ interface Option {
 	label: string;
 }
 
-export const prepareOptions = (options: Option[] | OptionsRaw | undefined) => {
+export const prepareOptions = (
+	options: Option[] | OptionsRaw | undefined
+): Option[] => {
 	if (isUndefined(options)) {
 		return [];
 	}
@@ -23,7 +25,7 @@ export const prepareOptions = (options: Option[] | OptionsRaw | undefined) => {
 		(acc, value, key) =>
 			acc.concat({
 				value: key,
-				label: value
+				label: value,
 			}),
 		[]
 	);

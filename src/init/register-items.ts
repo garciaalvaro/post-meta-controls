@@ -4,7 +4,7 @@ import { sprintf, __ } from "@wordpress/i18n";
 import { addQueryArgs } from "@wordpress/url";
 import { select, dispatch, useSelect, subscribe } from "@wordpress/data";
 
-import { store_slug } from "utils/data";
+import { store_slug } from "@/utils/data";
 import {
 	Sidebar,
 	Tab,
@@ -25,14 +25,31 @@ import {
 	Select,
 	Text,
 	Textarea,
-} from "../classes";
+} from "@/classes";
 
-interface Items {
-	sidebars?: any[];
-	tabs?: any[];
-	panels?: any[];
-	settings?: any[];
-}
+type Setting =
+	| Buttons
+	| Checkbox
+	| CheckboxMultiple
+	| Color
+	| CustomText
+	| DateRange
+	| DateSingle
+	| Image
+	| ImageMultiple
+	| Radio
+	| Range
+	| RangeFloat
+	| Select
+	| Text
+	| Textarea;
+
+type Items = {
+	sidebars?: SidebarProps[];
+	tabs?: TabProps[];
+	panels?: PanelProps[];
+	settings?: SettingProps[];
+};
 
 /* translators: %s: property name. */
 const already_exists_message = __(
@@ -59,7 +76,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 		}
 
 		const ids: string[] = [];
-		const checkId = (instance: any, is_sidebar = false) => {
+		const checkId = (instance: Sidebar | Tab | Panel | Setting) => {
 			const id = instance.getId();
 
 			if (ids.includes(id)) {
@@ -67,7 +84,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 
 				instance.addWarning("id", message);
 
-				if (is_sidebar) {
+				if ("setIdAlreadyExists" in instance) {
 					instance.setIdAlreadyExists();
 				}
 
@@ -79,7 +96,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 
 		// Prevent settings from having the same data_key.
 		const data_keys: string[] = [];
-		const checkDataKey = (setting: any) => {
+		const checkDataKey = (setting: Setting) => {
 			if (setting.getDataType() === "none") {
 				return;
 			}
@@ -95,20 +112,20 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 			}
 		};
 
-		sidebars.forEach((props_raw: any) => {
+		sidebars.forEach((props_raw: SidebarPropsRaw) => {
 			const sidebar = new Sidebar(props_raw);
 
 			if (!sidebar.is_valid) {
 				return;
 			}
 
-			checkId(sidebar, true);
+			checkId(sidebar);
 
 			sidebar.dispatch();
 			sidebar.registerPlugin();
 		});
 
-		tabs.forEach((props_raw: any) => {
+		tabs.forEach((props_raw: TabPropsRaw) => {
 			const tab = new Tab(props_raw);
 
 			if (!tab.is_valid) {
@@ -120,7 +137,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 			tab.dispatch();
 		});
 
-		panels.forEach((props_raw: any) => {
+		panels.forEach((props_raw: PanelPropsRaw) => {
 			const panel = new Panel(props_raw);
 
 			if (!panel.is_valid) {
@@ -132,7 +149,8 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 			panel.dispatch();
 		});
 
-		settings.forEach((props_raw: any) => {
+		settings.forEach((props_raw: SettingPropsRaw) => {
+			// @ts-expect-error TODO: Redefine types
 			const { type } = props_raw;
 
 			if (isUndefined(type)) {
@@ -143,62 +161,77 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 
 			switch (type) {
 				case "buttons":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Buttons(props_raw);
 					break;
 
 				case "checkbox":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Checkbox(props_raw);
 					break;
 
 				case "checkbox_multiple":
+					// @ts-expect-error TODO: Redefine types
 					setting = new CheckboxMultiple(props_raw);
 					break;
 
 				case "color":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Color(props_raw);
 					break;
 
 				case "custom_text":
+					// @ts-expect-error TODO: Redefine types
 					setting = new CustomText(props_raw);
 					break;
 
 				case "date_range":
+					// @ts-expect-error TODO: Redefine types
 					setting = new DateRange(props_raw);
 					break;
 
 				case "date_single":
+					// @ts-expect-error TODO: Redefine types
 					setting = new DateSingle(props_raw);
 					break;
 
 				case "image":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Image(props_raw);
 					break;
 
 				case "image_multiple":
+					// @ts-expect-error TODO: Redefine types
 					setting = new ImageMultiple(props_raw);
 					break;
 
 				case "radio":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Radio(props_raw);
 					break;
 
 				case "range":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Range(props_raw);
 					break;
 
 				case "range_float":
+					// @ts-expect-error TODO: Redefine types
 					setting = new RangeFloat(props_raw);
 					break;
 
 				case "select":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Select(props_raw);
 					break;
 
 				case "text":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Text(props_raw);
 					break;
 
 				case "textarea":
+					// @ts-expect-error TODO: Redefine types
 					setting = new Textarea(props_raw);
 					break;
 			}
@@ -231,7 +264,7 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 		}
 
 		const meta = select("core/editor").getEditedPostAttribute("meta") as
-			| Object
+			| Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 			| undefined;
 		const settings_prepared = select(store_slug).getSettingsAll() as
 			| State["settings"]
@@ -251,13 +284,15 @@ const registerItems = (props: { post_id: number; post_type: string }) => {
 				if (
 					!setting ||
 					setting.meta_key_exists ||
-					// @ts-ignore TODO: default_value does not exist in custom_text setting.
+					// @ts-expect-error TODO: default_value does not exist
+					// in custom_text setting.
 					isUndefined(setting.default_value)
 				) {
 					return { ...acc, [key]: value };
 				}
 
-				// @ts-ignore TODO: default_value does not exist in custom_text setting.
+				// @ts-expect-error TODO: default_value does not exist
+				// in custom_text setting.
 				return { ...acc, [key]: setting.default_value };
 			},
 			{}

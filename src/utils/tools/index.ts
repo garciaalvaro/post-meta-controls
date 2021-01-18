@@ -4,9 +4,8 @@ export { getColorScheme } from "./getColorScheme";
 export { prepareIcon } from "./prepareIcon";
 export {
 	prepareImageDataFromMedia,
-	prepareImageDataFromRest
+	prepareImageDataFromRest,
 } from "./prepareImageData";
 export { prepareOptions } from "./prepareOptions";
 export { prepareProps } from "./prepareProps";
-// export { prepareValue } from "./prepareValue-";
 export { sanitize } from "./sanitize";

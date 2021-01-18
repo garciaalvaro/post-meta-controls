@@ -1,3 +1,5 @@
-_extras/*
-build/*
-node_modules/*
+/_extras
+/_release
+/dist
+/node_modules
+/pro

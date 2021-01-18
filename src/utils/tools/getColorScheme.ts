@@ -1,93 +1,95 @@
-export const getColorScheme = (color_scheme: string) => {
+export const getColorScheme = (
+	color_scheme: string
+): { id: string; type: string } => {
 	switch (color_scheme) {
 		case "light":
 			return {
 				id: "",
-				type: "light"
+				type: "light",
 			};
 
 		case "banana":
 			return {
 				id: "banana",
-				type: "light"
+				type: "light",
 			};
 
 		case "melon":
 			return {
 				id: "melon",
-				type: "light"
+				type: "light",
 			};
 
 		case "melocoton":
 			return {
 				id: "melocoton",
-				type: "light"
+				type: "light",
 			};
 
 		case "coco":
 			return {
 				id: "coco",
-				type: "light"
+				type: "light",
 			};
 
 		case "mandarina":
 			return {
 				id: "mandarina",
-				type: "light"
+				type: "light",
 			};
 
 		case "pistacho":
 			return {
 				id: "pistacho",
-				type: "light"
+				type: "light",
 			};
 
 		case "dark":
 			return {
 				id: "plain_dark",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "higo":
 			return {
 				id: "higo",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "mango":
 			return {
 				id: "mango",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "endrina":
 			return {
 				id: "endrina",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "castana":
 			return {
 				id: "castana",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "naranja":
 			return {
 				id: "naranja",
-				type: "dark"
+				type: "dark",
 			};
 
 		case "ciruela":
 			return {
 				id: "ciruela",
-				type: "dark"
+				type: "dark",
 			};
 
 		default:
 			return {
 				id: "",
-				type: "light"
+				type: "light",
 			};
 	}
 };

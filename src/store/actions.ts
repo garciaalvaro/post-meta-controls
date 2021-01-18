@@ -1,34 +1,34 @@
 export const actions: ActionCreators = {
 	addPanel: payload => ({
 		type: "ADD_PANEL",
-		payload
+		payload,
 	}),
 	addSetting: payload => ({
 		type: "ADD_SETTING",
-		payload
+		payload,
 	}),
 	addSidebar: payload => ({
 		type: "ADD_SIDEBAR",
-		payload
+		payload,
 	}),
 	addTab: payload => ({
 		type: "ADD_TAB",
-		payload
+		payload,
 	}),
 	openTab: payload => ({
 		type: "OPEN_TAB",
-		payload
+		payload,
 	}),
 	setMetaKeyExists: payload => ({
 		type: "SET_META_KEY_EXISTS",
-		payload
+		payload,
 	}),
 	updatePropLocal: payload => ({
 		type: "UPDATE_PROP_LOCAL",
-		payload
+		payload,
 	}),
 	updatePropNone: payload => ({
 		type: "UPDATE_PROP_NONE",
-		payload
-	})
+		payload,
+	}),
 };

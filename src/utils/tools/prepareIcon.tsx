@@ -1,15 +1,16 @@
+import React from "react";
 import DOMPurify from "dompurify";
 import { RawHTML } from "@wordpress/element";
 import { Dashicon } from "@wordpress/components";
 
-import { Div } from "utils/Components";
-import { addPrefix } from "utils/tools/addPrefix";
+import { Div } from "@/utils/components";
+import { addPrefix } from "@/utils/tools/addPrefix";
 
 export const prepareIcon = (
 	icon_svg: string,
 	icon_dashicon: string,
 	type: "tab" | "panel"
-) => {
+): React.ReactNode => {
 	if (icon_svg === "" && icon_dashicon === "") {
 		return null;
 	}
@@ -24,10 +25,7 @@ export const prepareIcon = (
 
 	return (
 		<Div className={`${type}-icon`}>
-			<Dashicon
-				// @ts-ignore
-				icon={icon_dashicon}
-			/>
+			<Dashicon icon={icon_dashicon as Dashicon.Icon} />
 		</Div>
 	);
 };

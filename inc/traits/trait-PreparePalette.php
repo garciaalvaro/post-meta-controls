@@ -3,32 +3,34 @@
 namespace POSTMETACONTROLS;
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if (!defined("ABSPATH")) {
+	exit();
+}
 
 /**
  * Trait PreparePalette
  */
-trait PreparePalette {
-
-	protected function prepare_palette( $palette = array() ) {
-
-		if ( empty( $palette ) ) {
+trait PreparePalette
+{
+	protected function prepare_palette($palette = [])
+	{
+		if (empty($palette)) {
 			return;
 		}
 
-		$palette = $this->sanitize_array( $palette );
+		$palette = $this->sanitize_array($palette);
 
-		$palette_clean = array();
+		$palette_clean = [];
 
-		foreach ( $palette as $key => $value ) {
-			if ( ! is_string( $key ) || ! is_string( $value ) ) {
+		foreach ($palette as $key => $value) {
+			if (!is_string($key) || !is_string($value)) {
 				continue;
 			}
 
-			$palette_clean[] = array(
-				'name'  => $key,
-				'color' => $value,
-			);
+			$palette_clean[] = [
+				"name" => $key,
+				"color" => $value,
+			];
 		}
 
 		return $palette_clean;

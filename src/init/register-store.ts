@@ -1,16 +1,14 @@
 import { registerStore } from "@wordpress/data";
 
-import { store_slug } from "utils/data";
-import { reducer } from "store/reducer";
-import { actions } from "store/actions";
-import { selectors } from "store/selectors";
+import { store_slug } from "@/utils/data";
+import { reducer } from "@/store/reducer";
+import { actions } from "@/store/actions";
+import { selectors } from "@/store/selectors";
 
 registerStore(store_slug, {
-	// @ts-ignore
+	// @ts-expect-error TODO
 	reducer,
-	// @ts-ignore
 	actions,
-	// @ts-ignore
 	selectors,
-	persist: ["settings_persisted"]
+	persist: ["settings_persisted"],
 });

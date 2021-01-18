@@ -1,4 +1,4 @@
-interface SidebarProps {
+type SidebarProps = {
 	class_name: "sidebar";
 	warnings: Warning[];
 	id: string;
@@ -9,12 +9,10 @@ interface SidebarProps {
 	icon_svg: string;
 	id_already_exists: boolean;
 	ui_color_scheme: "light";
-}
+};
 
-interface SidebarPropsRaw
-	extends Partial<Omit<SidebarProps, "class_name" | "warnings">> {}
+type SidebarPropsRaw = Partial<Omit<SidebarProps, "class_name" | "warnings">>;
 
-interface SidebarPropsSchema
-	extends Record<keyof SidebarProps, SchemaElement> {}
+type SidebarPropsSchema = Record<keyof SidebarProps, SchemaElement>;
 
 type SidebarPropsPrivates = ("class_name" | "warnings")[];

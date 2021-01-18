@@ -16,13 +16,13 @@ type SanitizeType =
 type SanitizeTypeOrObject =
 	| SanitizeType
 	| {
+			[key: string]: SanitizeType | SanitizeTypeOrObject;
+	  }
+	| {
 			_all: SanitizeType | SanitizeTypeOrObject;
 	  }
 	| {
 			type: SanitizeType | SanitizeTypeOrObject;
-	  }
-	| {
-			[key: string]: SanitizeType;
 	  };
 
 type SchemaConditionObject = { value: boolean; message: string };
@@ -33,44 +33,46 @@ type SchemaCondition =
 	| SchemaConditionObject
 	| SchemaConditionObject[];
 
-interface SchemaElement {
+type SchemaElement = {
 	type: SanitizeTypeOrObject;
 	conditions?: SchemaCondition;
-}
+};
 
 interface Schema {
 	[prop: string]: SchemaElement;
 }
 
-interface Warning {
+type Warning = {
 	title: string;
 	message: string;
-}
+};
 
-interface ImageSizes {
-	[size: string]: {
-		source_url: string;
-		url: string;
-	};
-}
+type ImageSize = {
+	source_url: string;
+	url: string;
+};
 
-interface ImageFromMedia {
+type ImageSizes = Record<string, ImageSize>;
+
+type ImageFromMedia = {
 	id: number;
 	alt: string;
 	sizes: ImageSizes;
-}
+};
 
-interface ImageFromRest {
+type ImageFromRest = {
 	id: number;
 	alt_text: string;
 	media_details: {
 		sizes: ImageSizes;
 	};
 	source_url: string;
-}
+};
 
-interface Image {
+type Image = {
 	id: number;
 	alt: string;
 	url: string;
-}
+};
+
+type ItemProps = SidebarProps | TabProps | PanelProps | SettingProps;

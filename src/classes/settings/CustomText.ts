@@ -14,7 +14,7 @@ export class CustomText extends Setting<Props> {
 
 			props_defaults: {
 				type: "custom_text",
-				content: []
+				content: [],
 			},
 
 			props_schema: {
@@ -23,12 +23,12 @@ export class CustomText extends Setting<Props> {
 						_all: {
 							type: "id",
 							content: { _all: "text" },
-							href: "url"
-						}
+							href: "url",
+						},
 					},
-					conditions: "not_empty"
-				}
-			}
+					conditions: "not_empty",
+				},
+			},
 		});
 	}
 }

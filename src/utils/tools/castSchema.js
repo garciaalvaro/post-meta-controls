@@ -1,15 +1,15 @@
+/* eslint-disable */
+// TODO
 import {
 	isUndefined,
 	isObject,
 	isArray,
 	castArray,
 	forEach,
-	get
+	get,
 } from "lodash";
 
-import { sanitize } from "utils/tools/sanitize.ts";
-
-// TODO: TS
+import { sanitize } from "@/utils/tools/sanitize.ts";
 
 export const castSchema = (elements, schema) => {
 	forEach(elements, (value, key) => {
@@ -27,7 +27,8 @@ export const castSchema = (elements, schema) => {
 		}
 
 		if (isObject(schema_type)) {
-			value = !isObject(value) && !isArray(value) ? castArray(value) : value;
+			value =
+				!isObject(value) && !isArray(value) ? castArray(value) : value;
 
 			elements[key] = castSchema(value, schema_type);
 			return;

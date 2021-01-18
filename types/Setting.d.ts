@@ -35,7 +35,8 @@ type SettingPropsRawReceived = Partial<
 		| RangeFloatPropsRaw
 		| SelectPropsRaw
 		| TextPropsRaw
-		| TextareaPropsRaw);
+		| TextareaPropsRaw
+	);
 
 type SettingPropsRaw = Partial<SettingPropsShared> &
 	(
@@ -53,9 +54,10 @@ type SettingPropsRaw = Partial<SettingPropsShared> &
 		| RangeFloatPropsRaw
 		| SelectPropsRaw
 		| TextPropsRaw
-		| TextareaPropsRaw);
+		| TextareaPropsRaw
+	);
 
-interface SettingPropsShared {
+type SettingPropsShared = {
 	class_name: "setting";
 	warnings: Warning[];
 	meta_key_exists: boolean;
@@ -66,12 +68,11 @@ interface SettingPropsShared {
 	help: string;
 	data_type: "none" | "meta" | "localstorage";
 	ui_border_top: boolean;
-}
+};
 
 type SettingPropsPrivates = ("class_name" | "warnings")[];
 
-interface SettingPropsSchema
-	extends Record<keyof SettingProps, SchemaElement> {}
+type SettingPropsSchema = Record<keyof SettingProps, SchemaElement>;
 
 type SettingPropsSchemaReceived =
 	| ButtonsPropsSchema

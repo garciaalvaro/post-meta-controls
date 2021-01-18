@@ -1,8 +1,7 @@
 .DS_Store
 .todo
-.prettierrc
-_extras
-_release
-build
-node_modules
-pro
+/_extras
+/_release
+/dist
+/node_modules
+/pro

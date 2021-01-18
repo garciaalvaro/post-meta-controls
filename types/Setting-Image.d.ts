@@ -1,9 +1,8 @@
-interface ImageProps {
+type ImageProps = {
 	type: "image";
 	default_value: number;
-}
+};
 
-interface ImagePropsRaw extends Partial<Omit<ImageProps, "type">> {}
+type ImagePropsRaw = Partial<Omit<ImageProps, "type">>;
 
-interface ImagePropsSchema
-	extends Record<keyof Omit<ImageProps, "type">, SchemaElement> {}
+type ImagePropsSchema = Record<keyof Omit<ImageProps, "type">, SchemaElement>;

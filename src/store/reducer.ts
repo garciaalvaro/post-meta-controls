@@ -6,10 +6,10 @@ const initial_state: State = {
 	settings_persisted: {},
 	settings_none: {},
 	sidebars: [],
-	tabs: []
+	tabs: [],
 };
 
-export const reducer = (state_prev = initial_state, action: Actions) => {
+export const reducer = (state_prev = initial_state, action: Actions): State => {
 	let state = state_prev;
 
 	// Previous to WordPress 5.2, "persistence" takes the saved properties as the initial_state.
@@ -22,7 +22,7 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 		case "ADD_PANEL": {
 			return {
 				...state,
-				panels: [...state.panels, action.payload]
+				panels: [...state.panels, action.payload],
 			};
 		}
 
@@ -36,23 +36,26 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 					const sidebar = draft.find(({ id }) => id === sidebar_id);
 
 					if (sidebar) {
-						sidebar.settings_id = [...sidebar.settings_id, action.payload.id];
+						sidebar.settings_id = [
+							...sidebar.settings_id,
+							action.payload.id,
+						];
 					}
-				})
+				}),
 			};
 		}
 
 		case "ADD_SIDEBAR": {
 			return {
 				...state,
-				sidebars: [...state.sidebars, action.payload]
+				sidebars: [...state.sidebars, action.payload],
 			};
 		}
 
 		case "ADD_TAB": {
 			return {
 				...state,
-				tabs: [...state.tabs, action.payload]
+				tabs: [...state.tabs, action.payload],
 			};
 		}
 
@@ -67,7 +70,7 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 					if (sidebar) {
 						sidebar.active_tab = tab_id;
 					}
-				})
+				}),
 			};
 		}
 
@@ -88,8 +91,8 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 				...state,
 				settings_none: {
 					...state.settings_none,
-					[setting_id]: value
-				}
+					[setting_id]: value,
+				},
 			};
 		}
 
@@ -105,7 +108,9 @@ export const reducer = (state_prev = initial_state, action: Actions) => {
 					return;
 				}
 
-				draft_state.settings_persisted[setting.data_key_with_prefix] = value;
+				draft_state.settings_persisted[
+					setting.data_key_with_prefix
+				] = value;
 			});
 		}
 

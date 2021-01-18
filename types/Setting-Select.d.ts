@@ -1,15 +1,14 @@
-interface SelectOption {
+type SelectOption = {
 	value: string;
 	label: string;
-}
+};
 
-interface SelectProps {
+type SelectProps = {
 	type: "select";
 	default_value: string;
 	options: SelectOption[];
-}
+};
 
-interface SelectPropsRaw extends Partial<Omit<SelectProps, "type">> {}
+type SelectPropsRaw = Partial<Omit<SelectProps, "type">>;
 
-interface SelectPropsSchema
-	extends Record<keyof Omit<SelectProps, "type">, SchemaElement> {}
+type SelectPropsSchema = Record<keyof Omit<SelectProps, "type">, SchemaElement>;

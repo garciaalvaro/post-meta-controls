@@ -1,4 +1,6 @@
-export const prepareImageDataFromMedia = (images_raw: ImageFromMedia[]) =>
+export const prepareImageDataFromMedia = (
+	images_raw: ImageFromMedia[]
+): Image[] =>
 	images_raw.reduce<Image[]>((data, image_raw) => {
 		const { id, alt, sizes } = image_raw;
 
@@ -12,16 +14,18 @@ export const prepareImageDataFromMedia = (images_raw: ImageFromMedia[]) =>
 		return data.concat({
 			id,
 			alt,
-			url
+			url,
 		});
 	}, []);
 
-export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
+export const prepareImageDataFromRest = (
+	images_raw: ImageFromRest[]
+): Image[] =>
 	images_raw.reduce<Image[]>((data, image_raw) => {
 		const {
 			id,
 			alt_text: alt,
-			media_details: { sizes }
+			media_details: { sizes },
 		} = image_raw;
 
 		const { source_url } =
@@ -35,6 +39,6 @@ export const prepareImageDataFromRest = (images_raw: ImageFromRest[]) =>
 		return data.concat({
 			id,
 			alt,
-			url: source_url
+			url: source_url,
 		});
 	}, []);

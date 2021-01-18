@@ -14,14 +14,14 @@ export class ImageMultiple extends Setting<Props> {
 
 			props_defaults: {
 				type: "image_multiple",
-				default_value: []
+				default_value: [],
 			},
 
 			props_schema: {
 				default_value: {
-					type: { _all: "integer" }
-				}
-			}
+					type: { _all: "integer" },
+				},
+			},
 		});
 	}
 }

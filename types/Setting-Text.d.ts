@@ -1,10 +1,9 @@
-interface TextProps {
+type TextProps = {
 	type: "text";
 	default_value: string;
 	placeholder: string;
-}
+};
 
-interface TextPropsRaw extends Partial<Omit<TextProps, "type">> {}
+type TextPropsRaw = Partial<Omit<TextProps, "type">>;
 
-interface TextPropsSchema
-	extends Record<keyof Omit<TextProps, "type">, SchemaElement> {}
+type TextPropsSchema = Record<keyof Omit<TextProps, "type">, SchemaElement>;
