@@ -58,7 +58,7 @@
 		"css-loader": "^5.0.1",
 		"css-minimizer-webpack-plugin": "^1.2.0",
 		"dompurify": "^2.2.6",
-		"immer": "^8.0.0",
+		"immer": "^8.0.1",
 		"mini-css-extract-plugin": "^1.3.4",
 		"moment": "^2.29.1",
 		"nib": "^1.1.2",
