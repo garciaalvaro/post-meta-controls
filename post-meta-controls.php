@@ -4,7 +4,7 @@
  * Plugin URI: https://wordpress.org/plugins/post-meta-controls/
  * Description: Controls to manage post meta data in the Gutenberg editor.
  * Author: melonpan
- * Version: 1.4.0
+ * Version: 1.4.1
  * License: GPL3+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
@@ -17,7 +17,7 @@ if (!defined("ABSPATH")) {
 }
 
 define(__NAMESPACE__ . "\PLUGIN_NAME", "post-meta-controls");
-define(__NAMESPACE__ . "\PLUGIN_VERSION", "1.4.0");
+define(__NAMESPACE__ . "\PLUGIN_VERSION", "1.4.1");
 define(__NAMESPACE__ . "\DIST_DIR", plugins_url("dist/", __FILE__));
 define(__NAMESPACE__ . "\INC_DIR", plugin_dir_path(__FILE__) . "inc/");
 define(__NAMESPACE__ . "\PLUGIN_DIR", plugin_dir_path(__FILE__));
