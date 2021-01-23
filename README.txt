@@ -60,6 +60,9 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.4.1 =
+* Updated dependencies
+
 = 1.4.0 =
 * Updated dependencies
 * Minor bug fixes
